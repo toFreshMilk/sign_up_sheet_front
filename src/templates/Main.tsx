@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { AppConfig } from '@/utils/AppConfig';
+import { Bugger } from '@/layouts/bugger';
 
 type IMainProps = {
   meta: ReactNode;
@@ -12,6 +13,7 @@ const Main = (props: IMainProps) => (
   <div className="w-full px-1 text-gray-700 antialiased">
     {props.meta}
 
+    <Bugger />
     <div className="mx-auto max-w-screen-md">
       <div className="border-b border-gray-300">
         <div className="pt-16 pb-8">
