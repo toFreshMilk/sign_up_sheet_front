@@ -69,13 +69,14 @@ const Index = (_a: any) => {
     // console.log(process.env.NEXT_PUBLIC_API_URL);
     // console.log(process.env.NEXT_PUBLIC_API_URL2);
     //
+    router.push('/s1_joinType/s1SelectType');
   }, []);
 
   return (
     <Main
       meta={
         <Meta
-          title={`Smartel 온라인 가입 신청서`}
+          title={`Smartel 온라인 가입 신청서 메인인덱스`}
           description="Next js Boilerplate is the perfect starter code for your project. Build your React application with the Next.js framework."
         />
       }

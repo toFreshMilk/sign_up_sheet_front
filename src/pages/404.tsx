@@ -13,7 +13,7 @@ export async function getStaticProps() {
   // 하위 페이지로 바로 들어올 수도 있기 때문에..
   //
   // css 템플릿 적당한게 있는지 찿ㅈ아보면 될듯
-  console.log(process.env.NEXT_PUBLIC_API_URL, 'getStaticProps');
+  // console.log(process.env.NEXT_PUBLIC_API_URL, 'getStaticProps');
   return {
     props: { dd: 'ccc' },
   };
@@ -24,10 +24,10 @@ const Index = (_a: any) => {
 
   useEffect(() => {
     // console.log(MOBILE_OS);
-    console.log(_a, 'useEffect');
-    console.log(process.env.NODE_ENV);
-    console.log(process.env.NEXT_PUBLIC_ANALYTICS_ID);
-    console.log(process.env.hi);
+    // console.log(_a, 'useEffect');
+    // console.log(process.env.NODE_ENV);
+    // console.log(process.env.NEXT_PUBLIC_ANALYTICS_ID);
+    // console.log(process.env.hi);
     // console.log(process.env.NEXT_PUBLIC_API_URL);
     // console.log(process.env.NEXT_PUBLIC_API_URL2);
     //
