@@ -2,6 +2,9 @@
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
+    colors: {
+      header: '#f2555b',
+    },
     fontSize: {
       xs: '0.75rem',
       sm: '0.875rem',
@@ -38,6 +41,7 @@ module.exports = {
           800: '#2c5282',
           900: '#2a4365',
         },
+        white: 'rgb(255 255 255)',
       },
     },
   },
