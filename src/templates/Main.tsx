@@ -2,7 +2,6 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 import { Bugger } from '@/layouts/bugger';
-import { Meta } from '@/layouts/Meta';
 import { AppConfig } from '@/utils/AppConfig';
 
 type IMainProps = {
@@ -13,7 +12,7 @@ type IMainProps = {
 const Main = (props: IMainProps) => {
   return (
     <div className="w-full px-1 text-gray-700 antialiased">
-      {props.meta ? props.meta : <Meta />}
+      {props.meta}
 
       <Bugger />
       <div className="mx-auto max-w-screen-md">
