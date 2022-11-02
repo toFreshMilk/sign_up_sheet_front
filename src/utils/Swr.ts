@@ -8,18 +8,18 @@ declare global {
   }
 }
 
-// const swrToken = () => {
-//   const { data, mutate } = SWR('token', () => window.token);
-//   const token = data;
-//   const setToken = mutate;
-//   return {
-//     token,
-//     setToken: (_token: string) => {
-//       window.token = _token;
-//       return setToken();
-//     },
-//   };
-// };
+const SwrToken = () => {
+  const { data, mutate } = useSWR('/token', () => window.token);
+  const token = data;
+  const setToken = mutate;
+  return {
+    token,
+    setToken: (_token: string) => {
+      window.token = _token;
+      return setToken();
+    },
+  };
+};
 
 const UserInfo = () => {
   const { data, mutate } = useSWR('/userInfo', () => window.userInfo);
@@ -34,4 +34,4 @@ const UserInfo = () => {
   };
 };
 
-export { UserInfo };
+export { SwrToken, UserInfo };

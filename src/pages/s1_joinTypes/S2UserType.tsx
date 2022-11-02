@@ -1,5 +1,4 @@
 import { RadioGroup } from '@headlessui/react';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
@@ -15,23 +14,21 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-const S1UserType = () => {
-  const router = useRouter();
+const S2UserType = () => {
   const [selectedType] = useState(custommerTypes[0]);
   const { info, setInfo } = UserInfo();
 
   const setSelectedType = (v: any) => {
-    console.log(v);
+    console.log(info);
     // const { info, setInfo } = UserInfo();
     // console.log(info);
     // console.log(setInfo);
-    setInfo(v.name, true);
-    router.push('./S2UserType');
+    // setInfo(v.name, true);
   };
 
   return (
     <Main>
-      <p>ccccccccccccccccccc{info}</p>
+      <p>ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ{info}</p>
       <RadioGroup
         value={selectedType}
         onChange={setSelectedType}
@@ -97,4 +94,4 @@ const S1UserType = () => {
   );
 };
 
-export default S1UserType;
+export default S2UserType;

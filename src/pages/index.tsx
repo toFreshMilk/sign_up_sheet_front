@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
-import { swrToken } from '@/utils/Swr';
+import { SwrToken } from '@/utils/Swr';
 
 // 빌드타임에만 한번 호출됨.
 export async function getStaticProps() {
@@ -28,7 +28,7 @@ const Index = (_a: any) => {
     credentials: 'include',
   };
 
-  const { token } = swrToken();
+  const { token } = SwrToken();
   const callToken = async () => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getToken`;
     const aaaa = await axios.post(tokenUrl);
