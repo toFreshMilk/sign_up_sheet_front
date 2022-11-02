@@ -7,7 +7,7 @@ import { UserInfo } from '@/utils/Swr';
 const custommerTypes = [
   { name: '일반(만 19세 이상)', inStock: true },
   { name: '미성년자(만 19세 미만)', inStock: true },
-  { name: '외국인', inStock: false },
+  { name: '외국인', inStock: true },
 ];
 
 function classNames(...classes: string[]) {
@@ -16,15 +16,19 @@ function classNames(...classes: string[]) {
 
 const S1UserType = () => {
   const [selectedType] = useState(custommerTypes[0]);
+  const { info, setInfo } = UserInfo();
 
   const setSelectedType = (v: any) => {
     console.log(v);
-    const ff = UserInfo();
-    console.log(ff);
+    // const { info, setInfo } = UserInfo();
+    // console.log(info);
+    // console.log(setInfo);
+    setInfo(v.name, true);
   };
 
   return (
     <Main>
+      <p>ccccccccccccccccccc{info}</p>
       <RadioGroup
         value={selectedType}
         onChange={setSelectedType}

@@ -22,14 +22,14 @@ declare global {
 // };
 
 const UserInfo = () => {
-  const { data, mutate } = useSWR('userInfo', () => window.token);
+  const { data, mutate } = useSWR('/userInfo', () => window.userInfo);
   const info = data;
   const setInfo = mutate;
   return {
     info,
-    setInfo: (_info: string) => {
+    setInfo: (_info: string, _bool: boolean) => {
       window.userInfo = _info;
-      return setInfo();
+      return setInfo(_info, _bool);
     },
   };
 };
