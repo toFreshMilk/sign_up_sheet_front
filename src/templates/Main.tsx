@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
-import { Bugger } from '@/layouts/bugger';
+import { Bugger } from '@/layouts/Bugger';
 import { AppConfig } from '@/utils/AppConfig';
 
 type IMainProps = {
