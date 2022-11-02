@@ -2,6 +2,7 @@ import { RadioGroup } from '@headlessui/react';
 import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
+import { UserInfo } from '@/utils/Swr';
 
 const custommerTypes = [
   { name: '일반(만 19세 이상)', inStock: true },
@@ -12,36 +13,44 @@ const custommerTypes = [
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
+
 const S1UserType = () => {
-  const [selectedSize, setSelectedSize] = useState(custommerTypes[2]);
+  const [selectedType] = useState(custommerTypes[0]);
+
+  const setSelectedType = (v: any) => {
+    console.log(v);
+    const ff = UserInfo();
+    console.log(ff);
+  };
+
   return (
     <Main>
       <RadioGroup
-        value={selectedSize}
-        onChange={setSelectedSize}
+        value={selectedType}
+        onChange={setSelectedType}
         className="mt-4"
       >
         <RadioGroup.Label className="sr-only"> Choose a type </RadioGroup.Label>
         <div className="gap-4">
-          {custommerTypes.map((size) => (
+          {custommerTypes.map((Type) => (
             <RadioGroup.Option
-              key={size.name}
-              value={size}
-              disabled={!size.inStock}
+              key={Type.name}
+              value={Type}
+              disabled={!Type.inStock}
               className={({ active }) =>
                 `${classNames(
-                  size.inStock
+                  Type.inStock
                     ? 'bg-white shadow-sm text-gray-900 cursor-pointer'
                     : 'bg-gray-50 text-gray-500 cursor-not-allowed',
                   active ? 'ring-2 ring-indigo-500' : '',
                   'group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                )} mb-5`
+                )} m-10`
               }
             >
               {({ active, checked }) => (
                 <>
-                  <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                  {size.inStock ? (
+                  <RadioGroup.Label as="span">{Type.name}</RadioGroup.Label>
+                  {Type.inStock ? (
                     <span
                       className={classNames(
                         active ? 'border' : 'border-2',
