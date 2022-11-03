@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
-import { UserInfo } from '@/utils/Swr';
 
 const custommerTypes = [
   { name: '일반(만 19세 이상)', inStock: true, checked: true },
@@ -18,21 +17,19 @@ function classNames(...classes: string[]) {
 const S1UserType = () => {
   const router = useRouter();
   const [selectedType] = useState(custommerTypes[0]);
-  const { info, setInfo } = UserInfo();
 
   const setSelectedType = (v: any) => {
-    console.log(v);
+    // console.log(v);
     // const { info, setInfo } = UserInfo();
     // console.log(info);
     // console.log(setInfo);
-    setInfo(v, true);
-    // sessionStorage.setItem('userInfo', v);
+    sessionStorage.setItem('S1UserType', v);
     router.push('./S2UserType');
   };
 
   return (
     <Main>
-      <p>ccccccccccccccccccc{info}</p>
+      <p>ccccccccccccccccccc</p>
       <RadioGroup
         value={selectedType}
         onChange={setSelectedType}
