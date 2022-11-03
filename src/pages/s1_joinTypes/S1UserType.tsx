@@ -6,9 +6,9 @@ import { Main } from '@/templates/Main';
 import { UserInfo } from '@/utils/Swr';
 
 const custommerTypes = [
-  { name: '일반(만 19세 이상)', inStock: true },
-  { name: '미성년자(만 19세 미만)', inStock: true },
-  { name: '외국인', inStock: true },
+  { name: '일반(만 19세 이상)', inStock: true, checked: true },
+  { name: '미성년자(만 19세 미만)', inStock: true, checked: false },
+  { name: '외국인', inStock: true, checked: false },
 ];
 
 function classNames(...classes: string[]) {
@@ -25,7 +25,8 @@ const S1UserType = () => {
     // const { info, setInfo } = UserInfo();
     // console.log(info);
     // console.log(setInfo);
-    setInfo(v.name, true);
+    setInfo(v, true);
+    // sessionStorage.setItem('userInfo', v);
     router.push('./S2UserType');
   };
 
@@ -37,12 +38,12 @@ const S1UserType = () => {
         onChange={setSelectedType}
         className="mt-4"
       >
-        <RadioGroup.Label className="sr-only"> Choose a type </RadioGroup.Label>
+        <RadioGroup.Label className="sr-only"> 유형 선택 </RadioGroup.Label>
         <div className="gap-4">
           {custommerTypes.map((Type) => (
             <RadioGroup.Option
               key={Type.name}
-              value={Type}
+              value={Type.name}
               disabled={!Type.inStock}
               className={({ active }) =>
                 `${classNames(
