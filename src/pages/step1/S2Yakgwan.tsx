@@ -7,7 +7,7 @@ interface IfYakgwan {
   name: string;
   checked: boolean;
 }
-const S2UserType = () => {
+const S2Yakgwan = () => {
   const router = useRouter();
   const [requiredYakgwans, setRequiredYakgwans] = useState([
     { name: '개인정보 수집, 이용 동의[필수]', checked: true },
@@ -112,10 +112,10 @@ const S2UserType = () => {
 
                 // 타입스크립트가 좀 이상하다........... 이렇게까지 해야함?
                 sessionStorage.setItem(
-                  'S2UserType',
+                  'S2Yakgwan',
                   optionalChecked?.name || ''
                 );
-                router.push('./S3UserType');
+                router.push('./S3JoinType');
               } else {
                 alert('필수 항목에 동의해주세요.');
               }
@@ -130,4 +130,4 @@ const S2UserType = () => {
   );
 };
 
-export default S2UserType;
+export default S2Yakgwan;
