@@ -69,7 +69,7 @@ const Index = (_a: any) => {
     // console.log(process.env.NEXT_PUBLIC_API_URL);
     // console.log(process.env.NEXT_PUBLIC_API_URL2);
     //
-    router.push('/step1/S1UserType');
+    router.push('/step/S1UserType');
   }, []);
 
   return (
