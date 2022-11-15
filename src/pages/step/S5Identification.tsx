@@ -1,5 +1,6 @@
+import { RadioGroup } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
@@ -17,12 +18,13 @@ function CheckIcon(props: any) {
     </svg>
   );
 }
+const identificationTypes = [
+  { title: '주민등록증', checked: true },
+  { title: '운전면허증', checked: false },
+];
 const S5Identification = () => {
   const router = useRouter();
-  const [identification, setIdentification] = useState([
-    { title: '주민등록증', checked: true },
-    { title: '운전면허증', checked: false },
-  ]);
+  const [identification, setIdentification] = useState(identificationTypes[0]);
 
   return (
     <Main>
@@ -104,33 +106,38 @@ const S5Identification = () => {
             </div>
 
             <div className="col-span-6 sm:col-span-6">
-              <label className="block text-sm font-medium text-gray-700">
+              <label
+                className="block text-sm font-medium text-gray-700"
+                onClick={() => {
+                  console.log(identification);
+                }}
+              >
                 신분증 정보
               </label>
-              <div className="mt-5 flex justify-center sm:mt-8">
-                {identification.map((item, i) => (
-                  <div className="rounded-md shadow" key={item.title + i}>
-                    <button
-                      onClick={() => {
-                        console.log(identification[i]?.checked);
-                        for (let i = 0; i < identification.length; i += 1) {
-                          identification[i]
-                        }
-                        identification[i]!.checked = true;
-                        // setIdentification(identification);
-                      }}
-                      className="flex w-full rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg"
+              <RadioGroup value={identification} onChange={setIdentification}>
+                <div className="grid grid-cols-2 mt-5 sm:mt-8">
+                  {identificationTypes.map((item) => (
+                    <RadioGroup.Option
+                      key={item.title}
+                      value={item}
+                      as={Fragment}
                     >
-                      {item.title}
-                      {item.checked && (
-                        <div className="shrink-0 text-white">
-                          <CheckIcon className="h-6 w-6" />
-                        </div>
+                      {({ checked }) => (
+                        <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
+                          <div className="flex items-center">
+                            {checked && (
+                              <div className="shrink-0 text-white mr-2">
+                                <CheckIcon className="h-6 w-6" />
+                              </div>
+                            )}
+                            {item.title}
+                          </div>
+                        </button>
                       )}
-                    </button>
-                  </div>
-                ))}
-              </div>
+                    </RadioGroup.Option>
+                  ))}
+                </div>
+              </RadioGroup>
             </div>
 
             <div className="col-span-6 sm:col-span-3">
