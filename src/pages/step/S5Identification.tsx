@@ -115,7 +115,7 @@ const S5Identification = () => {
                 신분증 정보
               </label>
               <RadioGroup value={identification} onChange={setIdentification}>
-                <div className="grid grid-cols-2 mt-5 sm:mt-8">
+                <div className="mt-5 grid grid-cols-2 sm:mt-8">
                   {identificationTypes.map((item) => (
                     <RadioGroup.Option
                       key={item.title}
@@ -126,7 +126,7 @@ const S5Identification = () => {
                         <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
                           <div className="flex items-center">
                             {checked && (
-                              <div className="shrink-0 text-white mr-2">
+                              <div className="mr-2 shrink-0 text-white">
                                 <CheckIcon className="h-6 w-6" />
                               </div>
                             )}
@@ -138,98 +138,102 @@ const S5Identification = () => {
                   ))}
                 </div>
               </RadioGroup>
+
+              {identification?.title === '주민등록증' ? (
+                <div className="col-span-6 sm:col-span-4">
+                  <label
+                    htmlFor="publishedDate1"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    발급일자
+                  </label>
+                  <input
+                    type="text"
+                    name="publishedDate1"
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                  />
+                  <img
+                    src={`${router.basePath}/assets/images/registration_card.png`}
+                    alt={'주민증'}
+                  />
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <label
+                      htmlFor="driverLicenseNumber"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      운전면허 번호
+                    </label>
+                    <div>
+                      <select
+                        name="driverLicenseNumber"
+                        className="mt-1 w-1/5 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+                      >
+                        <option>United States</option>
+                        <option>Canada</option>
+                        <option>Mexico</option>
+                      </select>
+                      <span>-</span>
+                      <input
+                        type="text"
+                        name="driverLicenseNumber"
+                        className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                      />
+                      <span>-</span>
+                      <input
+                        type="text"
+                        name="driverLicenseNumber"
+                        className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                      />
+                      <span>-</span>
+                      <input
+                        type="text"
+                        name="driverLicenseNumber"
+                        className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                  <div className="col-span-6 sm:col-span-4">
+                    <label
+                      htmlFor="publishedDate2"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      발급일자
+                    </label>
+                    <input
+                      type="text"
+                      name="publishedDate2"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                    />
+                  </div>
+                  <img
+                    src={`${router.basePath}/assets/images/drivers_license.png`}
+                    alt={'면허증'}
+                  />
+                </>
+              )}
             </div>
 
             <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="country"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Country
-              </label>
-              <select
-                id="country"
-                name="country"
-                autoComplete="country-name"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
-              >
-                <option>United States</option>
-                <option>Canada</option>
-                <option>Mexico</option>
-              </select>
-            </div>
-
-            <div className="col-span-6">
-              <label
-                htmlFor="street-address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Street address
-              </label>
-              <input
-                type="text"
-                name="street-address"
-                id="street-address"
-                autoComplete="street-address"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-            </div>
-
-            <div className="col-span-6 sm:col-span-6 lg:col-span-2">
-              <label
-                htmlFor="city"
-                className="block text-sm font-medium text-gray-700"
-              >
-                City
-              </label>
-              <input
-                type="text"
-                name="city"
-                id="city"
-                autoComplete="address-level2"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-            </div>
-
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="region"
-                className="block text-sm font-medium text-gray-700"
-              >
-                State / Province
-              </label>
-              <input
-                type="text"
-                name="region"
-                id="region"
-                autoComplete="address-level1"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-            </div>
-
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="postal-code"
-                className="block text-sm font-medium text-gray-700"
-              >
-                ZIP / Postal code
-              </label>
-              <input
-                type="text"
-                name="postal-code"
-                id="postal-code"
-                autoComplete="postal-code"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
+              <p>여기에 이니시스 인증</p>
+              <p>여기에 이니시스 인증</p>
+              <p>여기에 이니시스 인증</p>
+              <p>여기에 이니시스 인증</p>
+              <p>여기에 이니시스 인증</p>
+              <p>여기에 이니시스 인증</p>
             </div>
           </div>
         </div>
-        <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+        <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
-            type="submit"
-            className="border-transparent bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 inline-flex justify-center rounded-md border py-2 px-4 text-sm font-medium text-white shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+            onClick={() => {
+              router.push('./S6UsingPhoneNumber');
+            }}
+            className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
-            Save
+            본인인증 완료
           </button>
         </div>
       </div>
