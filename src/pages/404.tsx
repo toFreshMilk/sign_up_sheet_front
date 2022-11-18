@@ -48,7 +48,7 @@ const Index = (_a: any) => {
           alt="Nextjs starter banner"
         />
       </a>
-      <h1 className="hidden bg-slate-300 text-2xl font-bold md:flex lg:bg-orange-400 xl:bg-purple-300 2xl:bg-amber-300">
+      <h1 className="bg-slate-300 lg:bg-orange-400 xl:bg-purple-300 2xl:bg-amber-300 hidden text-2xl font-bold md:flex">
         Boilerplate code for your Nextjs project with Tailwind CSS ==
         {router.basePath}
       </h1>

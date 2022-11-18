@@ -59,7 +59,7 @@ const S1Usim = () => {
   return (
     <Main>
       <div className="w-full p-5 sm:px-0">
-        <h2 className={'flex justify-center py-10 text-4xl font-bold'}>
+        <h2 className="flex justify-center py-10 text-4xl font-bold">
           유심 주문 옵션을 선택해주세요
         </h2>
         <Tab.Group>

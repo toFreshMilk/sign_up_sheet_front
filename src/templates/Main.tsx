@@ -25,7 +25,6 @@ const Main = (props: IMainProps) => {
         <h1 className="text-center text-white">온라인 가입 신청서</h1>
       </div>
       <div className="mx-auto max-w-screen-md">
-
         <div className="content py-5 text-xl">{props.children}</div>
 
         <div className="border-t border-gray-300 py-8 text-center text-sm">

@@ -12,7 +12,7 @@ const telecomList = [
   { title: 'KT(알뜰폰)', checked: false },
   { title: 'LGT(알뜰폰)', checked: false },
 ];
-const S6UsingPhoneNumber = () => {
+const S9ContactableNumber = () => {
   const router = useRouter();
   const [telecom, setTelecom] = useState(telecomList[0]);
 
@@ -20,7 +20,7 @@ const S6UsingPhoneNumber = () => {
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
         <h2 className="flex justify-center py-10 text-3xl font-bold">
-          현재 이용중인 휴대폰 번호를 입력해주세요
+          연락 가능한 휴대폰 번호를 입력해주세요
         </h2>
         <div className="col-span-6 sm:col-span-4">
           <Listbox value={telecom} onChange={setTelecom}>
@@ -51,7 +51,7 @@ const S6UsingPhoneNumber = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
-            router.push('./S7PayFeeMethod');
+            router.push('./S10InputAddress');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
         >
@@ -62,4 +62,4 @@ const S6UsingPhoneNumber = () => {
   );
 };
 
-export default S6UsingPhoneNumber;
+export default S9ContactableNumber;
