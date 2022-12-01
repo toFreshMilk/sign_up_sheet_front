@@ -1,8 +1,9 @@
 import { RadioGroup } from '@headlessui/react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
+import S5Identification2 from '@/pages/step/S5Identification2';
 import { Main } from '@/templates/Main';
 
 axios.defaults.withCredentials = true;
@@ -28,27 +29,25 @@ const identificationTypes = [
 
 const S5Identification = () => {
   const router = useRouter();
-
-  // const [iframe, setIframe] = useState(null);
-  // const Newframe = (props: any) => {
-  //   const iframeRef = useRef(null);
-  //   useEffect(() => {
-  //     // props.setIframe(iframeRef.current);
-  //   }, []);
-  //   return (
-  //     <iframe
-  //       ref={iframeRef}
-  //       name="sa_popup"
-  //       width="100%"
-  //       height="100%"
-  //       style={{ border: 'none' }}
-  //     />
-  //   );
-  // };
-  function inisuc() {
-    console.log('성공');
-  }
   const [identification, setIdentification] = useState(identificationTypes[0]);
+
+  const [keys, setKeys] = useState({ mid: '', apiKey: '', hashingKey: '' });
+  // const [authHash, setAuthHash] = useState('');
+  // const [authHash, setAuthHash] = useState('');
+  // const [userHash, setUserHash] = useState('');
+  useEffect(() => {
+    async function getKeys() {
+      try {
+        const getKeyUrl = `${process.env.NEXT_PUBLIC_API_URL}/getKeys`;
+        const { data } = await axios.post(getKeyUrl);
+        setKeys(data);
+      } catch (e) {
+        console.log('getKeys e');
+        console.log(e);
+      }
+    }
+    getKeys();
+  }, []);
 
   return (
     <Main>
@@ -241,106 +240,7 @@ const S5Identification = () => {
             </div>
 
             <div className="col-span-6 sm:col-span-3">
-              <form
-                name="saForm"
-                method="post"
-                target="sa_popup"
-                action="https://sa.inicis.com/auth"
-              >
-                <input type="text" name="mid" defaultValue="INIiasTest" />
-                <input type="text" name="reqSvcCd" defaultValue="01" />
-                <input
-                  type="text"
-                  name="mTxId"
-                  defaultValue="mTxId_1668754078819"
-                />
-                <input
-                  type="text"
-                  name="successUrl"
-                  defaultValue="https://join.smartelmobile.com/api/receiveInicisSuc"
-                />
-                <input
-                  type="text"
-                  name="failUrl"
-                  defaultValue="https://join.smartelmobile.com/api/receiveInicisFail"
-                />
-                <input
-                  type="text"
-                  name="authHash"
-                  defaultValue="df39eaaf785c3a7fb58948446a749b67b86fb5188b8f68011f948dd140af0453"
-                />
-                <input type="text" name="flgFixedUser" defaultValue="Y" />
-                <input type="text" name="userName" defaultValue="이성민" />
-                <input
-                  type="text"
-                  name="userPhone"
-                  defaultValue="01089025658"
-                />
-                <input type="text" name="userBirth" defaultValue="19890413" />
-                <input
-                  type="text"
-                  name="userHash"
-                  defaultValue="3162fde6de62d60459fc4864c707faa9f5bbebff688831fe44168709ddf87a56"
-                />
-                <input
-                  type="text"
-                  name="reservedMsg"
-                  defaultValue="isUseToken=Y"
-                />
-                <button type="submit">서브밋</button>
-              </form>
-              <p
-                onClick={(e) => {
-                  e.preventDefault();
-
-                  // 여기서 DB 로우 생성, 입력
-
-                  const width = 400;
-                  const height = 620;
-                  const xPos = document.body.offsetWidth / 2 - width / 2; // 가운데 정렬
-
-                  window.open(
-                    '',
-                    'sa_popup',
-                    `width=${width}, height=${height}, left=${xPos}, menubar=yes, status=yes, titlebar=yes, resizable=yes`
-                  );
-                }}
-              >
-                팝업출력
-              </p>
-              {/* <iframe ref={ifr} name="sa_sa_popup" /> */}
-              <p
-                onClick={async () => {
-                  const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/confirmAuth`;
-                  const aaaa = await axios.post(tokenUrl);
-                  console.log(aaaa);
-                }}
-              >
-                confirmAuth 확인
-              </p>
-              <p
-                onClick={async () => {
-                  const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/confirmAuth2`;
-                  const aaaa = await axios.post(tokenUrl);
-                  console.log(aaaa);
-                }}
-              >
-                confirmAuth2 확인
-              </p>
-              <p
-                onClick={async () => {
-                  const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertIdentificationInfo`;
-                  const data = {
-                    mTxId: 'mTxId_1668754078819',
-                    userName: '이성민',
-                    userPhone: '01089025658',
-                  };
-                  const aaaa = await axios.post(tokenUrl, data);
-                  console.log(aaaa);
-                }}
-              >
-                insertIdentificationInfo
-              </p>
+              <S5Identification2 k={keys} />
               <p
                 onClick={async () => {
                   const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertNewRow`;
@@ -350,7 +250,6 @@ const S5Identification = () => {
               >
                 insertNewRow
               </p>
-              <p onClick={inisuc}>inisuc</p>
               <p>여기에 이니시스 인증</p>
               <p>여기에 이니시스 인증</p>
             </div>
