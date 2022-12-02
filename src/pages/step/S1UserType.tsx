@@ -19,7 +19,7 @@ const S1UserType = () => {
   const [selectedType] = useState(custommerTypes[0]);
 
   const setSelectedType = (v: any) => {
-    // console.log(v);
+    console.log(v);
     // const { info, setInfo } = UserInfo();
     // console.log(info);
     // console.log(setInfo);
@@ -29,7 +29,7 @@ const S1UserType = () => {
 
   return (
     <Main>
-      <p>ccccccccccccccccccc</p>
+      <h1>고객 유형을 선택해 주세요</h1>
       <RadioGroup
         value={selectedType}
         onChange={setSelectedType}

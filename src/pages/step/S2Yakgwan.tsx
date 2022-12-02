@@ -20,26 +20,13 @@ const S2Yakgwan = () => {
   const [optionalYakgwans, setOptionalYakgwans] = useState([
     { name: '정보광고 전송 동의[선택]', checked: false },
   ]);
-
-  const sss = () => {
-    console.log(requiredYakgwans);
-    // console.log(sessionStorage.getItem('userInfo'));
-    // const { info, setInfo } = UserInfo();
-    // console.log(info);
-    // console.log(setInfo);
-    // setInfo(v.name, true);
-  };
-
   return (
     <Main>
-      <p onClick={sss}>ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ</p>
+      <h1>약관에 동의해 주세요</h1>
       <div className="overflow-hidden shadow sm:rounded-md">
         <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
           <fieldset>
             <legend className="sr-only">약관 동의</legend>
-            <h3 className="font-medium text-gray-900" aria-hidden="true">
-              약관에 동의해주세요
-            </h3>
             <div className="mt-4 space-y-4">
               {requiredYakgwans.map((item: IfYakgwan, index: number) => (
                 <div className="flex items-start" key={index}>

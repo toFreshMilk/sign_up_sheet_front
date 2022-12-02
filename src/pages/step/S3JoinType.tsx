@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
@@ -12,6 +12,9 @@ const S3JoinType = () => {
     },
     { title: '신규 가입', subTitle: '새로운 휴대폰 번호로 부여 받을래요' },
   ]);
+  useEffect(() => {
+    // console.log(sessionStorage.getItem('S2Yakgwan'));
+  }, []);
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
