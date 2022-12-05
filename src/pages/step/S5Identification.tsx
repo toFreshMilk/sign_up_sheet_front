@@ -1,5 +1,6 @@
 import { RadioGroup } from '@headlessui/react';
 import axios from 'axios';
+import moment from 'moment';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
@@ -18,16 +19,38 @@ const S5Identification = () => {
   const router = useRouter();
   const [identification, setIdentification] = useState(identificationTypes[0]);
 
-  const [keys, setKeys] = useState({ mid: '', apiKey: '', hashingKey: '' });
-  // const [authHash, setAuthHash] = useState('');
-  // const [authHash, setAuthHash] = useState('');
-  // const [userHash, setUserHash] = useState('');
+  const [keys, setKeys] = useState({
+    mid: '',
+    apiKey: '',
+    hashingKey: '',
+    mTxId: '',
+    authHash: '',
+    reqSvcCd: '01',
+    userHash: '',
+  });
+
+  const [person, setPerson] = useState({
+    userName: '이성민',
+    userPhone: '01089025658',
+    jumin1: '19890413',
+    jumin2: '',
+    email1: '',
+    email2: '',
+  });
+
+  const handleInputChange = (e: any) => {
+    setPerson({ ...person, [e.target.name]: e.target.value });
+  };
   useEffect(() => {
     async function getKeys() {
       try {
         const getKeyUrl = `${process.env.NEXT_PUBLIC_API_URL}/getKeys`;
         const { data } = await axios.post(getKeyUrl);
-        setKeys(data);
+        const mtxId = `smar${moment().format('YYMMDDHHmmssms')}`;
+        setKeys({
+          ...data,
+          mTxId: mtxId,
+        });
       } catch (e) {
         console.log('getKeys e');
         console.log(e);
@@ -36,6 +59,9 @@ const S5Identification = () => {
     getKeys();
   }, []);
 
+  useEffect(() => {
+    // console.log(keys);
+  }, [keys]);
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -52,10 +78,11 @@ const S5Identification = () => {
                 type="text"
                 name="name"
                 id="name"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                onChange={handleInputChange}
+                value={person.userName || ''}
               />
             </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="jumin1"
@@ -67,10 +94,11 @@ const S5Identification = () => {
                 type="text"
                 name="jumin1"
                 id="jumin1"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                onChange={handleInputChange}
+                value={person.jumin1 || ''}
               />
             </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="jumin2"
@@ -82,36 +110,41 @@ const S5Identification = () => {
                 type="text"
                 name="jumin2"
                 id="jumin2"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                onChange={handleInputChange}
+                value={person.jumin2 || ''}
               />
             </div>
             <div className="col-span-6 sm:col-span-3">
               <label
-                htmlFor="jumin1"
+                htmlFor="email1"
                 className="block text-sm font-medium text-gray-700"
               >
                 이메일
               </label>
               <input
                 type="text"
-                name="jumin1"
-                id="jumin1"
-                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                name="email1"
+                id="email1"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                onChange={handleInputChange}
+                value={person.email1 || ''}
               />
             </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
-                htmlFor="jumin2"
+                htmlFor="email2"
                 className="block text-sm font-medium text-gray-700"
               >
                 @ 직접 입력
               </label>
               <input
                 type="text"
-                name="jumin2"
-                id="jumin2"
-                className="focus:border-indigo-500 focus:ring-indigo-500 ml-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                name="email2"
+                id="email2"
+                className="ml-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                onChange={handleInputChange}
+                value={person.email2 || ''}
               />
             </div>
 
@@ -227,7 +260,7 @@ const S5Identification = () => {
             </div>
 
             <div className="col-span-6 sm:col-span-3">
-              <S5Identification2 k={keys} />
+              <S5Identification2 k={{ ...keys, ...person }} />
               <p
                 onClick={async () => {
                   const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertNewRow`;
@@ -237,15 +270,23 @@ const S5Identification = () => {
               >
                 insertNewRow
               </p>
-              <p>여기에 이니시스 인증</p>
-              <p>여기에 이니시스 인증</p>
             </div>
           </div>
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
-            onClick={() => {
-              router.push('./S6UsingPhoneNumber');
+            onClick={async () => {
+              const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkIdentification`;
+              const passedIdentification = await axios.post(tokenUrl, {
+                mTxId: keys.mTxId,
+              });
+
+              if (passedIdentification.data.length === 0) {
+                alert('본인인증이 되지 않았습니다.');
+                await router.push('./S6UsingPhoneNumber');
+              } else {
+                await router.push('./S6UsingPhoneNumber');
+              }
             }}
             className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           >

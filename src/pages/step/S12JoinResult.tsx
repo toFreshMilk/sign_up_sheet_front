@@ -176,7 +176,7 @@ const S12JoinResult = () => {
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
             onClick={() => {
-              router.push('./');
+              router.push('/');
             }}
             className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           >
