@@ -30,12 +30,16 @@ const S5Identification = () => {
   });
 
   const [person, setPerson] = useState({
-    userName: '이성민',
-    userPhone: '01089025658',
-    jumin1: '19890413',
-    jumin2: '',
+    userName: process.env.NEXT_PUBLIC_NAME,
+    userPhone: process.env.NEXT_PUBLIC_PHONE,
+    userBirth: process.env.NEXT_PUBLIC_BIRTH,
     email1: '',
     email2: '',
+    publishedDate1: '',
+    driverLicenseNumber1: '',
+    driverLicenseNumber2: '',
+    driverLicenseNumber3: '',
+    driverLicenseNumber4: '',
   });
 
   const handleInputChange = (e: any) => {
@@ -59,9 +63,6 @@ const S5Identification = () => {
     getKeys();
   }, []);
 
-  useEffect(() => {
-    // console.log(keys);
-  }, [keys]);
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -69,52 +70,37 @@ const S5Identification = () => {
           <div className="grid grid-cols-6 gap-6">
             <div className="col-span-6 sm:col-span-4">
               <label
-                htmlFor="name"
+                htmlFor="userName"
                 className="block text-sm font-medium text-gray-700"
               >
                 이름
               </label>
               <input
                 type="text"
-                name="name"
-                id="name"
+                name="userName"
+                id="userName"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
-                value={person.userName || ''}
+                value={person.userName}
               />
             </div>
-            <div className="col-span-6 sm:col-span-3">
+            <div className="col-span-12 sm:col-span-3">
               <label
-                htmlFor="jumin1"
+                htmlFor="userBirth"
                 className="block text-sm font-medium text-gray-700"
               >
-                주민번호 앞자리
+                8자리 생년월일
               </label>
               <input
                 type="text"
-                name="jumin1"
-                id="jumin1"
+                name="userBirth"
+                id="userBirth"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
-                value={person.jumin1 || ''}
+                value={person.userBirth}
               />
             </div>
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="jumin2"
-                className="block text-sm font-medium text-gray-700"
-              >
-                주민번호 뒷자리
-              </label>
-              <input
-                type="text"
-                name="jumin2"
-                id="jumin2"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-                onChange={handleInputChange}
-                value={person.jumin2 || ''}
-              />
-            </div>
+            <div className="col-span-6 sm:col-span-3" />
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="email1"
@@ -128,7 +114,7 @@ const S5Identification = () => {
                 id="email1"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
-                value={person.email1 || ''}
+                value={person.email1}
               />
             </div>
             <div className="col-span-6 sm:col-span-3">
@@ -144,7 +130,7 @@ const S5Identification = () => {
                 id="email2"
                 className="ml-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
-                value={person.email2 || ''}
+                value={person.email2}
               />
             </div>
 
@@ -193,6 +179,8 @@ const S5Identification = () => {
                   <input
                     type="text"
                     name="publishedDate1"
+                    onChange={handleInputChange}
+                    value={person.publishedDate1}
                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                   />
                   <img
@@ -211,8 +199,10 @@ const S5Identification = () => {
                     </label>
                     <div>
                       <select
-                        name="driverLicenseNumber"
+                        name="driverLicenseNumber1"
                         className="mt-1 w-1/5 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+                        onChange={handleInputChange}
+                        value={person.driverLicenseNumber1}
                       >
                         <option>United States</option>
                         <option>Canada</option>
@@ -221,19 +211,25 @@ const S5Identification = () => {
                       <span>-</span>
                       <input
                         type="text"
-                        name="driverLicenseNumber"
+                        name="driverLicenseNumber2"
+                        onChange={handleInputChange}
+                        value={person.driverLicenseNumber2}
                         className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
                       />
                       <span>-</span>
                       <input
                         type="text"
-                        name="driverLicenseNumber"
+                        name="driverLicenseNumber3"
+                        onChange={handleInputChange}
+                        value={person.driverLicenseNumber3}
                         className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
                       />
                       <span>-</span>
                       <input
                         type="text"
-                        name="driverLicenseNumber"
+                        name="driverLicenseNumber4"
+                        onChange={handleInputChange}
+                        value={person.driverLicenseNumber4}
                         className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
                       />
                     </div>
@@ -261,15 +257,6 @@ const S5Identification = () => {
 
             <div className="col-span-6 sm:col-span-3">
               <S5Identification2 k={{ ...keys, ...person }} />
-              <p
-                onClick={async () => {
-                  const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertNewRow`;
-                  const aaaa = await axios.post(tokenUrl);
-                  console.log(aaaa);
-                }}
-              >
-                insertNewRow
-              </p>
             </div>
           </div>
         </div>
@@ -282,11 +269,14 @@ const S5Identification = () => {
               });
 
               if (passedIdentification.data.length === 0) {
-                alert('본인인증이 되지 않았습니다.');
-                await router.push('./S6UsingPhoneNumber');
+                // alert('본인인증이 되지 않았습니다.');
+                // await router.push('./S6UsingPhoneNumber');
               } else {
+                sessionStorage.setItem('S4Usim', JSON.stringify(person));
                 await router.push('./S6UsingPhoneNumber');
               }
+              sessionStorage.setItem('S4Usim', JSON.stringify(person));
+              await router.push('./S6UsingPhoneNumber');
             }}
             className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           >

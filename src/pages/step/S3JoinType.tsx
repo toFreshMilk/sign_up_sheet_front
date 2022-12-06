@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
@@ -7,14 +7,11 @@ const S3JoinType = () => {
   const router = useRouter();
   const [joinTypes] = useState([
     {
-      title: '번호 이동',
+      title: '번호이동',
       subTitle: '지금 사용중인 휴대폰 번호 그대로 사용할래요',
     },
-    { title: '신규 가입', subTitle: '새로운 휴대폰 번호로 부여 받을래요' },
+    { title: '신규가입', subTitle: '새로운 휴대폰 번호로 부여 받을래요' },
   ]);
-  useEffect(() => {
-    // console.log(sessionStorage.getItem('S2Yakgwan'));
-  }, []);
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">

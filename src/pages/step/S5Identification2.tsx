@@ -20,9 +20,13 @@ const S5Identification2 = (_props: any) => {
   };
   useEffect(() => {
     const { k } = _props;
+    console.log(k);
+
     let authHashStr = k.mid + k.mTxId + k.apiKey;
     authHashStr = crypto.createHash('sha256').update(authHashStr).digest('hex');
-    let userHashStr = k.userName + k.mid + k.userPhone + k.mTxId + k.jumin1 + '01';
+    let userHashStr = `${
+      k.userName + k.mid + k.userPhone + k.mTxId + k.jumin1
+    }01`;
     userHashStr = crypto.createHash('sha256').update(userHashStr).digest('hex');
     setKey({
       ...key,
@@ -30,7 +34,7 @@ const S5Identification2 = (_props: any) => {
       mTxId: k.mTxId,
       userName: k.userName,
       userPhone: k.userPhone,
-      userBirth: k.jumin1,
+      userBirth: k.userBirth,
       authHash: authHashStr,
       userHash: userHashStr,
       reqSvcCd: k.reqSvcCd,
@@ -44,14 +48,14 @@ const S5Identification2 = (_props: any) => {
       action="https://sa.inicis.com/auth"
     >
       <input
-        type="text"
+        type="hidden"
         name="mid"
         value={key.mid}
         onChange={handleInputChange}
       />
       <input type="hidden" name="reqSvcCd" defaultValue="01" />
       <input
-        type="text"
+        type="hidden"
         name="mTxId"
         value={key.mTxId}
         onChange={handleInputChange}
@@ -67,32 +71,32 @@ const S5Identification2 = (_props: any) => {
         defaultValue="https://join.smartelmobile.com/api/receiveInicisFail"
       />
       <input
-        type="text"
+        type="hidden"
         name="authHash"
         value={key.authHash}
         onChange={handleInputChange}
       />
       <input type="hidden" name="flgFixedUser" defaultValue="Y" />
       <input
-        type="text"
+        type="hidden"
         name="userName"
         value={key.userName}
         onChange={handleInputChange}
       />
       <input
-        type="text"
+        type="hidden"
         name="userPhone"
         value={key.userPhone}
         onChange={handleInputChange}
       />
       <input
-        type="text"
+        type="hidden"
         name="userBirth"
         value={key.userBirth}
         onChange={handleInputChange}
       />
       <input
-        type="text"
+        type="hidden"
         name="userHash"
         value={key.userHash}
         onChange={handleInputChange}

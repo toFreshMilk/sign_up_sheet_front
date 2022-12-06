@@ -17,6 +17,9 @@ const Main = (props: IMainProps) => {
         <img
           src={`${router.basePath}/assets/images/smartel_logo.png`}
           alt={'스마텔 로고'}
+          onClick={() => {
+            router.push('/step/S1UserType/');
+          }}
         />
       </div>
       <div className="mx-auto max-w-screen-md">

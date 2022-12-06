@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { useRouter } from 'next/router';
 
 import { Main } from '@/templates/Main';
@@ -140,33 +141,57 @@ const S12JoinResult = () => {
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                다른 연락처
-              </dt>
+              <dt className="text-sm font-medium text-gray-500">다른 연락처</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                ㅁ니아러마ㅣㄴㅇㄹ
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">이메일</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                ㅁ니아러마ㅣㄴㅇㄹ
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">주소</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                ㅁ니아러마ㅣㄴㅇㄹ
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">청구서 유형</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 ㅁ니아러마ㅣㄴㅇㄹ
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
-                이메일
+                자동납부종류
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 ㅁ니아러마ㅣㄴㅇㄹ
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                주소
-              </dt>
+              <dt className="text-sm font-medium text-gray-500">예금주</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 ㅁ니아러마ㅣㄴㅇㄹ
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                청구서 유형
-              </dt>
+              <dt className="text-sm font-medium text-gray-500">관계</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                ㅁ니아러마ㅣㄴㅇㄹ
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">은행명</dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                ㅁ니아러마ㅣㄴㅇㄹ
+              </dd>
+            </div>
+            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt className="text-sm font-medium text-gray-500">계좌번호</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 ㅁ니아러마ㅣㄴㅇㄹ
               </dd>
@@ -175,8 +200,13 @@ const S12JoinResult = () => {
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
-            onClick={() => {
-              router.push('/');
+            onClick={async () => {
+              // 여기서 finalRow
+              const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
+              const finalResult = await axios.post(tokenUrl, {});
+
+              console.log(finalResult);
+              await router.push('/step/S1UserType/');
             }}
             className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           >

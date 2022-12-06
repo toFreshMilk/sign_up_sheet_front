@@ -1,6 +1,6 @@
-import { Listbox, RadioGroup, Tab, Transition } from '@headlessui/react';
+import { RadioGroup, Tab } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { Fragment, useState } from 'react';
+import { useState } from 'react';
 import Modal from 'react-modal';
 
 import { Main } from '@/templates/Main';
@@ -9,32 +9,46 @@ import CheckIcon from '@/utils/Commons';
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
-
+const usimTypes = [
+  { title: '유심 보유중', subTitle: '(새로 구매한 유심)' },
+  {
+    title: '유심 없음',
+    subTitle: '(택배 신청)',
+    nomalOrNFC: [
+      { name: '일반 유심', coment: '유심비도 무료, 배송비도 무료입니다.' },
+      {
+        name: 'NFC 유심',
+        coment: '유심비 4,400원 청구될 예정이며, 배송비는 무료입니다.',
+      },
+    ],
+  },
+  {
+    title: 'eSim 사용',
+    subTitle: '(eSIM 지원 휴대폰)',
+    esim: {
+      manufacturer: ['애플', '삼성', '기타'],
+      modelName: ['모델1', '모델2', '모델3'],
+      capacity: ['500M', '1G', '2G'],
+    },
+  },
+];
+const inputsInitial = {
+  usimNumber: '',
+  usimType: '',
+  esimFactory: '',
+  modelName: '',
+  modelVolume: '',
+  serialNumber: '',
+  imei1: '',
+  imei2: '',
+  EID: '',
+};
 const S1Usim = () => {
   const router = useRouter();
-  const [usimTypes] = useState([
-    { title: '유심 보유중', subTitle: '(새로 구매한 유심)' },
-    {
-      title: '유심 없음',
-      subTitle: '(택배 신청)',
-      nomalOrNFC: [
-        { name: '일반 유심', coment: '유심비도 무료, 배송비도 무료입니다.' },
-        {
-          name: 'NFC 유심',
-          coment: '유심비 4,400원 청구될 예정이며, 배송비는 무료입니다.',
-        },
-      ],
-    },
-    {
-      title: 'eSim 사용',
-      subTitle: '(eSIM 지원 휴대폰)',
-      esim: {
-        manufacturer: ['애플', '삼성', '기타'],
-        modelName: ['모델1', '모델2', '모델3'],
-        capacity: ['500M', '1G', '2G'],
-      },
-    },
-  ]);
+  const [inputs, setInputs] = useState(inputsInitial);
+  const handleInputChange = (e: any) => {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  };
   const [modalOpen, setModalOpen] = useState(false);
 
   const openModal = () => {
@@ -63,6 +77,9 @@ const S1Usim = () => {
                       : 'text-blue-100 hover:bg-white/[0.12] hover:text-white'
                   )
                 }
+                onClick={() => {
+                  setInputs(inputsInitial);
+                }}
               >
                 <h2 className={'mb-2 text-2xl font-bold'}>{usimType.title}</h2>
                 <h3 className={'mb-2'}>{usimType.subTitle}</h3>
@@ -78,7 +95,7 @@ const S1Usim = () => {
             >
               <h4>유심번호 빨간색 표기부분 전체를 입력해주세요</h4>
               <img
-                src={`${router.basePath}/assets/images/nextjs-starter-banner.png`}
+                src={`${router.basePath}/assets/images/u+usim_3__.png`}
                 alt={'이미지'}
               />
               <div className="border-4">
@@ -86,6 +103,8 @@ const S1Usim = () => {
                   type="text"
                   name="usimNumber"
                   id="usimNumber"
+                  value={inputs.usimNumber}
+                  onChange={handleInputChange}
                   placeholder={'USIM 번호'}
                   className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 />
@@ -102,6 +121,12 @@ const S1Usim = () => {
                   <div key={item.name + i}>
                     <RadioGroup.Option
                       value={item}
+                      onClick={() => {
+                        setInputs({
+                          ...inputs,
+                          usimType: item.name,
+                        });
+                      }}
                       className={({ active }) =>
                         `${classNames(
                           'bg-white shadow-sm text-gray-900 cursor-pointer',
@@ -163,6 +188,12 @@ const S1Usim = () => {
                                   <RadioGroup.Option
                                     key={factory + i}
                                     value={factory}
+                                    onClick={() => {
+                                      setInputs({
+                                        ...inputs,
+                                        esimFactory: factory,
+                                      });
+                                    }}
                                     className={({ active, checked }) =>
                                       `${
                                         active
@@ -175,7 +206,7 @@ const S1Usim = () => {
                     relative flex w-1/3 cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
                                     }
                                   >
-                                    {({ active, checked }) => (
+                                    {({ checked }) => (
                                       <>
                                         <div className="flex w-full items-center justify-between">
                                           <div className="text-sm">
@@ -188,7 +219,6 @@ const S1Usim = () => {
                                               }`}
                                             >
                                               {factory}
-                                              {String(active)}
                                             </RadioGroup.Label>
                                           </div>
                                           {checked && (
@@ -217,74 +247,65 @@ const S1Usim = () => {
                         <dl>
                           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">
-                              모델명
+                              <label
+                                htmlFor="modelName"
+                                className="block text-sm font-medium text-gray-700"
+                              >
+                                모델명
+                              </label>
                             </dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                              <div className="mx-auto w-full max-w-md">
-                                <RadioGroup>
-                                  <RadioGroup.Label className="sr-only">
-                                    단말기 모델명 선택
-                                  </RadioGroup.Label>
-                                  <div className="flex flex-row space-x-5">
-                                    <Listbox>
-                                      <div className="relative mt-1">
-                                        <Listbox.Button className="relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm">
-                                          <span className="block truncate">
-                                            ㅇㄹㄴㅇㄹㅇㄴㄹ
-                                          </span>
-                                          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2" />
-                                        </Listbox.Button>
-                                        <Transition
-                                          as={Fragment}
-                                          leave="transition ease-in duration-100"
-                                          leaveFrom="opacity-100"
-                                          leaveTo="opacity-0"
-                                        >
-                                          <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                                            {usimTypes[2]?.esim?.modelName?.map(
-                                              (person, personIdx) => (
-                                                <Listbox.Option
-                                                  key={personIdx}
-                                                  className={({ active }) =>
-                                                    `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                                                      active
-                                                        ? 'bg-amber-100 text-amber-900'
-                                                        : 'text-gray-900'
-                                                    }`
-                                                  }
-                                                  value={person}
-                                                >
-                                                  {({ selected }) => (
-                                                    <>
-                                                      <span
-                                                        className={`block truncate ${
-                                                          selected
-                                                            ? 'font-medium'
-                                                            : 'font-normal'
-                                                        }`}
-                                                      >
-                                                        {person}
-                                                      </span>
-                                                      {selected ? (
-                                                        <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
-                                                          <CheckIcon
-                                                            className="h-5 w-5"
-                                                            aria-hidden="true"
-                                                          />
-                                                        </span>
-                                                      ) : null}
-                                                    </>
-                                                  )}
-                                                </Listbox.Option>
-                                              )
-                                            )}
-                                          </Listbox.Options>
-                                        </Transition>
-                                      </div>
-                                    </Listbox>
-                                  </div>
-                                </RadioGroup>
-                              </div>
+                              <input
+                                type="text"
+                                name="modelName"
+                                id="modelName"
+                                value={inputs.modelName}
+                                onChange={handleInputChange}
+                                autoComplete="given-name"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                              />
+                            </dd>
+                          </div>
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-500">
+                              <label
+                                htmlFor="modelVolume"
+                                className="block text-sm font-medium text-gray-700"
+                              >
+                                모델용량
+                              </label>
+                            </dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                              <input
+                                type="text"
+                                name="modelVolume"
+                                id="modelVolume"
+                                value={inputs.modelVolume}
+                                onChange={handleInputChange}
+                                autoComplete="given-name"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                              />
+                            </dd>
+                          </div>
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-500">
+                              <label
+                                htmlFor="serialNumber"
+                                className="block text-sm font-medium text-gray-700"
+                              >
+                                일련번호
+                              </label>
+                            </dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                              <input
+                                type="text"
+                                name="serialNumber"
+                                id="serialNumber"
+                                value={inputs.serialNumber}
+                                onChange={handleInputChange}
+                                autoComplete="given-name"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                              />
                             </dd>
                           </div>
                         </dl>
@@ -318,8 +339,10 @@ const S1Usim = () => {
                                 type="text"
                                 name="imei1"
                                 id="imei1"
+                                value={inputs.imei1}
+                                onChange={handleInputChange}
                                 autoComplete="given-name"
-                                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -339,8 +362,10 @@ const S1Usim = () => {
                                 type="text"
                                 name="imei2"
                                 id="imei2"
+                                value={inputs.imei2}
+                                onChange={handleInputChange}
                                 autoComplete="given-name"
-                                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -360,8 +385,10 @@ const S1Usim = () => {
                                 type="text"
                                 name="EID"
                                 id="EID"
+                                value={inputs.EID}
+                                onChange={handleInputChange}
                                 autoComplete="given-name"
-                                className="focus:border-indigo-500 focus:ring-indigo-500 mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -380,7 +407,7 @@ const S1Usim = () => {
       </div>
       <button
         onClick={() => {
-          sessionStorage.setItem('S4Usim', '');
+          sessionStorage.setItem('S4Usim', JSON.stringify(inputs));
           router.push('./S5Identification');
         }}
         className="group relative flex w-full justify-center rounded-md border bg-[#32b2df] py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
