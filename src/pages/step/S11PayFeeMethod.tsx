@@ -38,6 +38,23 @@ const S11PayFeeMethod = () => {
   const [card, setCard] = useState(cardList[0]?.title);
   const [relation, setRelation] = useState(relationList[0]?.title);
 
+  const [userInfo, setUserInfo] = useState({
+    accountNumber: '',
+    accountName: '',
+    accountJumin1: '',
+    accountJumin2: '',
+    cardOwnerName: '',
+    cardNumber1: '',
+    cardNumber2: '',
+    cardNumber3: '',
+    cardNumber4: '',
+    validTimeMonth: '',
+    validTimeYear: '',
+    cardPasswordDigit2: '',
+  });
+  const handleInputChange = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -99,39 +116,47 @@ const S11PayFeeMethod = () => {
               </select>
               <input
                 type="text"
-                name="bankNumber"
+                name="accountNumber"
+                onChange={handleInputChange}
+                value={userInfo.accountNumber}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
               <p>* 평생계좌(휴대폰번호 형식 계좌)의 경우 등록이 불가합니다.</p>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
-                htmlFor="name"
+                htmlFor="accountName"
                 className="block text-sm font-medium text-gray-700"
               >
                 예금주명
               </label>
               <input
                 type="text"
-                name="name"
+                name="accountName"
+                onChange={handleInputChange}
+                value={userInfo.accountName}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
-                htmlFor="phoneNumber"
+                htmlFor="accountJumin"
                 className="block text-sm font-medium text-gray-700"
               >
                 예금주 주민등록번호
               </label>
               <input
                 type="text"
-                name="jumin1"
+                name="accountJumin1"
+                onChange={handleInputChange}
+                value={userInfo.accountJumin1}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
               <input
                 type="text"
-                name="jumin2"
+                name="accountJumin2"
+                onChange={handleInputChange}
+                value={userInfo.accountJumin2}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
@@ -165,7 +190,7 @@ const S11PayFeeMethod = () => {
                 htmlFor="methodType"
                 className="block text-sm font-medium text-gray-700"
               >
-                카드번호
+                카드명
               </label>
               <select
                 name="methodType"
@@ -183,7 +208,30 @@ const S11PayFeeMethod = () => {
               </select>
               <input
                 type="text"
-                name="cardNumber"
+                name="cardNumber1"
+                onChange={handleInputChange}
+                value={userInfo.cardNumber1}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+              />
+              <input
+                type="text"
+                name="cardNumber2"
+                onChange={handleInputChange}
+                value={userInfo.cardNumber2}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+              />
+              <input
+                type="text"
+                name="cardNumber3"
+                onChange={handleInputChange}
+                value={userInfo.cardNumber3}
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+              />
+              <input
+                type="text"
+                name="cardNumber4"
+                onChange={handleInputChange}
+                value={userInfo.cardNumber4}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
@@ -197,11 +245,15 @@ const S11PayFeeMethod = () => {
               <input
                 type="text"
                 name="validTimeMonth"
+                onChange={handleInputChange}
+                value={userInfo.validTimeMonth}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
               <input
                 type="text"
                 name="validTimeYear"
+                onChange={handleInputChange}
+                value={userInfo.validTimeYear}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
@@ -214,12 +266,9 @@ const S11PayFeeMethod = () => {
               </label>
               <input
                 type="text"
-                name="password1"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-              <input
-                type="text"
-                name="password2"
+                name="cardPasswordDigit2"
+                onChange={handleInputChange}
+                value={userInfo.cardPasswordDigit2}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
@@ -229,6 +278,16 @@ const S11PayFeeMethod = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              'S11PayFeeMethod',
+              JSON.stringify({
+                ...userInfo,
+                payFeeMethodType,
+                bank,
+                card,
+                relation,
+              })
+            );
             router.push('./S12JoinResult');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"

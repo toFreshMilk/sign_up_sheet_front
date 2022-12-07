@@ -15,7 +15,13 @@ const telecomList = [
 const S6UsingPhoneNumber = () => {
   const router = useRouter();
   const [telecom, setTelecom] = useState(telecomList[0]);
+  const [userInfo, setUserInfo] = useState({
+    phoneNumber: '',
+  });
 
+  const handleInputChange = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -44,6 +50,8 @@ const S6UsingPhoneNumber = () => {
           <input
             type="text"
             name="phoneNumber"
+            onChange={handleInputChange}
+            value={userInfo.phoneNumber}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
@@ -51,6 +59,14 @@ const S6UsingPhoneNumber = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              'S6UsingPhoneNumber',
+              JSON.stringify({
+                ...userInfo,
+                telecom,
+              })
+            );
+
             router.push('./S7PayFeeMethod');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"

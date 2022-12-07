@@ -1,9 +1,17 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
 const S8HopeNumber = () => {
   const router = useRouter();
+  const [userInfo, setUserInfo] = useState({
+    hope1: '',
+    hope2: '',
+  });
+  const handleInputChange = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -12,27 +20,31 @@ const S8HopeNumber = () => {
         </h2>
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
-            htmlFor="tier1"
+            htmlFor="hope1"
             className="block text-sm font-medium text-gray-700"
           >
             1순위
           </label>
           <input
             type="text"
-            name="tier1"
+            name="hope1"
+            onChange={handleInputChange}
+            value={userInfo.hope1}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
-            htmlFor="tier2"
+            htmlFor="hope2"
             className="block text-sm font-medium text-gray-700"
           >
             2순위
           </label>
           <input
             type="text"
-            name="tier2"
+            name="hope2"
+            onChange={handleInputChange}
+            value={userInfo.hope2}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
@@ -40,6 +52,12 @@ const S8HopeNumber = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              'S8HopeNumber',
+              JSON.stringify({
+                ...userInfo,
+              })
+            );
             router.push('./S9ContactableNumber');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"

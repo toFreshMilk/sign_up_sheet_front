@@ -13,7 +13,12 @@ const payMethodList = [
 const S7PayFeeMethod = () => {
   const router = useRouter();
   const [payMethod, setPayMethod] = useState(payMethodList[0]?.title);
-
+  const [userInfo, setUserInfo] = useState({
+    digint4: '',
+  });
+  const handleInputChange = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -48,14 +53,16 @@ const S7PayFeeMethod = () => {
           ) : (
             <>
               <label
-                htmlFor="phoneNumber"
+                htmlFor="digint4"
                 className="block text-sm font-medium text-gray-700"
               >
                 뒤 4자리 입력
               </label>
               <input
                 type="text"
-                name="phoneNumber"
+                name="digint4"
+                onChange={handleInputChange}
+                value={userInfo.digint4}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
               />
             </>
@@ -65,6 +72,13 @@ const S7PayFeeMethod = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              'S7PayFeeMethod',
+              JSON.stringify({
+                ...userInfo,
+                payMethod,
+              })
+            );
             router.push('./S8HopeNumber');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"

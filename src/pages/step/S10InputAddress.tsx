@@ -15,11 +15,17 @@ const S10InputAddress = () => {
   const router = useRouter();
 
   const [openPostcode, setOpenPostcode] = useState(false);
-  const [address1, setAddress1] = useState('');
-  const [address2, setAddress2] = useState('');
-
   const [chungGuType, setChungGuType] = useState(chungGuTypes[0]);
-
+  const [userInfo, setUserInfo] = useState({
+    receiveName: '',
+    receivePhoneNumber: '',
+    receiveAddress1: '',
+    receiveAddress2: '',
+    receiveMethod: '',
+  });
+  const handleInputChange = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -28,42 +34,35 @@ const S10InputAddress = () => {
         </h2>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <label
-            htmlFor="name"
+            htmlFor="receiveName"
             className="block text-sm font-medium text-gray-700"
           >
             수령인
           </label>
           <input
             type="text"
-            name="name"
+            name="receiveName"
+            onChange={handleInputChange}
+            value={userInfo.receiveName}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <label
-            htmlFor="phoneNumber"
+            htmlFor="receivePhoneNumber"
             className="block text-sm font-medium text-gray-700"
           >
             수령인 휴대폰 번호
           </label>
           <input
             type="text"
-            name="phoneNumber"
+            name="receivePhoneNumber"
+            onChange={handleInputChange}
+            value={userInfo.receivePhoneNumber}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
-          <label
-            htmlFor="ㄴㅁ"
-            className="block text-sm font-medium text-gray-700"
-          >
-            주소
-          </label>
-          <input
-            type="text"
-            name="ㄴㅁ"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-          />
           <button
             onClick={() => {
               setOpenPostcode(!openPostcode);
@@ -74,7 +73,10 @@ const S10InputAddress = () => {
           {openPostcode && (
             <DaumPostcode
               onComplete={(data) => {
-                setAddress1(data.roadAddress);
+                setUserInfo({
+                  ...userInfo,
+                  receiveAddress1: data.roadAddress,
+                });
                 setOpenPostcode(false);
               }}
               autoClose={false}
@@ -85,23 +87,19 @@ const S10InputAddress = () => {
         <div className="col-span-6 mt-5 sm:col-span-4">
           <input
             type="text"
-            name="address1"
+            name="receiveAddress1"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-            value={address1}
-            onChange={(e) => {
-              setAddress1(e.target.value);
-            }}
+            onChange={handleInputChange}
+            value={userInfo.receiveAddress1}
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <input
             type="text"
-            name="address2"
+            name="receiveAddress2"
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-            value={address2}
-            onChange={(e) => {
-              setAddress2(e.target.value);
-            }}
+            onChange={handleInputChange}
+            value={userInfo.receiveAddress2}
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
@@ -139,6 +137,13 @@ const S10InputAddress = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              'S10InputAddress',
+              JSON.stringify({
+                ...userInfo,
+                chungGuType,
+              })
+            );
             router.push('./S11PayFeeMethod');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"

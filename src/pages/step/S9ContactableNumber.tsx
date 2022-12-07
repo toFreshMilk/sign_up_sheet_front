@@ -15,7 +15,12 @@ const telecomList = [
 const S9ContactableNumber = () => {
   const router = useRouter();
   const [telecom, setTelecom] = useState(telecomList[0]);
-
+  const [userInfo, setUserInfo] = useState({
+    possiblePhoneNumber: '',
+  });
+  const handleInputChange = (e: any) => {
+    setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -36,14 +41,16 @@ const S9ContactableNumber = () => {
         </div>
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
-            htmlFor="phoneNumber"
+            htmlFor="possiblePhoneNumber"
             className="block text-sm font-medium text-gray-700"
           >
             휴대폰 번호
           </label>
           <input
             type="text"
-            name="phoneNumber"
+            name="possiblePhoneNumber"
+            onChange={handleInputChange}
+            value={userInfo.possiblePhoneNumber}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
@@ -51,6 +58,13 @@ const S9ContactableNumber = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            sessionStorage.setItem(
+              'S9ContactableNumber',
+              JSON.stringify({
+                ...userInfo,
+                possibleTelecom: telecom,
+              })
+            );
             router.push('./S10InputAddress');
           }}
           className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"

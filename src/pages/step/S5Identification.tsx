@@ -272,10 +272,10 @@ const S5Identification = () => {
                 // alert('본인인증이 되지 않았습니다.');
                 // await router.push('./S6UsingPhoneNumber');
               } else {
-                sessionStorage.setItem('S4Usim', JSON.stringify(person));
+                sessionStorage.setItem('S5Identification', JSON.stringify(person));
                 await router.push('./S6UsingPhoneNumber');
               }
-              sessionStorage.setItem('S4Usim', JSON.stringify(person));
+              sessionStorage.setItem('S5Identification', JSON.stringify(person));
               await router.push('./S6UsingPhoneNumber');
             }}
             className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
