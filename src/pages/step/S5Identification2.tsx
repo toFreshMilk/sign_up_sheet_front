@@ -104,6 +104,7 @@ const S5Identification2 = (_props: any) => {
       <input type="hidden" name="reservedMsg" defaultValue="isUseToken=Y" />
       <button
         type="submit"
+        className="p-3 border border-gray-300 shadow-sm focus:outline-none"
         onClick={() => {
           const width = 400;
           const height = 620;

@@ -78,7 +78,7 @@ const S5Identification = () => {
                 type="text"
                 name="userName"
                 id="userName"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
                 value={person.userName}
               />
@@ -94,7 +94,7 @@ const S5Identification = () => {
                 type="text"
                 name="userPhone"
                 id="userPhone"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
                 value={person.userPhone}
               />
@@ -110,7 +110,7 @@ const S5Identification = () => {
                 type="text"
                 name="userBirth"
                 id="userBirth"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
                 value={person.userBirth}
               />
@@ -127,7 +127,7 @@ const S5Identification = () => {
                 type="text"
                 name="email1"
                 id="email1"
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
                 value={person.email1}
               />
@@ -143,7 +143,7 @@ const S5Identification = () => {
                 type="text"
                 name="email2"
                 id="email2"
-                className="ml-2 mt-1 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="ml-2 p-3 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
                 value={person.email2}
               />
@@ -159,7 +159,7 @@ const S5Identification = () => {
                 신분증 정보
               </label>
               <RadioGroup value={identification} onChange={setIdentification}>
-                <div className="mt-5 grid grid-cols-2 sm:mt-8">
+                <div className="mb-5 grid grid-cols-2 sm:mt-8">
                   {identificationTypes.map((item) => (
                     <RadioGroup.Option
                       key={item.title}
@@ -187,7 +187,7 @@ const S5Identification = () => {
                 <div className="col-span-6 sm:col-span-4">
                   <label
                     htmlFor="publishedDate1"
-                    className="block text-sm font-medium text-gray-700"
+                    className="block text-sm font-medium text-gray-700 mb-5"
                   >
                     발급일자
                   </label>
@@ -196,7 +196,7 @@ const S5Identification = () => {
                     name="publishedDate1"
                     onChange={handleInputChange}
                     value={person.publishedDate1}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                    className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm mb-5"
                   />
                   <img
                     src={`${router.basePath}/assets/images/registration_card.png`}
@@ -208,14 +208,14 @@ const S5Identification = () => {
                   <div>
                     <label
                       htmlFor="driverLicenseNumber"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-gray-700 mb-5"
                     >
                       운전면허 번호
                     </label>
-                    <div>
+                    <div className="mb-5">
                       <select
                         name="driverLicenseNumber1"
-                        className="mt-1 w-1/5 rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+                        className="p-3 w-1/5 rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm mb-5"
                         onChange={handleInputChange}
                         value={person.driverLicenseNumber1}
                       >
@@ -223,29 +223,29 @@ const S5Identification = () => {
                         <option>Canada</option>
                         <option>Mexico</option>
                       </select>
-                      <span>-</span>
+                      <span className="p-3">-</span>
                       <input
                         type="text"
                         name="driverLicenseNumber2"
                         onChange={handleInputChange}
                         value={person.driverLicenseNumber2}
-                        className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                        className="p-3 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
                       />
-                      <span>-</span>
+                      <span className="p-3">-</span>
                       <input
                         type="text"
                         name="driverLicenseNumber3"
                         onChange={handleInputChange}
                         value={person.driverLicenseNumber3}
-                        className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                        className="p-3 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
                       />
-                      <span>-</span>
+                      <span className="p-3">-</span>
                       <input
                         type="text"
                         name="driverLicenseNumber4"
                         onChange={handleInputChange}
                         value={person.driverLicenseNumber4}
-                        className="mt-1 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                        className="p-3 w-1/5 rounded-md border-gray-300 shadow-sm sm:text-sm"
                       />
                     </div>
                   </div>
@@ -259,7 +259,7 @@ const S5Identification = () => {
                     <input
                       type="text"
                       name="publishedDate2"
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                      className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                     />
                   </div>
                   <img

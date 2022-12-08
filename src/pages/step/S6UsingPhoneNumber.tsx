@@ -1,4 +1,3 @@
-import { Listbox } from '@headlessui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
@@ -14,7 +13,7 @@ const telecomList = [
 ];
 const S6UsingPhoneNumber = () => {
   const router = useRouter();
-  const [telecom, setTelecom] = useState(telecomList[0]);
+  const [telecom, setTelecom] = useState(telecomList[0]?.title);
   const [userInfo, setUserInfo] = useState({
     phoneNumber: '',
   });
@@ -29,21 +28,31 @@ const S6UsingPhoneNumber = () => {
           현재 이용중인 휴대폰 번호를 입력해주세요
         </h2>
         <div className="col-span-6 sm:col-span-4">
-          <Listbox value={telecom} onChange={setTelecom}>
-            <Listbox.Button>통신사</Listbox.Button>
-            <Listbox.Options>
-              {telecomList.map((item) => (
-                <Listbox.Option key={item.title} value={item}>
-                  {item.title}
-                </Listbox.Option>
-              ))}
-            </Listbox.Options>
-          </Listbox>
+          <label
+            htmlFor="selectedTelecom"
+            className="block text-sm font-medium text-gray-700 mb-3"
+          >
+            통신사 선택
+          </label>
+          <select
+            name="selectedTelecom"
+            value={telecom}
+            onChange={(e) => {
+              setTelecom(e.target.value);
+            }}
+            className="block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
+          >
+            {telecomList.map((item) => (
+              <option key={item.title} value={item.title}>
+                {item.title}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
             htmlFor="phoneNumber"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-3"
           >
             휴대폰 번호
           </label>
@@ -52,7 +61,7 @@ const S6UsingPhoneNumber = () => {
             name="phoneNumber"
             onChange={handleInputChange}
             value={userInfo.phoneNumber}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="block p-3 w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
       </div>

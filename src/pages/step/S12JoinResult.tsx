@@ -10,13 +10,12 @@ const S12JoinResult = () => {
   const [totalData, setTotalData] = useState({}) as any;
 
   useEffect(() => {
+    const ff = {} as any;
     Object.keys(sessionStorage).forEach((key) => {
-      totalData[key] = JSON.parse(sessionStorage.getItem(key) || '');
-      setTotalData({
-        ...totalData,
-      });
+      ff[key] = JSON.parse(sessionStorage.getItem(key) || '');
     });
-    console.log(totalData);
+    setTotalData(ff);
+    console.log(ff);
   }, []);
   // 반복문으로 화면 그리는게 나을것 같은데??
   return (
@@ -136,7 +135,6 @@ const S12JoinResult = () => {
                 </div>
               </>
             )}
-
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
                 요금납부정보
@@ -159,19 +157,15 @@ const S12JoinResult = () => {
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">이메일</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {/* eslint-disable-next-line no-unsafe-optional-chaining */}
-                {totalData.S5Identification?.email1 +
-                  // eslint-disable-next-line no-unsafe-optional-chaining
-                  totalData.S5Identification?.email2}
+                {totalData.S5Identification?.email1}
+                {totalData.S5Identification?.email2}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">주소</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {/* eslint-disable-next-line no-unsafe-optional-chaining */}
-                {totalData.S10InputAddress?.receiveAddress1 +
-                  // eslint-disable-next-line no-unsafe-optional-chaining
-                  totalData.S10InputAddress?.receiveAddress2}
+                {totalData.S10InputAddress?.receiveAddress1}
+                {totalData.S10InputAddress?.receiveAddress2}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -206,12 +200,7 @@ const S12JoinResult = () => {
                 {totalData.S11PayFeeMethod?.bank}
               </dd>
             </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">계좌번호</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {totalData.S11PayFeeMethod?.accountNumber}
-              </dd>
-            </div>
+
           </dl>
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
@@ -219,9 +208,8 @@ const S12JoinResult = () => {
             onClick={async () => {
               // 여기서 finalRow
               const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
-              const finalResult = await axios.post(tokenUrl, {});
+              await axios.post(tokenUrl, {});
 
-              console.log(finalResult);
               sessionStorage.clear();
               await router.push('/step/S1UserType/');
             }}

@@ -61,7 +61,7 @@ const S11PayFeeMethod = () => {
         <h2 className="flex justify-center py-10 text-3xl font-bold">
           요금 납부 방법을 선택해주세요
         </h2>
-        <div className="col-span-6 mt-5 sm:col-span-4">
+        <div className="col-span-6 mt-5 sm:col-span-4 mb-3">
           <label
             className="block text-sm font-medium text-gray-700"
             onClick={() => {
@@ -71,7 +71,7 @@ const S11PayFeeMethod = () => {
             납부 방법
           </label>
           <RadioGroup value={payFeeMethodType} onChange={setPayFeeMethodType}>
-            <div className="mt-5 grid grid-cols-2 sm:mt-8">
+            <div className="grid grid-cols-2 mt-3">
               {payFeeMethodTypes.map((item) => (
                 <RadioGroup.Option key={item.title} value={item} as={Fragment}>
                   {({ checked }) => (
@@ -96,7 +96,7 @@ const S11PayFeeMethod = () => {
             <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="methodType"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 계좌 정보
               </label>
@@ -106,7 +106,7 @@ const S11PayFeeMethod = () => {
                 onChange={(e) => {
                   setBank(e.target.value);
                 }}
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+                className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
               >
                 {bankList.map((item) => (
                   <option key={item.title} value={item.title}>
@@ -119,14 +119,14 @@ const S11PayFeeMethod = () => {
                 name="accountNumber"
                 onChange={handleInputChange}
                 value={userInfo.accountNumber}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm mt-2"
               />
               <p>* 평생계좌(휴대폰번호 형식 계좌)의 경우 등록이 불가합니다.</p>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="accountName"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 예금주명
               </label>
@@ -135,35 +135,38 @@ const S11PayFeeMethod = () => {
                 name="accountName"
                 onChange={handleInputChange}
                 value={userInfo.accountName}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="accountJumin"
-                className="block text-sm font-medium text-gray-700"
+                className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
               >
                 예금주 주민등록번호
               </label>
-              <input
-                type="text"
-                name="accountJumin1"
-                onChange={handleInputChange}
-                value={userInfo.accountJumin1}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-              <input
-                type="text"
-                name="accountJumin2"
-                onChange={handleInputChange}
-                value={userInfo.accountJumin2}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
+              <div className="flex w-full mb-3">
+                <input
+                  type="text"
+                  name="accountJumin1"
+                  onChange={handleInputChange}
+                  value={userInfo.accountJumin1}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="accountJumin2"
+                  onChange={handleInputChange}
+                  value={userInfo.accountJumin2}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+              </div>
             </div>
             <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="methodType"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 관계
               </label>
@@ -173,7 +176,7 @@ const S11PayFeeMethod = () => {
                 onChange={(e) => {
                   setRelation(e.target.value);
                 }}
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+                className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
               >
                 {relationList.map((item) => (
                   <option key={item.title} value={item.title}>

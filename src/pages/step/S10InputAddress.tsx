@@ -35,7 +35,7 @@ const S10InputAddress = () => {
         <div className="col-span-6 mt-5 sm:col-span-4">
           <label
             htmlFor="receiveName"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-3"
           >
             수령인
           </label>
@@ -44,13 +44,13 @@ const S10InputAddress = () => {
             name="receiveName"
             onChange={handleInputChange}
             value={userInfo.receiveName}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <label
             htmlFor="receivePhoneNumber"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-3"
           >
             수령인 휴대폰 번호
           </label>
@@ -59,7 +59,7 @@ const S10InputAddress = () => {
             name="receivePhoneNumber"
             onChange={handleInputChange}
             value={userInfo.receivePhoneNumber}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
@@ -88,7 +88,8 @@ const S10InputAddress = () => {
           <input
             type="text"
             name="receiveAddress1"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            readOnly={true}
+            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
             onChange={handleInputChange}
             value={userInfo.receiveAddress1}
           />
@@ -97,7 +98,7 @@ const S10InputAddress = () => {
           <input
             type="text"
             name="receiveAddress2"
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
             onChange={handleInputChange}
             value={userInfo.receiveAddress2}
           />
@@ -112,7 +113,7 @@ const S10InputAddress = () => {
             청구서 수령방법
           </label>
           <RadioGroup value={chungGuType} onChange={setChungGuType}>
-            <div className="mt-5 grid grid-cols-2 sm:mt-8">
+            <div className="mt-3 grid grid-cols-2 sm:mt-8">
               {chungGuTypes.map((item) => (
                 <RadioGroup.Option key={item.title} value={item} as={Fragment}>
                   {({ checked }) => (

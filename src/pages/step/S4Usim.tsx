@@ -71,7 +71,7 @@ const S1Usim = () => {
                 key={usimType.title}
                 className={({ selected }) =>
                   classNames(
-                    'w-full rounded-lg py-2.5 font-medium leading-5 text-blue-700',
+                    'w-full rounded-lg p-2 font-medium leading-5 text-blue-700',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                     selected
                       ? 'bg-white shadow'
@@ -109,7 +109,7 @@ const S1Usim = () => {
                   value={inputs.usimNumber}
                   onChange={handleInputChange}
                   placeholder={'USIM 번호'}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-3"
+                  className="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-3"
                 />
               </div>
             </Tab.Panel>
@@ -179,7 +179,7 @@ const S1Usim = () => {
                       <dt className="text-sm font-medium text-gray-500">
                         제조사
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         <div className="mx-auto w-full max-w-md">
                           <RadioGroup>
                             <RadioGroup.Label className="sr-only">
@@ -206,7 +206,7 @@ const S1Usim = () => {
                   ${
                     checked ? 'bg-sky-900 bg-opacity-75 text-white' : 'bg-white'
                   }
-                    relative flex w-1/3 cursor-pointer rounded-lg px-5 py-4 shadow-md focus:outline-none`
+                    relative text-center flex w-1/3 cursor-pointer rounded-lg px-4 shadow-md focus:outline-none`
                                     }
                                   >
                                     {({ checked }) => (
@@ -242,34 +242,33 @@ const S1Usim = () => {
                     </div>
                   </dl>
                   <dl>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div className="bg-gray-50 p-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         단말 정보
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         <dl>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
                               <label
                                 htmlFor="modelName"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block font-medium text-gray-700"
                               >
                                 모델명
                               </label>
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                               <input
                                 type="text"
                                 name="modelName"
                                 id="modelName"
                                 value={inputs.modelName}
                                 onChange={handleInputChange}
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
                               <label
                                 htmlFor="modelVolume"
@@ -278,19 +277,18 @@ const S1Usim = () => {
                                 모델용량
                               </label>
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                               <input
                                 type="text"
                                 name="modelVolume"
                                 id="modelVolume"
                                 value={inputs.modelVolume}
                                 onChange={handleInputChange}
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
                               <label
                                 htmlFor="serialNumber"
@@ -299,15 +297,14 @@ const S1Usim = () => {
                                 일련번호
                               </label>
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                               <input
                                 type="text"
                                 name="serialNumber"
                                 id="serialNumber"
                                 value={inputs.serialNumber}
                                 onChange={handleInputChange}
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -316,7 +313,7 @@ const S1Usim = () => {
                     </div>
                   </dl>
                   <dl>
-                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                       <dt className="text-sm font-medium text-gray-500">
                         <button
                           type="button"
@@ -326,79 +323,80 @@ const S1Usim = () => {
                           단말 정보 보는 방법
                         </button>
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                      <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                         <dl>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
                               <label
                                 htmlFor="imei1"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block font-medium text-gray-700"
                               >
                                 imei1
                               </label>
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                               <input
                                 type="text"
                                 name="imei1"
                                 id="imei1"
                                 value={inputs.imei1}
                                 onChange={handleInputChange}
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
                         </dl>
                         <dl>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
                               <label
                                 htmlFor="imei2"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block font-medium text-gray-700"
                               >
                                 imei2
                               </label>
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                               <input
                                 type="text"
                                 name="imei2"
                                 id="imei2"
                                 value={inputs.imei2}
                                 onChange={handleInputChange}
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
                         </dl>
                         <dl>
-                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4">
                             <dt className="text-sm font-medium text-gray-500">
                               <label
                                 htmlFor="EID"
-                                className="block text-sm font-medium text-gray-700"
+                                className="block font-medium text-gray-700"
                               >
                                 EID
                               </label>
                             </dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                            <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                               <input
                                 type="text"
                                 name="EID"
                                 id="EID"
                                 value={inputs.EID}
                                 onChange={handleInputChange}
-                                autoComplete="given-name"
-                                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block p-3 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
                         </dl>
                       </dd>
                       <Modal isOpen={modalOpen} ariaHideApp={false}>
-                        <p onClick={closeModal}>dddddddddddddddddddf</p>
+                        <img
+                          src={`${router.basePath}/assets/images/202208_model_info.png`}
+                          alt={'단말정보 보는일'}
+                          onClick={closeModal}
+                        />
                       </Modal>
                     </div>
                   </dl>

@@ -21,7 +21,7 @@ const S8HopeNumber = () => {
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
             htmlFor="hope1"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-3"
           >
             1순위
           </label>
@@ -30,13 +30,13 @@ const S8HopeNumber = () => {
             name="hope1"
             onChange={handleInputChange}
             value={userInfo.hope1}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
             htmlFor="hope2"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-3"
           >
             2순위
           </label>
@@ -45,7 +45,7 @@ const S8HopeNumber = () => {
             name="hope2"
             onChange={handleInputChange}
             value={userInfo.hope2}
-            className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
       </div>

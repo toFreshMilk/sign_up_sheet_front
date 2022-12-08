@@ -28,7 +28,7 @@ const S7PayFeeMethod = () => {
         <div className="col-span-6 sm:col-span-4">
           <label
             htmlFor="methodType"
-            className="block text-sm font-medium text-gray-700"
+            className="block text-sm font-medium text-gray-700 mb-3"
           >
             요금 납부 유형
           </label>
@@ -38,7 +38,7 @@ const S7PayFeeMethod = () => {
             onChange={(e) => {
               setPayMethod(e.target.value);
             }}
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
           >
             {payMethodList.map((item) => (
               <option key={item.title} value={item.title}>
@@ -54,7 +54,7 @@ const S7PayFeeMethod = () => {
             <>
               <label
                 htmlFor="digint4"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 뒤 4자리 입력
               </label>
@@ -63,7 +63,7 @@ const S7PayFeeMethod = () => {
                 name="digint4"
                 onChange={handleInputChange}
                 value={userInfo.digint4}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
               />
             </>
           )}
