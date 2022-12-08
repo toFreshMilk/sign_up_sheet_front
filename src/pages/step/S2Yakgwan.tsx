@@ -95,13 +95,9 @@ const S2Yakgwan = () => {
                 const [optionalChecked] = optionalYakgwans.filter(
                   (item: IfYakgwan) => item.checked
                 );
-                console.log(optionalChecked?.name);
-
-                // 타입스크립트가 좀 이상하다........... 이렇게까지 해야함?
-                sessionStorage.setItem(
-                  'S2Yakgwan',
-                  optionalChecked?.name || ''
-                );
+                // console.log(optionalChecked?.name);
+                const result = { marketing: optionalChecked?.name || '' };
+                sessionStorage.setItem('S2Yakgwan', JSON.stringify(result));
                 router.push('./S3JoinType');
               } else {
                 alert('필수 항목에 동의해주세요.');

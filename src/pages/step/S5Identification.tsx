@@ -22,7 +22,6 @@ const S5Identification = () => {
   const [keys, setKeys] = useState({
     mid: '',
     apiKey: '',
-    hashingKey: '',
     mTxId: '',
     authHash: '',
     reqSvcCd: '01',
@@ -30,9 +29,9 @@ const S5Identification = () => {
   });
 
   const [person, setPerson] = useState({
-    userName: process.env.NEXT_PUBLIC_NAME,
-    userPhone: process.env.NEXT_PUBLIC_PHONE,
-    userBirth: process.env.NEXT_PUBLIC_BIRTH,
+    userName: process.env.NEXT_PUBLIC_NAME || '',
+    userPhone: process.env.NEXT_PUBLIC_PHONE || '',
+    userBirth: process.env.NEXT_PUBLIC_BIRTH || '',
     email1: '',
     email2: '',
     publishedDate1: '',
@@ -82,6 +81,22 @@ const S5Identification = () => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
                 value={person.userName}
+              />
+            </div>
+            <div className="col-span-6 sm:col-span-4">
+              <label
+                htmlFor="userPhone"
+                className="block text-sm font-medium text-gray-700"
+              >
+                핸드폰 번호
+              </label>
+              <input
+                type="text"
+                name="userPhone"
+                id="userPhone"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                onChange={handleInputChange}
+                value={person.userPhone}
               />
             </div>
             <div className="col-span-12 sm:col-span-3">
@@ -269,14 +284,15 @@ const S5Identification = () => {
               });
 
               if (passedIdentification.data.length === 0) {
-                // alert('본인인증이 되지 않았습니다.');
-                // await router.push('./S6UsingPhoneNumber');
+                alert('본인인증이 되지 않았습니다.');
+                await router.push('./S6UsingPhoneNumber');
               } else {
-                sessionStorage.setItem('S5Identification', JSON.stringify(person));
+                sessionStorage.setItem(
+                  'S5Identification',
+                  JSON.stringify(person)
+                );
                 await router.push('./S6UsingPhoneNumber');
               }
-              sessionStorage.setItem('S5Identification', JSON.stringify(person));
-              await router.push('./S6UsingPhoneNumber');
             }}
             className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
           >

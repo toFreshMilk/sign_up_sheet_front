@@ -25,7 +25,7 @@ const S5Identification2 = (_props: any) => {
     let authHashStr = k.mid + k.mTxId + k.apiKey;
     authHashStr = crypto.createHash('sha256').update(authHashStr).digest('hex');
     let userHashStr = `${
-      k.userName + k.mid + k.userPhone + k.mTxId + k.jumin1
+      k.userName + k.mid + k.userPhone + k.mTxId + k.userBirth
     }01`;
     userHashStr = crypto.createHash('sha256').update(userHashStr).digest('hex');
     setKey({

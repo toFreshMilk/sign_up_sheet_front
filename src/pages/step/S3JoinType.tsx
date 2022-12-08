@@ -25,7 +25,11 @@ const S3JoinType = () => {
                 <button
                   key={item.title}
                   onClick={() => {
-                    sessionStorage.setItem('S3JoinType', item.title);
+                    const result = { joinType: item.title };
+                    sessionStorage.setItem(
+                      'S3JoinType',
+                      JSON.stringify(result)
+                    );
                     router.push('./S4Usim');
                   }}
                   className="group relative flex w-full items-center rounded-md border bg-[#e0e0e0] py-2 px-4 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-offset-2"

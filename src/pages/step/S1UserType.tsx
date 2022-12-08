@@ -23,7 +23,8 @@ const S1UserType = () => {
     // const { info, setInfo } = UserInfo();
     // console.log(info);
     // console.log(setInfo);
-    sessionStorage.setItem('S1UserType', v);
+    const result = { userType: v };
+    sessionStorage.setItem('S1UserType', JSON.stringify(result));
     router.push('./S2Yakgwan');
   };
 
