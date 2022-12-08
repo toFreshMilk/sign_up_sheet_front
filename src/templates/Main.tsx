@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
-import { AppConfig } from '@/utils/AppConfig';
-
 type IMainProps = {
   meta?: ReactNode;
   children: ReactNode;
@@ -25,8 +23,7 @@ const Main = (props: IMainProps) => {
       <div className="mx-auto max-w-screen-md">
         <div className="content py-5 text-xl">{props.children}</div>
         <div className="border-t border-gray-300 py-8 text-center text-sm">
-          © Copyright {new Date().getFullYear()} {AppConfig.title}. Powered with{' '}
-          by <a href="https://smartelmobile.com">Smartel</a>
+          @ Powered by <a href="https://smartelmobile.com">Smartel</a>
         </div>
       </div>
     </div>

@@ -10,15 +10,16 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 const usimTypes = [
-  { title: '유심 보유중', subTitle: '(새로 구매한 유심)' },
+  { title: '유심 보유', subTitle: '(새로 구매한 유심)' },
   {
     title: '유심 없음',
     subTitle: '(택배 신청)',
     nomalOrNFC: [
-      { name: '일반 유심', coment: '유심비도 무료, 배송비도 무료입니다.' },
+      { name: '일반 유심', coment: '일반유심은 유심비, 배송비도 무료입니다.' },
       {
         name: 'NFC 유심',
-        coment: '유심비 4,400원 청구될 예정이며, 배송비는 무료입니다.',
+        coment:
+          'NFC 유심은 유심비 4,400원 청구될 예정이며, 배송비는 무료입니다.',
       },
     ],
   },
@@ -70,7 +71,7 @@ const S1Usim = () => {
                 key={usimType.title}
                 className={({ selected }) =>
                   classNames(
-                    'w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-blue-700',
+                    'w-full rounded-lg py-2.5 font-medium leading-5 text-blue-700',
                     'ring-white ring-opacity-60 ring-offset-2 ring-offset-blue-400 focus:outline-none focus:ring-2',
                     selected
                       ? 'bg-white shadow'
@@ -81,8 +82,10 @@ const S1Usim = () => {
                   setInputs(inputsInitial);
                 }}
               >
-                <h2 className={'mb-2 text-2xl font-bold'}>{usimType.title}</h2>
-                <h3 className={'mb-2'}>{usimType.subTitle}</h3>
+                <h2 className={'mb-2 text-xl font-bold md:text-2xl'}>
+                  {usimType.title}
+                </h2>
+                <h3 className={'mb-2 text-xs'}>{usimType.subTitle}</h3>
               </Tab>
             ))}
           </Tab.List>
@@ -95,7 +98,7 @@ const S1Usim = () => {
             >
               <h4>유심번호 빨간색 표기부분 전체를 입력해주세요</h4>
               <img
-                src={`${router.basePath}/assets/images/u+usim_3__.png`}
+                src={`${router.basePath}/assets/images/usimnumber.jpg`}
                 alt={'이미지'}
               />
               <div className="border-4">
@@ -106,7 +109,7 @@ const S1Usim = () => {
                   value={inputs.usimNumber}
                   onChange={handleInputChange}
                   placeholder={'USIM 번호'}
-                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                  className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-3"
                 />
               </div>
             </Tab.Panel>
@@ -119,6 +122,7 @@ const S1Usim = () => {
               <RadioGroup className="mt-4">
                 {usimTypes[1]?.nomalOrNFC?.map((item, i) => (
                   <div key={item.name + i}>
+                    <p>{item.coment}</p>
                     <RadioGroup.Option
                       value={item}
                       onClick={() => {
@@ -153,7 +157,6 @@ const S1Usim = () => {
                         </>
                       )}
                     </RadioGroup.Option>
-                    <p>{item.coment}</p>
                   </div>
                 ))}
               </RadioGroup>
@@ -410,7 +413,7 @@ const S1Usim = () => {
           sessionStorage.setItem('S4Usim', JSON.stringify(inputs));
           router.push('./S5Identification');
         }}
-        className="group relative flex w-full justify-center rounded-md border bg-[#32b2df] py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+        className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
       >
         다음
       </button>

@@ -103,7 +103,7 @@ const S2Yakgwan = () => {
                 alert('필수 항목에 동의해주세요.');
               }
             }}
-            className="group relative flex w-full justify-center rounded-md border bg-[#32b2df] py-2 px-4 text-sm font-medium text-white focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >
             다음
           </button>

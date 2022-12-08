@@ -294,9 +294,9 @@ const S5Identification = () => {
                 await router.push('./S6UsingPhoneNumber');
               }
             }}
-            className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+            className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >
-            본인인증 완료
+            다음
           </button>
         </div>
       </div>

@@ -146,9 +146,9 @@ const S10InputAddress = () => {
             );
             router.push('./S11PayFeeMethod');
           }}
-          className="w-full rounded-md border py-2 px-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2"
+          className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
         >
-          다음 단계로
+          다음
         </button>
       </div>
     </Main>
