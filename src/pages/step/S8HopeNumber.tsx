@@ -49,6 +49,7 @@ const S8HopeNumber = () => {
           />
         </div>
       </div>
+      <p>* 1, 2순위 모두 불가시, 임의 선택됩니다.</p>
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {

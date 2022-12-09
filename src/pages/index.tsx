@@ -7,8 +7,9 @@ import { Main } from '@/templates/Main';
 const Index = () => {
   const router = useRouter();
   useEffect(() => {
-    // 요금제 아이디 저장하고 이동
-    // console.log(router.asPath);
+    const asPath = router.asPath || '';
+    const feeId = asPath.split('=')[1];
+    sessionStorage.setItem('S0FeeId', JSON.stringify({ feeId }));
     router.push('/step/S1UserType');
   }, []);
 

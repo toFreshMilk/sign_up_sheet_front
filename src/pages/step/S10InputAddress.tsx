@@ -44,7 +44,7 @@ const S10InputAddress = () => {
             name="receiveName"
             onChange={handleInputChange}
             value={userInfo.receiveName}
-            className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
@@ -59,7 +59,7 @@ const S10InputAddress = () => {
             name="receivePhoneNumber"
             onChange={handleInputChange}
             value={userInfo.receivePhoneNumber}
-            className="p-3 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">

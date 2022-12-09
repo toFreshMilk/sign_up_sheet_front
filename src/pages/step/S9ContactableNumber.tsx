@@ -3,17 +3,8 @@ import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
-const telecomList = [
-  { title: 'SKT', checked: true },
-  { title: 'KT', checked: false },
-  { title: 'LGT', checked: false },
-  { title: 'SKT(알뜰폰)', checked: false },
-  { title: 'KT(알뜰폰)', checked: false },
-  { title: 'LGT(알뜰폰)', checked: false },
-];
 const S9ContactableNumber = () => {
   const router = useRouter();
-  const [telecom, setTelecom] = useState(telecomList[0]?.title);
   const [userInfo, setUserInfo] = useState({
     possiblePhoneNumber: '',
   });
@@ -26,22 +17,6 @@ const S9ContactableNumber = () => {
         <h2 className="flex justify-center py-10 text-3xl font-bold">
           연락 가능한 휴대폰 번호를 입력해주세요
         </h2>
-        <div className="col-span-6 sm:col-span-4">
-          <select
-            name="methodType"
-            value={telecom}
-            onChange={(e) => {
-              setTelecom(e.target.value);
-            }}
-            className="block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
-          >
-            {telecomList.map((item) => (
-              <option key={item.title} value={item.title}>
-                {item.title}
-              </option>
-            ))}
-          </select>
-        </div>
         <div className="col-span-6 sm:col-span-4 mt-5">
           <label
             htmlFor="possiblePhoneNumber"
@@ -65,7 +40,6 @@ const S9ContactableNumber = () => {
               'S9ContactableNumber',
               JSON.stringify({
                 ...userInfo,
-                possibleTelecom: telecom,
               })
             );
             router.push('./S10InputAddress');

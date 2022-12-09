@@ -285,11 +285,15 @@ const S5Identification = () => {
 
               if (passedIdentification.data.length === 0) {
                 alert('본인인증이 되지 않았습니다.');
+                sessionStorage.setItem(
+                  'S5Identification',
+                  JSON.stringify({ ...person, identification })
+                );
                 await router.push('./S6UsingPhoneNumber');
               } else {
                 sessionStorage.setItem(
                   'S5Identification',
-                  JSON.stringify(person)
+                  JSON.stringify({ ...person, identification })
                 );
                 await router.push('./S6UsingPhoneNumber');
               }

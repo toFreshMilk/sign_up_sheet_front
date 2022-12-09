@@ -1,13 +1,15 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
 const S12JoinResult = () => {
-  const router = useRouter();
-  const joinType = '신규';
   const [totalData, setTotalData] = useState({}) as any;
+  const [payFeeObj, setPayFeeObj] = useState({
+    RATECD: 'LPZ0015470',
+    RATENM: 'sample) 다이소 퍼펙트15G+',
+    RATEAMT: 'sample) 27500',
+  }) as any;
 
   useEffect(() => {
     const ff = {} as any;
@@ -15,9 +17,22 @@ const S12JoinResult = () => {
       ff[key] = JSON.parse(sessionStorage.getItem(key) || '');
     });
     setTotalData(ff);
-    console.log(ff);
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getPayFeeInfo`;
+    axios
+      .post(tokenUrl, { id: ff.S0FeeId?.feeId })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.length === 0) {
+          throw new Error('요금제 없음');
+        } else {
+          setPayFeeObj(...res.data);
+        }
+      })
+      .catch((e) => {
+        console.log('e');
+        console.log(e);
+      });
   }, []);
-  // 반복문으로 화면 그리는게 나을것 같은데??
   return (
     <Main>
       <div className="overflow-hidden bg-white shadow sm:rounded-lg">
@@ -32,7 +47,7 @@ const S12JoinResult = () => {
         <div className="border-t border-gray-200">
           <dl>
             <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">가입정보</dt>
+              <dt className="text-sm font-bold text-gray-700">가입정보</dt>
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">가입유형</dt>
@@ -43,18 +58,18 @@ const S12JoinResult = () => {
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">요금제</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                링크에서 전달받아야함
+                {payFeeObj.RATENM}
               </dd>
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">납부 금액</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                링크에서 전달받아야함
+                {payFeeObj.RATEAMT} 원
               </dd>
             </div>
 
             <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">고객 구분</dt>
+              <dt className="text-sm font-bold text-gray-700">고객 구분</dt>
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
@@ -73,20 +88,36 @@ const S12JoinResult = () => {
               </dd>
             </div>
             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                운전면허 발급일자?? 신분증
-              </dt>
+              <dt className="text-sm font-medium text-gray-500">신분증</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {totalData.S5Identification?.publishedDate1}
+                {totalData.S5Identification?.identification?.title}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">신분증 번호</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {`${totalData.S5Identification?.driverLicenseNumber1}-${totalData.S5Identification?.driverLicenseNumber2}-${totalData.S5Identification?.driverLicenseNumber3}-${totalData.S5Identification?.driverLicenseNumber4}`}
-              </dd>
-            </div>
-            {joinType === '신규' ? (
+            {totalData.S5Identification?.identification?.title ===
+            '주민등록증' ? (
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  주민등록증 발급일자
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  {totalData.S5Identification?.publishedDate1}
+                </dd>
+              </div>
+            ) : (
+              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <dt className="text-sm font-medium text-gray-500">
+                  운전면허증 번호
+                </dt>
+                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                  {`${totalData.S5Identification?.driverLicenseNumber1 || ''}-${
+                    totalData.S5Identification?.driverLicenseNumber2 || ''
+                  }-${totalData.S5Identification?.driverLicenseNumber3 || ''}-${
+                    totalData.S5Identification?.driverLicenseNumber4 || ''
+                  }`}
+                </dd>
+              </div>
+            )}
+            {totalData.S3JoinType?.joinType === '신규가입' ? (
               <>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
@@ -123,14 +154,6 @@ const S12JoinResult = () => {
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                     SKT Foster
-                  </dd>
-                </div>
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    번호이동 신청정보
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    여기에 뭐 나와야함?
                   </dd>
                 </div>
               </>
@@ -200,7 +223,6 @@ const S12JoinResult = () => {
                 {totalData.S11PayFeeMethod?.bank}
               </dd>
             </div>
-
           </dl>
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
@@ -210,8 +232,10 @@ const S12JoinResult = () => {
               const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
               await axios.post(tokenUrl, {});
 
+              const s0 = sessionStorage.getItem('S0FeeId');
               sessionStorage.clear();
-              await router.push('/step/S1UserType/');
+              sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
+              alert('접수가 완료되었습니다.');
             }}
             className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >

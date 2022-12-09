@@ -15,11 +15,16 @@ const usimTypes = [
     title: '유심 없음',
     subTitle: '(택배 신청)',
     nomalOrNFC: [
-      { name: '일반 유심', coment: '일반유심은 유심비, 배송비도 무료입니다.' },
+      {
+        name: '일반 유심',
+        coment: '일반유심은 유심비, 배송비도 무료입니다.',
+        subComent: '',
+      },
       {
         name: 'NFC 유심',
-        coment:
-          'NFC 유심은 유심비 4,400원 청구될 예정이며, 배송비는 무료입니다.',
+        coment: 'NFC 유심은 유심비 4,400원, 배송비는 무료입니다.',
+        subComent:
+          '입금시 배송되며 우리은행 1002-902-564862  스마텔 (입금자명 명의자성함)',
       },
     ],
   },
@@ -123,6 +128,7 @@ const S1Usim = () => {
                 {usimTypes[1]?.nomalOrNFC?.map((item, i) => (
                   <div key={item.name + i}>
                     <p>{item.coment}</p>
+                    <p>{item.subComent}</p>
                     <RadioGroup.Option
                       value={item}
                       onClick={() => {
@@ -264,7 +270,7 @@ const S1Usim = () => {
                                 id="modelName"
                                 value={inputs.modelName}
                                 onChange={handleInputChange}
-                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -284,7 +290,7 @@ const S1Usim = () => {
                                 id="modelVolume"
                                 value={inputs.modelVolume}
                                 onChange={handleInputChange}
-                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -304,7 +310,7 @@ const S1Usim = () => {
                                 id="serialNumber"
                                 value={inputs.serialNumber}
                                 onChange={handleInputChange}
-                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -331,7 +337,7 @@ const S1Usim = () => {
                                 htmlFor="imei1"
                                 className="block font-medium text-gray-700"
                               >
-                                imei1
+                                imei1(15자리)
                               </label>
                             </dt>
                             <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -341,7 +347,7 @@ const S1Usim = () => {
                                 id="imei1"
                                 value={inputs.imei1}
                                 onChange={handleInputChange}
-                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -353,7 +359,7 @@ const S1Usim = () => {
                                 htmlFor="imei2"
                                 className="block font-medium text-gray-700"
                               >
-                                imei2
+                                imei2(15자리)
                               </label>
                             </dt>
                             <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -363,7 +369,7 @@ const S1Usim = () => {
                                 id="imei2"
                                 value={inputs.imei2}
                                 onChange={handleInputChange}
-                                className="block w-full p-3 rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>
@@ -375,7 +381,7 @@ const S1Usim = () => {
                                 htmlFor="EID"
                                 className="block font-medium text-gray-700"
                               >
-                                EID
+                                EID(32자리)
                               </label>
                             </dt>
                             <dd className="text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -385,7 +391,7 @@ const S1Usim = () => {
                                 id="EID"
                                 value={inputs.EID}
                                 onChange={handleInputChange}
-                                className="block p-3 w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                                className="block p-3 w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
                             </dd>
                           </div>

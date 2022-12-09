@@ -75,8 +75,13 @@ const S6UsingPhoneNumber = () => {
                 telecom,
               })
             );
-
-            router.push('./S7PayFeeMethod');
+            const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
+            const S3JoinTypeJson = JSON.parse(S3JoinType);
+            if (S3JoinTypeJson.joinType === '신규가입') {
+              router.push('./S8HopeNumber');
+            } else {
+              router.push('./S7PayFeeMethod');
+            }
           }}
           className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
         >
