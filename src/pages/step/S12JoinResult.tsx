@@ -100,7 +100,7 @@ const S12JoinResult = () => {
                   주민등록증 발급일자
                 </dt>
                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {totalData.S5Identification?.publishedDate1}
+                  {totalData.S5Identification?.publishedDate}
                 </dd>
               </div>
             ) : (

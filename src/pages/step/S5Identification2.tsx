@@ -20,8 +20,6 @@ const S5Identification2 = (_props: any) => {
   };
   useEffect(() => {
     const { k } = _props;
-    console.log(k);
-
     let authHashStr = k.mid + k.mTxId + k.apiKey;
     authHashStr = crypto.createHash('sha256').update(authHashStr).digest('hex');
     let userHashStr = `${

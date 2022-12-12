@@ -13,7 +13,7 @@ const S9ContactableNumber = () => {
   };
   return (
     <Main>
-      <div className="overflow-hidden shadow sm:rounded-md">
+      <div className="p-3">
         <h2 className="flex justify-center py-10 text-3xl font-bold">
           연락 가능한 휴대폰 번호를 입력해주세요
         </h2>
