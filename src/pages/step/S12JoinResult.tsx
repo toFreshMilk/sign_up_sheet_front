@@ -120,7 +120,7 @@ const S12JoinResult = () => {
             {totalData.S3JoinType?.joinType === '신규가입' ? (
               <>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
+                  <dt className="text-sm font-bold text-gray-700">
                     신규희망번호
                   </dt>
                 </div>
@@ -144,7 +144,7 @@ const S12JoinResult = () => {
             ) : (
               <>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
+                  <dt className="text-sm font-bold text-gray-700">
                     번호 이동 정보
                   </dt>
                 </div>
@@ -153,15 +153,13 @@ const S12JoinResult = () => {
                     번호이동 휴대폰 번호
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    SKT Foster
+                    {totalData.S5Identification?.userPhone}
                   </dd>
                 </div>
               </>
             )}
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">
-                요금납부정보
-              </dt>
+              <dt className="text-sm font-bold text-gray-700">요금납부정보</dt>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
@@ -169,12 +167,6 @@ const S12JoinResult = () => {
               </dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 {totalData.S9ContactableNumber?.possiblePhoneNumber}
-              </dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">다른 연락처</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {totalData.S10InputAddress?.receivePhoneNumber}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
