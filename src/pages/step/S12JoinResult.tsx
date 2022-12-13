@@ -6,9 +6,9 @@ import { Main } from '@/templates/Main';
 const S12JoinResult = () => {
   const [totalData, setTotalData] = useState({}) as any;
   const [payFeeObj, setPayFeeObj] = useState({
-    RATECD: 'LPZ0015470',
-    RATENM: 'sample) 다이소 퍼펙트15G+',
-    RATEAMT: 'sample) 27500',
+    RATECD: '요금제 정보 없음',
+    RATENM: '요금제 정보 없음',
+    RATEAMT: '',
   }) as any;
 
   useEffect(() => {
@@ -29,7 +29,6 @@ const S12JoinResult = () => {
         }
       })
       .catch((e) => {
-        console.log('e');
         console.log(e);
       });
   }, []);
