@@ -22,6 +22,7 @@ const S10InputAddress = () => {
     receiveAddress1: '',
     receiveAddress2: '',
     receiveMethod: '',
+    zipcode: '',
   });
   const handleInputChange = (e: any) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
@@ -76,6 +77,7 @@ const S10InputAddress = () => {
                 setUserInfo({
                   ...userInfo,
                   receiveAddress1: data.roadAddress,
+                  zipcode: data.zonecode,
                 });
                 setOpenPostcode(false);
               }}
@@ -104,12 +106,7 @@ const S10InputAddress = () => {
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
-          <label
-            className="block text-sm font-medium text-gray-700"
-            onClick={() => {
-              console.log(chungGuType);
-            }}
-          >
+          <label className="block text-sm font-medium text-gray-700">
             청구서 수령방법
           </label>
           <RadioGroup value={chungGuType} onChange={setChungGuType}>

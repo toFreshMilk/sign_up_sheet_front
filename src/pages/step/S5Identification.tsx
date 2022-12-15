@@ -331,7 +331,7 @@ const S5Identification = () => {
               }
               sessionStorage.setItem(
                 'S5Identification',
-                JSON.stringify({ ...person, identification })
+                JSON.stringify({ ...person, identification, telecom })
               );
 
               const S3JoinType = sessionStorage.getItem('S3JoinType') || '';

@@ -5,9 +5,14 @@ import { useState } from 'react';
 import { Main } from '@/templates/Main';
 
 const custommerTypes = [
-  { name: '일반(만 19세 이상)', inStock: true, checked: true },
-  { name: '미성년자(만 19세 미만)', inStock: true, checked: false },
-  { name: '외국인', inStock: true, checked: false },
+  { name: '일반(만 19세 이상)', inStock: true, checked: true, value: '개인' },
+  {
+    name: '미성년자(만 19세 미만)',
+    inStock: true,
+    checked: false,
+    value: '미성년자',
+  },
+  { name: '외국인', inStock: true, checked: false, value: '외국인' },
 ];
 
 function classNames(...classes: string[]) {
@@ -16,15 +21,10 @@ function classNames(...classes: string[]) {
 
 const S1UserType = () => {
   const router = useRouter();
-  const [selectedType] = useState(custommerTypes[0]);
+  const [selectedType] = useState(custommerTypes);
 
   const setSelectedType = (v: any) => {
-    console.log(v);
-    // const { info, setInfo } = UserInfo();
-    // console.log(info);
-    // console.log(setInfo);
-    const result = { userType: v };
-    sessionStorage.setItem('S1UserType', JSON.stringify(result));
+    sessionStorage.setItem('S1UserType', JSON.stringify(v));
     router.push('./S2Yakgwan');
   };
 
@@ -41,7 +41,7 @@ const S1UserType = () => {
           {custommerTypes.map((Type) => (
             <RadioGroup.Option
               key={Type.name}
-              value={Type.name}
+              value={Type}
               disabled={!Type.inStock}
               className={({ active }) =>
                 `${classNames(

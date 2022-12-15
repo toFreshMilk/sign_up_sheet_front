@@ -1,9 +1,12 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
 const S12JoinResult = () => {
+  const router = useRouter();
+
   const [totalData, setTotalData] = useState({}) as any;
   const [payFeeObj, setPayFeeObj] = useState({
     RATECD: '요금제 정보 없음',
@@ -185,7 +188,7 @@ const S12JoinResult = () => {
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">청구서 유형</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {totalData.S10InputAddress?.receiveMethod}
+                {totalData.S10InputAddress?.chungGuType?.title}
               </dd>
             </div>
             <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
@@ -221,12 +224,17 @@ const S12JoinResult = () => {
             onClick={async () => {
               // 여기서 finalRow
               const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
-              await axios.post(tokenUrl, {});
+              const { data } = await axios.post(tokenUrl, totalData);
 
-              const s0 = sessionStorage.getItem('S0FeeId');
-              sessionStorage.clear();
-              sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
-              alert('접수가 완료되었습니다.');
+              if (data.rowsAffected > 0) {
+                alert('접수가 완료되었습니다.');
+                await router.push('/');
+              } else {
+                alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
+              }
+              // const s0 = sessionStorage.getItem('S0FeeId');
+              // sessionStorage.clear();
+              // sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
             }}
             className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >
