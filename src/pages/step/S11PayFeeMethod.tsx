@@ -191,7 +191,7 @@ const S11PayFeeMethod = () => {
             <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="methodType"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 카드명
               </label>
@@ -201,7 +201,7 @@ const S11PayFeeMethod = () => {
                 onChange={(e) => {
                   setCard(e.target.value);
                 }}
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:outline-none sm:text-sm"
+                className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm mb-3"
               >
                 {cardList.map((item) => (
                   <option key={item.title} value={item.title}>
@@ -209,61 +209,69 @@ const S11PayFeeMethod = () => {
                   </option>
                 ))}
               </select>
-              <input
-                type="text"
-                name="cardNumber1"
-                onChange={handleInputChange}
-                value={userInfo.cardNumber1}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-              <input
-                type="text"
-                name="cardNumber2"
-                onChange={handleInputChange}
-                value={userInfo.cardNumber2}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-              <input
-                type="text"
-                name="cardNumber3"
-                onChange={handleInputChange}
-                value={userInfo.cardNumber3}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-              <input
-                type="text"
-                name="cardNumber4"
-                onChange={handleInputChange}
-                value={userInfo.cardNumber4}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
+              <div className="flex">
+                <input
+                  type="text"
+                  name="cardNumber1"
+                  onChange={handleInputChange}
+                  value={userInfo.cardNumber1}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="cardNumber2"
+                  onChange={handleInputChange}
+                  value={userInfo.cardNumber2}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="cardNumber3"
+                  onChange={handleInputChange}
+                  value={userInfo.cardNumber3}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="cardNumber4"
+                  onChange={handleInputChange}
+                  value={userInfo.cardNumber4}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+              </div>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="validTime"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 유효기간
               </label>
-              <input
-                type="text"
-                name="validTimeMonth"
-                onChange={handleInputChange}
-                value={userInfo.validTimeMonth}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
-              <input
-                type="text"
-                name="validTimeYear"
-                onChange={handleInputChange}
-                value={userInfo.validTimeYear}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
-              />
+              <div className="flex">
+                <input
+                  type="text"
+                  name="validTimeMonth"
+                  onChange={handleInputChange}
+                  value={userInfo.validTimeMonth}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">/</span>
+                <input
+                  type="text"
+                  name="validTimeYear"
+                  onChange={handleInputChange}
+                  value={userInfo.validTimeYear}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+              </div>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="validTime"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-gray-700 mb-3"
               >
                 비밀번호 앞 2자리
               </label>
@@ -272,7 +280,7 @@ const S11PayFeeMethod = () => {
                 name="cardPasswordDigit2"
                 onChange={handleInputChange}
                 value={userInfo.cardPasswordDigit2}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm sm:text-sm"
+                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
           </>
