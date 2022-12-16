@@ -312,11 +312,22 @@ const S5Identification = () => {
                   name="publishedDate"
                   value={person.publishedDate}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
             <div className="col-span-6 sm:col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
+              <button
+                onClick={async () => {
+                  const tokenUrl =
+                    'https://sbxapi.lguplus.co.kr/uplus/extuser/oauth2/token';
+                  const aa = await axios.post(tokenUrl);
+                  console.log(aa);
+                }}
+              >
+                신분증 검사
+              </button>
             </div>
           </div>
         </div>
