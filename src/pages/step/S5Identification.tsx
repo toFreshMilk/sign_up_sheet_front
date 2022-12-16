@@ -310,6 +310,7 @@ const S5Identification = () => {
                 <input
                   type="text"
                   name="publishedDate"
+                  value={person.publishedDate}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
                 />
               </div>
