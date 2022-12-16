@@ -9,6 +9,16 @@ import CheckIcon from '@/utils/Commons';
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 const usimTypes = [
   { title: '유심 보유', subTitle: '(새로 구매한 유심)' },
   {
@@ -49,19 +59,29 @@ const inputsInitial = {
   imei2: '',
   EID: '',
 };
-const S1Usim = () => {
+const S4Usim = () => {
   const router = useRouter();
   const [inputs, setInputs] = useState(inputsInitial);
   const handleInputChange = (e: any) => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
   const [modalOpen, setModalOpen] = useState(false);
+  const [picAttOpen, setPicAttOpen] = useState(false);
 
   const openModal = () => {
     setModalOpen(true);
   };
   const closeModal = () => {
     setModalOpen(false);
+  };
+  const openModal2 = () => {
+    setPicAttOpen(true);
+  };
+  const closeModal2 = () => {
+    setPicAttOpen(false);
+  };
+  const saveImage = () => {
+    console.log('saveimg');
   };
   return (
     <Main>
@@ -84,7 +104,10 @@ const S1Usim = () => {
                   )
                 }
                 onClick={() => {
-                  setInputs(inputsInitial);
+                  setInputs({
+                    ...inputsInitial,
+                    usimType: usimType.title,
+                  });
                 }}
               >
                 <h2 className={'mb-2 text-xl font-bold md:text-2xl'}>
@@ -106,7 +129,7 @@ const S1Usim = () => {
                 src={`${router.basePath}/assets/images/usimnumber.jpg`}
                 alt={'이미지'}
               />
-              <div className="border-4">
+              <div className="border-4 mb-3">
                 <input
                   type="text"
                   name="usimNumber"
@@ -117,6 +140,34 @@ const S1Usim = () => {
                   className="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-3"
                 />
               </div>
+              <button
+                type="button"
+                onClick={openModal2}
+                className="block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm p-3"
+              >
+                사진 첨부
+              </button>
+              <Modal
+                isOpen={picAttOpen}
+                ariaHideApp={false}
+                style={customStyles}
+              >
+                <form
+                  action={`${process.env.NEXT_PUBLIC_API_URL}/saveImage`}
+                  method="post"
+                  encType="multipart/form-data"
+                >
+                  <input type="file" name="profile" />
+                  <div className="flex space-x-1 mt-3">
+                    <button onClick={closeModal2} className="p-3 border">
+                      취소
+                    </button>
+                    <button onClick={saveImage} className="p-3 border">
+                      저장
+                    </button>
+                  </div>
+                </form>
+              </Modal>
             </Tab.Panel>
             <Tab.Panel
               className={classNames(
@@ -414,8 +465,24 @@ const S1Usim = () => {
       </div>
       <button
         onClick={() => {
-          sessionStorage.setItem('S4Usim', JSON.stringify(inputs));
-          router.push('./S5Identification');
+          const v1 = inputs.imei1.length !== 15;
+          const v2 = inputs.imei2.length !== 15;
+          const v3 = inputs.EID.length !== 32;
+          if (inputs.usimType === 'eSim 사용') {
+            if (v1) {
+              alert('imei1 15자리를 입력해주세요');
+            } else if (v2) {
+              alert('imei2 15자리를 입력해주세요');
+            } else if (v3) {
+              alert('EID 32자리를 입력해주세요');
+            } else {
+              sessionStorage.setItem('S4Usim', JSON.stringify(inputs));
+              router.push('./S5Identification');
+            }
+          } else {
+            sessionStorage.setItem('S4Usim', JSON.stringify(inputs));
+            router.push('./S5Identification');
+          }
         }}
         className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
       >
@@ -425,4 +492,4 @@ const S1Usim = () => {
   );
 };
 
-export default S1Usim;
+export default S4Usim;
