@@ -40,16 +40,16 @@ const S5Identification = () => {
 
   const [person, setPerson] = useState({
     userName: process.env.NEXT_PUBLIC_NAME || '',
-    userNameP: '',
+    userNameP: process.env.NEXT_PUBLIC_NAME || '',
     userPhone: process.env.NEXT_PUBLIC_PHONE || '',
     userBirth: process.env.NEXT_PUBLIC_BIRTH || '',
     email1: '',
     email2: '',
-    publishedDate: '',
-    jumin1: '',
-    jumin2: '',
-    jumin3: '',
-    jumin4: '',
+    publishedDate: '20120928',
+    jumin1: process.env.NEXT_PUBLIC_jumin1 || '',
+    jumin2: process.env.NEXT_PUBLIC_jumin2 || '',
+    jumin3: process.env.NEXT_PUBLIC_jumin1 || '',
+    jumin4: process.env.NEXT_PUBLIC_jumin2 || '',
     driverLicenseNumber1: '',
     driverLicenseNumber2: '',
     driverLicenseNumber3: '',
@@ -189,6 +189,7 @@ const S5Identification = () => {
               value={person.publishedDate}
               className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               onChange={handleInputChange}
+              placeholder="ex) 20161125"
             />
           </div>
         </div>
@@ -229,7 +230,7 @@ const S5Identification = () => {
               htmlFor="driverLicenseNumber"
               className="mb-5 block text-sm font-medium text-gray-700"
             >
-              주민등록번호
+              본인 주민등록번호
             </label>
             <div className="mb-5 flex">
               <input
@@ -352,6 +353,7 @@ const S5Identification = () => {
               value={person.publishedDate}
               className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               onChange={handleInputChange}
+              placeholder="ex) 20161125"
             />
           </div>
         </div>
@@ -531,13 +533,43 @@ const S5Identification = () => {
               <button
                 onClick={async () => {
                   const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
-                  // const aa = await axios.post(tokenUrl);
-                  // console.log(aa);
-                  console.log(tokenUrl);
-                  const getCM806Data = {
-                    custNm: person.userName,
+                  let inqDvCd = '';
+                  if (identification?.title === '주민등록증') {
+                    inqDvCd = 'REGID';
+                  } else {
+                    inqDvCd = 'DRIVE';
+                  }
+                  let persFrgnrPsnoEnprNo = '';
+                  let custNm = '';
+                  if (person.isForgn === '미성년자') {
+                    persFrgnrPsnoEnprNo = person.jumin3 + person.jumin4;
+                    custNm = person.userNameP;
+                  } else if (person.isForgn === '개인') {
+                    persFrgnrPsnoEnprNo = person.jumin1 + person.jumin2;
+                    custNm = person.userName;
+                  }
+
+                  const jumin64 = Buffer.from(
+                    persFrgnrPsnoEnprNo,
+                    'utf-8'
+                  ).toString('base64');
+                  const dataCM806 = {
+                    custNm,
+                    inqDvCd,
+                    isuDt: person.publishedDate,
+                    persFrgnrPsnoEnprNo: jumin64,
+                    drvLcnsNo:
+                      person.driverLicenseNumber1 +
+                      person.driverLicenseNumber2 +
+                      person.driverLicenseNumber3 +
+                      person.driverLicenseNumber4,
                   };
-                  console.log(getCM806Data);
+                  const { data } = await axios.post(tokenUrl, dataCM806);
+                  if (data.totSuccCd === 'Y') {
+                    console.log('신분증 통과');
+                  } else {
+                    alert('신분증 오류');
+                  }
                 }}
               >
                 신분증 확인
