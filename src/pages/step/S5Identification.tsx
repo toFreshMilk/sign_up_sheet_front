@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
-import { S5forgn, S5normal, S5normal19 } from '@/pages/units/S5userType';
 import { Main } from '@/templates/Main';
 import CheckIcon from '@/utils/Commons';
 import driverLicenceRegion from '@/utils/PublicData';
@@ -41,6 +40,7 @@ const S5Identification = () => {
 
   const [person, setPerson] = useState({
     userName: process.env.NEXT_PUBLIC_NAME || '',
+    userNameP: '',
     userPhone: process.env.NEXT_PUBLIC_PHONE || '',
     userBirth: process.env.NEXT_PUBLIC_BIRTH || '',
     email1: '',
@@ -48,6 +48,8 @@ const S5Identification = () => {
     publishedDate: '',
     jumin1: '',
     jumin2: '',
+    jumin3: '',
+    jumin4: '',
     driverLicenseNumber1: '',
     driverLicenseNumber2: '',
     driverLicenseNumber3: '',
@@ -55,21 +57,340 @@ const S5Identification = () => {
     isForgn: '',
   });
 
+  const handleInputChange = (e: any) => {
+    setPerson({ ...person, [e.target.name]: e.target.value });
+  };
+
   const userType = () => {
     let component: JSX.Element;
     if (person.isForgn === '개인') {
-      component = S5normal();
+      component = (
+        <div className="col-span-6 sm:col-span-6">
+          <label
+            className="mb-3 block text-sm font-medium text-gray-700"
+            onClick={() => {
+              console.log(identification);
+            }}
+          >
+            신분증 정보
+          </label>
+          <RadioGroup value={identification} onChange={setIdentification}>
+            <div className="mb-5 grid grid-cols-2">
+              {identificationTypes.map((item) => (
+                <RadioGroup.Option key={item.title} value={item} as={Fragment}>
+                  {({ checked }) => (
+                    <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
+                      <div className="flex items-center">
+                        {checked && (
+                          <div className="mr-2 shrink-0 text-white">
+                            <CheckIcon className="h-6 w-6" />
+                          </div>
+                        )}
+                        {item.title}
+                      </div>
+                    </button>
+                  )}
+                </RadioGroup.Option>
+              ))}
+            </div>
+          </RadioGroup>
+          <div className="col-span-6 sm:col-span-4">
+            <label
+              htmlFor="driverLicenseNumber"
+              className="mb-5 block text-sm font-medium text-gray-700"
+            >
+              주민등록번호
+            </label>
+            <div className="mb-5 flex">
+              <input
+                type="text"
+                name="jumin1"
+                onChange={handleInputChange}
+                value={person.jumin1}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+              <span className="p-3">-</span>
+              <input
+                type="text"
+                name="jumin2"
+                onChange={handleInputChange}
+                value={person.jumin2}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+            </div>
+          </div>
+          {identification?.title === '주민등록증' ? (
+            <div className="col-span-6 sm:col-span-4">
+              <img
+                src={`${router.basePath}/assets/images/registration_card.png`}
+                alt={'주민증'}
+              />
+            </div>
+          ) : (
+            <>
+              <label
+                htmlFor="driverLicenseNumber"
+                className="mb-5 block text-sm font-medium text-gray-700"
+              >
+                운전면허 번호
+              </label>
+              <div className="mb-5 flex">
+                <select
+                  name="driverLicenseNumber1"
+                  className="w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber1}
+                >
+                  {driverLicenceRegion.map((item) => (
+                    <option key={item}>{item}</option>
+                  ))}
+                </select>
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="driverLicenseNumber2"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber2}
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="driverLicenseNumber3"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber3}
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="driverLicenseNumber4"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber4}
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                />
+              </div>
+              <img
+                src={`${router.basePath}/assets/images/drivers_license.png`}
+                alt={'면허증'}
+              />
+            </>
+          )}
+          <div className="col-span-6 my-3">
+            <label
+              htmlFor="publishedDate"
+              className="mb-3 block text-sm font-medium text-gray-700"
+            >
+              발급일자
+            </label>
+            <input
+              type="text"
+              name="publishedDate"
+              value={person.publishedDate}
+              className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+      );
     } else if (person.isForgn === '미성년자') {
-      component = S5normal19();
+      component = (
+        <div className="col-span-6 sm:col-span-6">
+          <label
+            className="mb-3 block text-sm font-medium text-gray-700"
+            onClick={() => {
+              console.log(identification);
+            }}
+          >
+            신분증 정보
+          </label>
+          <RadioGroup value={identification} onChange={setIdentification}>
+            <div className="mb-5 grid grid-cols-2">
+              {identificationTypes.map((item) => (
+                <RadioGroup.Option key={item.title} value={item} as={Fragment}>
+                  {({ checked }) => (
+                    <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
+                      <div className="flex items-center">
+                        {checked && (
+                          <div className="mr-2 shrink-0 text-white">
+                            <CheckIcon className="h-6 w-6" />
+                          </div>
+                        )}
+                        {item.title}
+                      </div>
+                    </button>
+                  )}
+                </RadioGroup.Option>
+              ))}
+            </div>
+          </RadioGroup>
+          <div className="col-span-6 sm:col-span-4">
+            <label
+              htmlFor="driverLicenseNumber"
+              className="mb-5 block text-sm font-medium text-gray-700"
+            >
+              주민등록번호
+            </label>
+            <div className="mb-5 flex">
+              <input
+                type="text"
+                name="jumin1"
+                onChange={handleInputChange}
+                value={person.jumin1}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+              <span className="p-3">-</span>
+              <input
+                type="text"
+                name="jumin2"
+                onChange={handleInputChange}
+                value={person.jumin2}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+            </div>
+          </div>
+          <div className="col-span-6 sm:col-span-4">
+            <label
+              htmlFor="driverLicenseNumber3"
+              className="mb-5 block text-sm font-medium text-gray-700"
+            >
+              이름, 주민등록번호(법정대리인)
+            </label>
+            <div className="mb-5 flex">
+              <input
+                type="text"
+                name="userNameP"
+                onChange={handleInputChange}
+                value={person.userNameP}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+              <span className="p-3">/</span>
+              <input
+                type="text"
+                name="jumin3"
+                onChange={handleInputChange}
+                value={person.jumin3}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+              <span className="p-3">-</span>
+              <input
+                type="text"
+                name="jumin4"
+                onChange={handleInputChange}
+                value={person.jumin4}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+            </div>
+          </div>
+          {identification?.title === '주민등록증' ? (
+            <div className="col-span-6 sm:col-span-4">
+              <img
+                src={`${router.basePath}/assets/images/registration_card.png`}
+                alt={'주민증'}
+              />
+            </div>
+          ) : (
+            <>
+              <label
+                htmlFor="driverLicenseNumber"
+                className="mb-5 block text-sm font-medium text-gray-700"
+              >
+                운전면허 번호(법정대리인)
+              </label>
+              <div className="mb-5 flex">
+                <select
+                  name="driverLicenseNumber1"
+                  className="w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber1}
+                >
+                  {driverLicenceRegion.map((item) => (
+                    <option key={item}>{item}</option>
+                  ))}
+                </select>
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="driverLicenseNumber2"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber2}
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="driverLicenseNumber3"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber3}
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="driverLicenseNumber4"
+                  onChange={handleInputChange}
+                  value={person.driverLicenseNumber4}
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                />
+              </div>
+              <img
+                src={`${router.basePath}/assets/images/drivers_license.png`}
+                alt={'면허증'}
+              />
+            </>
+          )}
+          <div className="col-span-6 my-3">
+            <label
+              htmlFor="publishedDate"
+              className="mb-3 block text-sm font-medium text-gray-700"
+            >
+              발급일자(법정대리인)
+            </label>
+            <input
+              type="text"
+              name="publishedDate"
+              value={person.publishedDate}
+              className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              onChange={handleInputChange}
+            />
+          </div>
+        </div>
+      );
     } else {
-      component = S5forgn();
+      component = (
+        <>
+          <div className="col-span-6 sm:col-span-4">
+            <label
+              htmlFor="driverLicenseNumber"
+              className="mb-5 block text-sm font-medium text-gray-700"
+            >
+              외국인번호
+            </label>
+            <div className="mb-5 flex">
+              <input
+                type="text"
+                name="jumin1"
+                onChange={handleInputChange}
+                value={person.jumin1}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+              <span className="p-3">-</span>
+              <input
+                type="text"
+                name="jumin2"
+                onChange={handleInputChange}
+                value={person.jumin2}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+            </div>
+          </div>
+          <button>외국인 신분증을 첨부해주세요</button>
+        </>
+      );
     }
     return component;
   };
 
-  const handleInputChange = (e: any) => {
-    setPerson({ ...person, [e.target.name]: e.target.value });
-  };
   useEffect(() => {
     async function getKeys() {
       try {
@@ -205,177 +526,6 @@ const S5Identification = () => {
             {userType()}
 
             <div className="col-span-6 sm:col-span-6">
-              {person.isForgn ? (
-                <>
-                  <div className="col-span-6 sm:col-span-4">
-                    <label
-                      htmlFor="driverLicenseNumber"
-                      className="mb-5 block text-sm font-medium text-gray-700"
-                    >
-                      외국인번호
-                    </label>
-                    <div className="mb-5 flex">
-                      <input
-                        type="text"
-                        name="jumin1"
-                        onChange={handleInputChange}
-                        value={person.jumin1}
-                        className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                      />
-                      <span className="p-3">-</span>
-                      <input
-                        type="text"
-                        name="jumin2"
-                        onChange={handleInputChange}
-                        value={person.jumin2}
-                        className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                      />
-                    </div>
-                  </div>
-                  <button>외국인 신분증을 첨부해주세요</button>
-                </>
-              ) : (
-                <>
-                  <label
-                    className="mb-3 block text-sm font-medium text-gray-700"
-                    onClick={() => {
-                      console.log(identification);
-                    }}
-                  >
-                    신분증 정보
-                  </label>
-                  <RadioGroup
-                    value={identification}
-                    onChange={setIdentification}
-                  >
-                    <div className="mb-5 grid grid-cols-2">
-                      {identificationTypes.map((item) => (
-                        <RadioGroup.Option
-                          key={item.title}
-                          value={item}
-                          as={Fragment}
-                        >
-                          {({ checked }) => (
-                            <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
-                              <div className="flex items-center">
-                                {checked && (
-                                  <div className="mr-2 shrink-0 text-white">
-                                    <CheckIcon className="h-6 w-6" />
-                                  </div>
-                                )}
-                                {item.title}
-                              </div>
-                            </button>
-                          )}
-                        </RadioGroup.Option>
-                      ))}
-                    </div>
-                  </RadioGroup>
-                  <div className="col-span-6 sm:col-span-4">
-                    <label
-                      htmlFor="driverLicenseNumber"
-                      className="mb-5 block text-sm font-medium text-gray-700"
-                    >
-                      주민등록번호
-                    </label>
-                    <div className="mb-5 flex">
-                      <input
-                        type="text"
-                        name="jumin1"
-                        onChange={handleInputChange}
-                        value={person.jumin1}
-                        className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                      />
-                      <span className="p-3">-</span>
-                      <input
-                        type="text"
-                        name="jumin2"
-                        onChange={handleInputChange}
-                        value={person.jumin2}
-                        className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                      />
-                    </div>
-                  </div>
-
-                  {identification?.title === '주민등록증' ? (
-                    <div className="col-span-6 sm:col-span-4">
-                      <img
-                        src={`${router.basePath}/assets/images/registration_card.png`}
-                        alt={'주민증'}
-                      />
-                    </div>
-                  ) : (
-                    <>
-                      <label
-                        htmlFor="driverLicenseNumber"
-                        className="mb-5 block text-sm font-medium text-gray-700"
-                      >
-                        운전면허 번호
-                      </label>
-                      <div className="mb-5 flex">
-                        <select
-                          name="driverLicenseNumber1"
-                          className="w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
-                          onChange={handleInputChange}
-                          value={person.driverLicenseNumber1}
-                        >
-                          {driverLicenceRegion.map((item) => (
-                            <option key={item}>{item}</option>
-                          ))}
-                        </select>
-                        <span className="p-3">-</span>
-                        <input
-                          type="text"
-                          name="driverLicenseNumber2"
-                          onChange={handleInputChange}
-                          value={person.driverLicenseNumber2}
-                          className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                        />
-                        <span className="p-3">-</span>
-                        <input
-                          type="text"
-                          name="driverLicenseNumber3"
-                          onChange={handleInputChange}
-                          value={person.driverLicenseNumber3}
-                          className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                        />
-                        <span className="p-3">-</span>
-                        <input
-                          type="text"
-                          name="driverLicenseNumber4"
-                          onChange={handleInputChange}
-                          value={person.driverLicenseNumber4}
-                          className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                        />
-                      </div>
-                      <img
-                        src={`${router.basePath}/assets/images/drivers_license.png`}
-                        alt={'면허증'}
-                      />
-                    </>
-                  )}
-                </>
-              )}
-
-              {person.isForgn ? null : (
-                <div className="col-span-6 my-3">
-                  <label
-                    htmlFor="publishedDate"
-                    className="mb-3 block text-sm font-medium text-gray-700"
-                  >
-                    발급일자
-                  </label>
-                  <input
-                    type="text"
-                    name="publishedDate"
-                    value={person.publishedDate}
-                    className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                    onChange={handleInputChange}
-                  />
-                </div>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
               <div></div>
               <button
@@ -383,6 +533,7 @@ const S5Identification = () => {
                   const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
                   // const aa = await axios.post(tokenUrl);
                   // console.log(aa);
+                  console.log(tokenUrl);
                   const getCM806Data = {
                     custNm: person.userName,
                   };
