@@ -89,36 +89,6 @@ const S12JoinResult = () => {
                 {totalData.S5Identification?.userBirth}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">신분증</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {totalData.S5Identification?.identification?.title}
-              </dd>
-            </div>
-            {totalData.S5Identification?.identification?.title ===
-            '주민등록증' ? (
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  주민등록증 발급일자
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {totalData.S5Identification?.publishedDate}
-                </dd>
-              </div>
-            ) : (
-              <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                <dt className="text-sm font-medium text-gray-500">
-                  운전면허증 번호
-                </dt>
-                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                  {`${totalData.S5Identification?.driverLicenseNumber1 || ''}-${
-                    totalData.S5Identification?.driverLicenseNumber2 || ''
-                  }-${totalData.S5Identification?.driverLicenseNumber3 || ''}-${
-                    totalData.S5Identification?.driverLicenseNumber4 || ''
-                  }`}
-                </dd>
-              </div>
-            )}
             {totalData.S3JoinType?.joinType === '신규가입' ? (
               <>
                 <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
