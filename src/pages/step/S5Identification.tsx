@@ -105,8 +105,8 @@ const S5Identification = () => {
     const passedIdentification = await axios.post(tokenUrl, {
       mTxId: keys.mTxId,
     });
-    const inicisCheck = passedIdentification.data.length === 0;
-    // const inicisCheck = passedIdentification.data.length > 0;
+    // const inicisCheck = passedIdentification.data.length === 0;
+    const inicisCheck = passedIdentification.data.length > 0;
     if (inicisCheck) {
       console.log('본인인증 되었습니다.');
       if (await identificationCheck()) {
