@@ -58,6 +58,7 @@ const inputsInitial = {
   imei1: '',
   imei2: '',
   EID: '',
+  USIM_PAY_TYPE: '구매',
 };
 const S4Usim = () => {
   const router = useRouter();
@@ -104,9 +105,18 @@ const S4Usim = () => {
                   )
                 }
                 onClick={() => {
+                  let USIM_PAY_TYPE = '';
+                  if (usimType.title === '유심 보유') {
+                    USIM_PAY_TYPE = '구매';
+                  } else if (usimType.title === '유심 없음') {
+                    USIM_PAY_TYPE = '유심 택배요청 - 일반 유심';
+                  } else {
+                    USIM_PAY_TYPE = 'esim';
+                  }
                   setInputs({
                     ...inputsInitial,
                     usimType: usimType.title,
+                    USIM_PAY_TYPE,
                   });
                 }}
               >
@@ -183,9 +193,16 @@ const S4Usim = () => {
                     <RadioGroup.Option
                       value={item}
                       onClick={() => {
+                        let USIM_PAY_TYPE = '';
+                        if (item.name === '일반 유심') {
+                          USIM_PAY_TYPE = '유심 택배요청 - 일반 유심';
+                        } else {
+                          USIM_PAY_TYPE = '유심 택배요청 - nfc 유심';
+                        }
                         setInputs({
                           ...inputs,
                           usimType: item.name,
+                          USIM_PAY_TYPE,
                         });
                       }}
                       className={({ active }) =>

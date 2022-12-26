@@ -17,10 +17,21 @@ const bankList = [
   { title: '우체국', disabled: true },
 ];
 const cardList = [
-  { title: '카드1', disabled: false },
-  { title: '카드2', disabled: false },
-  { title: '카드3', disabled: false },
-  { title: '카드4', disabled: true },
+  { title: 'BC카드', disabled: false },
+  { title: '국민카드', disabled: false },
+  { title: '농협카드', disabled: false },
+  { title: '롯데카드', disabled: true },
+  { title: '삼성카드', disabled: true },
+  { title: '신한카드', disabled: true },
+  { title: '하나카드', disabled: true },
+  { title: '현대카드', disabled: true },
+  { title: '카카오카드', disabled: true },
+  { title: '우체국카드', disabled: true },
+  { title: 'K뱅크', disabled: true },
+  { title: '아멕스카드', disabled: true },
+  { title: '씨티카드', disabled: true },
+  { title: '기타카드', disabled: true },
+  { title: '우리카드', disabled: true },
 ];
 const relationList = [
   { title: '본인', disabled: false },
