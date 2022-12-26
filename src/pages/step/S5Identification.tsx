@@ -60,6 +60,76 @@ const S5Identification = () => {
   const handleInputChange = (e: any) => {
     setPerson({ ...person, [e.target.name]: e.target.value });
   };
+  const identificationCheck = async () => {
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
+    let inqDvCd = '';
+    if (identification?.title === '주민등록증') {
+      inqDvCd = 'REGID';
+    } else {
+      inqDvCd = 'DRIVE';
+    }
+    let persFrgnrPsnoEnprNo = '';
+    let custNm = '';
+    if (person.isForgn === '미성년자') {
+      persFrgnrPsnoEnprNo = person.jumin3 + person.jumin4;
+      custNm = person.userNameP;
+    } else {
+      persFrgnrPsnoEnprNo = person.jumin1 + person.jumin2;
+      custNm = person.userName;
+    }
+
+    const jumin64 = Buffer.from(persFrgnrPsnoEnprNo, 'utf-8').toString(
+      'base64'
+    );
+    const dataCM806 = {
+      custNm,
+      inqDvCd,
+      isuDt: person.publishedDate,
+      persFrgnrPsnoEnprNo: jumin64,
+      drvLcnsNo:
+        person.driverLicenseNumber1 +
+        person.driverLicenseNumber2 +
+        person.driverLicenseNumber3 +
+        person.driverLicenseNumber4,
+    };
+    const { data } = await axios.post(tokenUrl, dataCM806);
+    let returnValue = false;
+    if (data.totSuccCd === 'Y') {
+      returnValue = true;
+    }
+    return returnValue;
+  };
+
+  const nextBtn = async () => {
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkIdentification`;
+    const passedIdentification = await axios.post(tokenUrl, {
+      mTxId: keys.mTxId,
+    });
+    const inicisCheck = passedIdentification.data.length === 0;
+    // const inicisCheck = passedIdentification.data.length > 0;
+    if (inicisCheck) {
+      console.log('본인인증 되었습니다.');
+      if (await identificationCheck()) {
+        console.log('신분증 통과');
+        sessionStorage.setItem(
+          'S5Identification',
+          JSON.stringify({ ...person, identification, telecom })
+        );
+
+        const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
+        const S3JoinTypeJson = JSON.parse(S3JoinType);
+        if (S3JoinTypeJson.joinType === '신규가입') {
+          await router.push('./S8HopeNumber');
+        } else {
+          await router.push('./S7PayFeeMethod');
+        }
+      } else {
+        alert('올바른 신분증이 아닙니다.');
+      }
+    } else {
+      alert('본인인증 되지 않았습니다.');
+    }
+  };
 
   const userType = () => {
     let component: JSX.Element;
@@ -356,12 +426,17 @@ const S5Identification = () => {
               placeholder="ex) 20161125"
             />
           </div>
+          <div className="col-span-6 sm:col-span-4">
+            <button className="rounded-md border border-gray-300 p-4 shadow-sm sm:text-sm">
+              법정대리인 신분증을 첨부해주세요
+            </button>
+          </div>
         </div>
       );
     } else {
       component = (
         <>
-          <div className="col-span-6 sm:col-span-4">
+          <div className="col-span-12 sm:col-span-6">
             <label
               htmlFor="driverLicenseNumber"
               className="mb-5 block text-sm font-medium text-gray-700"
@@ -386,7 +461,11 @@ const S5Identification = () => {
               />
             </div>
           </div>
-          <button>외국인 신분증을 첨부해주세요</button>
+          <div className="col-span-6 sm:col-span-4">
+            <button className="rounded-md border border-gray-300 p-4 shadow-sm sm:text-sm">
+              외국인 신분증을 첨부해주세요
+            </button>
+          </div>
         </>
       );
     }
@@ -529,78 +608,12 @@ const S5Identification = () => {
 
             <div className="col-span-6 sm:col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
-              <div></div>
-              <button
-                onClick={async () => {
-                  const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
-                  let inqDvCd = '';
-                  if (identification?.title === '주민등록증') {
-                    inqDvCd = 'REGID';
-                  } else {
-                    inqDvCd = 'DRIVE';
-                  }
-                  let persFrgnrPsnoEnprNo = '';
-                  let custNm = '';
-                  if (person.isForgn === '미성년자') {
-                    persFrgnrPsnoEnprNo = person.jumin3 + person.jumin4;
-                    custNm = person.userNameP;
-                  } else if (person.isForgn === '개인') {
-                    persFrgnrPsnoEnprNo = person.jumin1 + person.jumin2;
-                    custNm = person.userName;
-                  }
-
-                  const jumin64 = Buffer.from(
-                    persFrgnrPsnoEnprNo,
-                    'utf-8'
-                  ).toString('base64');
-                  const dataCM806 = {
-                    custNm,
-                    inqDvCd,
-                    isuDt: person.publishedDate,
-                    persFrgnrPsnoEnprNo: jumin64,
-                    drvLcnsNo:
-                      person.driverLicenseNumber1 +
-                      person.driverLicenseNumber2 +
-                      person.driverLicenseNumber3 +
-                      person.driverLicenseNumber4,
-                  };
-                  const { data } = await axios.post(tokenUrl, dataCM806);
-                  if (data.totSuccCd === 'Y') {
-                    console.log('신분증 통과');
-                  } else {
-                    alert('신분증 오류');
-                  }
-                }}
-              >
-                신분증 확인
-              </button>
-              <div></div>
             </div>
           </div>
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
-            onClick={async () => {
-              const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkIdentification`;
-              const passedIdentification = await axios.post(tokenUrl, {
-                mTxId: keys.mTxId,
-              });
-              if (passedIdentification.data.length === 0) {
-                alert('본인인증이 되지 않았습니다.');
-              }
-              sessionStorage.setItem(
-                'S5Identification',
-                JSON.stringify({ ...person, identification, telecom })
-              );
-
-              const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
-              const S3JoinTypeJson = JSON.parse(S3JoinType);
-              if (S3JoinTypeJson.joinType === '신규가입') {
-                await router.push('./S8HopeNumber');
-              } else {
-                await router.push('./S7PayFeeMethod');
-              }
-            }}
+            onClick={nextBtn}
             className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >
             다음
