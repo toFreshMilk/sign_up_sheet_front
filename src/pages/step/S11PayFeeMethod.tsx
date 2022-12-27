@@ -98,7 +98,7 @@ const S11PayFeeMethod = () => {
                 className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
               >
                 {bankList.map((item) => (
-                  <option key={item.name} value={item.value}>
+                  <option key={item.name} value={item.name}>
                     {item.name}
                   </option>
                 ))}
