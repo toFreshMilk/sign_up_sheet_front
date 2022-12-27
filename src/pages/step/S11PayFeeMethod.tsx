@@ -127,56 +127,24 @@ const S11PayFeeMethod = () => {
                 className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
-            <div className="col-span-6 mt-5 sm:col-span-4">
-              <label
-                htmlFor="accountJumin"
-                className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
-              >
-                예금주 주민등록번호
-              </label>
-              <div className="flex w-full mb-3">
-                <input
-                  type="text"
-                  name="accountJumin1"
-                  onChange={handleInputChange}
-                  value={userInfo.accountJumin1}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                />
-                <span className="p-3">-</span>
-                <input
-                  type="text"
-                  name="accountJumin2"
-                  onChange={handleInputChange}
-                  value={userInfo.accountJumin2}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                />
-              </div>
-            </div>
-            <div className="col-span-6 sm:col-span-4">
-              <label
-                htmlFor="methodType"
-                className="block text-sm font-medium text-gray-700 mb-3"
-              >
-                관계
-              </label>
-              <select
-                name="methodType"
-                value={relation}
-                onChange={(e) => {
-                  setRelation(e.target.value);
-                }}
-                className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
-              >
-                {relationList.map((item) => (
-                  <option key={item.title} value={item.title}>
-                    {item.title}
-                  </option>
-                ))}
-              </select>
-            </div>
           </>
         ) : (
           <>
+            <div className="col-span-6 mt-5 sm:col-span-4 mb-3">
+              <label
+                htmlFor="cardOwnerName"
+                className="block text-sm font-medium text-gray-700 mb-3"
+              >
+                카드 소유주 이름
+              </label>
+              <input
+                type="text"
+                name="cardOwnerName"
+                onChange={handleInputChange}
+                value={userInfo.cardOwnerName}
+                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+              />
+            </div>
             <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="methodType"
@@ -274,6 +242,53 @@ const S11PayFeeMethod = () => {
             </div>
           </>
         )}
+        <div className="col-span-6 mt-5 sm:col-span-4">
+          <label
+            htmlFor="accountJumin"
+            className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
+          >
+            소유자 주민등록번호
+          </label>
+          <div className="flex w-full mb-3">
+            <input
+              type="text"
+              name="accountJumin1"
+              onChange={handleInputChange}
+              value={userInfo.accountJumin1}
+              className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            />
+            <span className="p-3">-</span>
+            <input
+              type="text"
+              name="accountJumin2"
+              onChange={handleInputChange}
+              value={userInfo.accountJumin2}
+              className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            />
+          </div>
+        </div>
+        <div className="col-span-6 sm:col-span-4 mt-3">
+          <label
+            htmlFor="methodType"
+            className="block text-sm font-medium text-gray-700 mb-3"
+          >
+            관계
+          </label>
+          <select
+            name="methodType"
+            value={relation}
+            onChange={(e) => {
+              setRelation(e.target.value);
+            }}
+            className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
+          >
+            {relationList.map((item) => (
+              <option key={item.title} value={item.title}>
+                {item.title}
+              </option>
+            ))}
+          </select>
+        </div>
       </div>
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
