@@ -128,6 +128,19 @@ const S5Identification = () => {
       }
     } else {
       alert('본인인증 되지 않았습니다.');
+      // 임시
+      sessionStorage.setItem(
+        'S5Identification',
+        JSON.stringify({ ...person, identification, telecom })
+      );
+
+      const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
+      const S3JoinTypeJson = JSON.parse(S3JoinType);
+      if (S3JoinTypeJson.joinType === '신규가입') {
+        await router.push('./S8HopeNumber');
+      } else {
+        await router.push('./S6UbuniInfo');
+      }
     }
   };
 
