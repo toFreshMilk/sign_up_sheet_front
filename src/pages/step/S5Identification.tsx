@@ -7,7 +7,7 @@ import { Fragment, useEffect, useState } from 'react';
 import S5Identification2 from '@/pages/step/S5Identification2';
 import { Main } from '@/templates/Main';
 import CheckIcon from '@/utils/Commons';
-import driverLicenceRegion from '@/utils/PublicData';
+import { driverLicenceRegion } from '@/utils/PublicData';
 
 axios.defaults.withCredentials = true;
 
@@ -121,7 +121,7 @@ const S5Identification = () => {
         if (S3JoinTypeJson.joinType === '신규가입') {
           await router.push('./S8HopeNumber');
         } else {
-          await router.push('./S7PayFeeMethod');
+          await router.push('./S6UbuniInfo');
         }
       } else {
         alert('올바른 신분증이 아닙니다.');

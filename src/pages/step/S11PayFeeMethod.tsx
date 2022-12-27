@@ -4,35 +4,13 @@ import { Fragment, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 import CheckIcon from '@/utils/Commons';
+import { bankList, cardList } from '@/utils/PublicData';
 
 const payFeeMethodTypes = [
   { title: '계좌이체', checked: true },
   { title: '체크/신용카드 납부', checked: false },
 ];
 
-const bankList = [
-  { title: '국민', disabled: false },
-  { title: '기업', disabled: false },
-  { title: '신한', disabled: false },
-  { title: '우체국', disabled: true },
-];
-const cardList = [
-  { title: 'BC카드', disabled: false },
-  { title: '국민카드', disabled: false },
-  { title: '농협카드', disabled: false },
-  { title: '롯데카드', disabled: true },
-  { title: '삼성카드', disabled: true },
-  { title: '신한카드', disabled: true },
-  { title: '하나카드', disabled: true },
-  { title: '현대카드', disabled: true },
-  { title: '카카오카드', disabled: true },
-  { title: '우체국카드', disabled: true },
-  { title: 'K뱅크', disabled: true },
-  { title: '아멕스카드', disabled: true },
-  { title: '씨티카드', disabled: true },
-  { title: '기타카드', disabled: true },
-  { title: '우리카드', disabled: true },
-];
 const relationList = [
   { title: '본인', disabled: false },
   { title: '부모', disabled: false },
@@ -45,7 +23,7 @@ const S11PayFeeMethod = () => {
   const [payFeeMethodType, setPayFeeMethodType] = useState(
     payFeeMethodTypes[0]
   );
-  const [bank, setBank] = useState(bankList[0]?.title);
+  const [bank, setBank] = useState(bankList[0]?.name);
   const [card, setCard] = useState(cardList[0]?.title);
   const [relation, setRelation] = useState(relationList[0]?.title);
 
@@ -120,8 +98,8 @@ const S11PayFeeMethod = () => {
                 className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
               >
                 {bankList.map((item) => (
-                  <option key={item.title} value={item.title}>
-                    {item.title}
+                  <option key={item.name} value={item.value}>
+                    {item.name}
                   </option>
                 ))}
               </select>

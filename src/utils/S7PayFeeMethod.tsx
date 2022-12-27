@@ -75,8 +75,8 @@ const S7PayFeeMethod = () => {
             sessionStorage.setItem(
               'S7PayFeeMethod',
               JSON.stringify({
-                ...userInfo,
-                payMethod,
+                MOVE_CERT: payMethod,
+                MOVE_CERT_NUMBER: userInfo.digint4,
               })
             );
             const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
