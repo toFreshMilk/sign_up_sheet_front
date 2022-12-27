@@ -194,7 +194,10 @@ const S12JoinResult = () => {
             onClick={async () => {
               // 여기서 finalRow
               const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
-              const { data } = await axios.post(tokenUrl, totalData);
+              const { data } = await axios.post(tokenUrl, {
+                ...totalData,
+                payFeeObj,
+              });
 
               if (data.rowsAffected > 0) {
                 alert('접수가 완료되었습니다.');

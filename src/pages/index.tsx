@@ -8,7 +8,8 @@ const Index = () => {
   const router = useRouter();
   useEffect(() => {
     const asPath = router.asPath || '';
-    const feeId = asPath.split('=')[1];
+    const feeId = asPath.split('=')[1] || 'LPZ0015470';
+    // console.log(feeId);
     sessionStorage.setItem('S0FeeId', JSON.stringify({ feeId }));
     router.push('/step/S1UserType');
   }, []);
