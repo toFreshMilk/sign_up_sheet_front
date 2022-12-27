@@ -11,7 +11,7 @@ const S12JoinResult = () => {
   const [payFeeObj, setPayFeeObj] = useState({
     RATECD: '요금제 정보 없음',
     RATENM: '요금제 정보 없음',
-    RATEAMT: '',
+    RATEAMT: '-',
   }) as any;
 
   useEffect(() => {
@@ -125,7 +125,7 @@ const S12JoinResult = () => {
                     번호이동 휴대폰 번호
                   </dt>
                   <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    {totalData.S5Identification?.userPhone}
+                    {totalData.S6UbuniInfo?.MOVE_HP}
                   </dd>
                 </div>
               </>
