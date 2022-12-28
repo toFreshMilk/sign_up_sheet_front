@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
 import { Main } from '@/templates/Main';
-import { CheckIcon } from '@/utils/Commons';
+import { CheckIcon, encrypt } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
 
 axios.defaults.withCredentials = true;
@@ -113,7 +113,19 @@ const S5Identification = () => {
         console.log('신분증 통과');
         sessionStorage.setItem(
           'S5Identification',
-          JSON.stringify({ ...person, identification, telecom })
+          JSON.stringify({
+            ...person,
+            identification,
+            telecom,
+            totalJumin12: encrypt(person.jumin1 + person.jumin2),
+            totalJumin34: encrypt(person.jumin3 + person.jumin4),
+            totalDriverNumber: encrypt(
+              person.driverLicenseNumber1 +
+                person.driverLicenseNumber2 +
+                person.driverLicenseNumber3 +
+                person.driverLicenseNumber4
+            ),
+          })
         );
 
         const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
@@ -129,18 +141,30 @@ const S5Identification = () => {
     } else {
       alert('본인인증 되지 않았습니다.');
       // 임시
-      // sessionStorage.setItem(
-      //   'S5Identification',
-      //   JSON.stringify({ ...person, identification, telecom })
-      // );
-      //
-      // const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
-      // const S3JoinTypeJson = JSON.parse(S3JoinType);
-      // if (S3JoinTypeJson.joinType === '신규가입') {
-      //   await router.push('./S8HopeNumber');
-      // } else {
-      //   await router.push('./S6UbuniInfo');
-      // }
+      sessionStorage.setItem(
+        'S5Identification',
+        JSON.stringify({
+          ...person,
+          identification,
+          telecom,
+          totalJumin12: encrypt(person.jumin1 + person.jumin2),
+          totalJumin34: encrypt(person.jumin3 + person.jumin4),
+          totalDriverNumber: encrypt(
+            person.driverLicenseNumber1 +
+              person.driverLicenseNumber2 +
+              person.driverLicenseNumber3 +
+              person.driverLicenseNumber4
+          ),
+        })
+      );
+
+      const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
+      const S3JoinTypeJson = JSON.parse(S3JoinType);
+      if (S3JoinTypeJson.joinType === '신규가입') {
+        await router.push('./S8HopeNumber');
+      } else {
+        await router.push('./S6UbuniInfo');
+      }
     }
   };
 

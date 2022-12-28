@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import { Main } from '@/templates/Main';
-import { CheckIcon } from '@/utils/Commons';
+import { CheckIcon, encrypt } from '@/utils/Commons';
 import { bankList, cardList } from '@/utils/PublicData';
 
 const payFeeMethodTypes = [
@@ -301,6 +301,16 @@ const S11PayFeeMethod = () => {
                 bank,
                 card,
                 relation,
+                accountJuminTotal: encrypt(
+                  userInfo.accountJumin1 + userInfo.accountJumin2
+                ),
+                accountNumber: encrypt(userInfo.accountNumber),
+                cardNumberTotal: encrypt(
+                  userInfo.cardNumber1 +
+                    userInfo.cardNumber2 +
+                    userInfo.cardNumber3 +
+                    userInfo.cardNumber4
+                ),
               })
             );
             router.push('./S12JoinResult');

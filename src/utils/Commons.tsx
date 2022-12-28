@@ -17,15 +17,11 @@ const CheckIcon = (props: any) => {
 
 const encrypt = (val: any) => {
   const text = val.toString();
-
   const data = {
     id: text,
   };
-
   const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), 'SMTL');
-
   const result = encrypted.toString();
-
   return encodeURIComponent(result);
 };
 
