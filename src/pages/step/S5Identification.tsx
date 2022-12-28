@@ -147,14 +147,13 @@ const S5Identification = () => {
           ...person,
           identification,
           telecom,
-          totalJumin12: encrypt(person.jumin1 + person.jumin2),
-          totalJumin34: encrypt(person.jumin3 + person.jumin4),
-          totalDriverNumber: encrypt(
+          totalJumin12: person.jumin1 + person.jumin2,
+          totalJumin34: person.jumin3 + person.jumin4,
+          totalDriverNumber:
             person.driverLicenseNumber1 +
-              person.driverLicenseNumber2 +
-              person.driverLicenseNumber3 +
-              person.driverLicenseNumber4
-          ),
+            person.driverLicenseNumber2 +
+            person.driverLicenseNumber3 +
+            person.driverLicenseNumber4,
         })
       );
 
