@@ -129,18 +129,18 @@ const S5Identification = () => {
     } else {
       alert('본인인증 되지 않았습니다.');
       // 임시
-      sessionStorage.setItem(
-        'S5Identification',
-        JSON.stringify({ ...person, identification, telecom })
-      );
-
-      const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
-      const S3JoinTypeJson = JSON.parse(S3JoinType);
-      if (S3JoinTypeJson.joinType === '신규가입') {
-        await router.push('./S8HopeNumber');
-      } else {
-        await router.push('./S6UbuniInfo');
-      }
+      // sessionStorage.setItem(
+      //   'S5Identification',
+      //   JSON.stringify({ ...person, identification, telecom })
+      // );
+      //
+      // const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
+      // const S3JoinTypeJson = JSON.parse(S3JoinType);
+      // if (S3JoinTypeJson.joinType === '신규가입') {
+      //   await router.push('./S8HopeNumber');
+      // } else {
+      //   await router.push('./S6UbuniInfo');
+      // }
     }
   };
 
@@ -439,11 +439,6 @@ const S5Identification = () => {
               placeholder="ex) 20161125"
             />
           </div>
-          <div className="col-span-6 sm:col-span-4">
-            <button className="rounded-md border border-gray-300 p-4 shadow-sm sm:text-sm">
-              법정대리인 신분증을 첨부해주세요
-            </button>
-          </div>
         </div>
       );
     } else {
@@ -473,11 +468,6 @@ const S5Identification = () => {
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
             </div>
-          </div>
-          <div className="col-span-6 sm:col-span-4">
-            <button className="rounded-md border border-gray-300 p-4 shadow-sm sm:text-sm">
-              외국인 신분증을 첨부해주세요
-            </button>
           </div>
         </>
       );

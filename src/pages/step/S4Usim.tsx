@@ -75,9 +75,6 @@ const S4Usim = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const openModal2 = () => {
-    setPicAttOpen(true);
-  };
   const closeModal2 = () => {
     setPicAttOpen(false);
   };
@@ -150,13 +147,6 @@ const S4Usim = () => {
                   className="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-3"
                 />
               </div>
-              <button
-                type="button"
-                onClick={openModal2}
-                className="block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm p-3"
-              >
-                사진 첨부
-              </button>
               <Modal
                 isOpen={picAttOpen}
                 ariaHideApp={false}
