@@ -4,7 +4,7 @@ import { Fragment, useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
 import { Main } from '@/templates/Main';
-import CheckIcon from '@/utils/Commons';
+import { CheckIcon } from '@/utils/Commons';
 
 const chungGuTypes = [
   { title: 'e-mail 명세서', checked: true },

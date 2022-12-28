@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
 import { Main } from '@/templates/Main';
-import CheckIcon from '@/utils/Commons';
+import { CheckIcon } from '@/utils/Commons';
 import { bankList, cardList } from '@/utils/PublicData';
 
 const payFeeMethodTypes = [

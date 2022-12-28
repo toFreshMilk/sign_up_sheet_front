@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
 import { Main } from '@/templates/Main';
-import CheckIcon from '@/utils/Commons';
+import { CheckIcon } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
 
 axios.defaults.withCredentials = true;

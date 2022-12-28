@@ -1,3 +1,5 @@
+import CryptoJS from 'crypto-js';
+
 const CheckIcon = (props: any) => {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
@@ -13,4 +15,18 @@ const CheckIcon = (props: any) => {
   );
 };
 
-export default CheckIcon;
+const encrypt = (val: any) => {
+  const text = val.toString();
+
+  const data = {
+    id: text,
+  };
+
+  const encrypted = CryptoJS.AES.encrypt(JSON.stringify(data), 'SMTL');
+
+  const result = encrypted.toString();
+
+  return encodeURIComponent(result);
+};
+
+export { CheckIcon, encrypt };

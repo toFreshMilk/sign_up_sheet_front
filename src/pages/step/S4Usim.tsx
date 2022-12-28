@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 
 import { Main } from '@/templates/Main';
-import CheckIcon from '@/utils/Commons';
+import { CheckIcon } from '@/utils/Commons';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
