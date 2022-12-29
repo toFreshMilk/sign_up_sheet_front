@@ -6,7 +6,7 @@ import { Fragment, useEffect, useState } from 'react';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
 import { Main } from '@/templates/Main';
-import { CheckIcon, encrypt } from '@/utils/Commons';
+import { CheckIcon } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
 
 axios.defaults.withCredentials = true;
@@ -50,7 +50,7 @@ const S5Identification = () => {
     jumin2: process.env.NEXT_PUBLIC_jumin2 || '',
     jumin3: process.env.NEXT_PUBLIC_jumin1 || '',
     jumin4: process.env.NEXT_PUBLIC_jumin2 || '',
-    driverLicenseNumber1: '',
+    driverLicenseNumber1: '11',
     driverLicenseNumber2: '',
     driverLicenseNumber3: '',
     driverLicenseNumber4: '',
@@ -58,7 +58,8 @@ const S5Identification = () => {
   });
 
   const handleInputChange = (e: any) => {
-    setPerson({ ...person, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setPerson({ ...person, [name]: value.trim() });
   };
   const identificationCheck = async () => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
@@ -117,14 +118,13 @@ const S5Identification = () => {
             ...person,
             identification,
             telecom,
-            totalJumin12: encrypt(person.jumin1 + person.jumin2),
-            totalJumin34: encrypt(person.jumin3 + person.jumin4),
-            totalDriverNumber: encrypt(
+            totalJumin12: person.jumin1 + person.jumin2,
+            totalJumin34: person.jumin3 + person.jumin4,
+            totalDriverNumber:
               person.driverLicenseNumber1 +
-                person.driverLicenseNumber2 +
-                person.driverLicenseNumber3 +
-                person.driverLicenseNumber4
-            ),
+              person.driverLicenseNumber2 +
+              person.driverLicenseNumber3 +
+              person.driverLicenseNumber4,
           })
         );
 
@@ -248,7 +248,9 @@ const S5Identification = () => {
                   value={person.driverLicenseNumber1}
                 >
                   {driverLicenceRegion.map((item) => (
-                    <option key={item}>{item}</option>
+                    <option key={item.value} value={item.value}>
+                      {item.name}
+                    </option>
                   ))}
                 </select>
                 <span className="p-3">-</span>
@@ -412,7 +414,9 @@ const S5Identification = () => {
                   value={person.driverLicenseNumber1}
                 >
                   {driverLicenceRegion.map((item) => (
-                    <option key={item}>{item}</option>
+                    <option key={item.value} value={item.value}>
+                      {item.name}
+                    </option>
                   ))}
                 </select>
                 <span className="p-3">-</span>
@@ -639,7 +643,52 @@ const S5Identification = () => {
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
-            onClick={nextBtn}
+            onClick={() => {
+              console.log(person);
+              const validateJumin12 =
+                (person.jumin1 + person.jumin2).length === 13;
+              const validateJumin34 =
+                (person.jumin3 + person.jumin4).length === 13;
+              const validateDriverNumber =
+                (
+                  person.driverLicenseNumber1 +
+                  person.driverLicenseNumber2 +
+                  person.driverLicenseNumber3 +
+                  person.driverLicenseNumber4
+                ).length === 12;
+
+              const type1 =
+                person.isForgn === '미성년자' &&
+                identification?.title === '주민등록증' &&
+                validateJumin12 &&
+                validateJumin34;
+              const type2 =
+                person.isForgn === '미성년자' &&
+                identification?.title === '운전면허증' &&
+                validateJumin12 &&
+                validateJumin34 &&
+                validateDriverNumber;
+              const type3 =
+                person.isForgn === '개인' &&
+                identification?.title === '주민등록증' &&
+                validateJumin12;
+              const type4 =
+                person.isForgn === '개인' &&
+                identification?.title === '운전면허증' &&
+                validateJumin12 &&
+                validateDriverNumber;
+              const type5 = person.isForgn === '외국인' && validateJumin12;
+              console.log(type1);
+              console.log(type2);
+              console.log(type3);
+              console.log(type4);
+              console.log(type5);
+              if (type1 || type2 || type3 || type4 || type5) {
+                nextBtn();
+              } else {
+                alert('정확한 값을 입력해주세요');
+              }
+            }}
             className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >
             다음
