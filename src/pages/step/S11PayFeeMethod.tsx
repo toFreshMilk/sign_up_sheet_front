@@ -44,6 +44,26 @@ const S11PayFeeMethod = () => {
   const handleInputChange = (e: any) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
   };
+  const next = () => {
+    sessionStorage.setItem(
+      'S11PayFeeMethod',
+      JSON.stringify({
+        ...userInfo,
+        payFeeMethodType,
+        bank,
+        card,
+        relation,
+        accountJuminTotal:
+          userInfo.accountJumin1 + userInfo.accountJumin2,
+        cardNumberTotal:
+          userInfo.cardNumber1 +
+          userInfo.cardNumber2 +
+          userInfo.cardNumber3 +
+          userInfo.cardNumber4,
+      })
+    );
+    router.push('./S12JoinResult');
+  };
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
@@ -293,24 +313,29 @@ const S11PayFeeMethod = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
-            sessionStorage.setItem(
-              'S11PayFeeMethod',
-              JSON.stringify({
-                ...userInfo,
-                payFeeMethodType,
-                bank,
-                card,
-                relation,
-                accountJuminTotal:
-                  userInfo.accountJumin1 + userInfo.accountJumin2,
-                cardNumberTotal:
-                  userInfo.cardNumber1 +
-                  userInfo.cardNumber2 +
-                  userInfo.cardNumber3 +
-                  userInfo.cardNumber4,
-              })
-            );
-            router.push('./S12JoinResult');
+            const validateJumin12 =
+              (userInfo.accountJumin1 + userInfo.accountJumin2).length === 13;
+            const validateAccountNumber = userInfo.accountNumber.length < 100;
+            const validateCardNumber =
+              (
+                userInfo.cardNumber1 +
+                userInfo.cardNumber2 +
+                userInfo.cardNumber3 +
+                userInfo.cardNumber4
+              ).length < 100;
+            const type1 =
+              payFeeMethodType?.title === '계좌이체' &&
+              validateAccountNumber &&
+              validateJumin12;
+            const type2 =
+              payFeeMethodType?.title === '체크/신용카드 납부' &&
+              validateCardNumber &&
+              validateJumin12;
+            if (type1 || type2) {
+              next();
+            } else {
+              alert('정확한 값을 입력해주세요');
+            }
           }}
           className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
         >

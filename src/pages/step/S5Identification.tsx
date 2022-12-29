@@ -644,7 +644,6 @@ const S5Identification = () => {
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
             onClick={() => {
-              console.log(person);
               const validateJumin12 =
                 (person.jumin1 + person.jumin2).length === 13;
               const validateJumin34 =
@@ -678,11 +677,6 @@ const S5Identification = () => {
                 validateJumin12 &&
                 validateDriverNumber;
               const type5 = person.isForgn === '외국인' && validateJumin12;
-              console.log(type1);
-              console.log(type2);
-              console.log(type3);
-              console.log(type4);
-              console.log(type5);
               if (type1 || type2 || type3 || type4 || type5) {
                 nextBtn();
               } else {
