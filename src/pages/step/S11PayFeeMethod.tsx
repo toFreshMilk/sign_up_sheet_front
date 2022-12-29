@@ -53,8 +53,7 @@ const S11PayFeeMethod = () => {
         bank,
         card,
         relation,
-        accountJuminTotal:
-          userInfo.accountJumin1 + userInfo.accountJumin2,
+        accountJuminTotal: userInfo.accountJumin1 + userInfo.accountJumin2,
         cardNumberTotal:
           userInfo.cardNumber1 +
           userInfo.cardNumber2 +
