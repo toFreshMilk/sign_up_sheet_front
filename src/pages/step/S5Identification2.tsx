@@ -1,5 +1,6 @@
 import axios from 'axios';
 import crypto from 'crypto';
+import moment from 'moment';
 import { useEffect, useState } from 'react';
 
 axios.defaults.withCredentials = true;
@@ -112,16 +113,24 @@ const S5Identification2 = (_props: any) => {
             'sa_popup',
             `width=${width}, height=${height}, left=${xPos}, menubar=yes, status=yes, titlebar=yes, resizable=yes`
           );
+
+          const mTxId = `smar${moment().format('YYMMDDHHmmssms')}`;
+          sessionStorage.setItem(
+            'S5Identification2',
+            JSON.stringify({
+              mTxId,
+            })
+          );
           const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
           const data2 = {
-            mTxId: key.mTxId,
+            mTxId,
             userName: key.userName,
             userPhone: key.userPhone,
           };
           axios.post(url, data2);
         }}
       >
-        본인 인증 하기
+        이니시스 본인 인증 하기
       </button>
     </form>
   );
