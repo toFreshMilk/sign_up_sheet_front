@@ -1,7 +1,5 @@
-import axios from 'axios';
+// import axios from 'axios';
 import { useEffect, useState } from 'react';
-
-axios.defaults.withCredentials = true;
 
 const S5Identification3KCB = (_props: any) => {
   const [key, setKey] = useState({

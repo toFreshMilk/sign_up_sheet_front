@@ -3,8 +3,6 @@ import crypto from 'crypto';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
 
-axios.defaults.withCredentials = true;
-
 const S5Identification2 = (_props: any) => {
   const [key, setKey] = useState({
     mid: '',
@@ -19,7 +17,7 @@ const S5Identification2 = (_props: any) => {
   const handleInputChange = (e: any) => {
     setKey({ ...key, [e.target.name]: e.target.value });
   };
-  useEffect(() => {
+  const refreshKeys = () => {
     const { k } = _props;
     let authHashStr = k.mid + k.mTxId + k.apiKey;
     authHashStr = crypto.createHash('sha256').update(authHashStr).digest('hex');
@@ -38,6 +36,9 @@ const S5Identification2 = (_props: any) => {
       userHash: userHashStr,
       reqSvcCd: k.reqSvcCd,
     });
+  };
+  useEffect(() => {
+    refreshKeys();
   }, [_props]);
   return (
     <form

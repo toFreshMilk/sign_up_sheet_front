@@ -5,11 +5,10 @@ import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
+import S5Identification3KCB from '@/pages/step/S5Identification3KCB';
 import { Main } from '@/templates/Main';
 import { CheckIcon } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
-
-axios.defaults.withCredentials = true;
 
 const identificationTypes = [
   { title: '주민등록증', checked: true },
@@ -638,6 +637,9 @@ const S5Identification = () => {
 
             <div className="col-span-6 sm:col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
+            </div>
+            <div className="col-span-6 sm:col-span-6">
+              <S5Identification3KCB k={{ ...keys, ...person }} />
             </div>
           </div>
         </div>
