@@ -33,7 +33,7 @@ const S5Identification = () => {
     mid: 'THsmartel1',
     apiKey: '633913a75f7695f861b0ff0a2363515f',
     mTxId: '',
-    reqSvcCd: '01',
+    reqSvcCd: '02',
     authHash: '',
     userHash: '',
   });

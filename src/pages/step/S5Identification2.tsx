@@ -13,9 +13,9 @@ const S5Identification2 = (_props: any) => {
     );
     const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
     const data2 = {
-      mTxId: k.mTxId,
-      userName: k.userName,
-      userPhone: k.userPhone,
+      mTxId: k?.mTxId,
+      userName: k?.userName,
+      userPhone: k?.userPhone,
     };
     axios.post(url, data2);
   };
@@ -28,14 +28,15 @@ const S5Identification2 = (_props: any) => {
       onSubmit={onSubmit}
     >
       <input type="hidden" name="flgFixedUser" defaultValue="Y" />
-      <input type="hidden" name="mid" defaultValue={k.mid} />
-      <input type="hidden" name="reqSvcCd" defaultValue={k.reqSvcCd} />
-      <input type="hidden" name="mTxId" defaultValue={k.mTxId} />
-      <input type="hidden" name="authHash" defaultValue={k.authHash} />
-      <input type="hidden" name="userName" defaultValue={k.userName} />
-      <input type="hidden" name="userPhone" defaultValue={k.userPhone} />
-      <input type="hidden" name="userHash" defaultValue={k.userHash} />
-      <input type="hidden" name="userBirth" defaultValue={k.userBirth} />
+      <input type="hidden" name="mid" defaultValue={k?.mid} />
+      <input type="hidden" name="identifier" defaultValue={k?.mid} />
+      <input type="hidden" name="reqSvcCd" defaultValue={k?.reqSvcCd} />
+      <input type="hidden" name="mTxId" defaultValue={k?.mTxId} />
+      <input type="hidden" name="authHash" defaultValue={k?.authHash} />
+      <input type="hidden" name="userName" defaultValue={k?.userName} />
+      <input type="hidden" name="userPhone" defaultValue={k?.userPhone} />
+      <input type="hidden" name="userHash" defaultValue={k?.userHash} />
+      <input type="hidden" name="userBirth" defaultValue={k?.userBirth} />
       <input
         type="hidden"
         name="successUrl"
