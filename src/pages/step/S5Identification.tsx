@@ -511,22 +511,32 @@ const S5Identification = () => {
   }, []);
 
   useEffect(() => {
-    const authHashStr = keys.mid + keys.mTxId + keys.apiKey;
-    const userHashStr = `${
-      person.userName +
-      keys.mid +
-      person.userPhone +
-      keys.mTxId +
-      person.userBirth +
-      keys.reqSvcCd
-    }`;
+    const mTxId = `smar${moment().format('YYMMDDHHmmssms')}`;
+    const authHash = crypto
+      .createHash('sha256')
+      .update(keys.mid + mTxId + keys.apiKey)
+      .digest('hex');
+    const userHash = crypto
+      .createHash('sha256')
+      .update(
+        `${
+          person.userName +
+          keys.mid +
+          person.userPhone +
+          mTxId +
+          person.userBirth +
+          keys.reqSvcCd
+        }`
+      )
+      .digest('hex');
+
     setKeys({
       ...keys,
-      userHash: crypto.createHash('sha256').update(authHashStr).digest('hex'),
-      authHash: crypto.createHash('sha256').update(userHashStr).digest('hex'),
-      mTxId: `smar${moment().format('YYMMDDHHmmssms')}`,
+      authHash,
+      userHash,
+      mTxId,
     });
-  }, [person]);
+  }, [person.userName, person.userPhone, person.userBirth]);
 
   return (
     <Main>
