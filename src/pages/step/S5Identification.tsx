@@ -15,19 +15,9 @@ const identificationTypes = [
   { title: '주민등록증', checked: true },
   { title: '운전면허증', checked: false },
 ];
-const telecomList = [
-  { title: 'SKT', checked: true },
-  { title: 'KT', checked: false },
-  { title: 'LGT', checked: false },
-  { title: 'SKT(알뜰폰)', checked: false },
-  { title: 'KT(알뜰폰)', checked: false },
-  { title: 'LGT(알뜰폰)', checked: false },
-];
-
 const S5Identification = () => {
   const router = useRouter();
   const [identification, setIdentification] = useState(identificationTypes[0]);
-  const [telecom, setTelecom] = useState(telecomList[0]?.title);
 
   const [keys, setKeys] = useState({
     mid: 'THsmartel1',
@@ -48,8 +38,8 @@ const S5Identification = () => {
     publishedDate: '',
     jumin1: process.env.NEXT_PUBLIC_jumin1 || '',
     jumin2: process.env.NEXT_PUBLIC_jumin2 || '',
-    jumin3: process.env.NEXT_PUBLIC_jumin1 || '',
-    jumin4: process.env.NEXT_PUBLIC_jumin2 || '',
+    jumin3: process.env.NEXT_PUBLIC_jumin3 || '',
+    jumin4: process.env.NEXT_PUBLIC_jumin4 || '',
     driverLicenseNumber1: '11',
     driverLicenseNumber2: '',
     driverLicenseNumber3: '',
@@ -105,6 +95,8 @@ const S5Identification = () => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkIdentification`;
     const passedIdentification = await axios.post(tokenUrl, {
       mTxId: keys.mTxId,
+      userName: person.userName,
+      jumin1: person.jumin1,
     });
     // const inicisCheck = passedIdentification.data.length === 0;
     const inicisCheck = passedIdentification.data.length > 0;
@@ -117,7 +109,6 @@ const S5Identification = () => {
           JSON.stringify({
             ...person,
             identification,
-            telecom,
             totalJumin12: person.jumin1 + person.jumin2,
             totalJumin34: person.jumin3 + person.jumin4,
             totalDriverNumber:
@@ -146,7 +137,6 @@ const S5Identification = () => {
         JSON.stringify({
           ...person,
           identification,
-          telecom,
           totalJumin12: person.jumin1 + person.jumin2,
           totalJumin34: person.jumin3 + person.jumin4,
           totalDriverNumber:
@@ -543,7 +533,7 @@ const S5Identification = () => {
       <div className="overflow-hidden shadow sm:rounded-md">
         <div className="bg-white px-4 py-5 sm:p-6">
           <div className="grid grid-cols-6 gap-6">
-            <div className="col-span-6 sm:col-span-3">
+            <div className="col-span-6 sm:col-span-6">
               <label
                 htmlFor="userName"
                 className="mb-3 block text-sm font-medium text-gray-700"
@@ -559,60 +549,6 @@ const S5Identification = () => {
                 value={person.userName}
               />
             </div>
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="userBirth"
-                className="mb-3 block text-sm font-medium text-gray-700"
-              >
-                8자리 생년월일
-              </label>
-              <input
-                type="text"
-                name="userBirth"
-                id="userBirth"
-                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                onChange={handleInputChange}
-                value={person.userBirth}
-              />
-            </div>
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="selectedTelecom"
-                className="mb-3 block text-sm font-medium text-gray-700"
-              >
-                통신사 선택
-              </label>
-              <select
-                name="selectedTelecom"
-                value={telecom}
-                onChange={(e) => {
-                  setTelecom(e.target.value);
-                }}
-                className="block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
-              >
-                {telecomList.map((item) => (
-                  <option key={item.title} value={item.title}>
-                    {item.title}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="userPhone"
-                className="mb-3 block text-sm font-medium text-gray-700"
-              >
-                휴대폰 번호
-              </label>
-              <input
-                type="text"
-                name="userPhone"
-                onChange={handleInputChange}
-                value={person.userPhone}
-                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-              />
-            </div>
-
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="email1"
