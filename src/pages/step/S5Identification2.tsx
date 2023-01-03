@@ -1,43 +1,49 @@
 import axios from 'axios';
-import crypto from 'crypto';
 import { useEffect, useState } from 'react';
 
 const S5Identification2 = (_props: any) => {
   const [key, setKey] = useState({
-    mid: '',
-    mTxId: '',
-    authHash: '',
     userName: '',
     userPhone: '',
     userBirth: '',
     userHash: '',
-    reqSvcCd: '01',
+    authHash: '',
+    mTxId: ``,
+    reqSvcCd: _props.k.reqSvcCd,
+    apiKey: _props.k.apiKey,
+    mid: _props.k.mid,
   });
   const handleInputChange = (e: any) => {
     setKey({ ...key, [e.target.name]: e.target.value });
   };
-  const refreshKeys = () => {
+  const onSubmit = () => {
+    const width = 400;
+    const height = 620;
+    const xPos = document.body.offsetWidth / 2 - width / 2; // 가운데 정렬
+    window.open(
+      '',
+      'sa_popup',
+      `width=${width}, height=${height}, left=${xPos}, menubar=yes, status=yes, titlebar=yes, resizable=yes`
+    );
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
+    const data2 = {
+      mTxId: key.mTxId,
+      userName: key.userName,
+      userPhone: key.userPhone,
+    };
+    axios.post(url, data2);
+  };
+  useEffect(() => {
     const { k } = _props;
-    let authHashStr = k.mid + k.mTxId + k.apiKey;
-    authHashStr = crypto.createHash('sha256').update(authHashStr).digest('hex');
-    let userHashStr = `${
-      k.userName + k.mid + k.userPhone + k.mTxId + k.userBirth
-    }01`;
-    userHashStr = crypto.createHash('sha256').update(userHashStr).digest('hex');
     setKey({
       ...key,
-      mid: k.mid,
-      mTxId: k.mTxId,
       userName: k.userName,
       userPhone: k.userPhone,
       userBirth: k.userBirth,
-      authHash: authHashStr,
-      userHash: userHashStr,
-      reqSvcCd: k.reqSvcCd,
+      userHash: k.userHash,
+      authHash: k.authHash,
+      mTxId: k.mTxId,
     });
-  };
-  useEffect(() => {
-    refreshKeys();
   }, [_props]);
   return (
     <form
@@ -45,6 +51,7 @@ const S5Identification2 = (_props: any) => {
       method="post"
       target="sa_popup"
       action="https://sa.inicis.com/auth"
+      onSubmit={onSubmit}
     >
       <input
         type="hidden"
@@ -104,23 +111,6 @@ const S5Identification2 = (_props: any) => {
       <button
         type="submit"
         className="p-3 border border-gray-300 shadow-sm focus:outline-none"
-        onClick={() => {
-          const width = 400;
-          const height = 620;
-          const xPos = document.body.offsetWidth / 2 - width / 2; // 가운데 정렬
-          window.open(
-            '',
-            'sa_popup',
-            `width=${width}, height=${height}, left=${xPos}, menubar=yes, status=yes, titlebar=yes, resizable=yes`
-          );
-          const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
-          const data2 = {
-            mTxId: key.mTxId,
-            userName: key.userName,
-            userPhone: key.userPhone,
-          };
-          axios.post(url, data2);
-        }}
       >
         이니시스 본인 인증 하기
       </button>

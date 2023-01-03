@@ -26,7 +26,7 @@ const S5Identification3KCB = (_props: any) => {
         //   ...key,
         //   kcbToken: 'kcbTokendd',
         // });
-        console.log('data');
+        // console.log('data');
       } catch (e) {
         console.log('getKcbInfo e');
         console.log(e);

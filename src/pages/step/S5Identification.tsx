@@ -1,11 +1,12 @@
 import { RadioGroup } from '@headlessui/react';
 import axios from 'axios';
+import crypto from 'crypto';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
-import S5Identification3KCB from '@/pages/step/S5Identification3KCB';
+// import S5Identification3KCB from '@/pages/step/S5Identification3KCB';
 import { Main } from '@/templates/Main';
 import { CheckIcon } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
@@ -29,11 +30,11 @@ const S5Identification = () => {
   const [telecom, setTelecom] = useState(telecomList[0]?.title);
 
   const [keys, setKeys] = useState({
-    mid: '',
-    apiKey: '',
+    mid: 'THsmartel1',
+    apiKey: '633913a75f7695f861b0ff0a2363515f',
     mTxId: '',
-    authHash: '',
     reqSvcCd: '01',
+    authHash: '',
     userHash: '',
   });
 
@@ -500,23 +501,7 @@ const S5Identification = () => {
     }
     return component;
   };
-
   useEffect(() => {
-    async function getKeys() {
-      try {
-        const getKeyUrl = `${process.env.NEXT_PUBLIC_API_URL}/getKeys`;
-        const { data } = await axios.post(getKeyUrl);
-        const mtxId = `smar${moment().format('YYMMDDHHmmssms')}`;
-        setKeys({
-          ...data,
-          mTxId: mtxId,
-        });
-      } catch (e) {
-        console.log('getKeys e');
-        console.log(e);
-      }
-    }
-    getKeys();
     const s1 = sessionStorage.getItem('S1UserType') || '';
     const s1Parse = JSON.parse(s1);
     setPerson({
@@ -524,6 +509,24 @@ const S5Identification = () => {
       isForgn: s1Parse.value,
     });
   }, []);
+
+  useEffect(() => {
+    const authHashStr = keys.mid + keys.mTxId + keys.apiKey;
+    const userHashStr = `${
+      person.userName +
+      keys.mid +
+      person.userPhone +
+      keys.mTxId +
+      person.userBirth +
+      keys.reqSvcCd
+    }`;
+    setKeys({
+      ...keys,
+      userHash: crypto.createHash('sha256').update(authHashStr).digest('hex'),
+      authHash: crypto.createHash('sha256').update(userHashStr).digest('hex'),
+      mTxId: `smar${moment().format('YYMMDDHHmmssms')}`,
+    });
+  }, [person]);
 
   return (
     <Main>
@@ -637,9 +640,6 @@ const S5Identification = () => {
 
             <div className="col-span-6 sm:col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
-            </div>
-            <div className="col-span-6 sm:col-span-6">
-              <S5Identification3KCB k={{ ...keys, ...person }} />
             </div>
           </div>
         </div>
