@@ -35,6 +35,7 @@ const S5Identification2 = (_props: any) => {
       <input type="hidden" name="userName" defaultValue={k.userName} />
       <input type="hidden" name="userPhone" defaultValue={k.userPhone} />
       <input type="hidden" name="userHash" defaultValue={k.userHash} />
+      <input type="hidden" name="userBirth" defaultValue={k.userBirth} />
       <input
         type="hidden"
         name="successUrl"
