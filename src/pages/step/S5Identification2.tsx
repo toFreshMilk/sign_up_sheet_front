@@ -34,7 +34,6 @@ const S5Identification2 = (_props: any) => {
       <input type="hidden" name="reqSvcCd" defaultValue={k?.reqSvcCd} />
       <input type="hidden" name="mTxId" defaultValue={k?.mTxId} />
       <input type="hidden" name="authHash" defaultValue={k?.authHash} />
-      <input type="hidden" name="userHash" defaultValue={k?.userHash} />
       <input
         type="hidden"
         name="successUrl"

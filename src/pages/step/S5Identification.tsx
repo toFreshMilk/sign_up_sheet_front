@@ -25,7 +25,6 @@ const S5Identification = () => {
     mTxId: '',
     reqSvcCd: '02',
     authHash: '',
-    userHash: '',
   });
 
   const [person, setPerson] = useState({
@@ -506,24 +505,10 @@ const S5Identification = () => {
       .createHash('sha256')
       .update(keys.mid + mTxId + keys.apiKey)
       .digest('hex');
-    const userHash = crypto
-      .createHash('sha256')
-      .update(
-        `${
-          person.userName +
-          keys.mid +
-          person.userPhone +
-          mTxId +
-          person.userBirth +
-          keys.reqSvcCd
-        }`
-      )
-      .digest('hex');
 
     setKeys({
       ...keys,
       authHash,
-      userHash,
       mTxId,
     });
   }, []);
