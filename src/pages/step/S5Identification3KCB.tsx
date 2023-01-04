@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 
-import KcbForm from '@/utils/forms';
-
 const S5Identification3KCB = (_props: any) => {
   const didMount = useRef(false);
   const [key, setKey] = useState({
@@ -43,25 +41,41 @@ const S5Identification3KCB = (_props: any) => {
     if (didMount.current) {
       openKcbPopup();
       const wdwDct = document as any;
-      wdwDct.saForm2.submit();
+      const form2 = wdwDct.createElement('form');
+      form2.setAttribute('id', 'saForm2');
+      form2.setAttribute('method', 'Post');
+      form2.setAttribute('target', 'sa_popup2');
+      form2.setAttribute(
+        'action',
+        'https://card.ok-name.co.kr/popup/main/start.do'
+      );
+      let hiddenField = wdwDct.createElement('input');
+      hiddenField.setAttribute('type', 'hidden');
+      hiddenField.setAttribute('name', 'mdlTkn');
+      hiddenField.setAttribute('value', key.MDL_TKN);
+      form2.append(hiddenField);
+      hiddenField = wdwDct.createElement('input');
+      hiddenField.setAttribute('type', 'hidden');
+      hiddenField.setAttribute('name', 'cpCd');
+      hiddenField.setAttribute('value', key.CP_CD);
+      form2.append(hiddenField);
+      wdwDct.body.appendChild(form2);
+      form2.submit();
+      setTimeout(() => {
+        const ff = wdwDct.getElementById('saForm2');
+        ff.remove();
+      }, 1000);
     } else {
       didMount.current = true;
     }
   }, [key.MDL_TKN]);
   return (
-    <>
-      {key.MDL_TKN !== '' &&
-        KcbForm({
-          MDL_TKN: key.MDL_TKN,
-          CP_CD: key.CP_CD,
-        })}
-      <button
-        onClick={getKcbMDLToken}
-        className="p-3 border border-gray-300 shadow-sm focus:outline-none"
-      >
-        신용카드 본인 인증
-      </button>
-    </>
+    <button
+      onClick={getKcbMDLToken}
+      className="p-3 border border-gray-300 shadow-sm focus:outline-none"
+    >
+      신용카드 본인 인증
+    </button>
   );
 };
 

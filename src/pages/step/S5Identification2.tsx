@@ -2,7 +2,8 @@ import axios from 'axios';
 
 const S5Identification2 = (_props: any) => {
   const { k } = _props;
-  const onSubmit = () => {
+
+  const openInicisPopup = () => {
     const width = 400;
     const height = 620;
     const xPos = document.body.offsetWidth / 2 - width / 2; // 가운데 정렬
@@ -11,6 +12,8 @@ const S5Identification2 = (_props: any) => {
       'sa_popup',
       `width=${width}, height=${height}, left=${xPos}, menubar=yes, status=yes, titlebar=yes, resizable=yes`
     );
+  };
+  const beforeIdentification = () => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
     const data2 = {
       mTxId: k?.mTxId,
@@ -20,38 +23,82 @@ const S5Identification2 = (_props: any) => {
     };
     axios.post(url, data2);
   };
+  const createInicisForm = () => {
+    openInicisPopup();
+    const wdwDct = document as any;
+    const form1 = wdwDct.createElement('form');
+    form1.setAttribute('id', 'saForm1');
+    form1.setAttribute('method', 'Post');
+    form1.setAttribute('target', 'sa_popup');
+    form1.setAttribute('action', 'https://sa.inicis.com/auth');
+    let hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'flgFixedUser');
+    hiddenField.setAttribute('value', 'N');
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'mid');
+    hiddenField.setAttribute('value', k?.mid);
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'identifier');
+    hiddenField.setAttribute('value', k?.userName);
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'reqSvcCd');
+    hiddenField.setAttribute('value', k?.reqSvcCd);
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'mTxId');
+    hiddenField.setAttribute('value', k?.mTxId);
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'authHash');
+    hiddenField.setAttribute('value', k?.authHash);
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'successUrl');
+    hiddenField.setAttribute(
+      'value',
+      'https://join.smartelmobile.com/api/receiveInicisSuc'
+    );
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'failUrl');
+    hiddenField.setAttribute(
+      'value',
+      'https://join.smartelmobile.com/api/receiveInicisFail'
+    );
+    form1.append(hiddenField);
+    hiddenField = wdwDct.createElement('input');
+    hiddenField.setAttribute('type', 'hidden');
+    hiddenField.setAttribute('name', 'reservedMsg');
+    hiddenField.setAttribute('value', 'isUseToken=Y');
+    form1.append(hiddenField);
+    wdwDct.body.appendChild(form1);
+    form1.submit();
+    setTimeout(() => {
+      const ff = wdwDct.getElementById('saForm1');
+      ff.remove();
+    }, 1000);
+  };
   return (
-    <form
-      name="saForm"
-      method="post"
-      target="sa_popup"
-      action="https://sa.inicis.com/auth"
-      onSubmit={onSubmit}
+    <button
+      onClick={() => {
+        beforeIdentification();
+        createInicisForm();
+      }}
+      className="p-3 border border-gray-300 shadow-sm focus:outline-none"
     >
-      <input type="hidden" name="flgFixedUser" defaultValue="N" />
-      <input type="hidden" name="mid" defaultValue={k?.mid} />
-      <input type="hidden" name="identifier" defaultValue={k?.mid} />
-      <input type="hidden" name="reqSvcCd" defaultValue={k?.reqSvcCd} />
-      <input type="hidden" name="mTxId" defaultValue={k?.mTxId} />
-      <input type="hidden" name="authHash" defaultValue={k?.authHash} />
-      <input
-        type="hidden"
-        name="successUrl"
-        defaultValue="https://join.smartelmobile.com/api/receiveInicisSuc"
-      />
-      <input
-        type="hidden"
-        name="failUrl"
-        defaultValue="https://join.smartelmobile.com/api/receiveInicisFail"
-      />
-      <input type="hidden" name="reservedMsg" defaultValue="isUseToken=Y" />
-      <button
-        type="submit"
-        className="p-3 border border-gray-300 shadow-sm focus:outline-none"
-      >
-        이니시스 본인 인증 하기
-      </button>
-    </form>
+      이니시스 본인 인증 하기
+    </button>
   );
 };
 

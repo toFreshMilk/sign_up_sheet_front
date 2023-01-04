@@ -518,7 +518,7 @@ const S5Identification = () => {
       <div className="overflow-hidden shadow sm:rounded-md">
         <div className="bg-white px-4 py-5 sm:p-6">
           <div className="grid grid-cols-6 gap-6">
-            <div className="col-span-6 sm:col-span-6">
+            <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="userName"
                 className="mb-3 block text-sm font-medium text-gray-700"
@@ -534,6 +534,7 @@ const S5Identification = () => {
                 value={person.userName}
               />
             </div>
+            <div></div>
             <div className="col-span-6 sm:col-span-3">
               <label
                 htmlFor="email1"
