@@ -15,6 +15,13 @@ const identificationTypes = [
   { title: '주민등록증', checked: true },
   { title: '운전면허증', checked: false },
 ];
+const emailList = [
+  { title: '직접입력', checked: true },
+  { title: 'naver.com', checked: true },
+  { title: 'gmail.com', checked: true },
+  { title: 'nate.com', checked: true },
+  { title: 'hanmil.net', checked: true },
+];
 const S5Identification = () => {
   const router = useRouter();
   const [identification, setIdentification] = useState(identificationTypes[0]);
@@ -30,10 +37,10 @@ const S5Identification = () => {
   const [person, setPerson] = useState({
     userName: process.env.NEXT_PUBLIC_NAME || '',
     userNameP: process.env.NEXT_PUBLIC_NAME || '',
-    userPhone: process.env.NEXT_PUBLIC_PHONE || '',
-    userBirth: process.env.NEXT_PUBLIC_BIRTH || '',
     email1: '',
     email2: '',
+    email3: emailList[0]?.title,
+    totalEmail: '',
     publishedDate: '',
     jumin1: process.env.NEXT_PUBLIC_jumin1 || '',
     jumin2: process.env.NEXT_PUBLIC_jumin2 || '',
@@ -49,6 +56,24 @@ const S5Identification = () => {
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setPerson({ ...person, [name]: value.trim() });
+  };
+  const handleInputChangeForEmail2 = (e: any) => {
+    const { name, value } = e.target;
+    setPerson({
+      ...person,
+      [name]: value,
+      totalEmail: `${person.email1}@${value}`,
+    });
+  };
+  const handleInputChangeForEmail3 = (e: any) => {
+    const { name, value } = e.target;
+    setPerson({
+      ...person,
+      [name]: value,
+      email2: value === '직접입력' ? '' : value,
+      totalEmail:
+        value === '직접입력' ? person.email1 : `${person.email1}@${value}`,
+    });
   };
   const identificationCheckLG = async () => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
@@ -516,38 +541,45 @@ const S5Identification = () => {
                 value={person.userName}
               />
             </div>
-            <div></div>
-            <div className="col-span-6 sm:col-span-3">
+            <div className="col-span-6 sm:col-span-3" />
+            <div className="col-span-6">
               <label
                 htmlFor="email1"
-                className="mb-3 block text-sm font-medium text-gray-700"
+                className="w-full mb-3 block text-sm font-medium text-gray-700"
               >
                 이메일
               </label>
-              <input
-                type="text"
-                name="email1"
-                id="email1"
-                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                onChange={handleInputChange}
-                value={person.email1}
-              />
-            </div>
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="email2"
-                className="mb-3 block text-sm font-medium text-gray-700"
-              >
-                @ 직접 입력
-              </label>
-              <input
-                type="text"
-                name="email2"
-                id="email2"
-                className="ml-2 w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                onChange={handleInputChange}
-                value={person.email2}
-              />
+              <div className="flex">
+                <input
+                  type="text"
+                  name="email1"
+                  id="email1"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                  onChange={handleInputChange}
+                  value={person.email1}
+                />
+                <span className="p-3">@</span>
+                <input
+                  type="text"
+                  name="email2"
+                  id="email2"
+                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                  onChange={handleInputChangeForEmail2}
+                  value={person.email2}
+                />
+                <select
+                  name="email3"
+                  value={person.email3}
+                  onChange={handleInputChangeForEmail3}
+                  className="ml-2 block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
+                >
+                  {emailList.map((item) => (
+                    <option key={item.title} value={item.title}>
+                      {item.title}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             {userType()}
