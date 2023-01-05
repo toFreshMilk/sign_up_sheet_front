@@ -2,7 +2,6 @@ import axios from 'axios';
 
 const S5Identification2 = (_props: any) => {
   const { k } = _props;
-
   const openInicisPopup = () => {
     const width = 400;
     const height = 620;

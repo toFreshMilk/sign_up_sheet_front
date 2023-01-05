@@ -2,18 +2,16 @@ import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 
 const S5Identification3KCB = (_props: any) => {
+  const { k } = _props;
   const didMount = useRef(false);
   const [key, setKey] = useState({
-    mTxId: '',
-    userName: '',
-    reqSvcCd: '01',
     MDL_TKN: '',
     CP_CD: `${process.env.NEXT_PUBLIC_KCB_CP_CD}`,
   });
   const getKcbMDLToken = async () => {
     try {
       const getKeyUrl = `${process.env.NEXT_PUBLIC_API_URL}/kcbCardStep1`;
-      const result = await axios.post(getKeyUrl);
+      const result = await axios.post(getKeyUrl, { RETURN_MSG: k?.mTxId });
       if (result.data.RSLT_CD === 'T300') {
         setKey({
           ...key,
@@ -64,7 +62,7 @@ const S5Identification3KCB = (_props: any) => {
       setTimeout(() => {
         const ff = wdwDct.getElementById('saForm2');
         ff.remove();
-      }, 1000);
+      }, 500);
     } else {
       didMount.current = true;
     }
