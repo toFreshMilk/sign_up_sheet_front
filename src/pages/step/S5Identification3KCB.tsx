@@ -8,6 +8,16 @@ const S5Identification3KCB = (_props: any) => {
     MDL_TKN: '',
     CP_CD: `${process.env.NEXT_PUBLIC_KCB_CP_CD}`,
   });
+  const beforeIdentification = () => {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
+    const data2 = {
+      mTxId: k?.mTxId,
+      userName: k?.userName,
+      jumin1: k?.jumin1,
+      type: '신용카드인증',
+    };
+    axios.post(url, data2);
+  };
   const getKcbMDLToken = async () => {
     try {
       const getKeyUrl = `${process.env.NEXT_PUBLIC_API_URL}/kcbCardStep1`;
@@ -59,6 +69,7 @@ const S5Identification3KCB = (_props: any) => {
       form2.append(hiddenField);
       wdwDct.body.appendChild(form2);
       form2.submit();
+      beforeIdentification();
       setTimeout(() => {
         const ff = wdwDct.getElementById('saForm2');
         ff.remove();

@@ -18,7 +18,7 @@ const S5Identification2 = (_props: any) => {
       mTxId: k?.mTxId,
       userName: k?.userName,
       jumin1: k?.jumin1,
-      jumin2: k?.jumin2,
+      type: '전자서명인증',
     };
     axios.post(url, data2);
   };

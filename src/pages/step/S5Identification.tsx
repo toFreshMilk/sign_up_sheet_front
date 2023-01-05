@@ -490,14 +490,6 @@ const S5Identification = () => {
     }
     return component;
   };
-  useEffect(() => {
-    const s1 = sessionStorage.getItem('S1UserType') || '';
-    const s1Parse = JSON.parse(s1);
-    setPerson({
-      ...person,
-      isForgn: s1Parse.value,
-    });
-  }, []);
 
   useEffect(() => {
     const mTxId = `smar${moment().format('YYMMDDHHmmssms')}`;
@@ -505,11 +497,16 @@ const S5Identification = () => {
       .createHash('sha256')
       .update(keys.mid + mTxId + keys.apiKey)
       .digest('hex');
-
     setKeys({
       ...keys,
       authHash,
       mTxId,
+    });
+    const s1 = sessionStorage.getItem('S1UserType') || '';
+    const s1Parse = JSON.parse(s1);
+    setPerson({
+      ...person,
+      isForgn: s1Parse.value,
     });
   }, []);
 
