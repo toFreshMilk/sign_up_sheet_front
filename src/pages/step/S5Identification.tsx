@@ -50,7 +50,7 @@ const S5Identification = () => {
     const { name, value } = e.target;
     setPerson({ ...person, [name]: value.trim() });
   };
-  const identificationCheck = async () => {
+  const identificationCheckLG = async () => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
     let inqDvCd = '';
     if (identification?.title === '주민등록증') {
@@ -89,71 +89,56 @@ const S5Identification = () => {
     }
     return returnValue;
   };
-
-  const nextBtn = async () => {
+  const inicisKcb = async () => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkIdentification`;
     const passedIdentification = await axios.post(tokenUrl, {
       mTxId: keys.mTxId,
       userName: person.userName,
       jumin1: person.jumin1,
     });
-    // const inicisCheck = passedIdentification.data.length === 0;
-    const inicisCheck = passedIdentification.data.length > 0;
-    if (inicisCheck) {
-      console.log('본인인증 되었습니다.');
-      if (await identificationCheck()) {
-        console.log('신분증 통과');
-        sessionStorage.setItem(
-          'S5Identification',
-          JSON.stringify({
-            ...person,
-            identification,
-            totalJumin12: person.jumin1 + person.jumin2,
-            totalJumin34: person.jumin3 + person.jumin4,
-            totalDriverNumber:
-              person.driverLicenseNumber1 +
-              person.driverLicenseNumber2 +
-              person.driverLicenseNumber3 +
-              person.driverLicenseNumber4,
-          })
-        );
-
-        const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
-        const S3JoinTypeJson = JSON.parse(S3JoinType);
-        if (S3JoinTypeJson.joinType === '신규가입') {
-          await router.push('./S8HopeNumber');
-        } else {
-          await router.push('./S6UbuniInfo');
-        }
-      } else {
-        alert('올바른 신분증이 아닙니다.');
-      }
+    // console.log('passedIdentification.data');
+    // console.log(passedIdentification.data);
+    return passedIdentification.data.length > 0;
+  };
+  const finalSuc = async () => {
+    console.log('신분증 통과');
+    sessionStorage.setItem(
+      'S5Identification',
+      JSON.stringify({
+        ...person,
+        mtxId: keys.mTxId,
+        identification,
+        totalJumin12: person.jumin1 + person.jumin2,
+        totalJumin34: person.jumin3 + person.jumin4,
+        totalDriverNumber:
+          person.driverLicenseNumber1 +
+          person.driverLicenseNumber2 +
+          person.driverLicenseNumber3 +
+          person.driverLicenseNumber4,
+      })
+    );
+    const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
+    const S3JoinTypeJson = JSON.parse(S3JoinType);
+    if (S3JoinTypeJson.joinType === '신규가입') {
+      await router.push('./S8HopeNumber');
     } else {
-      alert('본인인증 되지 않았습니다.');
-      // 임시
-      sessionStorage.setItem(
-        'S5Identification',
-        JSON.stringify({
-          ...person,
-          identification,
-          totalJumin12: person.jumin1 + person.jumin2,
-          totalJumin34: person.jumin3 + person.jumin4,
-          totalDriverNumber:
-            person.driverLicenseNumber1 +
-            person.driverLicenseNumber2 +
-            person.driverLicenseNumber3 +
-            person.driverLicenseNumber4,
-        })
-      );
-
-      const S3JoinType = sessionStorage.getItem('S3JoinType') || '';
-      const S3JoinTypeJson = JSON.parse(S3JoinType);
-      if (S3JoinTypeJson.joinType === '신규가입') {
-        await router.push('./S8HopeNumber');
-      } else {
-        await router.push('./S6UbuniInfo');
-      }
+      await router.push('./S6UbuniInfo');
     }
+  };
+
+  const nextBtn = async () => {
+    const lgIdentificationCheck = await identificationCheckLG();
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    !lgIdentificationCheck && alert('신분증이 정확하지 않습니다.');
+
+    const inicisKcbCheck = await inicisKcb();
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    lgIdentificationCheck &&
+      !inicisKcbCheck &&
+      alert('본인인증이 일치하지 않습니다.');
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+    lgIdentificationCheck && inicisKcbCheck && finalSuc();
   };
 
   const userType = () => {
