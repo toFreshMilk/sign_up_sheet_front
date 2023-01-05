@@ -94,7 +94,7 @@ const S5Identification2 = (_props: any) => {
         beforeIdentification();
         createInicisForm();
       }}
-      className="p-3 border border-gray-300 shadow-sm focus:outline-none"
+      className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
     >
       이니시스 본인 인증 하기
     </button>

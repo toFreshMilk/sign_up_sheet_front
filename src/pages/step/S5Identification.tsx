@@ -170,36 +170,8 @@ const S5Identification = () => {
     let component: JSX.Element;
     if (person.isForgn === '개인') {
       component = (
-        <div className="col-span-6 sm:col-span-6">
-          <label
-            className="mb-3 block text-sm font-medium text-gray-700"
-            onClick={() => {
-              console.log(identification);
-            }}
-          >
-            신분증 정보
-          </label>
-          <RadioGroup value={identification} onChange={setIdentification}>
-            <div className="mb-5 grid grid-cols-2">
-              {identificationTypes.map((item) => (
-                <RadioGroup.Option key={item.title} value={item} as={Fragment}>
-                  {({ checked }) => (
-                    <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
-                      <div className="flex items-center">
-                        {checked && (
-                          <div className="mr-2 shrink-0 text-white">
-                            <CheckIcon className="h-6 w-6" />
-                          </div>
-                        )}
-                        {item.title}
-                      </div>
-                    </button>
-                  )}
-                </RadioGroup.Option>
-              ))}
-            </div>
-          </RadioGroup>
-          <div className="col-span-6 sm:col-span-4">
+        <>
+          <div className="col-span-6 sm:col-span-6">
             <label
               htmlFor="driverLicenseNumber"
               className="mb-5 block text-sm font-medium text-gray-700"
@@ -283,7 +255,7 @@ const S5Identification = () => {
               />
             </>
           )}
-          <div className="col-span-6 my-3">
+          <div className="col-span-6 mt-5">
             <label
               htmlFor="publishedDate"
               className="mb-3 block text-sm font-medium text-gray-700"
@@ -299,39 +271,11 @@ const S5Identification = () => {
               placeholder="ex) 20161125"
             />
           </div>
-        </div>
+        </>
       );
     } else if (person.isForgn === '미성년자') {
       component = (
         <div className="col-span-6 sm:col-span-6">
-          <label
-            className="mb-3 block text-sm font-medium text-gray-700"
-            onClick={() => {
-              console.log(identification);
-            }}
-          >
-            신분증 정보
-          </label>
-          <RadioGroup value={identification} onChange={setIdentification}>
-            <div className="mb-5 grid grid-cols-2">
-              {identificationTypes.map((item) => (
-                <RadioGroup.Option key={item.title} value={item} as={Fragment}>
-                  {({ checked }) => (
-                    <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
-                      <div className="flex items-center">
-                        {checked && (
-                          <div className="mr-2 shrink-0 text-white">
-                            <CheckIcon className="h-6 w-6" />
-                          </div>
-                        )}
-                        {item.title}
-                      </div>
-                    </button>
-                  )}
-                </RadioGroup.Option>
-              ))}
-            </div>
-          </RadioGroup>
           <div className="col-span-6 sm:col-span-4">
             <label
               htmlFor="driverLicenseNumber"
@@ -398,7 +342,7 @@ const S5Identification = () => {
               />
             </div>
           ) : (
-            <>
+            <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="driverLicenseNumber"
                 className="mb-5 block text-sm font-medium text-gray-700"
@@ -447,7 +391,7 @@ const S5Identification = () => {
                 src={`${router.basePath}/assets/images/drivers_license.png`}
                 alt={'면허증'}
               />
-            </>
+            </div>
           )}
           <div className="col-span-6 my-3">
             <label
@@ -581,13 +525,42 @@ const S5Identification = () => {
                 </select>
               </div>
             </div>
-
+            {person.isForgn === '외국인' ? null : (
+              <div className="col-span-6 sm:col-span-6">
+                <label className="mb-3 block text-sm font-medium text-gray-700">
+                  신분증 정보
+                </label>
+                <RadioGroup value={identification} onChange={setIdentification}>
+                  <div className="mb-5 grid grid-cols-2">
+                    {identificationTypes.map((item) => (
+                      <RadioGroup.Option
+                        key={item.title}
+                        value={item}
+                        as={Fragment}
+                      >
+                        {({ checked }) => (
+                          <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
+                            <div className="flex items-center">
+                              {checked && (
+                                <div className="mr-2 shrink-0 text-white">
+                                  <CheckIcon className="h-6 w-6" />
+                                </div>
+                              )}
+                              {item.title}
+                            </div>
+                          </button>
+                        )}
+                      </RadioGroup.Option>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
             {userType()}
 
-            <div className="col-span-6 sm:col-span-6">
+            <div className="flex col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
-            </div>
-            <div className="col-span-6 sm:col-span-6">
+              <span className="p-3"></span>
               <S5Identification3KCB k={{ ...keys, ...person }} />
             </div>
           </div>
