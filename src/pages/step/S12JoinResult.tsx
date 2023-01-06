@@ -191,17 +191,20 @@ const S12JoinResult = () => {
             onClick={async () => {
               // 여기서 finalRow
               const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
-              const { data } = await axios.post(tokenUrl, {
+              const resultObj = await axios.post(tokenUrl, {
                 ...totalData,
                 payFeeObj,
               });
+              console.log('resultObj');
+              console.log(resultObj);
+              console.log(router);
 
-              if (data.rowsAffected > 0) {
-                alert('접수가 완료되었습니다.');
-                await router.push('/');
-              } else {
-                alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
-              }
+              // if (data.rowsAffected > 0) {
+              //   alert('접수가 완료되었습니다.');
+              //   await router.push('/');
+              // } else {
+              //   alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
+              // }
               // const s0 = sessionStorage.getItem('S0FeeId');
               // sessionStorage.clear();
               // sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
