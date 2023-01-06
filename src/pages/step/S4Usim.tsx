@@ -1,4 +1,5 @@
 import { RadioGroup, Tab } from '@headlessui/react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Modal from 'react-modal';
@@ -68,6 +69,7 @@ const S4Usim = () => {
   };
   const [modalOpen, setModalOpen] = useState(false);
   const [picAttOpen, setPicAttOpen] = useState(false);
+  const [uploadImg, setUploadImg] = useState<File>();
 
   const openModal = () => {
     setModalOpen(true);
@@ -79,7 +81,17 @@ const S4Usim = () => {
     setPicAttOpen(false);
   };
   const saveImage = () => {
-    console.log('saveimg');
+    const formData = new FormData();
+    formData.append('file', uploadImg || '');
+    console.log(formData);
+    axios({
+      url: `${process.env.NEXT_PUBLIC_API_URL}/saveImage`,
+      method: 'POST',
+      data: formData,
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
   };
   return (
     <Main>
@@ -147,26 +159,42 @@ const S4Usim = () => {
                   className="block w-full rounded-md border-gray-300 shadow-sm sm:text-sm p-3"
                 />
               </div>
+              <button
+                className="rounded-md border p-3"
+                onClick={() => {
+                  setPicAttOpen(true);
+                }}
+              >
+                usim 사진 첨부하기
+              </button>
               <Modal
                 isOpen={picAttOpen}
                 ariaHideApp={false}
                 style={customStyles}
               >
-                <form
-                  action={`${process.env.NEXT_PUBLIC_API_URL}/saveImage`}
-                  method="post"
-                  encType="multipart/form-data"
-                >
-                  <input type="file" name="profile" />
+                <>
+                  <input
+                    type="file"
+                    name="imageFile"
+                    onChange={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      const files = target?.files || [];
+                      setUploadImg(files[0]);
+                    }}
+                  />
                   <div className="flex space-x-1 mt-3">
                     <button onClick={closeModal2} className="p-3 border">
                       취소
                     </button>
-                    <button onClick={saveImage} className="p-3 border">
+                    <button
+                      type="submit"
+                      onClick={saveImage}
+                      className="p-3 border"
+                    >
                       저장
                     </button>
                   </div>
-                </form>
+                </>
               </Modal>
             </Tab.Panel>
             <Tab.Panel
