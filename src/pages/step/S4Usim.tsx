@@ -83,7 +83,6 @@ const S4Usim = () => {
   const saveImage = () => {
     const formData = new FormData();
     formData.append('file', uploadImg || '');
-    console.log(formData);
     axios({
       url: `${process.env.NEXT_PUBLIC_API_URL}/saveImage`,
       method: 'POST',
@@ -91,7 +90,24 @@ const S4Usim = () => {
       headers: {
         'Content-Type': 'multipart/form-data',
       },
-    });
+    })
+      .then((res) => {
+        if (res.data.code === 226) {
+          const u1 = res.data.ftpUploadUrl;
+          sessionStorage.setItem(
+            'S4UsimImgUrl',
+            JSON.stringify({
+              usimImg: u1,
+            })
+          );
+          alert('유심 사진이 저장되었습니다.');
+        } else {
+          alert('사진 전송 실패');
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
   return (
     <Main>
