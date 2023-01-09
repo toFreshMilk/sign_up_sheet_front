@@ -95,7 +95,7 @@ const S4Usim = () => {
         if (res.data.code === 226) {
           const u1 = res.data.ftpUploadUrl;
           sessionStorage.setItem(
-            'S4UsimImgUrl',
+            'ftpImgUrl',
             JSON.stringify({
               usimImg: u1,
             })
