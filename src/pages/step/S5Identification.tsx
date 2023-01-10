@@ -4,6 +4,7 @@ import crypto from 'crypto';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
+import Modal from 'react-modal';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
 import S5Identification3KCB from '@/pages/step/S5Identification3KCB';
@@ -22,6 +23,16 @@ const emailList = [
   { title: 'nate.com', checked: true },
   { title: 'hanmil.net', checked: true },
 ];
+const customStyles = {
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
+};
 const S5Identification = () => {
   const router = useRouter();
   const [identification, setIdentification] = useState(identificationTypes[0]);
@@ -52,6 +63,9 @@ const S5Identification = () => {
     driverLicenseNumber4: '',
     isForgn: '',
   });
+  const [picAttOpen2, setPicAttOpen2] = useState(false);
+  const [uploadImg2, setUploadImg2] = useState<File>();
+  // const [uploadImg3, setUploadImg3] = useState<File>();
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -342,9 +356,47 @@ const S5Identification = () => {
               사진 파일 첨부(법정대리인)
             </label>
             <div className="mb-5 flex">
-              <button className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none">
-                신분증, 가족관계증명서 사진 첨부
+              <button
+                onClick={() => {
+                  setPicAttOpen2(true);
+                }}
+                className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
+              >
+                신분증 사진 첨부
               </button>
+              <button className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none">
+                가족관계증명서 사진 첨부
+              </button>
+              <Modal
+                isOpen={picAttOpen2}
+                ariaHideApp={false}
+                style={customStyles}
+              >
+                <>
+                  <input
+                    type="file"
+                    name="imageFile"
+                    onChange={(e) => {
+                      const target = e.target as HTMLInputElement;
+                      const files = target?.files || [];
+                      setUploadImg2(files[0]);
+                    }}
+                  />
+                  <div className="flex space-x-1 mt-3">
+                    <button
+                      onClick={() => {
+                        setPicAttOpen2(false);
+                      }}
+                      className="p-3 border"
+                    >
+                      취소
+                    </button>
+                    <button type="submit" className="p-3 border">
+                      저장
+                    </button>
+                  </div>
+                </>
+              </Modal>
             </div>
           </div>
           {identification?.title === '주민등록증' ? (

@@ -1,11 +1,10 @@
 import { RadioGroup, Tab } from '@headlessui/react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Modal from 'react-modal';
 
 import { Main } from '@/templates/Main';
-import { CheckIcon } from '@/utils/Commons';
+import { CheckIcon, saveImage } from '@/utils/Commons';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -79,35 +78,6 @@ const S4Usim = () => {
   };
   const closeModal2 = () => {
     setPicAttOpen(false);
-  };
-  const saveImage = () => {
-    const formData = new FormData();
-    formData.append('file', uploadImg || '');
-    axios({
-      url: `${process.env.NEXT_PUBLIC_API_URL}/saveImage`,
-      method: 'POST',
-      data: formData,
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    })
-      .then((res) => {
-        if (res.data.code === 226) {
-          const u1 = res.data.ftpUploadUrl;
-          sessionStorage.setItem(
-            'ftpImgUrl',
-            JSON.stringify({
-              usimImg: u1,
-            })
-          );
-          alert('유심 사진이 저장되었습니다.');
-        } else {
-          alert('사진 전송 실패');
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   };
   return (
     <Main>
@@ -204,7 +174,9 @@ const S4Usim = () => {
                     </button>
                     <button
                       type="submit"
-                      onClick={saveImage}
+                      onClick={() => {
+                        saveImage(uploadImg);
+                      }}
                       className="p-3 border"
                     >
                       저장

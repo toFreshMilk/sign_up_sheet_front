@@ -1,3 +1,4 @@
+import axios from 'axios';
 import CryptoJS from 'crypto-js';
 
 const CheckIcon = (props: any) => {
@@ -25,4 +26,38 @@ const encrypt = (val: any) => {
   return encodeURIComponent(result);
 };
 
-export { CheckIcon, encrypt };
+const saveImage = (_uploadImg: any) => {
+  const formData = new FormData();
+  formData.append('file', _uploadImg);
+  console.log(_uploadImg);
+  console.log('formData');
+
+  axios({
+    url: `${process.env.NEXT_PUBLIC_API_URL}/saveImage`,
+    method: 'POST',
+    data: formData,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
+    .then((res) => {
+      if (res.data.code === 226) {
+        const u1 = res.data.ftpUploadUrl;
+        sessionStorage.setItem(
+          'ftpImgUrl',
+          JSON.stringify({
+            usimImg: u1,
+          })
+        );
+        alert('유심 사진이 저장되었습니다.');
+      } else if (res.data.code === 553) {
+        alert('사진을 첨부해주세요');
+      }
+    })
+    .catch((e) => {
+      alert('사진이 전송되지 않았습니다.');
+      console.log(e);
+    });
+};
+
+export { CheckIcon, encrypt, saveImage };
