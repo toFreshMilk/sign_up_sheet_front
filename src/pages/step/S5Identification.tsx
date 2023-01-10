@@ -334,6 +334,19 @@ const S5Identification = () => {
               />
             </div>
           </div>
+          <div className="col-span-6 sm:col-span-4">
+            <label
+              htmlFor="driverLicenseNumber3"
+              className="mb-5 block text-sm font-medium text-gray-700"
+            >
+              사진 파일 첨부(법정대리인)
+            </label>
+            <div className="mb-5 flex">
+              <button className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none">
+                신분증, 가족관계증명서 사진 첨부
+              </button>
+            </div>
+          </div>
           {identification?.title === '주민등록증' ? (
             <div className="col-span-6 sm:col-span-4">
               <img

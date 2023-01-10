@@ -426,7 +426,7 @@ const S4Usim = () => {
                         <button
                           type="button"
                           onClick={openModal}
-                          className="rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                          className="rounded-md px-4 py-2 text-sm font-medium text-blue-900 border border-gray-300 shadow-sm focus:outline-none"
                         >
                           단말 정보 보는 방법
                         </button>
@@ -505,6 +505,12 @@ const S4Usim = () => {
                           alt={'단말정보 보는일'}
                           onClick={closeModal}
                         />
+                        <button
+                          onClick={closeModal}
+                          className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none mt-5"
+                        >
+                          닫기
+                        </button>
                       </Modal>
                     </div>
                   </dl>
