@@ -1,5 +1,6 @@
 import axios from 'axios';
 import CryptoJS from 'crypto-js';
+import Modal from 'react-modal';
 
 const CheckIcon = (props: any) => {
   return (
@@ -25,7 +26,6 @@ const encrypt = (val: any) => {
   const result = encrypted.toString();
   return encodeURIComponent(result);
 };
-
 const saveImage = (_uploadImg: any, _title: string) => {
   const formData = new FormData();
   formData.append('file', _uploadImg);
@@ -50,7 +50,7 @@ const saveImage = (_uploadImg: any, _title: string) => {
         );
         alert('유심 사진이 저장되었습니다.');
       } else if (res.data.code === 553) {
-        alert('사진이 첨부되지 않았습니다');
+        alert('사진이 첨부되지 않았습니다 code - 553');
       }
     })
     .catch((e) => {
@@ -58,5 +58,47 @@ const saveImage = (_uploadImg: any, _title: string) => {
       alert('사진이 전송되지 않았습니다.');
     });
 };
+const FtpImgModal = (_props: any) => {
+  const { k } = _props;
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
+  return (
+    <Modal isOpen={k.picAttOpen} ariaHideApp={false} style={customStyles}>
+      <>
+        <input
+          type="file"
+          name="imageFile"
+          onChange={(e) => {
+            const target = e.target as HTMLInputElement;
+            const files = target?.files || [];
+            k.setUploadImg(files[0]);
+          }}
+        />
+        <div className="flex space-x-1 mt-3">
+          <button onClick={k.closeModalForFtp} className="p-3 border">
+            취소
+          </button>
+          <button
+            type="submit"
+            onClick={() => {
+              saveImage(k.uploadImg, k.urlKey);
+            }}
+            className="p-3 border"
+          >
+            저장
+          </button>
+        </div>
+      </>
+    </Modal>
+  );
+};
 
-export { CheckIcon, encrypt, saveImage };
+export { CheckIcon, encrypt, FtpImgModal, saveImage };

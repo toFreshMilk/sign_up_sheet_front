@@ -4,21 +4,12 @@ import { useState } from 'react';
 import Modal from 'react-modal';
 
 import { Main } from '@/templates/Main';
-import { CheckIcon, saveImage } from '@/utils/Commons';
+import { CheckIcon, FtpImgModal } from '@/utils/Commons';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
+
 const usimTypes = [
   { title: '유심 보유', subTitle: '(새로 구매한 유심)' },
   {
@@ -67,7 +58,7 @@ const S4Usim = () => {
     setInputs({ ...inputs, [e.target.name]: e.target.value });
   };
   const [modalOpen, setModalOpen] = useState(false);
-  const [picAttOpen, setPicAttOpen] = useState(false);
+  const [picAttOpenFtp, setPicAttOpenFtp] = useState(false);
   const [uploadImg, setUploadImg] = useState<File>();
 
   const openModal = () => {
@@ -76,8 +67,8 @@ const S4Usim = () => {
   const closeModal = () => {
     setModalOpen(false);
   };
-  const closeModal2 = () => {
-    setPicAttOpen(false);
+  const closeModalForFtp = () => {
+    setPicAttOpenFtp(false);
   };
   return (
     <Main>
@@ -148,42 +139,21 @@ const S4Usim = () => {
               <button
                 className="rounded-md border p-3"
                 onClick={() => {
-                  setPicAttOpen(true);
+                  setPicAttOpenFtp(true);
                 }}
               >
                 usim 사진 첨부하기
               </button>
-              <Modal
-                isOpen={picAttOpen}
-                ariaHideApp={false}
-                style={customStyles}
-              >
-                <>
-                  <input
-                    type="file"
-                    name="imageFile"
-                    onChange={(e) => {
-                      const target = e.target as HTMLInputElement;
-                      const files = target?.files || [];
-                      setUploadImg(files[0]);
-                    }}
-                  />
-                  <div className="flex space-x-1 mt-3">
-                    <button onClick={closeModal2} className="p-3 border">
-                      취소
-                    </button>
-                    <button
-                      type="submit"
-                      onClick={() => {
-                        saveImage(uploadImg, 'ftpImgUrl');
-                      }}
-                      className="p-3 border"
-                    >
-                      저장
-                    </button>
-                  </div>
-                </>
-              </Modal>
+              <FtpImgModal
+                k={{
+                  picAttOpenFtp,
+                  setPicAttOpenFtp,
+                  uploadImg,
+                  setUploadImg,
+                  closeModalForFtp,
+                  urlKey: 'ftpImgUrl',
+                }}
+              />
             </Tab.Panel>
             <Tab.Panel
               className={classNames(
