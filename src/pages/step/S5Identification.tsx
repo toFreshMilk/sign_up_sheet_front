@@ -4,12 +4,11 @@ import crypto from 'crypto';
 import moment from 'moment';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
-import Modal from 'react-modal';
 
 import S5Identification2 from '@/pages/step/S5Identification2';
 import S5Identification3KCB from '@/pages/step/S5Identification3KCB';
 import { Main } from '@/templates/Main';
-import { CheckIcon } from '@/utils/Commons';
+import { CheckIcon, FtpImgModal } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
 
 const identificationTypes = [
@@ -23,16 +22,7 @@ const emailList = [
   { title: 'nate.com', checked: true },
   { title: 'hanmil.net', checked: true },
 ];
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-  },
-};
+
 const S5Identification = () => {
   const router = useRouter();
   const [identification, setIdentification] = useState(identificationTypes[0]);
@@ -63,10 +53,26 @@ const S5Identification = () => {
     driverLicenseNumber4: '',
     isForgn: '',
   });
-  const [picAttOpen2, setPicAttOpen2] = useState(false);
+  const [picAttOpenFtp1, setPicAttOpenFtp1] = useState(false);
+  const [uploadImg1, setUploadImg1] = useState<File>();
+  const closeModalForFtp1 = () => {
+    setPicAttOpenFtp1(false);
+  };
+  const [picAttOpenFtp2, setPicAttOpenFtp2] = useState(false);
   const [uploadImg2, setUploadImg2] = useState<File>();
-  console.log(uploadImg2);
-  // const [uploadImg3, setUploadImg3] = useState<File>();
+  const closeModalForFtp2 = () => {
+    setPicAttOpenFtp2(false);
+  };
+  const [picAttOpenFtp3, setPicAttOpenFtp3] = useState(false);
+  const [uploadImg3, setUploadImg3] = useState<File>();
+  const closeModalForFtp3 = () => {
+    setPicAttOpenFtp3(false);
+  };
+  const [picAttOpenFtp4, setPicAttOpenFtp4] = useState(false);
+  const [uploadImg4, setUploadImg4] = useState<File>();
+  const closeModalForFtp4 = () => {
+    setPicAttOpenFtp4(false);
+  };
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -359,46 +365,41 @@ const S5Identification = () => {
             <div className="mb-5 flex">
               <button
                 onClick={() => {
-                  setPicAttOpen2(true);
+                  setPicAttOpenFtp1(true);
                 }}
                 className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
               >
                 신분증 사진 첨부
               </button>
+              <FtpImgModal
+                k={{
+                  picAttOpenFtp: picAttOpenFtp1,
+                  setPicAttOpenFtp: setPicAttOpenFtp1,
+                  uploadImg: uploadImg1,
+                  setUploadImg: setUploadImg1,
+                  closeModalForFtp: closeModalForFtp1,
+                  urlKey: 'ftpImgUrl2',
+                }}
+              />
               <span className="p-3" />
-              <button className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none">
+              <button
+                onClick={() => {
+                  setPicAttOpenFtp2(true);
+                }}
+                className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
+              >
                 가족관계증명서 사진 첨부
               </button>
-              <Modal
-                isOpen={picAttOpen2}
-                ariaHideApp={false}
-                style={customStyles}
-              >
-                <>
-                  <input
-                    type="file"
-                    name="imageFile"
-                    onChange={(e) => {
-                      const target = e.target as HTMLInputElement;
-                      const files = target?.files || [];
-                      setUploadImg2(files[0]);
-                    }}
-                  />
-                  <div className="flex space-x-1 mt-3">
-                    <button
-                      onClick={() => {
-                        setPicAttOpen2(false);
-                      }}
-                      className="p-3 border"
-                    >
-                      취소
-                    </button>
-                    <button type="submit" className="p-3 border">
-                      저장
-                    </button>
-                  </div>
-                </>
-              </Modal>
+              <FtpImgModal
+                k={{
+                  picAttOpenFtp: picAttOpenFtp2,
+                  setPicAttOpenFtp: setPicAttOpenFtp2,
+                  uploadImg: uploadImg2,
+                  setUploadImg: setUploadImg2,
+                  closeModalForFtp: closeModalForFtp2,
+                  urlKey: 'ftpImgUrl3',
+                }}
+              />
             </div>
           </div>
           {identification?.title === '주민등록증' ? (
@@ -503,6 +504,45 @@ const S5Identification = () => {
                 onChange={handleInputChange}
                 value={person.jumin2}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+            </div>
+            <div className="mb-5 flex">
+              <button
+                onClick={() => {
+                  setPicAttOpenFtp3(true);
+                }}
+                className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
+              >
+                외국인 신분증 앞면 첨부
+              </button>
+              <FtpImgModal
+                k={{
+                  picAttOpenFtp: picAttOpenFtp3,
+                  setPicAttOpenFtp: setPicAttOpenFtp3,
+                  uploadImg: uploadImg3,
+                  setUploadImg: setUploadImg3,
+                  closeModalForFtp: closeModalForFtp3,
+                  urlKey: 'ftpImgUrl4',
+                }}
+              />
+              <span className="p-3" />
+              <button
+                onClick={() => {
+                  setPicAttOpenFtp4(true);
+                }}
+                className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
+              >
+                외국인 신분증 뒷면 첨부
+              </button>
+              <FtpImgModal
+                k={{
+                  picAttOpenFtp: picAttOpenFtp4,
+                  setPicAttOpenFtp: setPicAttOpenFtp4,
+                  uploadImg: uploadImg4,
+                  setUploadImg: setUploadImg4,
+                  closeModalForFtp: closeModalForFtp4,
+                  urlKey: 'ftpImgUrl5',
+                }}
               />
             </div>
           </div>

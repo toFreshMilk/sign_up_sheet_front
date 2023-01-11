@@ -71,7 +71,7 @@ const FtpImgModal = (_props: any) => {
     },
   };
   return (
-    <Modal isOpen={k.picAttOpen} ariaHideApp={false} style={customStyles}>
+    <Modal isOpen={k.picAttOpenFtp} ariaHideApp={false} style={customStyles}>
       <>
         <input
           type="file"
