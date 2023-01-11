@@ -365,6 +365,7 @@ const S5Identification = () => {
               >
                 신분증 사진 첨부
               </button>
+              <span className="p-3" />
               <button className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none">
                 가족관계증명서 사진 첨부
               </button>
@@ -626,7 +627,7 @@ const S5Identification = () => {
 
             <div className="flex col-span-6">
               <S5Identification2 k={{ ...keys, ...person }} />
-              <span className="p-3"></span>
+              <span className="p-3" />
               <S5Identification3KCB k={{ ...keys, ...person }} />
             </div>
           </div>
