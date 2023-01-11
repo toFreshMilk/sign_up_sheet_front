@@ -175,7 +175,7 @@ const S4Usim = () => {
                     <button
                       type="submit"
                       onClick={() => {
-                        saveImage(uploadImg);
+                        saveImage(uploadImg, 'ftpImgUrl');
                       }}
                       className="p-3 border"
                     >

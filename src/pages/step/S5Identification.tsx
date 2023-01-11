@@ -65,6 +65,7 @@ const S5Identification = () => {
   });
   const [picAttOpen2, setPicAttOpen2] = useState(false);
   const [uploadImg2, setUploadImg2] = useState<File>();
+  console.log(uploadImg2);
   // const [uploadImg3, setUploadImg3] = useState<File>();
 
   const handleInputChange = (e: any) => {

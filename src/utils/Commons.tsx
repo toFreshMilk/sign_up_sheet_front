@@ -26,12 +26,11 @@ const encrypt = (val: any) => {
   return encodeURIComponent(result);
 };
 
-const saveImage = (_uploadImg: any) => {
+const saveImage = (_uploadImg: any, _title: string) => {
   const formData = new FormData();
   formData.append('file', _uploadImg);
-  console.log(_uploadImg);
-  console.log('formData');
-
+  // console.log(_uploadImg);
+  // console.log('formData');
   axios({
     url: `${process.env.NEXT_PUBLIC_API_URL}/saveImage`,
     method: 'POST',
@@ -44,19 +43,19 @@ const saveImage = (_uploadImg: any) => {
       if (res.data.code === 226) {
         const u1 = res.data.ftpUploadUrl;
         sessionStorage.setItem(
-          'ftpImgUrl',
+          _title,
           JSON.stringify({
             usimImg: u1,
           })
         );
         alert('유심 사진이 저장되었습니다.');
       } else if (res.data.code === 553) {
-        alert('사진을 첨부해주세요');
+        alert('사진이 첨부되지 않았습니다');
       }
     })
     .catch((e) => {
-      alert('사진이 전송되지 않았습니다.');
       console.log(e);
+      alert('사진이 전송되지 않았습니다.');
     });
 };
 
