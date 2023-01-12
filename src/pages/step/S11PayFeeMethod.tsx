@@ -1,4 +1,5 @@
 import { RadioGroup } from '@headlessui/react';
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Fragment, useState } from 'react';
 
@@ -26,6 +27,7 @@ const S11PayFeeMethod = () => {
   const [bank, setBank] = useState(bankList[0]?.name);
   const [card, setCard] = useState(cardList[0]?.title);
   const [relation, setRelation] = useState(relationList[0]?.title);
+  const [checkAccountInfo, setCheckAccountInfo] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
     accountNumber: '',
@@ -43,6 +45,17 @@ const S11PayFeeMethod = () => {
   });
   const handleInputChange = (e: any) => {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+  };
+  const checkAccountInfoFunc = async () => {
+    const checkUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkAccountInfoFunc`;
+    const { data } = await axios.post(checkUrl, {
+      accountName: userInfo.accountName,
+      accountJumin12: userInfo.accountJumin1 + userInfo.accountJumin2,
+      bankName: bank,
+      accountNumber: userInfo.accountNumber,
+    });
+    console.log(data);
+    setCheckAccountInfo(true);
   };
   const next = () => {
     sessionStorage.setItem(
@@ -145,6 +158,45 @@ const S11PayFeeMethod = () => {
                 value={userInfo.accountName}
                 className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
               />
+            </div>
+            <div className="col-span-6 mt-5 sm:col-span-4">
+              <label
+                htmlFor="accountJumin"
+                className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
+              >
+                소유자 주민등록번호
+              </label>
+              <div className="flex w-full mb-3">
+                <input
+                  type="text"
+                  name="accountJumin1"
+                  onChange={handleInputChange}
+                  value={userInfo.accountJumin1}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="accountJumin2"
+                  onChange={handleInputChange}
+                  value={userInfo.accountJumin2}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3" />
+                <button
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  onClick={() => {
+                    checkAccountInfoFunc();
+                  }}
+                >
+                  <div className="flex items-center">
+                    {checkAccountInfo && <CheckIcon className="h-6 w-6" />}
+                    <span className="ml-3 text-center">
+                      예금주, 주민번호, 계좌 확인
+                    </span>
+                  </div>
+                </button>
+              </div>
             </div>
           </>
         ) : (
@@ -259,33 +311,34 @@ const S11PayFeeMethod = () => {
                 className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
               />
             </div>
+            <div className="col-span-6 mt-5 sm:col-span-4">
+              <label
+                htmlFor="accountJumin"
+                className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
+              >
+                소유자 주민등록번호
+              </label>
+              <div className="flex w-full mb-3">
+                <input
+                  type="text"
+                  name="accountJumin1"
+                  onChange={handleInputChange}
+                  value={userInfo.accountJumin1}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+                <span className="p-3">-</span>
+                <input
+                  type="text"
+                  name="accountJumin2"
+                  onChange={handleInputChange}
+                  value={userInfo.accountJumin2}
+                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                />
+              </div>
+            </div>
           </>
         )}
-        <div className="col-span-6 mt-5 sm:col-span-4">
-          <label
-            htmlFor="accountJumin"
-            className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
-          >
-            소유자 주민등록번호
-          </label>
-          <div className="flex w-full mb-3">
-            <input
-              type="text"
-              name="accountJumin1"
-              onChange={handleInputChange}
-              value={userInfo.accountJumin1}
-              className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-            />
-            <span className="p-3">-</span>
-            <input
-              type="text"
-              name="accountJumin2"
-              onChange={handleInputChange}
-              value={userInfo.accountJumin2}
-              className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-            />
-          </div>
-        </div>
+
         <div className="col-span-6 sm:col-span-4 mt-3">
           <label
             htmlFor="methodType"
