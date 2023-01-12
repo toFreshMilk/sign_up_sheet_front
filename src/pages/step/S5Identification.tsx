@@ -675,6 +675,9 @@ const S5Identification = () => {
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
             onClick={() => {
+              if (process.env.NEXT_PUBLIC_ENV_VARIABLE === 'development') {
+                finalSuc();
+              }
               const validateJumin12 =
                 (person.jumin1 + person.jumin2).length === 13;
               const validateJumin34 =

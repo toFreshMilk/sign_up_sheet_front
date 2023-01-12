@@ -312,6 +312,9 @@ const S11PayFeeMethod = () => {
       <div className="bg-gray-50 px-4 py-3 sm:px-6">
         <button
           onClick={() => {
+            if (process.env.NEXT_PUBLIC_ENV_VARIABLE === 'development') {
+              next();
+            }
             const validateJumin12 =
               (userInfo.accountJumin1 + userInfo.accountJumin2).length === 13;
             const validateAccountNumber = userInfo.accountNumber.length < 100;

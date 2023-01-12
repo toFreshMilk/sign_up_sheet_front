@@ -151,7 +151,7 @@ const S4Usim = () => {
                   uploadImg,
                   setUploadImg,
                   closeModalForFtp,
-                  urlKey: 'ftpImgUrl',
+                  urlKey: 'ftpImgUrl1',
                 }}
               />
             </Tab.Panel>

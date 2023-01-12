@@ -1,18 +1,32 @@
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
 const S12JoinResult = () => {
-  const router = useRouter();
-
   const [totalData, setTotalData] = useState({}) as any;
   const [payFeeObj, setPayFeeObj] = useState({
     RATECD: '요금제 정보 없음',
     RATENM: '요금제 정보 없음',
     RATEAMT: '-',
   }) as any;
+  const [ftpImgUrls, setFtpImgUrls] = useState<string[]>([]);
+  const collectFtpUrls = (_keys: any) => {
+    const aaa = [
+      _keys?.ftpImgUrl1?.usimImg,
+      _keys?.ftpImgUrl2?.usimImg,
+      _keys?.ftpImgUrl3?.usimImg,
+      _keys?.ftpImgUrl4?.usimImg,
+      _keys?.ftpImgUrl5?.usimImg,
+    ];
+    aaa.forEach((d: string) => {
+      if (d !== undefined) {
+        ftpImgUrls.push(d);
+      }
+    });
+    // console.log(ftpImgUrls);
+    setFtpImgUrls(ftpImgUrls);
+  };
 
   useEffect(() => {
     const ff = {} as any;
@@ -20,6 +34,7 @@ const S12JoinResult = () => {
       ff[key] = JSON.parse(sessionStorage.getItem(key) || '');
     });
     setTotalData(ff);
+    collectFtpUrls(ff);
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getPayFeeInfo`;
     axios
       .post(tokenUrl, { id: ff.S0FeeId?.feeId })
@@ -194,17 +209,16 @@ const S12JoinResult = () => {
               const resultObj = await axios.post(tokenUrl, {
                 ...totalData,
                 payFeeObj,
+                ftpImgUrls,
               });
-              console.log('resultObj');
-              console.log(resultObj);
-              console.log(router);
-
-              // if (data.rowsAffected > 0) {
-              //   alert('접수가 완료되었습니다.');
-              //   await router.push('/');
-              // } else {
-              //   alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
-              // }
+              // console.log('resultObj');
+              // console.log(resultObj);
+              if (resultObj.data.rowsAffected > 0) {
+                alert('접수가 완료되었습니다.');
+                // await router.push('/');
+              } else {
+                alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
+              }
               // const s0 = sessionStorage.getItem('S0FeeId');
               // sessionStorage.clear();
               // sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
