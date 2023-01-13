@@ -79,7 +79,7 @@ const S11PayFeeMethod = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className="flex justify-center py-10 text-3xl font-bold">
+        <h2 className="flex justify-center py-10 text-3xl font-bold p-3">
           요금 납부 방법을 선택해주세요
         </h2>
         <div className="col-span-6 mt-5 sm:col-span-4 mb-3">
@@ -182,21 +182,18 @@ const S11PayFeeMethod = () => {
                   value={userInfo.accountJumin2}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
                 />
-                <span className="p-3" />
-                <button
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
-                  onClick={() => {
-                    checkAccountInfoFunc();
-                  }}
-                >
-                  <div className="flex items-center">
-                    {checkAccountInfo && <CheckIcon className="h-6 w-6" />}
-                    <span className="ml-3 text-center">
-                      예금주, 주민번호, 계좌 확인
-                    </span>
-                  </div>
-                </button>
               </div>
+              <button
+                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                onClick={() => {
+                  checkAccountInfoFunc();
+                }}
+              >
+                <div className="flex justify-center">
+                  {checkAccountInfo && <CheckIcon className="h-6 w-6" />}
+                  <span className="ml-3">예금주, 주민번호, 계좌 확인</span>
+                </div>
+              </button>
             </div>
           </>
         ) : (

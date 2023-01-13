@@ -15,7 +15,7 @@ const S8HopeNumber = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className="flex justify-center py-10 text-4xl font-bold">
+        <h2 className="flex justify-center py-10 text-3xl font-bold p-3">
           새롭게 사용할 전화번호의 희망하는 뒷자리를 입력해주세요
         </h2>
         <div className="col-span-6 sm:col-span-4 mt-5">

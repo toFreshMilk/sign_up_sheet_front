@@ -30,7 +30,7 @@ const S10InputAddress = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className="flex justify-center py-10 text-3xl font-bold">
+        <h2 className="flex justify-center py-10 text-3xl font-bold p-3">
           유심 및 요금 청구서를 받으실 주소를 입력해주세요
         </h2>
         <div className="col-span-6 mt-5 sm:col-span-4">
@@ -65,6 +65,7 @@ const S10InputAddress = () => {
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <button
+            className="p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
             onClick={() => {
               setOpenPostcode(!openPostcode);
             }}

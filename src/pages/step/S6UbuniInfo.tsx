@@ -32,7 +32,7 @@ const S6UbuniInfo = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className="flex justify-center py-10 text-3xl font-bold">
+        <h2 className="flex justify-center py-10 text-3xl font-bold p-3">
           번호이동 정보를 입력해주세요
         </h2>
         <div className="col-span-6 sm:col-span-4 mb-5">
