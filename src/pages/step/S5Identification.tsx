@@ -225,7 +225,7 @@ const S5Identification = () => {
               />
             </div>
           ) : (
-            <>
+            <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="driverLicenseNumber"
                 className="mb-5 block text-sm font-medium text-gray-700"
@@ -274,7 +274,7 @@ const S5Identification = () => {
                 src={`${router.basePath}/assets/images/drivers_license.png`}
                 alt={'면허증'}
               />
-            </>
+            </div>
           )}
           <div className="col-span-6 mt-5">
             <label

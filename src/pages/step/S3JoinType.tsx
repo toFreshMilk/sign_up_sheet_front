@@ -15,7 +15,7 @@ const S3JoinType = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className={'flex justify-center text-4xl font-bold'}>
+        <h2 className={'flex justify-center text-4xl font-bold p-3'}>
           어떤 방법으로 가입을 진행할까요?
         </h2>
         <div className="space-y-6 bg-white px-4 py-5 sm:p-6 flex justify-center">

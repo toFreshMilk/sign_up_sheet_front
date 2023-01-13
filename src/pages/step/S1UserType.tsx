@@ -30,7 +30,7 @@ const S1UserType = () => {
 
   return (
     <Main>
-      <h1>고객 유형을 선택해 주세요</h1>
+      <h1 className="text-center">고객 유형을 선택해 주세요</h1>
       <RadioGroup
         value={selectedType}
         onChange={setSelectedType}
