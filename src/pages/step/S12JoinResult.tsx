@@ -1,9 +1,12 @@
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { Main } from '@/templates/Main';
 
 const S12JoinResult = () => {
+  const router = useRouter();
+
   const [totalData, setTotalData] = useState({}) as any;
   const [payFeeObj, setPayFeeObj] = useState({
     RATECD: '요금제 정보 없음',
@@ -205,14 +208,14 @@ const S12JoinResult = () => {
               // console.log('resultObj');
               // console.log(resultObj);
               if (resultObj.data.rowsAffected > 0) {
+                const s0 = sessionStorage.getItem('S0FeeId');
+                sessionStorage.clear();
+                sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
                 alert('접수가 완료되었습니다.');
-                // await router.push('/');
+                await router.push('/');
               } else {
                 alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
               }
-              // const s0 = sessionStorage.getItem('S0FeeId');
-              // sessionStorage.clear();
-              // sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
             }}
             className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
           >
