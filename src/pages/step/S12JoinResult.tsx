@@ -57,9 +57,6 @@ const S12JoinResult = () => {
           <h1 className="text-lg font-medium leading-6 text-gray-900">
             신청내역에 대하여 모든 내용을 확인 및 동의합니다.
           </h1>
-          <p className="mt-1 max-w-2xl text-sm text-gray-500">
-            Personal details and application.
-          </p>
         </div>
         <div className="border-t border-gray-200">
           <dl>
@@ -191,12 +188,6 @@ const S12JoinResult = () => {
               <dt className="text-sm font-medium text-gray-500">관계</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 {totalData.S11PayFeeMethod?.relation}
-              </dd>
-            </div>
-            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-              <dt className="text-sm font-medium text-gray-500">은행명</dt>
-              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                {totalData.S11PayFeeMethod?.bank}
               </dd>
             </div>
           </dl>

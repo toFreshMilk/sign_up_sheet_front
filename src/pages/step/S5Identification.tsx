@@ -225,7 +225,7 @@ const S5Identification = () => {
               />
             </div>
           ) : (
-            <div className="col-span-6 sm:col-span-4">
+            <div className="col-span-6 sm:col-span-6">
               <label
                 htmlFor="driverLicenseNumber"
                 className="mb-5 block text-sm font-medium text-gray-700"
@@ -276,7 +276,7 @@ const S5Identification = () => {
               />
             </div>
           )}
-          <div className="col-span-6 mt-5">
+          <div className="col-span-6 mt-5 mb-3">
             <label
               htmlFor="publishedDate"
               className="mb-3 block text-sm font-medium text-gray-700"
@@ -483,29 +483,6 @@ const S5Identification = () => {
       component = (
         <>
           <div className="col-span-12 sm:col-span-6">
-            <label
-              htmlFor="driverLicenseNumber"
-              className="mb-5 block text-sm font-medium text-gray-700"
-            >
-              외국인번호
-            </label>
-            <div className="mb-5 flex">
-              <input
-                type="text"
-                name="jumin1"
-                onChange={handleInputChange}
-                value={person.jumin1}
-                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-              />
-              <span className="p-3">-</span>
-              <input
-                type="text"
-                name="jumin2"
-                onChange={handleInputChange}
-                value={person.jumin2}
-                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-              />
-            </div>
             <div className="mb-5 flex">
               <button
                 onClick={() => {
@@ -546,6 +523,31 @@ const S5Identification = () => {
               />
             </div>
           </div>
+          <div className="col-span-12 sm:col-span-6">
+            <label
+              htmlFor="driverLicenseNumber"
+              className="mb-5 block text-sm font-medium text-gray-700"
+            >
+              외국인번호
+            </label>
+            <div className="mb-5 flex">
+              <input
+                type="text"
+                name="jumin1"
+                onChange={handleInputChange}
+                value={person.jumin1}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+              <span className="p-3">-</span>
+              <input
+                type="text"
+                name="jumin2"
+                onChange={handleInputChange}
+                value={person.jumin2}
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              />
+            </div>
+          </div>
         </>
       );
     }
@@ -575,101 +577,98 @@ const S5Identification = () => {
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
         <div className="bg-white px-4 py-5 sm:p-6">
-          <div className="grid grid-cols-6 gap-6">
-            <div className="col-span-6 sm:col-span-3">
-              <label
-                htmlFor="userName"
-                className="mb-3 block text-sm font-medium text-gray-700"
-              >
-                이름
-              </label>
+          <div className="col-span-6 sm:col-span-6 mb-3">
+            <label
+              htmlFor="userName"
+              className="mb-3 block text-sm font-medium text-gray-700"
+            >
+              이름
+            </label>
+            <input
+              type="text"
+              name="userName"
+              id="userName"
+              className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              onChange={handleInputChange}
+              value={person.userName}
+            />
+          </div>
+          <div className="col-span-6 mb-3">
+            <label
+              htmlFor="email1"
+              className="w-full mb-3 block text-sm font-medium text-gray-700"
+            >
+              이메일
+            </label>
+            <div className="flex">
               <input
                 type="text"
-                name="userName"
-                id="userName"
+                name="email1"
+                id="email1"
                 className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 onChange={handleInputChange}
-                value={person.userName}
+                value={person.email1}
               />
-            </div>
-            <div className="col-span-6 sm:col-span-3" />
-            <div className="col-span-6">
-              <label
-                htmlFor="email1"
-                className="w-full mb-3 block text-sm font-medium text-gray-700"
+              <span className="p-3">@</span>
+              <input
+                type="text"
+                name="email2"
+                id="email2"
+                className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+                onChange={handleInputChangeForEmail2}
+                value={person.email2}
+              />
+              <select
+                name="email3"
+                value={person.email3}
+                onChange={handleInputChangeForEmail3}
+                className="ml-2 block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
               >
-                이메일
+                {emailList.map((item) => (
+                  <option key={item.title} value={item.title}>
+                    {item.title}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          {person.isForgn === '외국인' ? null : (
+            <div className="col-span-6 sm:col-span-6">
+              <label className="mb-3 block text-sm font-medium text-gray-700">
+                신분증 정보
               </label>
-              <div className="flex">
-                <input
-                  type="text"
-                  name="email1"
-                  id="email1"
-                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                  onChange={handleInputChange}
-                  value={person.email1}
-                />
-                <span className="p-3">@</span>
-                <input
-                  type="text"
-                  name="email2"
-                  id="email2"
-                  className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
-                  onChange={handleInputChangeForEmail2}
-                  value={person.email2}
-                />
-                <select
-                  name="email3"
-                  value={person.email3}
-                  onChange={handleInputChangeForEmail3}
-                  className="ml-2 block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
-                >
-                  {emailList.map((item) => (
-                    <option key={item.title} value={item.title}>
-                      {item.title}
-                    </option>
+              <RadioGroup value={identification} onChange={setIdentification}>
+                <div className="mb-5 grid grid-cols-2">
+                  {identificationTypes.map((item) => (
+                    <RadioGroup.Option
+                      key={item.title}
+                      value={item}
+                      as={Fragment}
+                    >
+                      {({ checked }) => (
+                        <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
+                          <div className="flex items-center">
+                            {checked && (
+                              <div className="mr-2 shrink-0 text-white">
+                                <CheckIcon className="h-6 w-6" />
+                              </div>
+                            )}
+                            {item.title}
+                          </div>
+                        </button>
+                      )}
+                    </RadioGroup.Option>
                   ))}
-                </select>
-              </div>
+                </div>
+              </RadioGroup>
             </div>
-            {person.isForgn === '외국인' ? null : (
-              <div className="col-span-6 sm:col-span-6">
-                <label className="mb-3 block text-sm font-medium text-gray-700">
-                  신분증 정보
-                </label>
-                <RadioGroup value={identification} onChange={setIdentification}>
-                  <div className="mb-5 grid grid-cols-2">
-                    {identificationTypes.map((item) => (
-                      <RadioGroup.Option
-                        key={item.title}
-                        value={item}
-                        as={Fragment}
-                      >
-                        {({ checked }) => (
-                          <button className="rounded-md border px-8 py-3 text-base font-medium md:py-4 md:px-10 md:text-lg">
-                            <div className="flex items-center">
-                              {checked && (
-                                <div className="mr-2 shrink-0 text-white">
-                                  <CheckIcon className="h-6 w-6" />
-                                </div>
-                              )}
-                              {item.title}
-                            </div>
-                          </button>
-                        )}
-                      </RadioGroup.Option>
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-            )}
-            {userType()}
+          )}
+          {userType()}
 
-            <div className="flex col-span-6">
-              <S5Identification2 k={{ ...keys, ...person }} />
-              <span className="p-3" />
-              <S5Identification3KCB k={{ ...keys, ...person }} />
-            </div>
+          <div className="flex col-span-6">
+            <S5Identification2 k={{ ...keys, ...person }} />
+            <span className="p-3" />
+            <S5Identification3KCB k={{ ...keys, ...person }} />
           </div>
         </div>
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
