@@ -25,6 +25,7 @@ const S11PayFeeMethod = () => {
     payFeeMethodTypes[0]
   );
   const [bank, setBank] = useState(bankList[0]?.name);
+  const [bankCd, setBankCd] = useState(bankList[0]?.value);
   const [card, setCard] = useState(cardList[0]?.title);
   const [relation, setRelation] = useState(relationList[0]?.title);
   const [checkAccountInfo, setCheckAccountInfo] = useState(false);
@@ -48,14 +49,20 @@ const S11PayFeeMethod = () => {
   };
   const checkAccountInfoFunc = async () => {
     const checkUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkAccountInfoFunc`;
-    const { data } = await axios.post(checkUrl, {
+    const result = await axios.post(checkUrl, {
       accountName: userInfo.accountName,
-      accountJumin12: userInfo.accountJumin1 + userInfo.accountJumin2,
-      bankName: bank,
+      accountJumin1: userInfo.accountJumin1,
+      bankCd,
       accountNumber: userInfo.accountNumber,
+      acctGb: '1',
     });
-    console.log(data);
-    setCheckAccountInfo(true);
+    console.log(result);
+    console.log(result.data.dataHeader.GW_RSLT_CD);
+    if (result.data.dataHeader.GW_RSLT_CD === '1200') {
+      setCheckAccountInfo(true);
+    } else {
+      alert('계좌 확인이 되지 않았습니다.');
+    }
   };
   const next = () => {
     sessionStorage.setItem(
@@ -123,14 +130,14 @@ const S11PayFeeMethod = () => {
               </label>
               <select
                 name="methodType"
-                value={bank}
                 onChange={(e) => {
-                  setBank(e.target.value);
+                  setBank(e.target.name);
+                  setBankCd(e.target.value);
                 }}
                 className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
               >
                 {bankList.map((item) => (
-                  <option key={item.name} value={item.name}>
+                  <option key={item.name} value={item.value}>
                     {item.name}
                   </option>
                 ))}
