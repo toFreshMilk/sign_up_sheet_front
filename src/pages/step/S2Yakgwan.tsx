@@ -22,7 +22,7 @@ const S2Yakgwan = () => {
   ]);
   return (
     <Main>
-      <h1>약관에 동의해 주세요</h1>
+      <h1 className="p-3">약관에 동의해 주세요</h1>
       <div className="overflow-hidden shadow sm:rounded-md">
         <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
           <fieldset>

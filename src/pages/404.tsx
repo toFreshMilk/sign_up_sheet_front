@@ -4,21 +4,6 @@ import { useEffect } from 'react';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 
-// 빌드타임에만 한번 호출됨.
-export async function getStaticProps() {
-  // api를 호출해야 의미 있음, 화면 그리기 전에 필요한 데이터 수집
-  // 접속한 디바이스 정보를 알면 아예 전용 화면을 그릴수 있을듯? 하지만 소스가 두벌이 되버림.
-  // 그래도 알면 좋을듯?
-  // 근데 모든 페이지에서 호출하긴 좀 별론데...
-  // 하위 페이지로 바로 들어올 수도 있기 때문에..
-  //
-  // css 템플릿 적당한게 있는지 찿ㅈ아보면 될듯
-  // console.log(process.env.NEXT_PUBLIC_API_URL, 'getStaticProps');
-  return {
-    props: { dd: 'ccc' },
-  };
-}
-
 const Index = (_a: any) => {
   const router = useRouter();
 

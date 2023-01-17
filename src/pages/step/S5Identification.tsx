@@ -142,18 +142,25 @@ const S5Identification = () => {
       userName: person.userName,
       jumin1: person.jumin1,
     });
-    // console.log('passedIdentification.data');
-    // console.log(passedIdentification.data);
-    return passedIdentification.data.length > 0;
+    console.log(passedIdentification.data);
+    console.log('passedIdentification.data');
+
+    const as = passedIdentification.data[0];
+    console.log(as?.TYPE);
+    console.log('as.TYPE');
+    return {
+      isOk: passedIdentification.data.length > 0,
+      sucType: as?.TYPE || '',
+    };
   };
-  const finalSuc = async () => {
-    console.log('신분증 통과');
+  const finalSuc = async (_TYPE = '') => {
     sessionStorage.setItem(
       'S5Identification',
       JSON.stringify({
         ...person,
         mtxId: keys.mTxId,
         identification,
+        inicisKcb: _TYPE,
         totalJumin12: person.jumin1 + person.jumin2,
         totalJumin34: person.jumin3 + person.jumin4,
         totalDriverNumber:
@@ -173,6 +180,7 @@ const S5Identification = () => {
   };
 
   const nextBtn = async () => {
+    // 무슨 밸리데이션이 이러냐
     const lgIdentificationCheck = await identificationCheckLG();
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     !lgIdentificationCheck && alert('신분증이 정확하지 않습니다.');
@@ -180,11 +188,13 @@ const S5Identification = () => {
     const inicisKcbCheck = await inicisKcb();
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     lgIdentificationCheck &&
-      !inicisKcbCheck &&
+      !inicisKcbCheck.isOk &&
       alert('본인인증이 일치하지 않습니다.');
 
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-    lgIdentificationCheck && inicisKcbCheck && finalSuc();
+    lgIdentificationCheck &&
+      inicisKcbCheck.isOk &&
+      finalSuc(inicisKcbCheck.sucType);
   };
 
   const userType = () => {
@@ -674,9 +684,9 @@ const S5Identification = () => {
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
             onClick={() => {
-              if (process.env.NEXT_PUBLIC_ENV_VARIABLE === 'development') {
-                finalSuc();
-              }
+              // if (process.env.NEXT_PUBLIC_ENV_VARIABLE === 'development') {
+              //   finalSuc();
+              // }
               const validateJumin12 =
                 (person.jumin1 + person.jumin2).length === 13;
               const validateJumin34 =
