@@ -92,6 +92,7 @@ const S6UbuniInfo = () => {
           <input
             type="text"
             name="movePhoneNumber"
+            maxLength={11}
             onChange={handleInputChange}
             value={userInfo.movePhoneNumber}
             className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"

@@ -213,6 +213,7 @@ const S5Identification = () => {
               <input
                 type="text"
                 name="jumin1"
+                maxLength={6}
                 onChange={handleInputChange}
                 value={person.jumin1}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -221,6 +222,7 @@ const S5Identification = () => {
               <input
                 type="text"
                 name="jumin2"
+                maxLength={7}
                 onChange={handleInputChange}
                 value={person.jumin2}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -259,6 +261,7 @@ const S5Identification = () => {
                 <input
                   type="text"
                   name="driverLicenseNumber2"
+                  maxLength={2}
                   onChange={handleInputChange}
                   value={person.driverLicenseNumber2}
                   className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -267,6 +270,7 @@ const S5Identification = () => {
                 <input
                   type="text"
                   name="driverLicenseNumber3"
+                  maxLength={6}
                   onChange={handleInputChange}
                   value={person.driverLicenseNumber3}
                   className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -275,6 +279,7 @@ const S5Identification = () => {
                 <input
                   type="text"
                   name="driverLicenseNumber4"
+                  maxLength={2}
                   onChange={handleInputChange}
                   value={person.driverLicenseNumber4}
                   className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -297,6 +302,7 @@ const S5Identification = () => {
               type="text"
               name="publishedDate"
               value={person.publishedDate}
+              maxLength={8}
               className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               onChange={handleInputChange}
               placeholder="ex) 20161125"
@@ -319,6 +325,7 @@ const S5Identification = () => {
                 type="text"
                 name="jumin1"
                 onChange={handleInputChange}
+                maxLength={6}
                 value={person.jumin1}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
@@ -326,6 +333,7 @@ const S5Identification = () => {
               <input
                 type="text"
                 name="jumin2"
+                maxLength={7}
                 onChange={handleInputChange}
                 value={person.jumin2}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -353,6 +361,7 @@ const S5Identification = () => {
                 name="jumin3"
                 onChange={handleInputChange}
                 value={person.jumin3}
+                maxLength={6}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
               <span className="p-3">-</span>
@@ -361,6 +370,7 @@ const S5Identification = () => {
                 name="jumin4"
                 onChange={handleInputChange}
                 value={person.jumin4}
+                maxLength={7}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
             </div>
@@ -445,6 +455,7 @@ const S5Identification = () => {
                   type="text"
                   name="driverLicenseNumber2"
                   onChange={handleInputChange}
+                  maxLength={2}
                   value={person.driverLicenseNumber2}
                   className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
@@ -452,6 +463,7 @@ const S5Identification = () => {
                 <input
                   type="text"
                   name="driverLicenseNumber3"
+                  maxLength={6}
                   onChange={handleInputChange}
                   value={person.driverLicenseNumber3}
                   className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -460,6 +472,7 @@ const S5Identification = () => {
                 <input
                   type="text"
                   name="driverLicenseNumber4"
+                  maxLength={2}
                   onChange={handleInputChange}
                   value={person.driverLicenseNumber4}
                   className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
@@ -482,6 +495,7 @@ const S5Identification = () => {
               type="text"
               name="publishedDate"
               value={person.publishedDate}
+              maxLength={8}
               className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               onChange={handleInputChange}
               placeholder="ex) 20161125"
@@ -546,12 +560,14 @@ const S5Identification = () => {
                 name="jumin1"
                 onChange={handleInputChange}
                 value={person.jumin1}
+                maxLength={6}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
               <span className="p-3">-</span>
               <input
                 type="text"
                 name="jumin2"
+                maxLength={7}
                 onChange={handleInputChange}
                 value={person.jumin2}
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"

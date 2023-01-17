@@ -28,6 +28,7 @@ const S8HopeNumber = () => {
           <input
             type="text"
             name="hope1"
+            maxLength={4}
             onChange={handleInputChange}
             value={userInfo.hope1}
             className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -43,6 +44,7 @@ const S8HopeNumber = () => {
           <input
             type="text"
             name="hope2"
+            maxLength={4}
             onChange={handleInputChange}
             value={userInfo.hope2}
             className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"

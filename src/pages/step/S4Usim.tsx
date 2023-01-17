@@ -390,6 +390,7 @@ const S4Usim = () => {
                                 name="imei1"
                                 id="imei1"
                                 value={inputs.imei1}
+                                maxLength={15}
                                 onChange={handleInputChange}
                                 className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
                               />
@@ -411,6 +412,7 @@ const S4Usim = () => {
                                 type="text"
                                 name="imei2"
                                 id="imei2"
+                                maxLength={15}
                                 value={inputs.imei2}
                                 onChange={handleInputChange}
                                 className="block w-full p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -433,6 +435,7 @@ const S4Usim = () => {
                                 type="text"
                                 name="EID"
                                 id="EID"
+                                maxLength={32}
                                 value={inputs.EID}
                                 onChange={handleInputChange}
                                 className="block p-3 w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"

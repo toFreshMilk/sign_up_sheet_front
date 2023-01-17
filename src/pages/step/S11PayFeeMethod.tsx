@@ -177,6 +177,7 @@ const S11PayFeeMethod = () => {
                 <input
                   type="text"
                   name="accountJumin1"
+                  maxLength={6}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin1}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -185,6 +186,7 @@ const S11PayFeeMethod = () => {
                 <input
                   type="text"
                   name="accountJumin2"
+                  maxLength={7}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin2}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -286,6 +288,7 @@ const S11PayFeeMethod = () => {
                 <input
                   type="text"
                   name="validTimeMonth"
+                  maxLength={2}
                   onChange={handleInputChange}
                   value={userInfo.validTimeMonth}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -294,6 +297,7 @@ const S11PayFeeMethod = () => {
                 <input
                   type="text"
                   name="validTimeYear"
+                  maxLength={2}
                   onChange={handleInputChange}
                   value={userInfo.validTimeYear}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -310,6 +314,7 @@ const S11PayFeeMethod = () => {
               <input
                 type="text"
                 name="cardPasswordDigit2"
+                maxLength={2}
                 onChange={handleInputChange}
                 value={userInfo.cardPasswordDigit2}
                 className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -326,6 +331,7 @@ const S11PayFeeMethod = () => {
                 <input
                   type="text"
                   name="accountJumin1"
+                  maxLength={6}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin1}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
@@ -334,6 +340,7 @@ const S11PayFeeMethod = () => {
                 <input
                   type="text"
                   name="accountJumin2"
+                  maxLength={7}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin2}
                   className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"

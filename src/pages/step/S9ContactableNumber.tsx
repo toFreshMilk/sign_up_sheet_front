@@ -28,6 +28,7 @@ const S9ContactableNumber = () => {
             type="text"
             name="possiblePhoneNumber"
             onChange={handleInputChange}
+            maxLength={15}
             value={userInfo.possiblePhoneNumber}
             className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
           />
