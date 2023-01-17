@@ -100,6 +100,9 @@ const S12JoinResult = () => {
               <dt className="text-sm font-medium text-gray-500">
                 명의고객 생년월일
               </dt>
+              <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                {totalData.S5Identification?.jumin1}
+              </dd>
             </div>
             {totalData.S3JoinType?.joinType === '신규가입' ? (
               <>
