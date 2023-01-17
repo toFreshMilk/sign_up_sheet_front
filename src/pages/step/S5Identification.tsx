@@ -146,14 +146,15 @@ const S5Identification = () => {
     console.log('passedIdentification.data');
 
     const as = passedIdentification.data[0];
-    console.log(as?.TYPE);
-    console.log('as.TYPE');
+    console.log(as?.DI);
+    console.log('as.DI');
     return {
       isOk: passedIdentification.data.length > 0,
       sucType: as?.TYPE || '',
+      DI: as?.DI || '',
     };
   };
-  const finalSuc = async (_TYPE = '') => {
+  const finalSuc = async (_TYPE = '', _DI = '') => {
     sessionStorage.setItem(
       'S5Identification',
       JSON.stringify({
@@ -161,6 +162,7 @@ const S5Identification = () => {
         mtxId: keys.mTxId,
         identification,
         inicisKcb: _TYPE,
+        di: _DI,
         totalJumin12: person.jumin1 + person.jumin2,
         totalJumin34: person.jumin3 + person.jumin4,
         totalDriverNumber:
@@ -194,7 +196,7 @@ const S5Identification = () => {
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     lgIdentificationCheck &&
       inicisKcbCheck.isOk &&
-      finalSuc(inicisKcbCheck.sucType);
+      finalSuc(inicisKcbCheck.sucType, inicisKcbCheck.DI);
   };
 
   const userType = () => {

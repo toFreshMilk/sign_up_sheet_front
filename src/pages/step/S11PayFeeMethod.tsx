@@ -131,7 +131,8 @@ const S11PayFeeMethod = () => {
               <select
                 name="methodType"
                 onChange={(e) => {
-                  setBank(e.target.name);
+                  const b = bankList.find((o) => o.value === e.target.value);
+                  setBank(b?.name);
                   setBankCd(e.target.value);
                 }}
                 className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
