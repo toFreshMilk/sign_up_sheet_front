@@ -14,6 +14,7 @@ const S12JoinResult = () => {
     RATEAMT: '-',
   }) as any;
   const [ftpImgUrls, setFtpImgUrls] = useState<string[]>([]);
+  const [identificationRst, setIdentificationRst] = useState(false);
   const collectFtpUrls = (_keys: any) => {
     const aaa = [
       _keys?.ftpImgUrl1?.usimImg,
@@ -30,7 +31,43 @@ const S12JoinResult = () => {
     // console.log(ftpImgUrls);
     setFtpImgUrls(ftpImgUrls);
   };
+  const inicisKcb = async (_obj: any) => {
+    const { S5Identification } = _obj;
+    // console.log(S5Identification);
 
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkIdentification`;
+    const passedIdentification = await axios.post(tokenUrl, {
+      mTxId: S5Identification?.mTxId,
+      userName: S5Identification?.userName,
+      jumin1: S5Identification?.jumin1,
+    });
+    // console.log(passedIdentification.data);
+    // console.log('passedIdentification.data');
+    // console.log(passedIdentification.data.length);
+    if (passedIdentification.data.length > 0) {
+      setIdentificationRst(true);
+    }
+  };
+  const finalRow = async () => {
+    // 여기서 finalRow
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
+    const resultObj = await axios.post(tokenUrl, {
+      ...totalData,
+      payFeeObj,
+      ftpImgUrls,
+    });
+    // console.log('resultObj');
+    // console.log(resultObj);
+    if (resultObj.data.rowsAffected > 0) {
+      const s0 = sessionStorage.getItem('S0FeeId');
+      sessionStorage.clear();
+      sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
+      alert('접수가 완료되었습니다.');
+      await router.push('/');
+    } else {
+      alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
+    }
+  };
   useEffect(() => {
     const ff = {} as any;
     Object.keys(sessionStorage).forEach((key) => {
@@ -42,7 +79,7 @@ const S12JoinResult = () => {
     axios
       .post(tokenUrl, { id: ff.S0FeeId?.feeId })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         if (res.data.length === 0) {
           throw new Error('요금제 없음');
         } else {
@@ -52,6 +89,7 @@ const S12JoinResult = () => {
       .catch((e) => {
         console.log(e);
       });
+    inicisKcb(ff);
   }, []);
   return (
     <Main>
@@ -201,23 +239,10 @@ const S12JoinResult = () => {
         <div className="bg-gray-50 px-4 py-3 sm:px-6">
           <button
             onClick={async () => {
-              // 여기서 finalRow
-              const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
-              const resultObj = await axios.post(tokenUrl, {
-                ...totalData,
-                payFeeObj,
-                ftpImgUrls,
-              });
-              // console.log('resultObj');
-              // console.log(resultObj);
-              if (resultObj.data.rowsAffected > 0) {
-                const s0 = sessionStorage.getItem('S0FeeId');
-                sessionStorage.clear();
-                sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
-                alert('접수가 완료되었습니다.');
-                await router.push('/');
+              if (identificationRst) {
+                await finalRow();
               } else {
-                alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
+                alert('본인인증 정보가 일치하지 않습니다.');
               }
             }}
             className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"

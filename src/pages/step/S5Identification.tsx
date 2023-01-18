@@ -164,7 +164,7 @@ const S5Identification = () => {
       'S5Identification',
       JSON.stringify({
         ...person,
-        mtxId: keys.mTxId,
+        mTxId: keys.mTxId,
         identification,
         inicisKcb: _TYPE,
         di: _DI,
