@@ -104,6 +104,9 @@ const S5Identification = () => {
     } else {
       inqDvCd = 'DRIVE';
     }
+    if (person.isForgn === '외국인') {
+      inqDvCd = 'FORGN';
+    }
     let persFrgnrPsnoEnprNo = '';
     let custNm = '';
     if (person.isForgn === '미성년자') {
@@ -118,7 +121,7 @@ const S5Identification = () => {
       'base64'
     );
     const dataCM806 = {
-      custNm,
+      custNm: custNm.toUpperCase(),
       inqDvCd,
       isuDt: person.publishedDate,
       persFrgnrPsnoEnprNo: jumin64,
@@ -129,6 +132,8 @@ const S5Identification = () => {
         person.driverLicenseNumber4,
     };
     const { data } = await axios.post(tokenUrl, dataCM806);
+    // console.log(data);
+    // console.log('dataCM806');
     let returnValue = false;
     if (data.totSuccCd === 'Y') {
       returnValue = true;
@@ -142,12 +147,12 @@ const S5Identification = () => {
       userName: person.userName,
       jumin1: person.jumin1,
     });
-    console.log(passedIdentification.data);
-    console.log('passedIdentification.data');
+    // console.log(passedIdentification.data);
+    // console.log('passedIdentification.data');
 
     const as = passedIdentification.data[0];
-    console.log(as?.DI);
-    console.log('as.DI');
+    // console.log(as?.DI);
+    // console.log('as.DI');
     return {
       isOk: passedIdentification.data.length > 0,
       sucType: as?.TYPE || '',
@@ -575,6 +580,23 @@ const S5Identification = () => {
                 className="w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
             </div>
+          </div>
+          <div className="col-span-6 my-3">
+            <label
+              htmlFor="publishedDate"
+              className="mb-3 block text-sm font-medium text-gray-700"
+            >
+              발급일자(외국인 신분증)
+            </label>
+            <input
+              type="text"
+              name="publishedDate"
+              value={person.publishedDate}
+              maxLength={8}
+              className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
+              onChange={handleInputChange}
+              placeholder="ex) 20161125"
+            />
           </div>
         </>
       );
