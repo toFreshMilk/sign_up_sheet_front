@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { Main } from '@/templates/Main';
 
 const custommerTypes = [
-  { name: '일반(만 19세 이상)', inStock: true, checked: true, value: '개인' },
+  { name: '일반 (만 19세 이상)', inStock: true, checked: true, value: '개인' },
   {
-    name: '미성년자(만 19세 미만)',
+    name: '미성년자 (만 19세 미만)',
     inStock: true,
     checked: false,
     value: '미성년자',
@@ -30,68 +30,37 @@ const S1UserType = () => {
 
   return (
     <Main>
-      <h1 className="text-center">고객 유형을 선택해 주세요</h1>
-      <RadioGroup
-        value={selectedType}
-        onChange={setSelectedType}
-        className="mt-4"
-      >
-        <RadioGroup.Label className="sr-only"> 유형 선택 </RadioGroup.Label>
-        <div className="gap-4">
-          {custommerTypes.map((Type) => (
-            <RadioGroup.Option
-              key={Type.name}
-              value={Type}
-              disabled={!Type.inStock}
-              className={({ active }) =>
-                `${classNames(
-                  Type.inStock
-                    ? 'bg-white shadow-sm text-gray-900 cursor-pointer'
-                    : 'bg-gray-50 text-gray-500 cursor-not-allowed',
-                  active ? 'ring-2 ring-indigo-500' : '',
-                  'group relative border rounded-md py-3 px-4 flex items-center justify-center text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
-                )} m-10`
-              }
-            >
-              {({ active, checked }) => (
-                <>
-                  <RadioGroup.Label as="span">{Type.name}</RadioGroup.Label>
-                  {Type.inStock ? (
-                    <span
-                      className={classNames(
-                        active ? 'border' : 'border-2',
-                        checked ? 'border-indigo-500' : 'border-transparent',
-                        'pointer-events-none absolute -inset-px rounded-md'
-                      )}
-                      aria-hidden="true"
-                    />
-                  ) : (
-                    <span
-                      aria-hidden="true"
-                      className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                    >
-                      <svg
-                        className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                        viewBox="0 0 100 100"
-                        preserveAspectRatio="none"
-                        stroke="currentColor"
-                      >
-                        <line
-                          x1={0}
-                          y1={100}
-                          x2={100}
-                          y2={0}
-                          vectorEffect="non-scaling-stroke"
-                        />
-                      </svg>
-                    </span>
-                  )}
-                </>
-              )}
-            </RadioGroup.Option>
-          ))}
-        </div>
-      </RadioGroup>
+      <div className="px-10 py-5">
+        <h1 className="flex items-start font-bold mb-5">고객 유형을 선택해 주세요</h1>
+        <RadioGroup
+          value={selectedType}
+          onChange={setSelectedType}
+        >
+          <RadioGroup.Label className="sr-only"> 유형 선택 </RadioGroup.Label>
+          <div className="border-t border-l border-r border-bw50 text-lg">
+            {custommerTypes.map((Type) => (
+              <RadioGroup.Option
+                key={Type.name}
+                value={Type}
+                disabled={!Type.inStock}
+                className={() =>
+                  `${classNames(
+                    'group relative py-4 px-6 border-b border-bw50 flex ' +
+                    'items-start font-medium hover:bg-gray-300 hover:cursor-pointer'
+                  )}`
+                }
+              >
+                {() => (
+                  <>
+                    <RadioGroup.Label as="span">{Type.name}</RadioGroup.Label>
+                    <span aria-hidden="true" />
+                  </>
+                )}
+              </RadioGroup.Option>
+            ))}
+          </div>
+        </RadioGroup>
+      </div>
     </Main>
   );
 };
