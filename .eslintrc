@@ -58,7 +58,8 @@
         "unused-imports/no-unused-vars": [
           "error",
           { "argsIgnorePattern": "^_" }
-        ]
+        ],
+        "import/extensions": ["off"]
       }
     },
     // Configuration for testing

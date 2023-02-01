@@ -30,37 +30,34 @@ const S1UserType = () => {
 
   return (
     <Main>
-      <div className="px-10 py-5">
-        <h1 className="flex items-start font-bold mb-5">고객 유형을 선택해 주세요</h1>
-        <RadioGroup
-          value={selectedType}
-          onChange={setSelectedType}
-        >
-          <RadioGroup.Label className="sr-only"> 유형 선택 </RadioGroup.Label>
-          <div className="border-t border-l border-r border-bw50 text-lg">
-            {custommerTypes.map((Type) => (
-              <RadioGroup.Option
-                key={Type.name}
-                value={Type}
-                disabled={!Type.inStock}
-                className={() =>
-                  `${classNames(
-                    'group relative py-4 px-6 border-b border-bw50 flex ' +
+      <h1 className="flex items-start font-bold mb-5">
+        고객 유형을 선택해 주세요
+      </h1>
+      <RadioGroup value={selectedType} onChange={setSelectedType}>
+        <RadioGroup.Label className="sr-only"> 유형 선택 </RadioGroup.Label>
+        <div className="border-t border-l border-r border-bw50 text-lg">
+          {custommerTypes.map((Type) => (
+            <RadioGroup.Option
+              key={Type.name}
+              value={Type}
+              disabled={!Type.inStock}
+              className={() =>
+                `${classNames(
+                  'group relative py-4 px-6 border-b border-bw50 flex ' +
                     'items-start font-medium hover:bg-gray-300 hover:cursor-pointer'
-                  )}`
-                }
-              >
-                {() => (
-                  <>
-                    <RadioGroup.Label as="span">{Type.name}</RadioGroup.Label>
-                    <span aria-hidden="true" />
-                  </>
-                )}
-              </RadioGroup.Option>
-            ))}
-          </div>
-        </RadioGroup>
-      </div>
+                )}`
+              }
+            >
+              {() => (
+                <>
+                  <RadioGroup.Label as="span">{Type.name}</RadioGroup.Label>
+                  <span aria-hidden="true" />
+                </>
+              )}
+            </RadioGroup.Option>
+          ))}
+        </div>
+      </RadioGroup>
     </Main>
   );
 };

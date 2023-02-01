@@ -9,7 +9,7 @@ type IMainProps = {
 const Main = (props: IMainProps) => {
   const router = useRouter();
   return (
-    <div className="w-full px-1 text-gray-700">
+    <div className="w-full text-gray-700">
       {props.meta}
       <div className="w-full bg-header p-5">
         <img
@@ -21,7 +21,7 @@ const Main = (props: IMainProps) => {
         />
       </div>
       <div className="mx-auto max-w-screen-md">
-        <div className="content py-5 text-xl">{props.children}</div>
+        <div className="content text-xl px-10 py-5">{props.children}</div>
         <div className="border-t border-gray-300 py-8 text-center text-sm">
           @ Powered by <a href="https://smartelmobile.com">Smartel</a>
         </div>
