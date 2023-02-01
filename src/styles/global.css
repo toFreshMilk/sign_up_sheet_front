@@ -19,3 +19,10 @@ a:hover {
 .content ul {
   @apply my-6;
 }
+th, td {
+  padding: 10px;
+  border: 1px solid #333;
+}
+td {
+  text-align: center;
+}

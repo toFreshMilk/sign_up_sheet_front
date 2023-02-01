@@ -22,9 +22,6 @@ const Main = (props: IMainProps) => {
       </div>
       <div className="mx-auto max-w-screen-md">
         <div className="content text-xl px-10 py-5">{props.children}</div>
-        <div className="border-t border-gray-300 py-8 text-center text-sm">
-          @ Powered by <a href="https://smartelmobile.com">Smartel</a>
-        </div>
       </div>
     </div>
   );
