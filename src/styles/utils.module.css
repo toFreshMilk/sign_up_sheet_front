@@ -1,0 +1,21 @@
+.bodyStyle {
+  line-height: 1.5;
+  white-space: pre-wrap;
+  margin: 2em auto;
+  max-width: 900px;
+  color: rgb(55, 53, 47);
+}
+.pageTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.75em;
+  text-align: left;
+  color: #000;
+  padding-bottom: 10px;
+}
+.textStyle {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  line-height: 2;
+}
