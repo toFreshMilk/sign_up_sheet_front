@@ -19,3 +19,33 @@
   margin-bottom: 0.5em;
   line-height: 2;
 }
+.stepTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2a3037;
+  margin-top: 32px;
+}
+.joinTypeBtn {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  color: #2a3037;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+  transition: .2s;
+  gap: 16px;
+}
+.joinTypeBtn2 {
+  color: #2a3037;
+  font-size: 18px;
+  font-weight: 700;
+}
+.joinTypeBtn3 {
+  color: #868e96;
+  font-size: 14px;
+  font-weight: 500;
+}

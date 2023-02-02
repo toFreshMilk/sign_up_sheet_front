@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
+import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 
 const S3JoinType = () => {
@@ -14,11 +15,11 @@ const S3JoinType = () => {
   ]);
   return (
     <Main>
-      <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className={'flex justify-center text-4xl font-bold p-3'}>
-          어떤 방법으로 가입을 진행할까요?
+      <div className="overflow-hidden">
+        <h2 className={`${styles.stepTitle}`}>
+          어떤 방법으로 <br /> 가입을 진행할까요?
         </h2>
-        <div className="space-y-6 bg-white px-4 py-5 sm:p-6 flex justify-center">
+        <div className="bg-white w-full mt-10">
           <fieldset>
             <div className="mt-4 space-y-4">
               {joinTypes.map((item) => (
@@ -32,11 +33,26 @@ const S3JoinType = () => {
                     );
                     router.push('./S4Usim');
                   }}
-                  className="group relative flex w-full items-center rounded-md border bg-[#e0e0e0] py-2 px-4 text-sm font-medium text-black focus:outline-none focus:ring-2 focus:ring-offset-2"
+                  className={`${styles.joinTypeBtn}`}
                 >
-                  <div className={'text-left'}>
-                    <h3 className={'mb-2 text-3xl font-bold'}>{item.title}</h3>
-                    <h5 className={'mb-2'}>{item.subTitle}</h5>
+                  <div className={'text-left relative w-full'}>
+                    <h3 className={`${styles.joinTypeBtn2}`}>{item.title}</h3>
+                    <h3 className={`${styles.joinTypeBtn3}`}>
+                      {item.subTitle}
+                    </h3>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                      aria-hidden="true"
+                      className="text-gray-400 w-7 absolute right-0 top-3"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm5.207-11.793a1 1 0 00-1.414-1.414L11 13.586l-2.793-2.793a1 1 0 00-1.414 1.414l3.5 3.5a1 1 0 001.414 0l5.5-5.5z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
                   </div>
                 </button>
               ))}

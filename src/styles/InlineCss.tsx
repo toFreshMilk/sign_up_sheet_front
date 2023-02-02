@@ -6,4 +6,4 @@ const yakgwanStyle = {
 const color888 = {
   color: '#888',
 };
-export { yakgwanStyle, color888 };
+export { color888, yakgwanStyle };
