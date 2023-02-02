@@ -1,9 +1,12 @@
-import { yakgwanStyle } from '@/styles/InlineCss';
+import styles from '@/styles/utils.module.css';
 
 const Yakgwan3 = () => {
   return (
-    <div className="text-center">
-      <textarea readOnly={true} style={yakgwanStyle}>
+    <div className={`${styles.bodyStyle}`}>
+      <h1 className={`${styles.pageTitle}`}>
+        개인정보(위치정보포함)수집,이용동의
+      </h1>
+      <p className={`${styles.textStyle}`}>
         ㈜스마텔은이동전화서비스 및 부가서비스 제공, 요금정산, 고객상담등 원활한
         업무 처리를 위하여 신청인의 개인정보의 수집, 보관, 처리, 이용, 제공,
         관리, 파기 등(이하”취급”)의 업무를 위탁대리점, 고객센터, 신용정보 업체
@@ -27,7 +30,7 @@ const Yakgwan3 = () => {
         ㈜LG유플러스, ㈜NICE신용평가정보에고객님의 개인정보를 제공합니다.5) 본
         항의 개인정보 제공은 서비스 가입 및 이용을 위해 필수적인 제공사항으로써,
         이를 제외한 개인정보의 제3자 제공은 모두 별도의 동의를 득합니다.
-      </textarea>
+      </p>
     </div>
   );
 };
