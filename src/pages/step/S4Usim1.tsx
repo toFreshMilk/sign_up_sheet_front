@@ -9,8 +9,18 @@ interface Aaa {
   checked: boolean;
 }
 const isUsimObj = [
-  { title: '없어요(택배 요청)', checked: true, val: '유심 없음' },
-  { title: '가지고 있어요', checked: false, val: '유심 보유' },
+  {
+    title: '없어요(택배 요청)',
+    checked: true,
+    val: '유심 없음',
+    goal: './S4Usim21',
+  },
+  {
+    title: '가지고 있어요',
+    checked: false,
+    val: '유심 보유',
+    goal: './S4Usim22',
+  },
 ] as any;
 const S4Usim1 = () => {
   const router = useRouter();
@@ -66,7 +76,7 @@ const S4Usim1 = () => {
             'S4Usim1',
             JSON.stringify({ usimType: result[0].val })
           );
-          router.push('./S4Usim2');
+          router.push(result[0].goal);
         }}
         className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
       >
