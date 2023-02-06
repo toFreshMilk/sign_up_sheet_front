@@ -49,3 +49,14 @@
   font-size: 14px;
   font-weight: 500;
 }
+.borderStyle {
+  --tw-border-opacity: 1 !important;
+  border-width: 1px!important;
+  border-radius: 12px!important;
+}
+.checkBoxStyle {
+  --tw-border-opacity: 1;
+  border-color: rgb(86 111 238/var(--tw-border-opacity));
+  border-radius: 4px;
+  border-width: 1px;
+}

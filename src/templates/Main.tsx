@@ -21,7 +21,9 @@ const Main = (props: IMainProps) => {
         />
       </div>
       <div className="mx-auto max-w-screen-md">
-        <div className="content text-xl px-10 py-5">{props.children}</div>
+        <div className="content text-xl px-[24px] pt-[20px] pb-[32px]">
+          {props.children}
+        </div>
       </div>
     </div>
   );

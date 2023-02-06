@@ -43,7 +43,8 @@ module.exports = {
         },
         white: 'rgb(255 255 255)',
         box: '#ccc',
-        bw50: 'rgba(204, 204, 204, 0.5)'
+        bw50: 'rgba(204, 204, 204, 0.5)',
+        borderColor: 'rgb(222 226 230/var(--tw-border-opacity))!important;',
       },
     },
   },

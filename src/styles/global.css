@@ -6,6 +6,7 @@ a {
 
 a:hover {
   @apply border-b-2 border-blue-700;
+  border-width: 0;
 }
 
 @tailwind components;
