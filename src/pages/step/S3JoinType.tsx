@@ -30,7 +30,7 @@ const S3JoinType = () => {
                 onClick={() => {
                   const result = { joinType: item.title };
                   sessionStorage.setItem('S3JoinType', JSON.stringify(result));
-                  router.push('./S4Usim');
+                  router.push('./S4Usim1');
                 }}
                 className={`${styles.joinTypeBtn}`}
               >
