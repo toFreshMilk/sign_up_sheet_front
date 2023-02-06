@@ -64,7 +64,7 @@ const S4Usim1 = () => {
           const result = isUsim.filter((item: Aaa) => item.checked);
           sessionStorage.setItem(
             'S4Usim1',
-            JSON.stringify({ usimType: result.val })
+            JSON.stringify({ usimType: result[0].val })
           );
           router.push('./S4Usim2');
         }}
