@@ -13,16 +13,16 @@ const isUsimObj = [
     title: '없어요(택배 요청)',
     checked: true,
     val: '유심 없음',
-    goal: './S4Usim21',
+    goal: './S4UsimType',
   },
   {
     title: '가지고 있어요',
     checked: false,
     val: '유심 보유',
-    goal: './S4Usim22',
+    goal: './S4UsimNumber',
   },
 ] as any;
-const S4Usim1 = () => {
+const S4IsUsim = () => {
   const router = useRouter();
   const [isUsim, setIsUsim] = useState(isUsimObj);
   return (
@@ -73,7 +73,7 @@ const S4Usim1 = () => {
         onClick={() => {
           const result = isUsim.filter((item: Aaa) => item.checked);
           sessionStorage.setItem(
-            'S4Usim1',
+            'S4UsimType',
             JSON.stringify({ usimType: result[0].val })
           );
           router.push(result[0].goal);
@@ -86,4 +86,4 @@ const S4Usim1 = () => {
   );
 };
 
-export default S4Usim1;
+export default S4IsUsim;

@@ -208,7 +208,7 @@ const S2Yakgwan = () => {
               alert('필수 항목에 동의해주세요.');
             }
           }}
-          className="flex w-full justify-center rounded-md border bg-[#32b2df] p-3 font-medium text-white"
+          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
         >
           다음
         </button>

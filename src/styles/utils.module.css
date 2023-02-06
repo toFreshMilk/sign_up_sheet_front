@@ -100,3 +100,46 @@
   left: 28px;
   box-sizing: border-box;
 }
+.usimWarning {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  column-gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 12px;
+  padding: 12px 16px;
+  white-space: pre-line;
+  word-break: break-word;
+  color: rgb(42, 48, 55);
+  background-color: rgb(255, 245, 245);
+}
+.usimWarning svg {
+  width: 20px;
+  height: 20px;
+  color: rgb(250, 82, 82);
+}
+.usimSubTitle {
+  color: #868e96;
+  font-weight: 500;
+  font-size: .875rem;
+}
+.inputBox:hover {
+  border-bottom: 2px solid rgb(120, 139, 219);
+}
+.inputBox {
+  display: block;
+  border: none;
+  border-bottom: 2px solid #dee2e6;
+  border-radius: 0;
+  padding: 12px 8px 12px 0;
+  font-size: 18px;
+  font-weight: 500;
+  background-color: transparent;
+  color: #2a3037;
+  transition: border .2s;
+}
+.inputBox:focus {
+  outline: none;
+}

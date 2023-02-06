@@ -4,33 +4,34 @@ import { useState } from 'react';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 
-const S3JoinType = () => {
+const S4UsimType = () => {
   const router = useRouter();
-  const [joinTypes] = useState([
+  const [usimTypes] = useState([
     {
-      title: '번호이동',
-      subTitle: '지금 쓰는 번호 그대로 사용할래요',
+      title: '일반 유심',
+      subTitle: '삼성페이는 사용할 수 있어요',
     },
-    { title: '신규가입', subTitle: '새로운 휴대폰 번호로 가입할래요' },
+    {
+      title: 'NFC 유심',
+      subTitle: '교통카드 기능을 사용할 수 있어요',
+    },
   ]);
   return (
     <Main>
-      <div className="overflow-hidden">
-        <h2 className={`${styles.stepTitle}`}>
-          어떤 방법으로 <br /> 알뜰폰 가입을 진행할까요?
-        </h2>
+      <div className="">
+        <h2 className={`${styles.stepTitle}`}>어떤 유심이 필요하신가요?</h2>
         <h3 className="text-[16px] text-color-[#000] mt-[8px]">
-          스마텔 통신사로 가입을 진행합니다.
+          유심 종류에 따라 유심비가 부과될 수 있어요
         </h3>
         <div className="bg-white w-full mt-[32px]">
           <div className="mt-4 space-y-4">
-            {joinTypes.map((item) => (
+            {usimTypes.map((item) => (
               <button
                 key={item.title}
                 onClick={() => {
                   const result = { joinType: item.title };
-                  sessionStorage.setItem('S3JoinType', JSON.stringify(result));
-                  router.push('./S4IsUsim');
+                  sessionStorage.setItem('S4UsimType', JSON.stringify(result));
+                  router.push('./S5PhoneNumber');
                 }}
                 className={`${styles.joinTypeBtn}`}
               >
@@ -64,4 +65,4 @@ const S3JoinType = () => {
   );
 };
 
-export default S3JoinType;
+export default S4UsimType;
