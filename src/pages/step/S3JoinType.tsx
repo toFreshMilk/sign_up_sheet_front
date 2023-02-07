@@ -19,7 +19,7 @@ const S3JoinType = () => {
         <h2 className={`${styles.stepTitle}`}>
           어떤 방법으로 <br /> 알뜰폰 가입을 진행할까요?
         </h2>
-        <h3 className="text-[16px] text-color-[#000] mt-[8px]">
+        <h3 className="text-[16px] text-[#868e96] mt-[8px]">
           스마텔 통신사로 가입을 진행합니다.
         </h3>
         <div className="bg-white w-full mt-[32px]">

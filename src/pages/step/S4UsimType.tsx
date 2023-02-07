@@ -20,7 +20,7 @@ const S4UsimType = () => {
     <Main>
       <div className="">
         <h2 className={`${styles.stepTitle}`}>어떤 유심이 필요하신가요?</h2>
-        <h3 className="text-[16px] text-color-[#000] mt-[8px]">
+        <h3 className="text-[16px] text-[#868e96] mt-[8px]">
           유심 종류에 따라 유심비가 부과될 수 있어요
         </h3>
         <div className="bg-white w-full mt-[32px]">

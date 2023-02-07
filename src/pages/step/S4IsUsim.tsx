@@ -31,7 +31,7 @@ const S4IsUsim = () => {
         <h2 className={`${styles.stepTitle}`}>
           스마텔의 <br /> 유심을 가지고 있나요?
         </h2>
-        <h3 className="text-[16px] text-color-[#000] mt-[8px]">
+        <h3 className="text-[16px] text-[#868e96] mt-[8px]">
           기존 유심이 아닌 스마텔의 유심이 필요해요
         </h3>
         <div className={'mt-[80px] flex justify-center space-x-[8px]'}>
