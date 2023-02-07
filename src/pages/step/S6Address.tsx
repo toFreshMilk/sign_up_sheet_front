@@ -102,7 +102,7 @@ const S6Address = () => {
                 address2,
               })
             );
-            router.push('./S7Email');
+            router.push('./S6Address');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
         >

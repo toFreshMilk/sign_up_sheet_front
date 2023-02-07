@@ -4,7 +4,7 @@ import { useState } from 'react';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 
-const S7Email = () => {
+const S8Identification = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
 
@@ -34,7 +34,7 @@ const S7Email = () => {
                 email,
               })
             );
-            router.push('./S8Identification');
+            router.push('./S7Email');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
         >
@@ -45,4 +45,4 @@ const S7Email = () => {
   );
 };
 
-export default S7Email;
+export default S8Identification;
