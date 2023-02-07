@@ -5,8 +5,8 @@ import moment from 'moment';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect, useState } from 'react';
 
-import S5Identification2 from '@/pages/step/S5Identification2';
-import S5Identification3KCB from '@/pages/step/S5Identification3KCB';
+import S5Identification2 from '@/pages/old/S5Identification2';
+import S5Identification3KCB from '@/pages/old/S5Identification3KCB';
 import { Main } from '@/templates/Main';
 import { CheckIcon, FtpImgModal } from '@/utils/Commons';
 import { driverLicenceRegion } from '@/utils/PublicData';
