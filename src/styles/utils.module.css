@@ -143,3 +143,13 @@
 .inputBox:focus {
   outline: none;
 }
+.bottomSheetStyle {
+  padding: 26px 24px 16px 24px;
+}
+.bottomSheetList {
+  padding: 12px 0;
+  color: #666;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

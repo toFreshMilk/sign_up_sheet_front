@@ -32,3 +32,44 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+
+[data-rsbs-overlay] {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  display: flex;
+  background: #ffffff;
+  flex-direction: column;
+  height: 400px;
+  transform: translate3d(0, 10px, 0);
+  will-change: height;
+}
+[data-rsbs-overlay]:focus {
+  outline: none;
+}
+
+[data-rsbs-is-blocking='false'] [data-rsbs-overlay] {
+  box-shadow: 0 -5px 60px 0 rgba(38, 89, 115, 0.11),
+  0 -1px 0 rgba(38, 89, 115, 0.05);
+}
+[data-rsbs-overlay],
+[data-rsbs-backdrop],
+[data-rsbs-root]:after {
+  z-index: 3;
+  overscroll-behavior: none;
+  touch-action: none;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+[data-rsbs-backdrop] {
+  top: -60px;
+  bottom: -60px;
+  background-color: #000000;
+  will-change: opacity;
+  cursor: pointer;
+  opacity: 0.5;
+}
