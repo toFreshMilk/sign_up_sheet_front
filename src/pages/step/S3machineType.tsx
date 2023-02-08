@@ -5,9 +5,17 @@ import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { machineModelList } from '@/utils/PublicData';
 
+interface ModelObj {
+  title: string;
+  disabled: boolean;
+}
+
 const S3machineType = () => {
   const router = useRouter();
   const [modelName, setModelName] = useState('');
+  const [modelList, setModelList] = useState<ModelObj[]>([
+    { title: '선택', disabled: false },
+  ]);
   return (
     <Main>
       <div className="overflow-hidden">
@@ -18,13 +26,16 @@ const S3machineType = () => {
         <div className={`${styles.usimSubTitle}`}>모델명</div>
         <select
           value={modelName}
+          onClick={() => {
+            setModelList(machineModelList);
+          }}
           onChange={(e) => {
             setModelName(e.target.value);
           }}
           className={`${styles.inputBox} w-full`}
         >
-          {machineModelList.map((item) => (
-            <option key={item.title} value={item.title}>
+          {modelList.map((item) => (
+            <option key={item.title} value={item.title} className={'p-4'}>
               {item.title}
             </option>
           ))}
