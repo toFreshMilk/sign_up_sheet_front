@@ -148,4 +148,33 @@ const alttleTelecomList = [
   { title: '온세텔레콤', disabled: true },
   { title: '기타 통신사', disabled: true },
 ];
-export { alttleTelecomList, bankList, cardList, driverLicenceRegion };
+const machineModelList = [
+  { title: '갤럭시 Z Flip 4', disabled: false },
+  { title: '갤럭시 Z Fold 4', disabled: false },
+  { title: 'iPhone14 Pro Max', disabled: false },
+  { title: 'iPhone14 Pro', disabled: false },
+  { title: 'iPhone14 Plus', disabled: false },
+  { title: 'iPhone14', disabled: false },
+  { title: 'iPhone13 Pro Max', disabled: false },
+  { title: 'iPhone13 Pro', disabled: false },
+  { title: 'iPhone13', disabled: false },
+  { title: 'iPhone13 mini', disabled: false },
+  { title: 'iPhone12 Pro Max', disabled: false },
+  { title: 'iPhone12 Pro', disabled: false },
+  { title: 'iPhone12', disabled: false },
+  { title: 'iPhone12 mini', disabled: false },
+  { title: 'iPhone SE 3세대', disabled: false },
+  { title: 'iPhone11 Pro', disabled: false },
+  { title: 'iPhone11', disabled: false },
+  { title: 'iPhone11 mini', disabled: false },
+  { title: 'iPhone XR', disabled: false },
+  { title: 'iPhone XS MAX', disabled: false },
+  { title: 'iPhone XS', disabled: false },
+];
+export {
+  alttleTelecomList,
+  bankList,
+  cardList,
+  driverLicenceRegion,
+  machineModelList,
+};

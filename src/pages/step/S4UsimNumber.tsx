@@ -59,6 +59,7 @@ const S4UsimNumber = () => {
           }}
         />
         <button
+          disabled={usimModel === '' || usimNuber === ''}
           onClick={() => {
             sessionStorage.setItem(
               'S4UsimNumber',

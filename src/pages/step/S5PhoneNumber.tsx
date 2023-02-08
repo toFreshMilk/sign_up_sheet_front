@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import styles from '@/styles/utils.module.css';
@@ -16,11 +16,18 @@ const telecomList = [
 ];
 const S5PhoneNumber = () => {
   const router = useRouter();
-  const [selectedTelecom, setSelectedTelecom] = useState(telecomList[0]);
-  const [usimNuber, setUsimNumber] = useState('');
+  const [selectedTelecom, setSelectedTelecom] = useState({
+    telecomName: '',
+    selected: false,
+    isAlddle: false,
+  });
+  const [phoneNumber, setPhoneNumber] = useState('');
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [alddleTelecom, setAlddleTelecom] = useState('');
 
+  useEffect(() => {
+    setBottomSheetOpen(true);
+  }, []);
   return (
     <Main>
       <div className={``}>
@@ -30,9 +37,10 @@ const S5PhoneNumber = () => {
         <br className={'mt-[32px]'} />
         <div className={`${styles.usimSubTitle}`}>통신사</div>
         <input
+          readOnly={true}
           className={`${styles.inputBox} w-full`}
-          placeholder="통신사를 입력해 주세요"
-          value={selectedTelecom?.telecomName || ''}
+          placeholder="통신사 선택"
+          value={selectedTelecom?.telecomName}
           onChange={() => {}}
           type="text"
           onClick={() => {
@@ -103,25 +111,31 @@ const S5PhoneNumber = () => {
           </div>
         ) : null}
 
-        <div className={`${styles.usimSubTitle} mt-6`}>일련번호</div>
+        <div className={`${styles.usimSubTitle} mt-6`}>휴대폰 번호</div>
         <input
           className={`${styles.inputBox} w-full`}
-          placeholder="마지막 숫자 8자리를 적어주세요"
-          maxLength={8}
-          value={usimNuber}
-          type="number"
+          placeholder="휴대폰 번호"
+          maxLength={13}
+          value={phoneNumber}
+          type="text"
           onChange={(e) => {
-            setUsimNumber(e.target.value);
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setPhoneNumber(inputed);
           }}
         />
         <button
+          disabled={
+            selectedTelecom?.telecomName === '' || phoneNumber.length !== 13
+          }
           onClick={() => {
             sessionStorage.setItem(
               'S5PhoneNumber',
               JSON.stringify({
                 ...selectedTelecom,
                 alddleTelecom,
-                usimNuber,
+                phoneNumber,
               })
             );
             router.push('./S5PersonalInfo');
