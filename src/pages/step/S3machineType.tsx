@@ -35,7 +35,7 @@ const S3machineType = () => {
           className={`${styles.inputBox} w-full`}
         >
           {modelList.map((item) => (
-            <option key={item.title} value={item.title} className={'p-4'}>
+            <option key={item.title} value={item.title}>
               {item.title}
             </option>
           ))}

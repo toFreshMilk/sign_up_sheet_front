@@ -106,4 +106,73 @@ const HowToGetUsimSvg3 = () => {
     </svg>
   );
 };
-export { HowToGetUsimSvg1, HowToGetUsimSvg2, HowToGetUsimSvg3 };
+const SettingSvg = () => {
+  return (
+    <svg
+      className="setting"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="24" height="24" rx="8" fill="#DEE2E6"></rect>
+      <path
+        d="M17 12H12M9.5 7.66917L12 12M12 12L9.5 16.3308M12 17C13.3261 17 14.5979 16.4732 15.5355 15.5355C16.4732 14.5979 17 13.3261 17 12C17 10.6739 16.4732 9.40215 15.5355 8.46447C14.5979 7.52678 13.3261 7 12 7C10.6739 7 9.40215 7.52678 8.46447 8.46447C7.52678 9.40215 7 10.6739 7 12C7 13.3261 7.52678 14.5979 8.46447 15.5355C9.40215 16.4732 10.6739 17 12 17V17Z"
+        stroke="#495057"
+        strokeWidth="1.32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+      <path
+        d="M11.9998 17.8337C12.7659 17.8337 13.5244 17.6828 14.2322 17.3896C14.9399 17.0965 15.583 16.6668 16.1246 16.1251C16.6663 15.5834 17.096 14.9404 17.3891 14.2326C17.6823 13.5249 17.8332 12.7664 17.8332 12.0003C17.8332 11.2343 17.6823 10.4757 17.3891 9.76801C17.096 9.06027 16.6663 8.41721 16.1246 7.87554C15.583 7.33386 14.9399 6.90418 14.2322 6.61103C13.5244 6.31788 12.7659 6.16699 11.9998 6.16699C10.4527 6.16699 8.96901 6.78157 7.87505 7.87554C6.78109 8.9695 6.1665 10.4532 6.1665 12.0003C6.1665 13.5474 6.78109 15.0312 7.87505 16.1251C8.96901 17.2191 10.4527 17.8337 11.9998 17.8337V17.8337Z"
+        stroke="#495057"
+        strokeWidth="1.32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeDasharray="0.67 2"
+      ></path>
+      <path
+        d="M11.9998 20.3337C16.6023 20.3337 20.3332 16.6028 20.3332 12.0003C20.3332 7.39783 16.6023 3.66699 11.9998 3.66699C7.39734 3.66699 3.6665 7.39783 3.6665 12.0003C3.6665 16.6028 7.39734 20.3337 11.9998 20.3337Z"
+        stroke="#495057"
+        strokeWidth="1.32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+      <path
+        d="M12 14.5C12.663 14.5 13.2989 14.2366 13.7678 13.7678C14.2366 13.2989 14.5 12.663 14.5 12C14.5 11.337 14.2366 10.7011 13.7678 10.2322C13.2989 9.76339 12.663 9.5 12 9.5C11.337 9.5 10.7011 9.76339 10.2322 10.2322C9.76339 10.7011 9.5 11.337 9.5 12C9.5 12.663 9.76339 13.2989 10.2322 13.7678C10.7011 14.2366 11.337 14.5 12 14.5V14.5Z"
+        stroke="#495057"
+        strokeWidth="1.32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </svg>
+  );
+};
+const ArrowSvg = () => {
+  return (
+    <svg
+      className="arrow"
+      width="16"
+      height="16"
+      viewBox="0 0 16 16"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 13L11 8L6 3"
+        stroke="#868E96"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      ></path>
+    </svg>
+  );
+};
+export {
+  ArrowSvg,
+  HowToGetUsimSvg1,
+  HowToGetUsimSvg2,
+  HowToGetUsimSvg3,
+  SettingSvg,
+};

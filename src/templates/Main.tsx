@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
 type IMainProps = {
@@ -7,21 +6,11 @@ type IMainProps = {
 };
 
 const Main = (props: IMainProps) => {
-  const router = useRouter();
   return (
     <div className="w-full text-gray-700">
       {props.meta}
-      <div className="w-full bg-header p-5">
-        <img
-          src={`${router.basePath}/assets/images/smartel_logo.png`}
-          alt={'스마텔 로고'}
-          onClick={() => {
-            router.push('/step/S1UserType/');
-          }}
-        />
-      </div>
       <div className="mx-auto max-w-screen-md">
-        <div className="content text-xl px-[24px] pt-[20px] pb-[32px]">
+        <div className="content text-xl px-[24px] pt-[20px] pb-[32px] max-w-[480px] m-auto">
           {props.children}
         </div>
       </div>

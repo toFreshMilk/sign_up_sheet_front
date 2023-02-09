@@ -313,3 +313,72 @@
   line-height: normal;
   color: rgb(73, 80, 87);
 }
+.s4EsimRadioWrapper {
+  position: relative;
+  height: 42px;
+  background: rgb(241, 243, 245);
+  border-radius: 12px;
+  padding: 4px;
+  display: flex;
+  gap: 4px;
+}
+.s4EsimRadioWrapperInDiv {
+  position: absolute;
+  left: 0px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  height: 34px;
+  background: rgb(255, 255, 255);
+  transition: transform 0.3s ease 0s;
+}
+.s4EsimRadioOn {
+  width: calc(50% - 6px);
+  left: 4px;
+  transform: translate(calc(0% + 0px), 0px);
+}
+.s4EsimRadioOff {
+  width: calc(50% - 6px);
+  left: 4px;
+  transform: translate(calc(100% + 4px), 0px);
+}
+.s4EsimRadio {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 4px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  gap: 4px;
+}
+.s4EsimRadio > button {
+  width: 100%;
+  color: rgb(42, 48, 55);
+  font-size: 0.875rem;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  -webkit-appearance: button;
+}
+.howToCheck {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: rgb(42, 48, 55);
+  margin-bottom: 26px;
+}
+.howToCheckSub {
+  text-align: left;
+  color: rgb(42, 48, 55);
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 26px 0px 24px;
+  width: 100%;
+}
+.howToCheckSub > span {
+  display: inline-block;
+  vertical-align: middle;
+}
