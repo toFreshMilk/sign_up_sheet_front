@@ -7,7 +7,7 @@ import { Main } from '@/templates/Main';
 const S7Email = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
-
+  const regex = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/;
   return (
     <Main>
       <div className={``}>
@@ -26,7 +26,7 @@ const S7Email = () => {
           type="text"
         />
         <button
-          disabled={email === ''}
+          disabled={!regex.test(email)}
           onClick={() => {
             sessionStorage.setItem(
               'S7Email',

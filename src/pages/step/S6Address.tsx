@@ -15,7 +15,7 @@ const S6Address = () => {
   return (
     <Main>
       {openPostcode && (
-        <div className={`${styles.positionFixed} top-[72px]`}>
+        <div className={`${styles.positionFixed}`}>
           <div className="flex items-center justify-between p-[20px] border-b border-gray-300">
             <div className="text-20 font-bold text-gray-700">주소 찾기</div>
             <div
@@ -102,7 +102,7 @@ const S6Address = () => {
                 address2,
               })
             );
-            router.push('./S6Address');
+            router.push('./S7Email');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
         >
