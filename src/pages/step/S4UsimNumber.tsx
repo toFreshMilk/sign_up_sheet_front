@@ -28,9 +28,9 @@ const S4UsimNumber = () => {
               aria-hidden="true"
             >
               <path
-                fill-rule="evenodd"
+                fillRule="evenodd"
                 d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-9 3.75a1 1 0 112 0 1 1 0 01-2 0zm1-2.5a1 1 0 001-1v-4a1 1 0 10-2 0v4a1 1 0 001 1z"
-                clip-rule="evenodd"
+                clipRule="evenodd"
               ></path>
             </svg>
             유심 정보를 다시 확인해 주세요.

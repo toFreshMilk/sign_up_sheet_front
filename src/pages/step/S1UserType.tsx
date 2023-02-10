@@ -5,14 +5,27 @@ import { useState } from 'react';
 import { Main } from '@/templates/Main';
 
 const custommerTypes = [
-  { name: '일반 (만 19세 이상)', inStock: true, checked: true, value: '개인' },
+  {
+    name: '일반 (만 19세 이상)',
+    inStock: true,
+    checked: true,
+    value: '개인',
+    inqDvcd: 'REGID',
+  },
   {
     name: '미성년자 (만 19세 미만)',
     inStock: true,
     checked: false,
     value: '미성년자',
+    inqDvcd: 'REGID',
   },
-  { name: '외국인', inStock: true, checked: false, value: '외국인' },
+  {
+    name: '외국인',
+    inStock: true,
+    checked: false,
+    value: '외국인',
+    inqDvcd: 'FORGN',
+  },
 ];
 
 function classNames(...classes: string[]) {

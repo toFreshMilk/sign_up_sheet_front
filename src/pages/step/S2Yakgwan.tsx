@@ -87,7 +87,7 @@ const S2Yakgwan = () => {
             />
           </div>
           <div className="ml-[8px]">
-            <label htmlFor={`agreeAll`} className="font-medium text-gray-700">
+            <label htmlFor={`agreeAll`} className="font-medium text-gray-700 align-text-top">
               약관에 모두 동의
             </label>
           </div>
@@ -115,7 +115,7 @@ const S2Yakgwan = () => {
               <div className="ml-3 text-sm">
                 <label
                   htmlFor={`requiredYakgwan${index}`}
-                  className="font-medium text-gray-700"
+                  className="font-medium text-gray-700 align-text-top"
                 >
                   {item.name}
                 </label>
@@ -161,7 +161,7 @@ const S2Yakgwan = () => {
               <div className="ml-3 text-sm">
                 <label
                   htmlFor={`requiredYakgwan${index}`}
-                  className="font-medium text-gray-700"
+                  className="font-medium text-gray-700 align-text-top"
                 >
                   {item.name}
                 </label>

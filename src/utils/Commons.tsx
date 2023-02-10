@@ -100,5 +100,22 @@ const FtpImgModal = (_props: any) => {
     </Modal>
   );
 };
+const identificationCheckLG = async (_param: any) => {
+  // 신분증 종류, 외국인 여부, 주민번호, 신분증 발급일자
+  // 면허번호
+  const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getCM806`;
+  const jumin64 = Buffer.from(_param.persFrgnrPsnoEnprNo, 'utf-8').toString(
+    'base64'
+  );
+  const dataCM806 = {
+    custNm: _param.custNm,
+    inqDvCd: _param.inqDvCd,
+    isuDt: _param.isuDt,
+    persFrgnrPsnoEnprNo: jumin64,
+    drvLcnsNo: _param.drvLcnsNo,
+  };
+  const { data } = await axios.post(tokenUrl, dataCM806);
+  return data;
+};
 
-export { CheckIcon, encrypt, FtpImgModal, saveImage };
+export { CheckIcon, encrypt, FtpImgModal, identificationCheckLG, saveImage };

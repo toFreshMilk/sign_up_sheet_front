@@ -7,26 +7,43 @@ import { Tooltip as ReactTooltip } from 'react-tooltip';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { driverLicenceRegion } from '@/utils/PublicData';
+import { identificationCheckLG } from '@/utils/Commons';
 
 const identificationTypes = [
   {
     title: '주민등록증',
     checked: true,
-    val: '',
+    val: 'REGID',
   },
   {
     title: '운전면허증',
     checked: false,
-    val: '',
+    val: 'DRIVE',
   },
 ] as any;
 const S8Identification = () => {
   const router = useRouter();
+  const [s1UserType, setS1UserType] = useState<{
+    name: string;
+    value: string;
+    isStock: boolean;
+    checked: boolean;
+  }>();
   const [s5PersonalInfo, setS5PersonalInfo] = useState<{
     userName: string;
+    userNameParent: string;
     jumin1: string;
     jumin2: string;
-  }>();
+    jumin3: string;
+    jumin4: string;
+  }>({
+    userName: '',
+    userNameParent: '',
+    jumin1: '',
+    jumin2: '',
+    jumin3: '',
+    jumin4: '',
+  });
   const [driver1, setDriver1] = useState('');
   const [driver2, setDriver2] = useState('');
   const [driver3, setDriver3] = useState('');
@@ -34,7 +51,39 @@ const S8Identification = () => {
   const [monthYear, setMonthYear] = useState('');
   const [identificationType, setIdentificationType] =
     useState(identificationTypes);
+  const checkIdentification = async () => {
+    let inqDvCd = '';
+    if (identificationType[0]?.checked) {
+      inqDvCd = 'REGID';
+    } else {
+      inqDvCd = 'DRIVE';
+    }
+    if (s1UserType?.value === '외국인') {
+      inqDvCd = 'FORGN';
+    }
+    let persFrgnrPsnoEnprNo = '';
+    let custNm: string | undefined = '';
+    if (s1UserType?.value === '미성년자') {
+      persFrgnrPsnoEnprNo = s5PersonalInfo.jumin3 + s5PersonalInfo.jumin4;
+      custNm = s5PersonalInfo?.userNameParent;
+    } else {
+      persFrgnrPsnoEnprNo = s5PersonalInfo.jumin1 + s5PersonalInfo.jumin2;
+      custNm = s5PersonalInfo.userName;
+    }
+    const identiParts = {
+      inqDvCd,
+      custNm: custNm?.toUpperCase(),
+      persFrgnrPsnoEnprNo,
+      isuDt: monthYear,
+      drvLcnsNo: driver1 + driver2 + driver3 + driver4,
+    };
+    const checkResult = await identificationCheckLG(identiParts);
+    console.log(checkResult);
+  };
   useEffect(() => {
+    const S1UserType = sessionStorage.getItem('S1UserType') || '';
+    const S1UserTypeJson = JSON.parse(S1UserType);
+    setS1UserType(S1UserTypeJson);
     const S5PersonalInfo = sessionStorage.getItem('S5PersonalInfo') || '';
     const S5PersonalInfoJson = JSON.parse(S5PersonalInfo);
     setS5PersonalInfo(S5PersonalInfoJson);
@@ -158,6 +207,7 @@ const S8Identification = () => {
         <button
           disabled={driver1 === ''}
           onClick={() => {
+            checkIdentification();
             sessionStorage.setItem(
               'S8Identification',
               JSON.stringify({

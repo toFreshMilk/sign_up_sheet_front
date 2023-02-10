@@ -1,32 +1,21 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 
-const S5PersonalInfo = () => {
+const S5PersonalInfoParent = () => {
   const router = useRouter();
-  const [s1UserType, setS1UserType] = useState<{
-    name: string;
-    value: string;
-    isStock: boolean;
-    checked: boolean;
-  }>();
-  const [userName, setUserName] = useState('');
-  const [jumin1, setJumin1] = useState('');
-  const [jumin2, setJumin2] = useState('');
+  const [userNameParent, setUserNameParent] = useState('');
+  const [jumin3, setJumin3] = useState('');
+  const [jumin4, setJumin4] = useState('');
   const [verifyCHeckJumin, setVerifyCHeckJumin] = useState(true);
-  useEffect(() => {
-    const S1UserType = sessionStorage.getItem('S1UserType') || '';
-    const S1UserTypeJson = JSON.parse(S1UserType);
-    setS1UserType(S1UserTypeJson);
-  }, []);
 
   return (
     <Main>
       <div className={``}>
         <h2 className={`${styles.stepTitle}`}>
-          가입하려는 분의 <br /> 정보를 입력해주세요
+          법정대리인의 <br /> 정보를 입력해주세요
         </h2>
         <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           안전하게 보관하고 개통시에만 사용해요
@@ -35,9 +24,9 @@ const S5PersonalInfo = () => {
         <input
           className={`${styles.inputBox} w-full`}
           placeholder="이름을 입력해 주세요"
-          value={userName}
+          value={userNameParent}
           onChange={(e) => {
-            setUserName(e.target.value);
+            setUserNameParent(e.target.value);
           }}
           type="text"
         />
@@ -46,11 +35,11 @@ const S5PersonalInfo = () => {
             className={`${styles.inputBox} w-full`}
             placeholder="앞자리"
             maxLength={6}
-            value={jumin1}
+            value={jumin3}
             type="text"
             onChange={(e) => {
               const regex = /[^0-9]/g;
-              setJumin1(e.target.value.replace(regex, ''));
+              setJumin3(e.target.value.replace(regex, ''));
             }}
           />
           <div className={`${styles.hipen}`}>-</div>
@@ -58,11 +47,11 @@ const S5PersonalInfo = () => {
             className={`${styles.inputBox} w-full`}
             placeholder="뒷자리"
             maxLength={7}
-            value={jumin2}
+            value={jumin4}
             type="password"
             onChange={(e) => {
               const regex = /[^0-9]/g;
-              setJumin2(e.target.value.replace(regex, ''));
+              setJumin4(e.target.value.replace(regex, ''));
             }}
           />
         </div>
@@ -87,27 +76,23 @@ const S5PersonalInfo = () => {
         )}
         <button
           disabled={
-            userName === '' || jumin1.length !== 6 || jumin2.length !== 7
+            userNameParent === '' || jumin3.length !== 6 || jumin4.length !== 7
           }
           onClick={() => {
             const juminRule =
               /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$/;
-            const isOk = juminRule.test(`${jumin1}-${jumin2}`);
+            const isOk = juminRule.test(`${jumin3}-${jumin4}`);
             setVerifyCHeckJumin(isOk);
-            const goal =
-              s1UserType?.value === '미성년자'
-                ? './S5PersonalInfoParent'
-                : './S6Address';
             if (isOk) {
               sessionStorage.setItem(
-                'S5PersonalInfo',
+                'S5PersonalInfoParent',
                 JSON.stringify({
-                  userName,
-                  jumin1,
-                  jumin2,
+                  userNameParent,
+                  jumin3,
+                  jumin4,
                 })
               );
-              router.push(goal);
+              router.push('./S6Address');
             }
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
@@ -119,4 +104,4 @@ const S5PersonalInfo = () => {
   );
 };
 
-export default S5PersonalInfo;
+export default S5PersonalInfoParent;

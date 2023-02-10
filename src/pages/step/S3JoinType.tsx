@@ -49,9 +49,9 @@ const S3JoinType = () => {
                     className="text-gray-400 w-7 absolute right-0 top-3"
                   >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10zm5.207-11.793a1 1 0 00-1.414-1.414L11 13.586l-2.793-2.793a1 1 0 00-1.414 1.414l3.5 3.5a1 1 0 001.414 0l5.5-5.5z"
-                      clip-rule="evenodd"
+                      clipRule="evenodd"
                     ></path>
                   </svg>
                 </div>
