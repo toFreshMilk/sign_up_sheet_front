@@ -30,12 +30,12 @@ const S1UserType = () => {
 
   return (
     <Main>
-      <h1 className="flex items-start font-bold mb-5">
+      <h1 className="mb-5 flex items-start font-bold">
         고객 유형을 선택해 주세요
       </h1>
       <RadioGroup value={selectedType} onChange={setSelectedType}>
         <RadioGroup.Label className="sr-only"> 유형 선택 </RadioGroup.Label>
-        <div className="border-t border-l border-r border-bw50 text-lg">
+        <div className="border-x border-t border-bw50 text-lg">
           {custommerTypes.map((Type) => (
             <RadioGroup.Option
               key={Type.name}

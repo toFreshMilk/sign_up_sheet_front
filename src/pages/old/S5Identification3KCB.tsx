@@ -81,7 +81,7 @@ const S5Identification3KCB = (_props: any) => {
   return (
     <button
       onClick={getKcbMDLToken}
-      className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
+      className="w-full border border-gray-300 p-3 shadow-sm focus:outline-none"
     >
       신용카드 본인 인증
     </button>

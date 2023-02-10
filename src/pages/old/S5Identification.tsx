@@ -394,7 +394,7 @@ const S5Identification = () => {
                 onClick={() => {
                   setPicAttOpenFtp1(true);
                 }}
-                className="w-full p-3 border border-gray-300 shadow-sm focus:outline-none"
+                className="w-full border border-gray-300 p-3 shadow-sm focus:outline-none"
               >
                 신분증 사진 첨부
               </button>

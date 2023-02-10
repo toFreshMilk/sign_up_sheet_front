@@ -2,11 +2,11 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { driverLicenceRegion } from '@/utils/PublicData';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 const identificationTypes = [
   {

@@ -109,7 +109,6 @@ const HowToGetUsimSvg3 = () => {
 const SettingSvg = () => {
   return (
     <svg
-      className="setting"
       width="24"
       height="24"
       viewBox="0 0 24 24"
@@ -152,7 +151,6 @@ const SettingSvg = () => {
 const ArrowSvg = () => {
   return (
     <svg
-      className="arrow"
       width="16"
       height="16"
       viewBox="0 0 16 16"

@@ -61,6 +61,7 @@ const S11PayFeeMethod = () => {
     if (result.data.dataHeader.GW_RSLT_CD === '1200') {
       setCheckAccountInfo(true);
     } else {
+      // eslint-disable-next-line no-alert
       alert('계좌 확인이 되지 않았습니다.');
     }
   };
@@ -86,10 +87,10 @@ const S11PayFeeMethod = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className="flex justify-center py-10 text-3xl font-bold p-3">
+        <h2 className="flex justify-center p-3 py-10 text-3xl font-bold">
           요금 납부 방법을 선택해주세요
         </h2>
-        <div className="col-span-6 mt-5 sm:col-span-4 mb-3">
+        <div className="col-span-6 mt-5 mb-3 sm:col-span-4">
           <label
             className="block text-sm font-medium text-gray-700"
             onClick={() => {
@@ -99,7 +100,7 @@ const S11PayFeeMethod = () => {
             납부 방법
           </label>
           <RadioGroup value={payFeeMethodType} onChange={setPayFeeMethodType}>
-            <div className="grid grid-cols-2 mt-3">
+            <div className="mt-3 grid grid-cols-2">
               {payFeeMethodTypes.map((item) => (
                 <RadioGroup.Option key={item.title} value={item} as={Fragment}>
                   {({ checked }) => (
@@ -124,7 +125,7 @@ const S11PayFeeMethod = () => {
             <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="methodType"
-                className="block text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 block text-sm font-medium text-gray-700"
               >
                 계좌 정보
               </label>
@@ -135,7 +136,7 @@ const S11PayFeeMethod = () => {
                   setBank(b?.name);
                   setBankCd(e.target.value);
                 }}
-                className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
+                className="block w-full rounded-md border border-gray-300 bg-white p-4 shadow-sm focus:outline-none sm:text-sm"
               >
                 {bankList.map((item) => (
                   <option key={item.name} value={item.value}>
@@ -148,14 +149,14 @@ const S11PayFeeMethod = () => {
                 name="accountNumber"
                 onChange={handleInputChange}
                 value={userInfo.accountNumber}
-                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm mt-2"
+                className="mt-2 block w-full rounded-md border border-gray-300 p-3 shadow-sm"
               />
               <p>* 평생계좌(휴대폰번호 형식 계좌)의 경우 등록이 불가합니다.</p>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="accountName"
-                className="block text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 block text-sm font-medium text-gray-700"
               >
                 예금주명
               </label>
@@ -164,24 +165,24 @@ const S11PayFeeMethod = () => {
                 name="accountName"
                 onChange={handleInputChange}
                 value={userInfo.accountName}
-                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="accountJumin"
-                className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 flex w-full flex-row text-sm font-medium text-gray-700"
               >
                 소유자 주민등록번호
               </label>
-              <div className="flex w-full mb-3">
+              <div className="mb-3 flex w-full">
                 <input
                   type="text"
                   name="accountJumin1"
                   maxLength={6}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin1}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
                 <span className="p-3">-</span>
                 <input
@@ -190,11 +191,11 @@ const S11PayFeeMethod = () => {
                   maxLength={7}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin2}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
               </div>
               <button
-                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 onClick={() => {
                   checkAccountInfoFunc();
                 }}
@@ -208,10 +209,10 @@ const S11PayFeeMethod = () => {
           </>
         ) : (
           <>
-            <div className="col-span-6 mt-5 sm:col-span-4 mb-3">
+            <div className="col-span-6 mt-5 mb-3 sm:col-span-4">
               <label
                 htmlFor="cardOwnerName"
-                className="block text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 block text-sm font-medium text-gray-700"
               >
                 카드 소유주 이름
               </label>
@@ -220,13 +221,13 @@ const S11PayFeeMethod = () => {
                 name="cardOwnerName"
                 onChange={handleInputChange}
                 value={userInfo.cardOwnerName}
-                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
             </div>
             <div className="col-span-6 sm:col-span-4">
               <label
                 htmlFor="methodType"
-                className="block text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 block text-sm font-medium text-gray-700"
               >
                 카드명
               </label>
@@ -236,7 +237,7 @@ const S11PayFeeMethod = () => {
                 onChange={(e) => {
                   setCard(e.target.value);
                 }}
-                className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm mb-3"
+                className="mb-3 block w-full rounded-md border border-gray-300 bg-white p-4 shadow-sm focus:outline-none sm:text-sm"
               >
                 {cardList.map((item) => (
                   <option key={item.title} value={item.title}>
@@ -250,7 +251,7 @@ const S11PayFeeMethod = () => {
                   name="cardNumber1"
                   onChange={handleInputChange}
                   value={userInfo.cardNumber1}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
                 <span className="p-3">-</span>
                 <input
@@ -258,7 +259,7 @@ const S11PayFeeMethod = () => {
                   name="cardNumber2"
                   onChange={handleInputChange}
                   value={userInfo.cardNumber2}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
                 <span className="p-3">-</span>
                 <input
@@ -266,7 +267,7 @@ const S11PayFeeMethod = () => {
                   name="cardNumber3"
                   onChange={handleInputChange}
                   value={userInfo.cardNumber3}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
                 <span className="p-3">-</span>
                 <input
@@ -274,14 +275,14 @@ const S11PayFeeMethod = () => {
                   name="cardNumber4"
                   onChange={handleInputChange}
                   value={userInfo.cardNumber4}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
               </div>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="validTime"
-                className="block text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 block text-sm font-medium text-gray-700"
               >
                 유효기간
               </label>
@@ -292,7 +293,7 @@ const S11PayFeeMethod = () => {
                   maxLength={2}
                   onChange={handleInputChange}
                   value={userInfo.validTimeMonth}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
                 <span className="p-3">/</span>
                 <input
@@ -301,14 +302,14 @@ const S11PayFeeMethod = () => {
                   maxLength={2}
                   onChange={handleInputChange}
                   value={userInfo.validTimeYear}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
               </div>
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="validTime"
-                className="block text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 block text-sm font-medium text-gray-700"
               >
                 비밀번호 앞 2자리
               </label>
@@ -318,24 +319,24 @@ const S11PayFeeMethod = () => {
                 maxLength={2}
                 onChange={handleInputChange}
                 value={userInfo.cardPasswordDigit2}
-                className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
               />
             </div>
             <div className="col-span-6 mt-5 sm:col-span-4">
               <label
                 htmlFor="accountJumin"
-                className="flex flex-row w-full text-sm font-medium text-gray-700 mb-3"
+                className="mb-3 flex w-full flex-row text-sm font-medium text-gray-700"
               >
                 소유자 주민등록번호
               </label>
-              <div className="flex w-full mb-3">
+              <div className="mb-3 flex w-full">
                 <input
                   type="text"
                   name="accountJumin1"
                   maxLength={6}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin1}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
                 <span className="p-3">-</span>
                 <input
@@ -344,17 +345,17 @@ const S11PayFeeMethod = () => {
                   maxLength={7}
                   onChange={handleInputChange}
                   value={userInfo.accountJumin2}
-                  className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+                  className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
                 />
               </div>
             </div>
           </>
         )}
 
-        <div className="col-span-6 sm:col-span-4 mt-3">
+        <div className="col-span-6 mt-3 sm:col-span-4">
           <label
             htmlFor="methodType"
-            className="block text-sm font-medium text-gray-700 mb-3"
+            className="mb-3 block text-sm font-medium text-gray-700"
           >
             관계
           </label>
@@ -364,7 +365,7 @@ const S11PayFeeMethod = () => {
             onChange={(e) => {
               setRelation(e.target.value);
             }}
-            className="p-4 block w-full rounded-md border border-gray-300 bg-white shadow-sm focus:outline-none sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 bg-white p-4 shadow-sm focus:outline-none sm:text-sm"
           >
             {relationList.map((item) => (
               <option key={item.title} value={item.title}>
@@ -374,7 +375,7 @@ const S11PayFeeMethod = () => {
           </select>
         </div>
       </div>
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
+      <div className="px-4 py-3 sm:px-6">
         <button
           onClick={() => {
             if (process.env.NEXT_PUBLIC_ENV_VARIABLE === 'development') {

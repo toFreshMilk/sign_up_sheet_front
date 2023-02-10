@@ -62,9 +62,11 @@ const S12JoinResult = () => {
       const s0 = sessionStorage.getItem('S0FeeId');
       sessionStorage.clear();
       sessionStorage.setItem('S0FeeId', JSON.stringify(s0));
+      // eslint-disable-next-line no-alert
       alert('접수가 완료되었습니다.');
       await router.push('/');
     } else {
+      // eslint-disable-next-line no-alert
       alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
     }
   };
@@ -101,10 +103,10 @@ const S12JoinResult = () => {
         </div>
         <div className="border-t border-gray-200">
           <dl>
-            <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-bold text-gray-700">가입정보</dt>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">가입유형</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 {totalData.S1UserType?.name}
@@ -116,17 +118,17 @@ const S12JoinResult = () => {
                 {payFeeObj.RATENM}
               </dd>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">납부 금액</dt>
               <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                 {payFeeObj.RATEAMT} 원
               </dd>
             </div>
 
-            <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-bold text-gray-700">고객 구분</dt>
             </div>
-            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+            <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt className="text-sm font-medium text-gray-500">
                 명의 고객 이름
               </dt>
@@ -144,12 +146,12 @@ const S12JoinResult = () => {
             </div>
             {totalData.S3JoinType?.joinType === '신규가입' ? (
               <>
-                <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-bold text-gray-700">
                     신규희망번호
                   </dt>
                 </div>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
                     희망번호1
                   </dt>
@@ -168,12 +170,12 @@ const S12JoinResult = () => {
               </>
             ) : (
               <>
-                <div className="bg-gray-50 px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="px-4 py-3 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-bold text-gray-700">
                     번호 이동 정보
                   </dt>
                 </div>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                <div className="px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                   <dt className="text-sm font-medium text-gray-500">
                     번호이동 휴대폰 번호
                   </dt>
@@ -236,12 +238,13 @@ const S12JoinResult = () => {
             </div>
           </dl>
         </div>
-        <div className="bg-gray-50 px-4 py-3 sm:px-6">
+        <div className="px-4 py-3 sm:px-6">
           <button
             onClick={async () => {
               if (identificationRst) {
                 await finalRow();
               } else {
+                // eslint-disable-next-line no-alert
                 alert('본인인증 정보가 일치하지 않습니다.');
               }
             }}

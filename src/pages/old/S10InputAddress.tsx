@@ -30,13 +30,13 @@ const S10InputAddress = () => {
   return (
     <Main>
       <div className="overflow-hidden shadow sm:rounded-md">
-        <h2 className="flex justify-center py-10 text-3xl font-bold p-3">
+        <h2 className="flex justify-center p-3 py-10 text-3xl font-bold">
           유심 및 요금 청구서를 받으실 주소를 입력해주세요
         </h2>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <label
             htmlFor="receiveName"
-            className="block text-sm font-medium text-gray-700 mb-3"
+            className="mb-3 block text-sm font-medium text-gray-700"
           >
             수령인
           </label>
@@ -45,13 +45,13 @@ const S10InputAddress = () => {
             name="receiveName"
             onChange={handleInputChange}
             value={userInfo.receiveName}
-            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <label
             htmlFor="receivePhoneNumber"
-            className="block text-sm font-medium text-gray-700 mb-3"
+            className="mb-3 block text-sm font-medium text-gray-700"
           >
             수령인 휴대폰 번호
           </label>
@@ -60,12 +60,12 @@ const S10InputAddress = () => {
             name="receivePhoneNumber"
             onChange={handleInputChange}
             value={userInfo.receivePhoneNumber}
-            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
           />
         </div>
         <div className="col-span-6 mt-5 sm:col-span-4">
           <button
-            className="p-3 rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            className="rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
             onClick={() => {
               setOpenPostcode(!openPostcode);
             }}
@@ -92,7 +92,7 @@ const S10InputAddress = () => {
             type="text"
             name="receiveAddress1"
             readOnly={true}
-            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
             onChange={handleInputChange}
             value={userInfo.receiveAddress1}
           />
@@ -101,7 +101,7 @@ const S10InputAddress = () => {
           <input
             type="text"
             name="receiveAddress2"
-            className="p-3 block w-full rounded-md border border-gray-300 shadow-sm sm:text-sm"
+            className="block w-full rounded-md border border-gray-300 p-3 shadow-sm sm:text-sm"
             onChange={handleInputChange}
             value={userInfo.receiveAddress2}
           />
@@ -133,7 +133,7 @@ const S10InputAddress = () => {
         </div>
       </div>
 
-      <div className="bg-gray-50 px-4 py-3 sm:px-6">
+      <div className="px-4 py-3 sm:px-6">
         <button
           onClick={() => {
             sessionStorage.setItem(
