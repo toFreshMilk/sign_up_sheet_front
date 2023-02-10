@@ -382,3 +382,38 @@
   display: inline-block;
   vertical-align: middle;
 }
+.tooltip {
+  display: inline-flex;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(42, 48, 55);
+  border-radius: 12px;
+  margin-right: 16px;
+  padding: 12px 16px;
+  word-break: keep-all;
+  position: absolute;
+  inset: auto auto 0 0;
+  transform: translate(110px, );
+  opacity: 1;
+}
+.tooltipArrow {
+  position: absolute;
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  bottom: -4px;
+  left: 0px;
+  transform: translate(71px, 0px);
+}
+.tooltipArrow:before {
+  content: "";
+  position: absolute;
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  background-color: rgb(42, 48, 55);
+  border-radius: 2px;
+  transform: rotate(45deg);
+  border-top-color: #2a3037!important;
+}
