@@ -48,6 +48,9 @@ input::-webkit-inner-spin-button {
   height: 400px;
   transform: translate3d(0, 10px, 0);
   will-change: height;
+  max-width: 480px;
+  width: 100%;
+  margin: 0 auto;
 }
 [data-rsbs-overlay]:focus {
   outline: none;

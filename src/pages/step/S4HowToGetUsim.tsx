@@ -3,12 +3,12 @@ import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 import {
   HowToGetUsimSvg1,
   HowToGetUsimSvg2,
   HowToGetUsimSvg3,
 } from '@/utils/Svgs';
-import { Context } from '@/utils/Context';
 
 const S4HowToGetUsim = () => {
   const router = useRouter();
