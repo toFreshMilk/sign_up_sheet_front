@@ -1,13 +1,14 @@
 import 'react-tooltip/dist/react-tooltip.css';
 
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
-import { driverLicenceRegion } from '@/utils/PublicData';
 import { identificationCheckLG } from '@/utils/Commons';
+import { Context } from '@/utils/Context';
+import { driverLicenceRegion } from '@/utils/PublicData';
 
 const identificationTypes = [
   {
@@ -23,27 +24,8 @@ const identificationTypes = [
 ] as any;
 const S8Identification = () => {
   const router = useRouter();
-  const [s1UserType, setS1UserType] = useState<{
-    name: string;
-    value: string;
-    isStock: boolean;
-    checked: boolean;
-  }>();
-  const [s5PersonalInfo, setS5PersonalInfo] = useState<{
-    userName: string;
-    userNameParent: string;
-    jumin1: string;
-    jumin2: string;
-    jumin3: string;
-    jumin4: string;
-  }>({
-    userName: '',
-    userNameParent: '',
-    jumin1: '',
-    jumin2: '',
-    jumin3: '',
-    jumin4: '',
-  });
+  const { total, setTotal } = useContext(Context) as any;
+  const [who, setWho] = useState('');
   const [driver1, setDriver1] = useState('');
   const [driver2, setDriver2] = useState('');
   const [driver3, setDriver3] = useState('');
@@ -51,24 +33,23 @@ const S8Identification = () => {
   const [monthYear, setMonthYear] = useState('');
   const [identificationType, setIdentificationType] =
     useState(identificationTypes);
+  const [identiWarning, setIdentiWarning] = useState(false);
+
   const checkIdentification = async () => {
-    let inqDvCd = '';
-    if (identificationType[0]?.checked) {
-      inqDvCd = 'REGID';
-    } else {
-      inqDvCd = 'DRIVE';
-    }
-    if (s1UserType?.value === '외국인') {
+    let inqDvCd = identificationType[0]?.checked ? 'REGID' : 'DRIVE';
+    if (total.S1UserType.value === '외국인') {
       inqDvCd = 'FORGN';
     }
-    let persFrgnrPsnoEnprNo = '';
+    let persFrgnrPsnoEnprNo: string | undefined = '';
     let custNm: string | undefined = '';
-    if (s1UserType?.value === '미성년자') {
-      persFrgnrPsnoEnprNo = s5PersonalInfo.jumin3 + s5PersonalInfo.jumin4;
-      custNm = s5PersonalInfo?.userNameParent;
+    if (total.S1UserType.value === '미성년자') {
+      persFrgnrPsnoEnprNo =
+        total.S5PersonalInfoParent.jumin3 + total.S5PersonalInfoParent.jumin4;
+      custNm = total.S5PersonalInfoParent.userNameParent;
     } else {
-      persFrgnrPsnoEnprNo = s5PersonalInfo.jumin1 + s5PersonalInfo.jumin2;
-      custNm = s5PersonalInfo.userName;
+      persFrgnrPsnoEnprNo =
+        total.S5PersonalInfo.jumin1 + total.S5PersonalInfo.jumin2;
+      custNm = total.S5PersonalInfo.userName;
     }
     const identiParts = {
       inqDvCd,
@@ -77,26 +58,25 @@ const S8Identification = () => {
       isuDt: monthYear,
       drvLcnsNo: driver1 + driver2 + driver3 + driver4,
     };
-    const checkResult = await identificationCheckLG(identiParts);
-    console.log(checkResult);
+    console.log(identiParts);
+    const lgResult = await identificationCheckLG(identiParts);
+
+    return lgResult;
   };
   useEffect(() => {
-    const S1UserType = sessionStorage.getItem('S1UserType') || '';
-    const S1UserTypeJson = JSON.parse(S1UserType);
-    setS1UserType(S1UserTypeJson);
-    const S5PersonalInfo = sessionStorage.getItem('S5PersonalInfo') || '';
-    const S5PersonalInfoJson = JSON.parse(S5PersonalInfo);
-    setS5PersonalInfo(S5PersonalInfoJson);
+    const whoami =
+      total.S1UserType?.value === '미성년자'
+        ? '법정대리인'
+        : total.S5PersonalInfo?.userName;
+    setWho(whoami);
   }, []);
-
   return (
     <Main>
       <div className={``}>
         <h2 className={`${styles.stepTitle}`}>
-          {s5PersonalInfo?.userName || '고객'}님의 신분증 <br /> 정보를
-          입력해주세요
+          {who}님의 신분증 <br /> 정보를 입력해주세요
         </h2>
-        <h3 className="text-[16px] text-[#868e96] mt-[8px]">
+        <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           부정가입방지를 위한 과정이에요
         </h3>
         <br className={'mt-[32px]'} />
@@ -106,7 +86,7 @@ const S8Identification = () => {
               key={item.title}
               className={`${
                 styles.grayBtn
-              } w-full text-[16px] text-center p-[18px] font-bold ${
+              } w-full p-[18px] text-center text-[16px] font-bold ${
                 item.checked ? styles.clickBtn : ''
               }`}
               onClick={() => {
@@ -140,7 +120,7 @@ const S8Identification = () => {
               >
                 {driverLicenceRegion.map((item) => (
                   <option key={item.name} value={item.value}>
-                    {item.value}
+                    {item.name}
                   </option>
                 ))}
               </select>
@@ -181,7 +161,7 @@ const S8Identification = () => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="text-[#dee1e7] w-[20px] h-[20px]"
+            className="h-[20px] w-[20px] text-[#dee1e7]"
             data-tooltip-content={`${
               identificationType[0].checked ? '주민등록증' : '운전면허증'
             } 앞면 하단의 날짜를 적어주세요`}
@@ -204,20 +184,46 @@ const S8Identification = () => {
           }}
           type="text"
         />
+        {identiWarning ? (
+          <div className="mt-[24px]">
+            <div className={`${styles.juminWaring}`}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-9 3.75a1 1 0 112 0 1 1 0 01-2 0zm1-2.5a1 1 0 001-1v-4a1 1 0 10-2 0v4a1 1 0 001 1z"
+                  clipRule="evenodd"
+                ></path>
+              </svg>
+              신분증을 다시 확인해 주세요
+            </div>
+          </div>
+        ) : null}
         <button
-          disabled={driver1 === ''}
-          onClick={() => {
-            checkIdentification();
-            sessionStorage.setItem(
-              'S8Identification',
-              JSON.stringify({
-                driver1,
-                identificationType,
-              })
-            );
-            router.push('./S9');
+          disabled={
+            identificationType[0].checked
+              ? monthYear.length !== 8
+              : monthYear.length !== 8 ||
+                driver2.length !== 2 ||
+                driver3.length !== 6 ||
+                driver4.length !== 2
+          }
+          onClick={async () => {
+            const lgResult = await checkIdentification();
+            console.log(lgResult);
+            if (lgResult.totSuccCd === 'Y') {
+              setIdentiWarning(false);
+              setTotal({ ...total, S8Identification: '' });
+              router.push('./S9SelfAuth');
+            } else {
+              setIdentiWarning(true);
+            }
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음 단계로
         </button>

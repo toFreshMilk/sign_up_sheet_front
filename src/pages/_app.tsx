@@ -2,9 +2,9 @@ import '../styles/global.css';
 
 import type { AppProps } from 'next/app';
 import { DefaultSeo } from 'next-seo';
+import { useEffect, useState } from 'react';
 
 import { AppConfig } from '@/utils/AppConfig';
-import { useEffect, useState } from 'react';
 import { Context } from '@/utils/Context';
 
 const DEFAULT_SEO = {
