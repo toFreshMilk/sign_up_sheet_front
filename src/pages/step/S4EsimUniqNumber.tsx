@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 import { ArrowSvg, SettingSvg } from '@/utils/Svgs';
 
 const S4EsimUniqNumber = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [eid, setEid] = useState('');
   const [imei, setImei] = useState('');
   const [imei2, setImei2] = useState('');
@@ -105,14 +107,14 @@ const S4EsimUniqNumber = () => {
             eid.length !== 32 || imei.length !== 15 || imei2.length !== 15
           }
           onClick={() => {
-            sessionStorage.setItem(
-              'S4EsimUniqNumber',
-              JSON.stringify({
+            setTotal({
+              ...total,
+              S4EsimUniqNumber: {
                 eid,
                 imei,
                 imei2,
-              })
-            );
+              },
+            });
             router.push('./S5PhoneNumber');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

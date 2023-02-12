@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S4UsimNumber = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [isErr] = useState(false);
   const [usimModel, setUsimModel] = useState('');
   const [usimNuber, setUsimNumber] = useState('');
@@ -61,10 +63,7 @@ const S4UsimNumber = () => {
         <button
           disabled={usimModel === '' || usimNuber === ''}
           onClick={() => {
-            sessionStorage.setItem(
-              'S4UsimNumber',
-              JSON.stringify({ usimModel, usimNuber })
-            );
+            setTotal({ ...total, S4UsimNumber: { usimModel, usimNuber } });
             router.push('./S5PhoneNumber');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

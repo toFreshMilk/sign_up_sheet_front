@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 interface IfYakgwan {
   name: string;
@@ -12,6 +13,7 @@ interface IfYakgwan {
 }
 const S2Yakgwan = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [requiredYakgwans, setRequiredYakgwans] = useState([
     {
       name: '스마텔 서비스 이용약관 (필수)',
@@ -87,7 +89,10 @@ const S2Yakgwan = () => {
             />
           </div>
           <div className="ml-[8px]">
-            <label htmlFor={`agreeAll`} className="font-medium text-gray-700 align-text-top">
+            <label
+              htmlFor={`agreeAll`}
+              className="font-medium text-gray-700 align-text-top"
+            >
               약관에 모두 동의
             </label>
           </div>
@@ -201,8 +206,8 @@ const S2Yakgwan = () => {
                 (item: IfYakgwan) => item.checked
               );
               // console.log(optionalChecked?.name);
-              const result = { marketing: optionalChecked?.name || '' };
-              sessionStorage.setItem('S2Yakgwan', JSON.stringify(result));
+              const result = { marketing: optionalChecked?.name || '{}' };
+              setTotal({ ...total, S2Yakgwan: result });
               router.push('./S3JoinType');
             } else {
               alert('필수 항목에 동의해주세요.');

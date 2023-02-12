@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S5PersonalInfoParent = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [userNameParent, setUserNameParent] = useState('');
   const [jumin3, setJumin3] = useState('');
   const [jumin4, setJumin4] = useState('');
@@ -84,14 +86,14 @@ const S5PersonalInfoParent = () => {
             const isOk = juminRule.test(`${jumin3}-${jumin4}`);
             setVerifyCHeckJumin(isOk);
             if (isOk) {
-              sessionStorage.setItem(
-                'S5PersonalInfoParent',
-                JSON.stringify({
+              setTotal({
+                ...total,
+                S5PersonalInfoParent: {
                   userNameParent,
                   jumin3,
                   jumin4,
-                })
-              );
+                },
+              });
               router.push('./S6Address');
             }
           }}

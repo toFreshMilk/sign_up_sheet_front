@@ -1,16 +1,18 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const Index = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   useEffect(() => {
     const asPath = router.asPath || '';
     const feeId = asPath.split('=')[1] || 'LPZ0015470';
     // console.log(feeId);
-    sessionStorage.setItem('S0FeeId', JSON.stringify({ feeId }));
+    setTotal({ ...total, feeId });
     router.push('/step/S1UserType');
   }, []);
 

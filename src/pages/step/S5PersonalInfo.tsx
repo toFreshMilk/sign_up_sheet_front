@@ -1,26 +1,17 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S5PersonalInfo = () => {
   const router = useRouter();
-  const [s1UserType, setS1UserType] = useState<{
-    name: string;
-    value: string;
-    isStock: boolean;
-    checked: boolean;
-  }>();
+  const { total, setTotal } = useContext(Context) as any;
   const [userName, setUserName] = useState('');
   const [jumin1, setJumin1] = useState('');
   const [jumin2, setJumin2] = useState('');
   const [verifyCHeckJumin, setVerifyCHeckJumin] = useState(true);
-  useEffect(() => {
-    const S1UserType = sessionStorage.getItem('S1UserType') || '';
-    const S1UserTypeJson = JSON.parse(S1UserType);
-    setS1UserType(S1UserTypeJson);
-  }, []);
 
   return (
     <Main>
@@ -95,18 +86,18 @@ const S5PersonalInfo = () => {
             const isOk = juminRule.test(`${jumin1}-${jumin2}`);
             setVerifyCHeckJumin(isOk);
             const goal =
-              s1UserType?.value === '미성년자'
+              total.S1UserType.value === '미성년자'
                 ? './S5PersonalInfoParent'
                 : './S6Address';
             if (isOk) {
-              sessionStorage.setItem(
-                'S5PersonalInfo',
-                JSON.stringify({
+              setTotal({
+                ...total,
+                S5PersonalInfo: {
                   userName,
                   jumin1,
                   jumin2,
-                })
-              );
+                },
+              });
               router.push(goal);
             }
           }}

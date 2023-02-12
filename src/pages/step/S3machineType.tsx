@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 import { machineModelList } from '@/utils/PublicData';
 
 interface ModelObj {
@@ -12,6 +13,7 @@ interface ModelObj {
 
 const S3machineType = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [modelName, setModelName] = useState('');
   const [modelList, setModelList] = useState<ModelObj[]>([
     { title: '선택', disabled: false },
@@ -42,12 +44,7 @@ const S3machineType = () => {
         </select>
         <button
           onClick={() => {
-            sessionStorage.setItem(
-              'S3machineType',
-              JSON.stringify({
-                modelName,
-              })
-            );
+            setTotal({ ...total, S3machineType: modelName });
             router.push('./S4HowToGetUsim');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

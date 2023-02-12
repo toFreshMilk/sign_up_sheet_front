@@ -1,8 +1,9 @@
 import { RadioGroup } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const custommerTypes = [
   {
@@ -34,10 +35,10 @@ function classNames(...classes: string[]) {
 
 const S1UserType = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [selectedType] = useState(custommerTypes);
-
   const setSelectedType = (v: any) => {
-    sessionStorage.setItem('S1UserType', JSON.stringify(v));
+    setTotal({ ...total, S1UserType: v });
     router.push('./S2Yakgwan');
   };
 

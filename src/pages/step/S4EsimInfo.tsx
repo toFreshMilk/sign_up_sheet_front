@@ -1,20 +1,20 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 import { ArrowSvg, SettingSvg } from '@/utils/Svgs';
 
 const S4EsimInfo = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [modelName, setModelName] = useState('');
   const [capacity, setCapacity] = useState('');
   const [serial, setSerial] = useState('');
   const [radio, setRadio] = useState(true);
   useEffect(() => {
-    const s3 = sessionStorage.getItem('S3machineType') || '';
-    const s3Parse = JSON.parse(s3);
-    setModelName(s3Parse.modelName);
+    setModelName(total.modelName);
   }, []);
   return (
     <Main>
@@ -124,6 +124,15 @@ const S4EsimInfo = () => {
                 factory: radio ? '아이폰' : '삼성',
               })
             );
+            setTotal({
+              ...total,
+              S4EsimInfo: {
+                modelName,
+                capacity,
+                serial,
+                factory: radio ? '아이폰' : '삼성',
+              },
+            });
             router.push('./S4EsimUniqNumber');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

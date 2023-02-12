@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 interface Aaa {
   title: string;
@@ -24,6 +25,7 @@ const isUsimObj = [
 ] as any;
 const S4IsUsim = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [isUsim, setIsUsim] = useState(isUsimObj);
   return (
     <Main>
@@ -72,10 +74,7 @@ const S4IsUsim = () => {
       <button
         onClick={() => {
           const result = isUsim.filter((item: Aaa) => item.checked);
-          sessionStorage.setItem(
-            'S4UsimType',
-            JSON.stringify({ usimType: result[0].val })
-          );
+          setTotal({ ...total, usimType: result[0].val });
           router.push(result[0].goal);
         }}
         className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

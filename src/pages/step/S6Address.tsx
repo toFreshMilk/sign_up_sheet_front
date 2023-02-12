@@ -1,12 +1,14 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S6Address = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [bunji, setBunji] = useState('');
   const [openPostcode, setOpenPostcode] = useState(false);
   const [address1, setAddress1] = useState('');
@@ -94,14 +96,14 @@ const S6Address = () => {
         <button
           disabled={bunji === '' || address1 === '' || address2 === ''}
           onClick={() => {
-            sessionStorage.setItem(
-              'S6Address',
-              JSON.stringify({
+            setTotal({
+              ...total,
+              S6Address: {
                 bunji,
                 address1,
                 address2,
-              })
-            );
+              },
+            });
             router.push('./S7Email');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

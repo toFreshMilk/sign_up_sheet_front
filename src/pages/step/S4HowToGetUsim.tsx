@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
@@ -8,9 +8,11 @@ import {
   HowToGetUsimSvg2,
   HowToGetUsimSvg3,
 } from '@/utils/Svgs';
+import { Context } from '@/utils/Context';
 
 const S4HowToGetUsim = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [howToGetUsimBtn1, setHowToGetUsimBtn1] = useState({
     title: 'QR 코드로 다운',
     subTitle: '빠른 개통',
@@ -106,10 +108,7 @@ const S4HowToGetUsim = () => {
             ? './S4EsimInfo'
             : './S4UsimType';
           const result = howToGetUsimBtn1.checked ? 'Esim' : '배송 받기';
-          sessionStorage.setItem(
-            'S4HowToGetUsim',
-            JSON.stringify({ goal, result })
-          );
+          setTotal({ ...total, S4HowToGetUsim: result });
           router.push(goal);
         }}
         className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
@@ -118,10 +117,7 @@ const S4HowToGetUsim = () => {
       </button>
       <button
         onClick={() => {
-          sessionStorage.setItem(
-            'S4HowToGetUsim',
-            JSON.stringify({ result: '유심 있음' })
-          );
+          setTotal({ ...total, S4HowToGetUsim: '유심 있음' });
           router.push('./S4UsimNumber');
         }}
         className={`${styles.nextBtn2} flex w-full justify-center`}

@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S4UsimType = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [usimTypes] = useState([
     {
       title: '일반 유심',
@@ -29,8 +31,7 @@ const S4UsimType = () => {
               <button
                 key={item.title}
                 onClick={() => {
-                  const result = { joinType: item.title };
-                  sessionStorage.setItem('S4UsimType', JSON.stringify(result));
+                  setTotal({ ...total, S4UsimType: item.title });
                   router.push('./S5PhoneNumber');
                 }}
                 className={`${styles.joinTypeBtn}`}

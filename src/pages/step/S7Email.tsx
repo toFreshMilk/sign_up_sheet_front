@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S7Email = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [email, setEmail] = useState('');
   const regex = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/;
   return (
@@ -28,12 +30,7 @@ const S7Email = () => {
         <button
           disabled={!regex.test(email)}
           onClick={() => {
-            sessionStorage.setItem(
-              'S7Email',
-              JSON.stringify({
-                email,
-              })
-            );
+            setTotal({ ...total, S7Email: email });
             router.push('./S8Identification');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

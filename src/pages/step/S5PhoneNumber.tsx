@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 import { alttleTelecomList } from '@/utils/PublicData';
 
 const telecomList = [
@@ -16,6 +17,7 @@ const telecomList = [
 ];
 const S5PhoneNumber = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [selectedTelecom, setSelectedTelecom] = useState({
     telecomName: '',
     selected: false,
@@ -130,14 +132,14 @@ const S5PhoneNumber = () => {
             selectedTelecom?.telecomName === '' || phoneNumber.length !== 13
           }
           onClick={() => {
-            sessionStorage.setItem(
-              'S5PhoneNumber',
-              JSON.stringify({
+            setTotal({
+              ...total,
+              S5PhoneNumber: {
                 ...selectedTelecom,
                 alddleTelecom,
                 phoneNumber,
-              })
-            );
+              },
+            });
             router.push('./S5PersonalInfo');
           }}
           className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}

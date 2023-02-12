@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
+import { Context } from '@/utils/Context';
 
 const S3JoinType = () => {
   const router = useRouter();
+  const { total, setTotal } = useContext(Context) as any;
   const [joinTypes] = useState([
     {
       title: '번호이동',
@@ -29,7 +31,7 @@ const S3JoinType = () => {
                 key={item.title}
                 onClick={() => {
                   const result = { joinType: item.title };
-                  sessionStorage.setItem('S3JoinType', JSON.stringify(result));
+                  setTotal({ ...total, S3JoinType: result });
                   router.push('./S3machineType');
                 }}
                 className={`${styles.joinTypeBtn}`}
