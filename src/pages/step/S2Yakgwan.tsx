@@ -56,12 +56,12 @@ const S2Yakgwan = () => {
   ]);
   return (
     <Main>
-      <h1 className="flex items-start font-bold text-[24px] mb-[32px]">
+      <h1 className="mb-[32px] flex items-start text-[24px] font-bold">
         알뜰폰 신청을 위해 <br />
         약관에 동의해 주세요
       </h1>
       <div
-        className={`${styles.borderStyle} mb-10 text-[16px] p-[16px] border-gray-300`}
+        className={`${styles.borderStyle} mb-10 border-gray-300 p-[16px] text-[16px]`}
       >
         <div className="flex items-start">
           <div className="flex h-7 items-center">
@@ -91,7 +91,7 @@ const S2Yakgwan = () => {
           <div className="ml-[8px]">
             <label
               htmlFor={`agreeAll`}
-              className="font-medium text-gray-700 align-text-top"
+              className="align-text-top font-medium text-gray-700"
             >
               약관에 모두 동의
             </label>
@@ -99,7 +99,7 @@ const S2Yakgwan = () => {
         </div>
       </div>
 
-      <div className="space-y-[16px] mb-10">
+      <div className="mb-10 space-y-[16px]">
         {requiredYakgwans.map((item: IfYakgwan, index: number) => (
           <div key={index} className="flex w-full relatice">
             <div className="flex w-5/6 items-start">
@@ -120,24 +120,24 @@ const S2Yakgwan = () => {
               <div className="ml-3 text-sm">
                 <label
                   htmlFor={`requiredYakgwan${index}`}
-                  className="font-medium text-gray-700 align-text-top"
+                  className="align-text-top font-medium text-gray-700"
                 >
                   {item.name}
                 </label>
               </div>
             </div>
-            <div className="flex w-1/6 items-end flex-col justify-center">
+            <div className="flex w-1/6 flex-col items-end justify-center">
               <Link href={`/yakgwans/${item.value}`}>
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="link-item"
+                  className="linkItem"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
                     fill="currentColor"
-                    className="text-gray-500 w-[50px] h-[16px]"
+                    className="h-[16px] w-[50px] text-gray-500"
                   >
                     <path d="M5.46967 12.4697C5.17678 12.7626 5.17678 13.2374 5.46967 13.5303C5.76256 13.8232 6.23744 13.8232 6.53033 13.5303L5.46967 12.4697ZM11 8L11.5303 8.53033C11.8232 8.23744 11.8232 7.76256 11.5303 7.46967L11 8ZM6.53033 2.46967C6.23744 2.17678 5.76256 2.17678 5.46967 2.46967C5.17678 2.76256 5.17678 3.23744 5.46967 3.53033L6.53033 2.46967ZM6.53033 13.5303L11.5303 8.53033L10.4697 7.46967L5.46967 12.4697L6.53033 13.5303ZM11.5303 7.46967L6.53033 2.46967L5.46967 3.53033L10.4697 8.53033L11.5303 7.46967Z" />
                   </svg>
@@ -147,7 +147,7 @@ const S2Yakgwan = () => {
           </div>
         ))}
         {optionalYakgwans.map((item: IfYakgwan, index: number) => (
-          <div key={index} className="flex w-full relatice">
+          <div key={index} className="relatice flex w-full">
             <div className="flex w-5/6 items-start">
               <div>
                 <input
@@ -166,13 +166,13 @@ const S2Yakgwan = () => {
               <div className="ml-3 text-sm">
                 <label
                   htmlFor={`requiredYakgwan${index}`}
-                  className="font-medium text-gray-700 align-text-top"
+                  className="align-text-top font-medium text-gray-700"
                 >
                   {item.name}
                 </label>
               </div>
             </div>
-            <div className="flex w-1/6 items-end flex-col justify-center">
+            <div className="flex w-1/6 flex-col items-end justify-center">
               <Link href={`/yakgwans/${item.value}`}>
                 <a
                   target="_blank"
@@ -183,7 +183,7 @@ const S2Yakgwan = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
                     fill="currentColor"
-                    className="text-gray-500 w-[50px] h-[16px]"
+                    className="h-[16px] w-[50px] text-gray-500"
                   >
                     <path d="M5.46967 12.4697C5.17678 12.7626 5.17678 13.2374 5.46967 13.5303C5.76256 13.8232 6.23744 13.8232 6.53033 13.5303L5.46967 12.4697ZM11 8L11.5303 8.53033C11.8232 8.23744 11.8232 7.76256 11.5303 7.46967L11 8ZM6.53033 2.46967C6.23744 2.17678 5.76256 2.17678 5.46967 2.46967C5.17678 2.76256 5.17678 3.23744 5.46967 3.53033L6.53033 2.46967ZM6.53033 13.5303L11.5303 8.53033L10.4697 7.46967L5.46967 12.4697L6.53033 13.5303ZM11.5303 7.46967L6.53033 2.46967L5.46967 3.53033L10.4697 8.53033L11.5303 7.46967Z" />
                   </svg>
@@ -213,7 +213,7 @@ const S2Yakgwan = () => {
               alert('필수 항목에 동의해주세요.');
             }
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음
         </button>

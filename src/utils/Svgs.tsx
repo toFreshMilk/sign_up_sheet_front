@@ -167,10 +167,28 @@ const ArrowSvg = () => {
     </svg>
   );
 };
+const QuestionSvg = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden="true"
+      className="mr-[4px] h-[16px] w-[16px]"
+    >
+      <path
+        fillRule="evenodd"
+        d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1.083-5.937v-.14c.006-1.58.432-2.062 1.193-2.538.546-.356.972-.75.965-1.333.007-.635-.489-1.048-1.104-1.054-.59.006-1.143.4-1.168 1.143H7C7.032 6.357 8.358 5.5 9.983 5.5c1.771 0 3.022.92 3.022 2.488 0 1.048-.54 1.708-1.371 2.21-.718.425-1.035.837-1.041 1.726v.14H8.917zm.876 2.87c-.597 0-1.08-.476-1.066-1.067a1.042 1.042 0 011.066-1.053 1.06 1.06 0 011.054 1.053 1.07 1.07 0 01-1.054 1.067z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+};
 export {
   ArrowSvg,
   HowToGetUsimSvg1,
   HowToGetUsimSvg2,
   HowToGetUsimSvg3,
+  QuestionSvg,
   SettingSvg,
 };
