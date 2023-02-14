@@ -440,3 +440,32 @@
   height: 20px;
   color: rgb(250, 82, 82);
 }
+.authComponyList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logoBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+}
+.logoBoxNaver {
+  background-color: #06be34;
+}
+.logoBoxToss {
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+}
+.logoBoxCredit {
+  background-color: #e8edff;
+}
+.logoContent {
+  margin-top: 1rem;
+  color: #495057;
+  font-size: .875rem;
+  font-weight: 500;
+}

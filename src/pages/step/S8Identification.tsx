@@ -58,7 +58,6 @@ const S8Identification = () => {
       isuDt: monthYear,
       drvLcnsNo: driver1 + driver2 + driver3 + driver4,
     };
-    console.log(identiParts);
     const lgResult = await identificationCheckLG(identiParts);
 
     return lgResult;
@@ -92,10 +91,7 @@ const S8Identification = () => {
               onClick={() => {
                 identificationTypes.map((item2: any, index2: number) => {
                   const temp = item2;
-                  temp.checked = false;
-                  if (index === index2) {
-                    temp.checked = true;
-                  }
+                  temp.checked = index === index2;
                   return temp;
                 });
                 setIdentificationType([...identificationTypes]);
