@@ -119,4 +119,6 @@ input::-webkit-inner-spin-button {
   width: 99.6% !important;
   margin: 0 1px !important;
   position: relative !important;
+  font-size: 16px !important;
+  font-weight: 600;
 }
