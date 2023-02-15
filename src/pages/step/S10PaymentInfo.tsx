@@ -22,7 +22,7 @@ const identificationTypes = [
     val: 'DRIVE',
   },
 ] as any;
-const S8Identification = () => {
+const S10PaymentInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [who, setWho] = useState('');
@@ -228,4 +228,4 @@ const S8Identification = () => {
   );
 };
 
-export default S8Identification;
+export default S10PaymentInfo;
