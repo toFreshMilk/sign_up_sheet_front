@@ -5,7 +5,12 @@ import { useContext, useEffect, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
-import { NaverDetail, TossDetail, CreditDetail } from '@/utils/AuthDetails';
+import {
+  CreditDetail,
+  IfAuthDifficult,
+  NaverDetail,
+  TossDetail,
+} from '@/utils/AuthDetails';
 import { Context } from '@/utils/Context';
 import { QuestionSvg } from '@/utils/Svgs';
 
@@ -29,6 +34,12 @@ const logoList = [
     uniqCss: `${styles.logoBoxCredit}`,
   },
 ];
+const authDifficult = [
+  {
+    name: '어려움',
+  },
+];
+const all = [...logoList, ...authDifficult];
 
 const S9SelfAuth = () => {
   const router = useRouter();
@@ -48,8 +59,8 @@ const S9SelfAuth = () => {
       case '신용카드':
         component = <CreditDetail setShowDetailInfo={setShowDetailInfo} />;
         break;
-      case 'qna':
-        component = <div>네이버4</div>;
+      case '어려움':
+        component = <IfAuthDifficult setShowDetailInfo={setShowDetailInfo} />;
         break;
       default:
         component = <div></div>;
@@ -61,12 +72,12 @@ const S9SelfAuth = () => {
     setShowDetailInfo(!showDetailInfo);
   };
   useEffect(() => {
-    console.log('lgResult');
+    console.log(all);
   }, []);
   return (
     <Main>
       {showDetailInfo ? (
-        authInfoPage(logoList[selectedIdx])
+        authInfoPage(all[selectedIdx])
       ) : (
         <div>
           <h2 className={`${styles.stepTitle}`}>
@@ -102,7 +113,7 @@ const S9SelfAuth = () => {
             <button
               className="flex items-center rounded-lg bg-gray-200 py-[8px] px-[12px] text-[14px] font-medium text-gray-600"
               onClick={() => {
-                clickLogo(item, idx);
+                clickLogo(authDifficult[0], 3);
               }}
             >
               <QuestionSvg />

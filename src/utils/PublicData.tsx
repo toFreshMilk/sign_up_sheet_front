@@ -172,10 +172,178 @@ const machineModelList = [
   { label: 'iPhone XS', value: 'iPhone XS', rating: 'safe' },
   { label: '그 외', value: '그 외', rating: 'safe' },
 ];
+const difficultNaverList = [
+  {
+    title: '아이콘을 눌러도 반응이 없어요',
+    subTitle: (
+      <>
+        인증서가 없는 네이버 ID로 로그인 되어 있으면 인증이 제대로 작동하지 않아요. 다른 브라우저에서 시도해 주시거나, 네이버 로그인을 다시 진행해 주세요.
+      </>
+    ),
+    checked: true,
+  },
+  {
+    title: '"본인 명의의 계정으로 인증해 주세요" 라고 나와요',
+    subTitle: (
+      <>
+        앞서 입력하신 본인 명의의 네이버 인증서로 인증해야 해요. 다른
+        브라우저에서 시도해 주시거나, 아래 페이지에서 서비스 연동을 철회하고
+        다시 시도해 주세요.
+        <br />
+        <br />
+        <a
+          href="https://nid.naver.com/user2/help/externalAuth?lang=ko_KR"
+          target="_blank"
+          className="inline text-[14px] text-[#adafb2] hover:underline"
+          rel="noreferrer"
+        >
+          https://nid.naver.com/user2/help/externalAuth?lang=ko_KR
+        </a>
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '인증에 실패했다고 나와요',
+    subTitle: (
+      <>
+        핸드폰 잠금 정보가 달라졌거나 앱을 재설치했다면 인증서를 재발급 받아야
+        해요. 만료된 인증서로는 인증받을 수 없어요.
+        <br />
+        <br />
+        핸드폰 기기의 시간과 실제 시간이 같은지 확인해 주세요. 다르면 인증할 수
+        없어요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '인증하기를 눌렀는데 알림이 안 와요',
+    subTitle: (
+      <>
+        인증 시 로그인한 ID와 동일한 ID로 네이버 앱에 로그인 중인지, 알림이 켜져
+        있는지 확인해 주세요. 알림은 네이버 앱을 켜고 오른쪽 상단에 종 모양을
+        클릭하면 확인할 수 있어요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '인증서가 있는데 재발급하라고 떠요',
+    subTitle: (
+      <>
+        인증서 발급 후에 앱을 재설치 했거나, 핸드폰 잠금 정보가 달라지면 인증서를 재발급 받아야 해요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '인증을 했는데 다음 단계로 안 넘어가요',
+    subTitle: (
+      <>
+        신청하시는 분의 명의와 인증서 명의가 다르면 신청을 진행할 수 없어요.
+        같은 명의의 인증서로 진행해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '다른 네이버 ID로 로그인하고 싶어요',
+    subTitle: (
+      <>
+        브라우저에 이미 로그인이 되어 있다면 자동으로 로그인이 되어 있어요.
+        로그아웃 하거나 다른 브라우저로 신청해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '일시적인 오류라고 뜨고 인증이 안돼요',
+    subTitle: (
+      <>
+        기기를 교체했거나 iCloud 등에 백업된 앱이 자동으로 설치됐다면 앱을
+        삭제하고 스토어에서 다시 설치해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '2단계 인증 요청이 거부되었다고 떠요',
+    subTitle: <>네이버 앱이 최신 버전인지 확인하고 업데이트를 해주세요.</>,
+    checked: false,
+  },
+  {
+    title: '인증 시간을 초과했어요',
+    subTitle: <>네이버 아이콘을 다시 눌러서 인증을 진행해 주세요.</>,
+    checked: false,
+  },
+];
+const difficultTossList = [
+  {
+    title: '아이콘을 눌러도 반응이 없어요',
+    subTitle: <>토스 앱이 설치되어 있나요? 최신 버전의 토스 앱이 필요해요.</>,
+    checked: true,
+  },
+  {
+    title: '인증하기를 눌렀는데 알림이 안 와요',
+    subTitle: (
+      <>
+        알림 설정이 꺼져있지는 않나요? 토스 앱을 켜서 오른쪽 상단에 종 모양을
+        클릭해서 인증을 진행해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '요청이 만료되었다고 떠요',
+    subTitle: (
+      <>
+        인증 가능한 시간이 지났기 때문이에요. 토스 아이콘을 다시 눌러서 인증을
+        다시 시도해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+  {
+    title: '"본인 명의의 계정으로 인증해 주세요" 라고 나와요',
+    subTitle: (
+      <>
+        신청하시는 분의 명의와 인증서 명의가 다르면 신청을 진행할 수 없어요.
+        신청자 본인 명의의 토스 계정으로 진행해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+];
+const difficultCardList = [
+  {
+    title: '체크카드 인증은 할 수 없나요?',
+    subTitle: (
+      <>
+        본인인증은 신용카드만 지원하고 있어요. 본인 명의의 신용카드로 인증을
+        진행해 주세요.
+      </>
+    ),
+    checked: true,
+  },
+  {
+    title: '"본인 명의의 계정으로 인증해 주세요" 라고 나와요',
+    subTitle: (
+      <>
+        신청하시는 분의 명의와 신용카드 명의가 다르면 신청을 진행할 수 없어요.
+        신청자 본인 명의의 신용카드로 진행해 주세요.
+      </>
+    ),
+    checked: false,
+  },
+];
 export {
   alttleTelecomList,
   bankList,
   cardList,
+  difficultCardList,
+  difficultNaverList,
+  difficultTossList,
   driverLicenceRegion,
   machineModelList,
 };

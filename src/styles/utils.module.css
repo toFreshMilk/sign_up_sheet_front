@@ -500,3 +500,17 @@
   background-color: rgb(222, 226, 230);
   border-color: rgb(222, 226, 230);
 }
+
+.tabStyle {
+  text-transform: none;
+  -webkit-appearance: button;
+  font-size: 16px;
+  font-weight: 500;
+  color: rgb(134, 142, 150);
+  border-radius: 12px;
+  padding: 12px 16px;
+}
+.tabStyleClicked {
+  color: rgb(66, 90, 213);
+  background-color: rgb(243, 246, 255);
+}
