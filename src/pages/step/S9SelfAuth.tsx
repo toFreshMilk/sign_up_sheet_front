@@ -1,7 +1,7 @@
 import 'react-tooltip/dist/react-tooltip.css';
 
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
@@ -69,9 +69,6 @@ const S9SelfAuth = () => {
     setSelectedIdx(_idx);
     setShowDetailInfo(!showDetailInfo);
   };
-  useEffect(() => {
-    console.log(all);
-  }, []);
   return (
     <Main>
       {showDetailInfo ? (
