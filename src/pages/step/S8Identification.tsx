@@ -213,7 +213,14 @@ const S8Identification = () => {
             console.log(lgResult);
             if (lgResult.totSuccCd === 'Y') {
               setIdentiWarning(false);
-              setTotal({ ...total, S8Identification: '' });
+              setTotal({
+                ...total,
+                S8Identification: {
+                  identificationType,
+                  monthYear,
+                  driverNumber: driver1 + driver2 + driver3 + driver4,
+                },
+              });
               router.push('./S9SelfAuth');
             } else {
               setIdentiWarning(true);
