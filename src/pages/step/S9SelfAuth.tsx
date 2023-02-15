@@ -1,7 +1,7 @@
 import 'react-tooltip/dist/react-tooltip.css';
 
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
@@ -11,7 +11,6 @@ import {
   NaverDetail,
   TossDetail,
 } from '@/utils/AuthDetails';
-import { Context } from '@/utils/Context';
 import { QuestionSvg } from '@/utils/Svgs';
 
 const logoList = [
@@ -43,7 +42,6 @@ const all = [...logoList, ...authDifficult];
 
 const S9SelfAuth = () => {
   const router = useRouter();
-  const { total, setTotal } = useContext(Context) as any;
   const [showDetailInfo, setShowDetailInfo] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState(0);
 
@@ -120,19 +118,6 @@ const S9SelfAuth = () => {
               인증에 어려움이 있으신가요?
             </button>
           </div>
-          <button
-            disabled={false}
-            onClick={() => {
-              setTotal({ ...total, S8Identification: '' });
-              router.push('./S9SelfAuth').then((r) => {
-                console.log(r);
-                console.log('r???');
-              });
-            }}
-            className={`${styles.nextBtn} mt-[400px] flex w-full justify-center`}
-          >
-            다음 단계로
-          </button>
         </div>
       )}
     </Main>

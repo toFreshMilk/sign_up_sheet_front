@@ -2,11 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
-import {
-  difficultCardList,
-  difficultNaverList,
-  difficultTossList,
-} from '@/utils/PublicData';
+import { difficultCardList, difficultNaverList } from '@/utils/PublicData';
 import { DownArrow, UpArrow } from '@/utils/Svgs';
 
 const BottomNavBtn = ({ setShowDetailInfo }: any) => {
@@ -212,15 +208,13 @@ const CreditDetail = ({ setShowDetailInfo }: any) => {
 };
 const tabList = [
   { name: '네이버', checked: true, qnaList: difficultNaverList },
-  { name: '토스', checked: false, qnaList: difficultTossList },
+  // { name: '토스', checked: false, qnaList: difficultTossList },
   { name: '신용카드', checked: false, qnaList: difficultNaverList },
 ];
 const IfAuthDifficult = ({ setShowDetailInfo }: any) => {
   const [tabState, setTabState] = useState(tabList);
   const [qnaNaver, setQnaNaver] = useState(difficultNaverList);
-  const [qnaToss, setQnaToss] = useState(difficultTossList);
   const [qnaCard, setQnaCard] = useState(difficultCardList);
-  // const [selectedTab, setSelectedTab] = useState(tabList[0]);
   return (
     <div className={`${styles.authDetailwrapper}`}>
       <div>
@@ -275,32 +269,6 @@ const IfAuthDifficult = ({ setShowDetailInfo }: any) => {
             ))
           : null}
         {tabState[1]?.checked
-          ? qnaToss.map((qna, i1) => (
-              <div key={qna.title}>
-                <button
-                  className={`m-0 flex w-full items-center border-b border-gray-200 p-0 py-[20px] text-[16px] font-medium text-[#000]`}
-                  onClick={() => {
-                    const newList = qnaToss.map((v, i2) => {
-                      const temp = v;
-                      temp.checked = i1 === i2;
-                      return temp;
-                    });
-                    setQnaToss(newList);
-                  }}
-                >
-                  <span className="mr-[16px] text-gray-500">Q</span>
-                  <div className={'break-keep text-left'}>{qna.title}</div>
-                  {qna.checked ? <UpArrow /> : <DownArrow />}
-                </button>
-                {qna.checked ? (
-                  <div className="py-[20px] text-[14px] font-medium leading-[1.5] text-[#93989c]">
-                    {qna.subTitle}
-                  </div>
-                ) : null}
-              </div>
-            ))
-          : null}
-        {tabState[2]?.checked
           ? qnaCard.map((qna, i1) => (
               <div key={qna.title}>
                 <button
