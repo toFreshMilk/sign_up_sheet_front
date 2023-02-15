@@ -97,7 +97,7 @@ const S9SelfAuth = () => {
                   <div className={`${styles.authComponyList}`}>
                     <div className={`${styles.logoBox} ${item.uniqCss}`}>
                       <img
-                        alt="네이버인증"
+                        alt={item.name}
                         src={`${router.basePath}/assets/images/${item.fileName}`}
                       />
                     </div>
