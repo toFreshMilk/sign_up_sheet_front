@@ -21,12 +21,12 @@ const logoList = [
     fileName: 'logo_naver.svg',
     uniqCss: `${styles.logoBoxNaver}`,
   },
-  {
-    name: '토스',
-    alt: '토스인증',
-    fileName: 'logo_toss.svg',
-    uniqCss: `${styles.logoBoxToss}`,
-  },
+  // {
+  //   name: '토스',
+  //   alt: '토스인증',
+  //   fileName: 'logo_toss.svg',
+  //   uniqCss: `${styles.logoBoxToss}`,
+  // },
   {
     name: '신용카드',
     alt: '신용카드인증',
@@ -113,7 +113,7 @@ const S9SelfAuth = () => {
             <button
               className="flex items-center rounded-lg bg-gray-200 py-[8px] px-[12px] text-[14px] font-medium text-gray-600"
               onClick={() => {
-                clickLogo(authDifficult[0], 3);
+                clickLogo(authDifficult[0], all.length - 1);
               }}
             >
               <QuestionSvg />

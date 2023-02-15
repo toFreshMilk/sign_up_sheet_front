@@ -615,7 +615,7 @@ const S5Identification = () => {
       authHash,
       mTxId,
     });
-    const s1 = sessionStorage.getItem('S1UserType') || '';
+    const s1 = sessionStorage.getItem('S1UserType') || '{}';
     const s1Parse = JSON.parse(s1);
     setPerson({
       ...person,
