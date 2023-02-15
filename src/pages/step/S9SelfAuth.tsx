@@ -11,7 +11,7 @@ import {
   NaverDetail,
   TossDetail,
 } from '@/utils/AuthDetails';
-import { QuestionSvg } from '@/utils/Svgs';
+import { QuestionDark } from '@/utils/Svgs';
 
 const logoList = [
   {
@@ -111,7 +111,7 @@ const S9SelfAuth = () => {
                 clickLogo(authDifficult[0], all.length - 1);
               }}
             >
-              <QuestionSvg />
+              <QuestionDark />
               인증에 어려움이 있으신가요?
             </button>
           </div>

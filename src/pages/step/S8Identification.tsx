@@ -9,6 +9,7 @@ import { Main } from '@/templates/Main';
 import { identificationCheckLG } from '@/utils/Commons';
 import { Context } from '@/utils/Context';
 import { driverLicenceRegion } from '@/utils/PublicData';
+import { QuestionLightly, Warning } from '@/utils/Svgs';
 
 const identificationTypes = [
   {
@@ -153,22 +154,11 @@ const S8Identification = () => {
         <br className={'mt-[32px]'} />
         <div className={`${styles.usimSubTitle} flex justify-items-center`}>
           <div className={'mr-[4px]'}>발급일자</div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="h-[20px] w-[20px] text-[#dee1e7]"
-            data-tooltip-content={`${
+          <QuestionLightly
+            checked={
               identificationType[0].checked ? '주민등록증' : '운전면허증'
-            } 앞면 하단의 날짜를 적어주세요`}
-            id={'publishedDate'}
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM8.91699 12.0635V11.9238C8.92334 10.3433 9.34863 9.86084 10.1104 9.38477C10.6562 9.0293 11.0815 8.63574 11.0752 8.05176C11.0815 7.41699 10.5864 7.00439 9.9707 6.99805C9.38037 7.00439 8.82812 7.39795 8.80273 8.14062H7C7.03174 6.35693 8.3584 5.5 9.9834 5.5C11.7544 5.5 13.0049 6.42041 13.0049 7.98828C13.0049 9.03564 12.4653 9.6958 11.6338 10.1973C10.9165 10.6226 10.5991 11.0352 10.5928 11.9238V12.0635H8.91699ZM9.79297 14.9326C9.19629 14.9326 8.71387 14.4565 8.72656 13.8662C8.71387 13.2822 9.19629 12.8062 9.79297 12.8125C10.3579 12.8062 10.8467 13.2822 10.8467 13.8662C10.8467 14.4565 10.3579 14.9326 9.79297 14.9326Z"
-            ></path>
-          </svg>
+            }
+          />
           <ReactTooltip anchorId="publishedDate" />
         </div>
         <input
@@ -183,18 +173,7 @@ const S8Identification = () => {
         {identiWarning ? (
           <div className="mt-[24px]">
             <div className={`${styles.juminWaring}`}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-9 3.75a1 1 0 112 0 1 1 0 01-2 0zm1-2.5a1 1 0 001-1v-4a1 1 0 10-2 0v4a1 1 0 001 1z"
-                  clipRule="evenodd"
-                ></path>
-              </svg>
+              <Warning />
               신분증을 다시 확인해 주세요
             </div>
           </div>
@@ -210,7 +189,7 @@ const S8Identification = () => {
           }
           onClick={async () => {
             const lgResult = await checkIdentification();
-            console.log(lgResult);
+            // console.log(lgResult);
             if (lgResult.totSuccCd === 'Y') {
               setIdentiWarning(false);
               setTotal({
