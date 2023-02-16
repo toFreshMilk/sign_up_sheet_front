@@ -101,7 +101,7 @@ const S2Yakgwan = () => {
 
       <div className="mb-10 space-y-[16px]">
         {requiredYakgwans.map((item: IfYakgwan, index: number) => (
-          <div key={index} className="flex w-full relatice">
+          <div key={index} className="relative flex w-full">
             <div className="flex w-5/6 items-start">
               <div>
                 <input
@@ -128,11 +128,7 @@ const S2Yakgwan = () => {
             </div>
             <div className="flex w-1/6 flex-col items-end justify-center">
               <Link href={`/yakgwans/${item.value}`}>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="linkItem"
-                >
+                <a target="_blank" rel="noopener noreferrer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -147,7 +143,7 @@ const S2Yakgwan = () => {
           </div>
         ))}
         {optionalYakgwans.map((item: IfYakgwan, index: number) => (
-          <div key={index} className="relatice flex w-full">
+          <div key={index} className="relative flex w-full">
             <div className="flex w-5/6 items-start">
               <div>
                 <input
@@ -174,11 +170,7 @@ const S2Yakgwan = () => {
             </div>
             <div className="flex w-1/6 flex-col items-end justify-center">
               <Link href={`/yakgwans/${item.value}`}>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="link-item"
-                >
+                <a target="_blank" rel="noopener noreferrer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"

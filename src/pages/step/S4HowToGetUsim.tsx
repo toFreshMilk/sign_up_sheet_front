@@ -27,7 +27,7 @@ const S4HowToGetUsim = () => {
     <Main>
       <div className="">
         <h2 className={`${styles.stepTitle}`}>유심은 어떻게 받을까요?</h2>
-        <h3 className="text-[16px] text-[#868e96] mt-[8px]">
+        <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           유심 종류에 따라 유심비가 부과될 수 있어요
         </h3>
         <div className={'mt-[40px] flex justify-center space-x-[8px]'}>
@@ -111,7 +111,7 @@ const S4HowToGetUsim = () => {
           setTotal({ ...total, S4HowToGetUsim: result });
           router.push(goal);
         }}
-        className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+        className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
       >
         다음
       </button>

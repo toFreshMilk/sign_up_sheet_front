@@ -363,7 +363,7 @@ const S11PaymentInfo = () => {
                 accountNumber,
               },
             });
-            router.push('./S12');
+            router.push('./S12Final');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

@@ -135,7 +135,7 @@ const S4EsimInfo = () => {
             });
             router.push('./S4EsimUniqNumber');
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음 단계로
         </button>

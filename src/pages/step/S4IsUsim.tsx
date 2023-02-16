@@ -64,7 +64,7 @@ const S4IsUsim = () => {
         {isUsim[0]?.checked ? (
           <ol className={'mt-[32px] pl-[12px]'}>
             <li
-              className={`${styles.listStyle} text-[14px] text-color-gray mb-[8px] leading-[1.5]`}
+              className={`${styles.listStyle} mb-[8px] text-[14px] leading-[1.5]`}
             >
               유심 배송은 신청 후 영업일 기준 약 1~3일 정도 더 소요될 수 있어요.
             </li>
@@ -77,7 +77,7 @@ const S4IsUsim = () => {
           setTotal({ ...total, usimType: result[0].val });
           router.push(result[0].goal);
         }}
-        className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+        className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
       >
         다음
       </button>

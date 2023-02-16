@@ -5,6 +5,7 @@ import DaumPostcode from 'react-daum-postcode';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
+import { Close } from '@/utils/Svgs';
 
 const S6Address = () => {
   const router = useRouter();
@@ -18,29 +19,15 @@ const S6Address = () => {
     <Main>
       {openPostcode && (
         <div className={`${styles.positionFixed}`}>
-          <div className="flex items-center justify-between p-[20px] border-b border-gray-300">
-            <div className="text-20 font-bold text-gray-700">주소 찾기</div>
+          <div className="flex items-center justify-between border-b border-gray-300 p-[20px]">
+            <div className="text-[20px] font-bold text-gray-700">주소 찾기</div>
             <div
-              className="text-gray-500 hover:text-gray-600 cursor-pointer"
+              className="cursor-pointer text-gray-500 hover:text-gray-600"
               onClick={() => {
                 setOpenPostcode(false);
               }}
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-                className={'w-[24px]'}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M5 5l14 14M19 5L5 19"
-                ></path>
-              </svg>
+              <Close />
             </div>
           </div>
           <DaumPostcode
@@ -106,7 +93,7 @@ const S6Address = () => {
             });
             router.push('./S7Email');
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음 단계로
         </button>

@@ -8,7 +8,6 @@ import { Context } from '@/utils/Context';
 const S4UsimNumber = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
-  const [isErr] = useState(false);
   const [usimModel, setUsimModel] = useState('');
   const [usimNuber, setUsimNumber] = useState('');
   return (
@@ -21,23 +20,6 @@ const S4UsimNumber = () => {
           src={`${router.basePath}/assets/images/usimnumber.jpg`}
           alt={'이미지'}
         />
-        {isErr ? (
-          <div className={`${styles.usimWarning}`}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-9 3.75a1 1 0 112 0 1 1 0 01-2 0zm1-2.5a1 1 0 001-1v-4a1 1 0 10-2 0v4a1 1 0 001 1z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            유심 정보를 다시 확인해 주세요.
-          </div>
-        ) : null}
         <div className={`${styles.usimSubTitle} mt-10`}>유심 모델명</div>
         <input
           className={`${styles.inputBox} w-full`}
@@ -66,7 +48,7 @@ const S4UsimNumber = () => {
             setTotal({ ...total, S4UsimNumber: { usimModel, usimNuber } });
             router.push('./S5PhoneNumber');
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음
         </button>

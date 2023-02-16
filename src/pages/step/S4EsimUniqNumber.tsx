@@ -54,11 +54,11 @@ const S4EsimUniqNumber = () => {
         />
         <div className={'mt-[24px]'}>
           <div className={`${styles.howToCheck}`}>확인방법</div>
-          <div className={'text-left mt-[16px] text-[18px]'}>방법 1</div>
-          <div className={'text-left mt-[16px] mb-[24px] text-[16px]'}>
+          <div className={'mt-[16px] text-left text-[18px]'}>방법 1</div>
+          <div className={'mt-[16px] mb-[24px] text-left text-[16px]'}>
             <a
               href="tel:*%2306%23"
-              className={'text-[##6679d8] text-[16px] font-bold'}
+              className={'text-[16px] font-bold text-[#6679d8]'}
             >
               *#06#
             </a>
@@ -71,7 +71,7 @@ const S4EsimUniqNumber = () => {
               className={'w-[270px]'}
             />
           </div>
-          <div className={'text-left mt-[16px] text-[18px]'}>방법 2</div>
+          <div className={'mt-[16px] text-left text-[18px]'}>방법 2</div>
           <div className={`${styles.howToCheckSub} mb-[24px]`}>
             <span className={'mr-[6px]'}>
               <SettingSvg />
@@ -86,7 +86,7 @@ const S4EsimUniqNumber = () => {
             </span>
             <span className={'mr-[6px]'}>상태 정보에서 확인할 수 있어요</span>
           </div>
-          <div className={'flex justify-center mb-[5px]'}>
+          <div className={'mb-[5px] flex justify-center'}>
             <img
               src={`${router.basePath}/assets/images/esim_samsung_device_guide_1.webp`}
               alt={'img'}
@@ -117,7 +117,7 @@ const S4EsimUniqNumber = () => {
             });
             router.push('./S5PhoneNumber');
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음 단계로
         </button>
