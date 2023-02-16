@@ -5,10 +5,16 @@ import styles from '@/styles/utils.module.css';
 import { difficultCardList, difficultNaverList } from '@/utils/PublicData';
 import { DownArrow, UpArrow } from '@/utils/Svgs';
 
-const BottomNavBtn = ({ setShowDetailInfo }: any) => {
+const BottomNavBtn = ({ path, setShowDetailInfo }: any) => {
+  const router = useRouter();
   return (
     <>
-      <button className={`${styles.nextBtn} mt-[40px] mb-[16px]`}>
+      <button
+        className={`${styles.nextBtn} mt-[40px] mb-[16px]`}
+        onClick={() => {
+          router.push(path);
+        }}
+      >
         인증하러 가기
       </button>
       <button
@@ -93,7 +99,10 @@ const NaverDetail = ({ setShowDetailInfo }: any) => {
             </div>
           </div>
         </div>
-        <BottomNavBtn setShowDetailInfo={setShowDetailInfo} />
+        <BottomNavBtn
+          path={'../../auth/InicisAuth'}
+          setShowDetailInfo={setShowDetailInfo}
+        />
       </div>
     </div>
   );
@@ -201,7 +210,10 @@ const CreditDetail = ({ setShowDetailInfo }: any) => {
             </div>
           </div>
         </div>
-        <BottomNavBtn setShowDetailInfo={setShowDetailInfo} />
+        <BottomNavBtn
+          path={'../../auth/KcbAuth'}
+          setShowDetailInfo={setShowDetailInfo}
+        />
       </div>
     </div>
   );
