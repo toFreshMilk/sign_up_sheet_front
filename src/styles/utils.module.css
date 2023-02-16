@@ -222,6 +222,14 @@
   justify-content: space-between;
   align-items: center;
 }
+.bottomSheetList2 {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+}
 .hipen {
   display: flex;
   flex-direction: column;
@@ -513,4 +521,24 @@
 .tabStyleClicked {
   color: rgb(66, 90, 213);
   background-color: rgb(243, 246, 255);
+}
+.informBlue {
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  column-gap: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: 12px;
+  padding: 12px 16px;
+  white-space: pre-line;
+  word-break: break-word;
+  color: rgb(42, 48, 55);
+  background-color: rgb(243, 246, 255);
+}
+.informBlue svg {
+  width: 20px;
+  height: 20px;
+  color: rgb(86, 111, 238);
 }

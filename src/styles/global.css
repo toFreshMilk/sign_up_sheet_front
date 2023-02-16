@@ -45,12 +45,14 @@ input::-webkit-inner-spin-button {
   display: flex;
   background: #ffffff;
   flex-direction: column;
-  height: 400px;
+  height: auto;
+  max-height: 750px;
   transform: translate3d(0, 10px, 0);
   will-change: height;
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
+  overflow: scroll;
 }
 [data-rsbs-overlay]:focus {
   outline: none;

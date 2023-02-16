@@ -59,10 +59,10 @@ const S5PhoneNumber = () => {
           blocking={true}
         >
           <div className={`${styles.bottomSheetStyle}`}>
-            <h3 className={`text-[24px] font-bold color-[#2a3037]`}>
+            <h3 className={`text-[24px] font-bold text-[#2a3037]`}>
               통신사 선택
             </h3>
-            <div className={'pt-[8px] pb-[8px]'}>
+            <div className={'py-[8px]'}>
               {telecomList.map((item, i1) => (
                 <div
                   className={`${styles.bottomSheetList}`}
@@ -70,10 +70,7 @@ const S5PhoneNumber = () => {
                   onClick={() => {
                     telecomList.map((item2: any, i2: number) => {
                       const temp = item2;
-                      temp.selected = false;
-                      if (i1 === i2) {
-                        temp.selected = true;
-                      }
+                      temp.selected = i1 === i2;
                       return temp;
                     });
                     setBottomSheetOpen(false);
@@ -142,7 +139,7 @@ const S5PhoneNumber = () => {
             });
             router.push('./S5PersonalInfo');
           }}
-          className={`${styles.nextBtn} flex w-full justify-center mt-[40px]`}
+          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
           다음
         </button>

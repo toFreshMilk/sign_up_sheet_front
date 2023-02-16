@@ -2,39 +2,55 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
-import { Tooltip as ReactTooltip } from 'react-tooltip';
+import Select from 'react-select';
+import { BottomSheet } from 'react-spring-bottom-sheet';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
-import { driverLicenceRegion } from '@/utils/PublicData';
+import { bankList, family, monthList, yearList } from '@/utils/PublicData';
+import { InformBlue } from '@/utils/Svgs';
 
-const identificationTypes = [
-  {
-    title: '카드',
-    checked: true,
-    val: 'REGID',
-  },
-  {
-    title: '계좌이체',
-    checked: false,
-    val: 'DRIVE',
-  },
-] as any;
 const S11PaymentInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [who, setWho] = useState('');
-  const [driver1, setDriver1] = useState('11');
-  const [driver2, setDriver2] = useState('');
-  const [driver3, setDriver3] = useState('');
-  const [driver4, setDriver4] = useState('');
-  const [monthYear, setMonthYear] = useState('');
-  const [identificationType, setIdentificationType] =
-    useState(identificationTypes);
-
+  const [card1, setCard1] = useState('');
+  const [card2, setCard2] = useState('');
+  const [card3, setCard3] = useState('');
+  const [card4, setCard4] = useState('');
+  const [month, setMonth] = useState('');
+  const [year, setYear] = useState('');
+  const [paymentType, setPaymentType] = useState([
+    {
+      title: '카드',
+      checked: true,
+    },
+    {
+      title: '계좌이체',
+      checked: false,
+    },
+  ]);
+  const [showSelect1, setShowSelect1] = useState(false);
+  const [showSelect2, setShowSelect2] = useState(false);
+  const [showSelect3, setShowSelect3] = useState(false);
+  const [isNotMyThing, setIsNotMyThing] = useState(false);
+  const [whatsRelation, setWhatsRelation] = useState('');
+  const [ownerName, setOwnerName] = useState('');
+  const [birthMonthDay, setBirthMonthDay] = useState('');
+  const [contactableMobile, setContactableMobile] = useState('010-');
+  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [selectedBank, setSelectedBank] = useState({
+    name: '',
+    value: '',
+    disabled: false,
+  });
+  const [accountNumber, setAccountNumber] = useState('');
   useEffect(() => {
     setWho(total.S5PersonalInfo?.userName);
+    setShowSelect1(true);
+    setShowSelect2(true);
+    setShowSelect3(true);
   }, []);
   return (
     <Main>
@@ -46,7 +62,7 @@ const S11PaymentInfo = () => {
         </h3>
         <br className={'mt-[32px]'} />
         <div className={'flex justify-center space-x-[8px]'}>
-          {identificationTypes.map((item: any, index: number) => (
+          {paymentType.map((item: any, index: number) => (
             <div
               key={item.title}
               className={`${
@@ -55,12 +71,12 @@ const S11PaymentInfo = () => {
                 item.checked ? styles.clickBtn : ''
               }`}
               onClick={() => {
-                identificationTypes.map((item2: any, index2: number) => {
+                paymentType.map((item2: any, index2: number) => {
                   const temp = item2;
                   temp.checked = index === index2;
                   return temp;
                 });
-                setIdentificationType([...identificationTypes]);
+                setPaymentType([...paymentType]);
               }}
             >
               {item.title}
@@ -68,107 +84,290 @@ const S11PaymentInfo = () => {
           ))}
         </div>
         <br className={'mt-[32px]'} />
-        {identificationType[1].checked ? (
+        {paymentType[0]?.checked ? (
           <>
-            <div className={`${styles.usimSubTitle}`}>운전면허번호</div>
+            <div className={`${styles.usimSubTitle}`}>카드 번호</div>
             <div className={'flex justify-items-center'}>
-              <select
-                name="selectedTelecom"
-                value={driver1}
-                onChange={(e) => {
-                  setDriver1(e.target.value);
-                }}
-                className={`${styles.inputBox} w-1/6`}
-              >
-                {driverLicenceRegion.map((item) => (
-                  <option key={item.name} value={item.value}>
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-              <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-1/6`}
-                value={driver2}
+                className={`${styles.inputBox} w-full`}
+                value={card1}
                 onChange={(e) => {
-                  setDriver2(e.target.value);
+                  setCard1(e.target.value);
                 }}
                 type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-2/6`}
-                value={driver3}
+                className={`${styles.inputBox} w-full`}
+                value={card2}
                 onChange={(e) => {
-                  setDriver3(e.target.value);
+                  setCard2(e.target.value);
                 }}
                 type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-1/6`}
-                value={driver4}
+                className={`${styles.inputBox} w-full`}
+                value={card3}
                 onChange={(e) => {
-                  setDriver4(e.target.value);
+                  setCard3(e.target.value);
+                }}
+                type="text"
+              />
+              <div className={`${styles.hipen}`}>-</div>
+              <input
+                className={`${styles.inputBox} w-full`}
+                value={card4}
+                onChange={(e) => {
+                  setCard4(e.target.value);
                 }}
                 type="text"
               />
             </div>
+            <br className={'mt-[32px]'} />
+            <div className={`${styles.usimSubTitle}`}>유효 기간</div>
+            <div className={'flex justify-items-center'}>
+              <div className={'relative mr-[20px] w-1/4'}>
+                {showSelect1 ? (
+                  <Select
+                    options={monthList}
+                    defaultValue={{
+                      value: '월',
+                      label: '월',
+                      rating: 'safe',
+                    }}
+                    classNamePrefix={'selectPrefix'}
+                    isDisabled={false}
+                    isLoading={false}
+                    isClearable={false}
+                    isRtl={false}
+                    isSearchable={false}
+                    name={'dd'}
+                    onChange={(v: any) => {
+                      setMonth(v.label);
+                    }}
+                  />
+                ) : null}
+              </div>
+              <div className={'relative w-1/4'}>
+                {showSelect2 ? (
+                  <Select
+                    options={yearList}
+                    defaultValue={{
+                      value: '년',
+                      label: '년',
+                      rating: 'safe',
+                    }}
+                    classNamePrefix={'selectPrefix'}
+                    isDisabled={false}
+                    isLoading={false}
+                    isClearable={false}
+                    isRtl={false}
+                    isSearchable={false}
+                    name={'dd'}
+                    onChange={(v: any) => {
+                      setYear(v.label);
+                    }}
+                  />
+                ) : null}
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <div className={`${styles.usimSubTitle}`}>은행</div>
+            <input
+              readOnly={true}
+              className={`${styles.inputBox} w-full`}
+              placeholder="은행 선택"
+              value={selectedBank?.name}
+              onChange={() => {}}
+              type="text"
+              onClick={() => {
+                setBottomSheetOpen(!bottomSheetOpen);
+              }}
+            />
+            <BottomSheet
+              snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight]}
+              open={bottomSheetOpen}
+              onDismiss={() => {
+                setBottomSheetOpen(false);
+              }}
+              skipInitialTransition={false}
+              blocking={true}
+            >
+              <div className={`${styles.bottomSheetStyle}`}>
+                <h3 className={`text-[24px] font-bold text-[#2a3037]`}>
+                  은행 선택
+                </h3>
+                <div className={'grid grid-cols-3 gap-4 py-[8px]'}>
+                  {bankList.map((item, i1) => (
+                    <div
+                      key={item.name}
+                      className={`${styles.bottomSheetList2}`}
+                      onClick={() => {
+                        bankList.map((item2: any, i2: number) => {
+                          const temp = item2;
+                          temp.selected = i1 === i2;
+                          return temp;
+                        });
+                        setBottomSheetOpen(false);
+                        setSelectedBank(item);
+                      }}
+                    >
+                      <img
+                        src={`${router.basePath}/assets/images/banks/${item.imgName}.svg`}
+                        alt={item.imgName}
+                        className="h-[50px] w-[50px] shrink-0 py-[8px]"
+                      />
+                      <p
+                        className={
+                          'mt-2 text-center text-[14px] text-[#495057]'
+                        }
+                      >
+                        {item.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </BottomSheet>
+            <br className={'mt-[32px]'} />
+            <div className={`${styles.usimSubTitle}`}>계좌번호</div>
+            <input
+              className={`${styles.inputBox} w-full`}
+              placeholder="숫자만 입력해주세요"
+              value={accountNumber}
+              type="text"
+              onChange={(e) => {
+                const inputed = e.target.value.replace(/[^0-9]/g, '');
+                setAccountNumber(inputed);
+              }}
+            />
+          </>
+        )}
+        <br className={'mt-[32px]'} />
+        <div className="flex items-start">
+          <div className="flex h-7 items-center">
+            <input
+              name={`inNotMyThing`}
+              type="checkbox"
+              checked={isNotMyThing}
+              className={`${styles.checkBoxStyle} h-[20px] w-[20px]`}
+              onChange={() => {}}
+              onClick={() => {
+                setIsNotMyThing(!isNotMyThing);
+              }}
+            />
+          </div>
+          <div className="ml-[8px]">
+            <label
+              htmlFor={`inNotMyThing`}
+              className="align-text-top text-[16px] font-medium text-gray-700"
+              onClick={() => {
+                setIsNotMyThing(!isNotMyThing);
+              }}
+            >
+              제 명의의 {paymentType[0]?.checked ? '카드' : '계좌'}가 아니에요
+            </label>
+          </div>
+        </div>
+        {isNotMyThing ? (
+          <>
+            <div className={`${styles.usimSubTitle} mt-10`}>
+              {who}님과의 관계
+            </div>
+            {showSelect3 ? (
+              <Select
+                options={family}
+                defaultValue={{
+                  value: '선택해주세요',
+                  label: '선택해주세요',
+                  rating: 'safe',
+                }}
+                classNamePrefix={'selectPrefix'}
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable={false}
+                name={'dd'}
+                onChange={(v: any) => {
+                  setWhatsRelation(v.label);
+                }}
+              />
+            ) : null}
+            <div className={`${styles.usimSubTitle} mt-10`}>
+              {paymentType[0]?.checked ? '카드' : '계좌'} 소유자 이름
+            </div>
+            <input
+              className={`${styles.inputBox} w-full`}
+              placeholder="이름을 입력해주세요"
+              value={ownerName}
+              type="text"
+              onChange={(e) => {
+                setOwnerName(e.target.value);
+              }}
+            />
+            <div className={`${styles.usimSubTitle} mt-10`}>생년월일</div>
+            <input
+              className={`${styles.inputBox} w-full`}
+              placeholder="예) 901231"
+              value={birthMonthDay}
+              type="text"
+              onChange={(e) => {
+                setBirthMonthDay(e.target.value);
+              }}
+            />
+            <div className={`${styles.usimSubTitle} mt-10`}>
+              연락 가능한 번호
+            </div>
+            <input
+              className={`${styles.inputBox} w-full`}
+              value={contactableMobile}
+              type="text"
+              onChange={(e) => {
+                const inputed = e.target.value
+                  .replace(/[^0-9]/g, '')
+                  .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                setContactableMobile(inputed);
+              }}
+            />
+            <div className="mt-[24px]">
+              <div className={`${styles.informBlue}`}>
+                <InformBlue />
+                가족 명의의 {paymentType[0]?.checked ? '카드' : '계좌'}만
+                가능해요
+              </div>
+            </div>
           </>
         ) : null}
-        <br className={'mt-[32px]'} />
-        <div className={`${styles.usimSubTitle} flex justify-items-center`}>
-          <div className={'mr-[4px]'}>발급일자</div>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-            className="h-[20px] w-[20px] text-[#dee1e7]"
-            data-tooltip-content={`${
-              identificationType[0].checked ? '주민등록증' : '운전면허증'
-            } 앞면 하단의 날짜를 적어주세요`}
-            id={'publishedDate'}
-          >
-            <path
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18ZM8.91699 12.0635V11.9238C8.92334 10.3433 9.34863 9.86084 10.1104 9.38477C10.6562 9.0293 11.0815 8.63574 11.0752 8.05176C11.0815 7.41699 10.5864 7.00439 9.9707 6.99805C9.38037 7.00439 8.82812 7.39795 8.80273 8.14062H7C7.03174 6.35693 8.3584 5.5 9.9834 5.5C11.7544 5.5 13.0049 6.42041 13.0049 7.98828C13.0049 9.03564 12.4653 9.6958 11.6338 10.1973C10.9165 10.6226 10.5991 11.0352 10.5928 11.9238V12.0635H8.91699ZM9.79297 14.9326C9.19629 14.9326 8.71387 14.4565 8.72656 13.8662C8.71387 13.2822 9.19629 12.8062 9.79297 12.8125C10.3579 12.8062 10.8467 13.2822 10.8467 13.8662C10.8467 14.4565 10.3579 14.9326 9.79297 14.9326Z"
-            />
-          </svg>
-          <ReactTooltip anchorId="publishedDate" />
-        </div>
-        <input
-          className={`${styles.inputBox} w-full`}
-          placeholder="20201010"
-          value={monthYear}
-          onChange={(e) => {
-            setMonthYear(e.target.value);
-          }}
-          type="text"
-        />
         <button
-          disabled={
-            identificationType[0].checked
-              ? monthYear.length !== 8
-              : monthYear.length !== 8 ||
-                driver2.length !== 2 ||
-                driver3.length !== 6 ||
-                driver4.length !== 2
-          }
+          disabled={false}
           onClick={async () => {
             setTotal({
               ...total,
               S11PaymentInfo: {
-                identificationType,
-                monthYear,
-                driverNumber: driver1 + driver2 + driver3 + driver4,
+                card1,
+                card2,
+                card3,
+                card4,
+                month,
+                year,
+                isNotMyThing,
+                whatsRelation,
+                ownerName,
+                birthMonthDay,
+                contactableMobile,
+                selectedBank,
+                accountNumber,
               },
             });
-            router.push('./S9SelfAuth');
+            router.push('./S12');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
-          다음 단계로
+          다음
         </button>
       </div>
     </Main>
