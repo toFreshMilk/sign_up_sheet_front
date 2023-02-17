@@ -94,6 +94,7 @@ const S5PersonalInfo = () => {
                 ...total,
                 S5PersonalInfo: {
                   userName,
+                  jumin12: jumin1 + jumin2,
                   jumin1,
                   jumin2,
                 },

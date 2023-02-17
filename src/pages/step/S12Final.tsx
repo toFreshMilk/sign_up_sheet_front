@@ -1,6 +1,6 @@
 import 'react-tooltip/dist/react-tooltip.css';
 
-import { useRouter } from 'next/router';
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import Select from 'react-select';
 
@@ -26,11 +26,35 @@ const nowPaymentList = [
   },
 ];
 const S12Final = () => {
-  const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [nowPayment, setNowPayment] = useState('');
   const [showSelect1, setShowSelect1] = useState(false);
+  const [payFeeObj] = useState({
+    RATECD: '요금제 정보 없음',
+    RATENM: '요금제 정보 없음',
+    RATEAMT: '-',
+  });
+  const [ftpImgUrls] = useState<string[]>([]);
+  const finalRow = async () => {
+    // 여기서 finalRow
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
+    const resultObj = await axios.post(tokenUrl, {
+      ...total,
+      payFeeObj,
+      ftpImgUrls,
+    });
+    // console.log('resultObj');
+    // console.log(resultObj);
+    if (resultObj.data.rowsAffected > 0) {
+      // eslint-disable-next-line no-alert
+      alert('접수가 완료되었습니다.');
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
+    }
+  };
   useEffect(() => {
+    console.log(total);
     setShowSelect1(true);
   }, []);
   return (
@@ -61,6 +85,12 @@ const S12Final = () => {
               name={'dd'}
               onChange={(v: any) => {
                 setNowPayment(v.label);
+                setTotal({
+                  ...total,
+                  S12Final: {
+                    nowPayment: v.label,
+                  },
+                });
               }}
             />
           ) : null}
@@ -68,13 +98,7 @@ const S12Final = () => {
         <button
           disabled={nowPayment === ''}
           onClick={async () => {
-            setTotal({
-              ...total,
-              S12Final: {
-                nowPayment,
-              },
-            });
-            router.push('./S12');
+            await finalRow();
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

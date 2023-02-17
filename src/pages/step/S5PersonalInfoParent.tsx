@@ -90,6 +90,7 @@ const S5PersonalInfoParent = () => {
                 ...total,
                 S5PersonalInfoParent: {
                   userNameParent,
+                  jumin34: jumin3 + jumin4,
                   jumin3,
                   jumin4,
                 },

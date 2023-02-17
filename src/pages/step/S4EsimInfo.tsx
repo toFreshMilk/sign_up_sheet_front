@@ -115,15 +115,6 @@ const S4EsimInfo = () => {
 
         <button
           onClick={() => {
-            sessionStorage.setItem(
-              'S4EsimInfo',
-              JSON.stringify({
-                modelName,
-                capacity,
-                serial,
-                factory: radio ? '아이폰' : '삼성',
-              })
-            );
             setTotal({
               ...total,
               S4EsimInfo: {
