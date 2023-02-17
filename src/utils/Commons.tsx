@@ -117,5 +117,30 @@ const identificationCheckLG = async (_param: any) => {
   const { data } = await axios.post(tokenUrl, dataCM806);
   return data;
 };
+const getLocalStorage = (key: string, initialValue: any) => {
+  try {
+    const value = window.localStorage.getItem(key);
+    return value ? JSON.parse(value) : initialValue;
+  } catch (e) {
+    // if error, return initial value
+    return initialValue;
+  }
+};
+const setLocalStorage = (key: string, value: any) => {
+  try {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  } catch (e) {
+    // catch possible errors:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
+  }
+};
 
-export { CheckIcon, encrypt, FtpImgModal, identificationCheckLG, saveImage };
+export {
+  CheckIcon,
+  encrypt,
+  FtpImgModal,
+  getLocalStorage,
+  identificationCheckLG,
+  saveImage,
+  setLocalStorage,
+};

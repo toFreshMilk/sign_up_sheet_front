@@ -54,7 +54,6 @@ const S12Final = () => {
     }
   };
   useEffect(() => {
-    console.log(total);
     setShowSelect1(true);
   }, []);
   return (

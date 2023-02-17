@@ -5,7 +5,9 @@ import { DefaultSeo } from 'next-seo';
 import { useEffect, useState } from 'react';
 
 import { AppConfig } from '@/utils/AppConfig';
+import { getLocalStorage, setLocalStorage } from '@/utils/Commons';
 import { Context } from '@/utils/Context';
+import { initialState } from '@/utils/PublicData';
 
 const DEFAULT_SEO = {
   title: AppConfig.title,
@@ -30,27 +32,7 @@ const DEFAULT_SEO = {
     cardType: 'summary_large_image',
   },
 };
-const initialState = {
-  feeId: '',
-};
-function setLocalStorage(key: string, value: any) {
-  try {
-    window.localStorage.setItem(key, JSON.stringify(value));
-  } catch (e) {
-    // catch possible errors:
-    // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
-  }
-}
 
-function getLocalStorage(key: string, initialValue: any) {
-  try {
-    const value = window.localStorage.getItem(key);
-    return value ? JSON.parse(value) : initialValue;
-  } catch (e) {
-    // if error, return initial value
-    return initialValue;
-  }
-}
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const [total, setTotal] = useState(() =>
     getLocalStorage('total', initialState)

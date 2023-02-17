@@ -4,6 +4,7 @@ import { useContext, useEffect } from 'react';
 import { Meta } from '@/layouts/Meta';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
+import { initialState } from '@/utils/PublicData';
 
 const Index = () => {
   const router = useRouter();
@@ -12,53 +13,7 @@ const Index = () => {
     const asPath = router.asPath || '';
     const feeId = asPath.split('=')[1] || 'LPZ0015470';
     // console.log(feeId);
-    const defineTotal = {
-      custommerType: '',
-      custommerTypeTitle: '',
-      marketing1: false,
-      marketing2: false,
-      joinType: '',
-      needUsimType: '',
-      modelName: '',
-      capacity: '',
-      serial: '',
-      factory: '',
-      eid: '',
-      imei: '',
-      imei2: '',
-      howToGetUsim: '',
-      aldyOwnUsimModel: '',
-      aldyOwnUsimNumber: '',
-      selectedTelecom: '',
-      alddleTelecom: '',
-      phoneNumber: '',
-      userName: '',
-      jumin12: '',
-      jumin1: '',
-      userNameParent: '',
-      jumin34: '',
-      jumin3: '',
-      bunji: '',
-      address1: '',
-      address2: '',
-      email: '',
-      identificationType: '',
-      monthYear: '',
-      driverNumber: '',
-      billType: '',
-      card1234: '',
-      selectedBank: '',
-      accountNumber: '',
-      month: '',
-      year: '',
-      isNotMyThing: '',
-      whatsRelationForNMT: '',
-      ownerNameForNMT: '',
-      birthMonthDayForNMT: '',
-      contactableMobileForNMT: '',
-      nowPaymentInfo: '',
-    };
-    setTotal({ feeId, ...defineTotal });
+    setTotal({ ...initialState, feeId });
     router.push('/step/S1UserType');
   }, []);
 
