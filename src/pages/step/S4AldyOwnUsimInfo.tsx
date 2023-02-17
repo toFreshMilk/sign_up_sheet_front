@@ -5,11 +5,11 @@ import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 
-const S4OwnUsimNumber = () => {
+const S4AldyOwnUsimInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
-  const [ownSmtUsimModel, setOwnSmtUsimModel] = useState('');
-  const [ownSmtUsimNumber, setOwnSmtUsimNumber] = useState('');
+  const [aldyOwnUsimModel, setAldyOwnUsimModel] = useState('');
+  const [aldyOwnUsimNumber, setAldyOwnUsimNumber] = useState('');
   return (
     <Main>
       <div className="">
@@ -25,10 +25,10 @@ const S4OwnUsimNumber = () => {
           className={`${styles.inputBox} w-full`}
           placeholder="유심 모델을 입력해 주세요"
           maxLength={8}
-          value={ownSmtUsimModel}
+          value={aldyOwnUsimModel}
           type="text"
           onChange={(e) => {
-            setOwnSmtUsimModel(e.target.value);
+            setAldyOwnUsimModel(e.target.value);
           }}
         />
         <div className={`${styles.usimSubTitle} mt-6`}>일련번호</div>
@@ -36,16 +36,16 @@ const S4OwnUsimNumber = () => {
           className={`${styles.inputBox} w-full`}
           placeholder="마지막 숫자 8자리를 적어주세요"
           maxLength={8}
-          value={ownSmtUsimNumber}
+          value={aldyOwnUsimNumber}
           type="number"
           onChange={(e) => {
-            setOwnSmtUsimNumber(e.target.value);
+            setAldyOwnUsimNumber(e.target.value);
           }}
         />
         <button
-          disabled={ownSmtUsimModel === '' || ownSmtUsimNumber === ''}
+          disabled={aldyOwnUsimModel === '' || aldyOwnUsimNumber === ''}
           onClick={() => {
-            setTotal({ ...total, ownSmtUsimModel, ownSmtUsimNumber });
+            setTotal({ ...total, aldyOwnUsimModel, aldyOwnUsimNumber });
             router.push('./S5MobileInfo');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
@@ -57,4 +57,4 @@ const S4OwnUsimNumber = () => {
   );
 };
 
-export default S4OwnUsimNumber;
+export default S4AldyOwnUsimInfo;

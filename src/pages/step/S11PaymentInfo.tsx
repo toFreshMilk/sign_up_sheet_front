@@ -348,10 +348,7 @@ const S11PaymentInfo = () => {
           onClick={() => {
             setTotal({
               ...total,
-              card1,
-              card2,
-              card3,
-              card4,
+              card1234: card1 + card2 + card3 + card4,
               selectedBank,
               accountNumber,
               month,

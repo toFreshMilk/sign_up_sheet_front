@@ -95,7 +95,6 @@ const S5PersonalInfo = () => {
                 userName,
                 jumin12: jumin1 + jumin2,
                 jumin1,
-                jumin2,
               });
               router.push(goal);
             }

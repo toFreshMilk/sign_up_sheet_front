@@ -32,7 +32,7 @@ const S4DeliveryUsimType = () => {
               <button
                 key={item.title}
                 onClick={() => {
-                  setTotal({ ...total, S4UsimType: item.title });
+                  setTotal({ ...total, needUsimType: item.title });
                   router.push('./S5MobileInfo');
                 }}
                 className={`${styles.joinTypeBtn}`}

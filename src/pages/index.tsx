@@ -7,12 +7,58 @@ import { Context } from '@/utils/Context';
 
 const Index = () => {
   const router = useRouter();
-  const { total, setTotal } = useContext(Context) as any;
+  const { setTotal } = useContext(Context) as any;
   useEffect(() => {
     const asPath = router.asPath || '';
     const feeId = asPath.split('=')[1] || 'LPZ0015470';
     // console.log(feeId);
-    setTotal({ ...total, feeId });
+    const defineTotal = {
+      custommerType: '',
+      custommerTypeTitle: '',
+      marketing1: false,
+      marketing2: false,
+      joinType: '',
+      needUsimType: '',
+      modelName: '',
+      capacity: '',
+      serial: '',
+      factory: '',
+      eid: '',
+      imei: '',
+      imei2: '',
+      howToGetUsim: '',
+      aldyOwnUsimModel: '',
+      aldyOwnUsimNumber: '',
+      selectedTelecom: '',
+      alddleTelecom: '',
+      phoneNumber: '',
+      userName: '',
+      jumin12: '',
+      jumin1: '',
+      userNameParent: '',
+      jumin34: '',
+      jumin3: '',
+      bunji: '',
+      address1: '',
+      address2: '',
+      email: '',
+      identificationType: '',
+      monthYear: '',
+      driverNumber: '',
+      billType: '',
+      card1234: '',
+      selectedBank: '',
+      accountNumber: '',
+      month: '',
+      year: '',
+      isNotMyThing: '',
+      whatsRelationForNMT: '',
+      ownerNameForNMT: '',
+      birthMonthDayForNMT: '',
+      contactableMobileForNMT: '',
+      nowPaymentInfo: '',
+    };
+    setTotal({ feeId, ...defineTotal });
     router.push('/step/S1UserType');
   }, []);
 

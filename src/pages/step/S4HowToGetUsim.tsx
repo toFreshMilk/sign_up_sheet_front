@@ -118,7 +118,7 @@ const S4HowToGetUsim = () => {
       <button
         onClick={() => {
           setTotal({ ...total, howToGetUsim: '유심 있음' });
-          router.push('./S4OwnUsimNumber');
+          router.push('./S4AldyOwnUsimInfo');
         }}
         className={`${styles.nextBtn2} flex w-full justify-center`}
       >
