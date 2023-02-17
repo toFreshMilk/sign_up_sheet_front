@@ -38,7 +38,11 @@ const S1UserType = () => {
   const { total, setTotal } = useContext(Context) as any;
   const [selectedType] = useState(custommerTypes);
   const setSelectedType = (v: any) => {
-    setTotal({ ...total, S1UserType: v });
+    setTotal({
+      ...total,
+      custommerType: v.value,
+      custommerTypeTitle: v.name,
+    });
     router.push('./S2Yakgwan');
   };
 

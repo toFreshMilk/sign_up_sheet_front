@@ -31,8 +31,7 @@ const S3JoinType = () => {
               <button
                 key={item.title}
                 onClick={() => {
-                  const result = { joinType: item.title };
-                  setTotal({ ...total, S3JoinType: result });
+                  setTotal({ ...total, joinType: item.title });
                   router.push('./S3machineType');
                 }}
                 className={`${styles.joinTypeBtn}`}

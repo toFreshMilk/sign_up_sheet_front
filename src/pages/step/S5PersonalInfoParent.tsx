@@ -88,12 +88,10 @@ const S5PersonalInfoParent = () => {
             if (isOk) {
               setTotal({
                 ...total,
-                S5PersonalInfoParent: {
-                  userNameParent,
-                  jumin34: jumin3 + jumin4,
-                  jumin3,
-                  jumin4,
-                },
+                userNameParent,
+                jumin34: jumin3 + jumin4,
+                jumin3,
+                jumin4,
               });
               router.push('./S6Address');
             }

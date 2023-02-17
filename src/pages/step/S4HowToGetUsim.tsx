@@ -106,9 +106,9 @@ const S4HowToGetUsim = () => {
         onClick={() => {
           const goal = howToGetUsimBtn1.checked
             ? './S4EsimInfo'
-            : './S4UsimType';
+            : './S4DeliveryUsimType';
           const result = howToGetUsimBtn1.checked ? 'Esim' : '배송 받기';
-          setTotal({ ...total, S4HowToGetUsim: result });
+          setTotal({ ...total, howToGetUsim: result });
           router.push(goal);
         }}
         className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
@@ -117,8 +117,8 @@ const S4HowToGetUsim = () => {
       </button>
       <button
         onClick={() => {
-          setTotal({ ...total, S4HowToGetUsim: '유심 있음' });
-          router.push('./S4UsimNumber');
+          setTotal({ ...total, howToGetUsim: '유심 있음' });
+          router.push('./S4OwnUsimNumber');
         }}
         className={`${styles.nextBtn2} flex w-full justify-center`}
       >

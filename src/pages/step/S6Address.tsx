@@ -85,11 +85,9 @@ const S6Address = () => {
           onClick={() => {
             setTotal({
               ...total,
-              S6Address: {
-                bunji,
-                address1,
-                address2,
-              },
+              bunji,
+              address1,
+              address2,
             });
             router.push('./S7Email');
           }}

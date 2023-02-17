@@ -26,7 +26,8 @@ const S4EsimInfo = () => {
         <div className={`${styles.usimSubTitle} mt-6`}>모델명</div>
         <input
           className={`${styles.inputBox} w-full`}
-          defaultValue={modelName}
+          value={modelName}
+          onChange={() => {}}
           type="text"
         />
         <div className={`${styles.usimSubTitle} mt-6`}>용량</div>
@@ -117,12 +118,10 @@ const S4EsimInfo = () => {
           onClick={() => {
             setTotal({
               ...total,
-              S4EsimInfo: {
-                modelName,
-                capacity,
-                serial,
-                factory: radio ? '아이폰' : '삼성',
-              },
+              modelName,
+              capacity,
+              serial,
+              factory: radio ? '아이폰' : '삼성',
             });
             router.push('./S4EsimUniqNumber');
           }}

@@ -5,11 +5,11 @@ import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 
-const S4UsimNumber = () => {
+const S4OwnUsimNumber = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
-  const [usimModel, setUsimModel] = useState('');
-  const [usimNuber, setUsimNumber] = useState('');
+  const [ownSmtUsimModel, setOwnSmtUsimModel] = useState('');
+  const [ownSmtUsimNumber, setOwnSmtUsimNumber] = useState('');
   return (
     <Main>
       <div className="">
@@ -25,10 +25,10 @@ const S4UsimNumber = () => {
           className={`${styles.inputBox} w-full`}
           placeholder="유심 모델을 입력해 주세요"
           maxLength={8}
-          value={usimModel}
+          value={ownSmtUsimModel}
           type="text"
           onChange={(e) => {
-            setUsimModel(e.target.value);
+            setOwnSmtUsimModel(e.target.value);
           }}
         />
         <div className={`${styles.usimSubTitle} mt-6`}>일련번호</div>
@@ -36,17 +36,17 @@ const S4UsimNumber = () => {
           className={`${styles.inputBox} w-full`}
           placeholder="마지막 숫자 8자리를 적어주세요"
           maxLength={8}
-          value={usimNuber}
+          value={ownSmtUsimNumber}
           type="number"
           onChange={(e) => {
-            setUsimNumber(e.target.value);
+            setOwnSmtUsimNumber(e.target.value);
           }}
         />
         <button
-          disabled={usimModel === '' || usimNuber === ''}
+          disabled={ownSmtUsimModel === '' || ownSmtUsimNumber === ''}
           onClick={() => {
-            setTotal({ ...total, S4UsimNumber: { usimModel, usimNuber } });
-            router.push('./S5PhoneNumber');
+            setTotal({ ...total, ownSmtUsimModel, ownSmtUsimNumber });
+            router.push('./S5MobileInfo');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
@@ -57,4 +57,4 @@ const S4UsimNumber = () => {
   );
 };
 
-export default S4UsimNumber;
+export default S4OwnUsimNumber;

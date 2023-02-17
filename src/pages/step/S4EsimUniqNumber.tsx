@@ -109,13 +109,11 @@ const S4EsimUniqNumber = () => {
           onClick={() => {
             setTotal({
               ...total,
-              S4EsimUniqNumber: {
-                eid,
-                imei,
-                imei2,
-              },
+              eid,
+              imei,
+              imei2,
             });
-            router.push('./S5PhoneNumber');
+            router.push('./S5MobileInfo');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

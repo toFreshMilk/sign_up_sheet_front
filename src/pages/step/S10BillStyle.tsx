@@ -28,8 +28,7 @@ const S10BillStyle = () => {
               <button
                 key={item.title}
                 onClick={() => {
-                  const result = { billType: item.title };
-                  setTotal({ ...total, S10BillStyle: result });
+                  setTotal({ ...total, billType: item.title });
                   router.push('./S11PaymentInfo');
                 }}
                 className={`${styles.joinTypeBtn}`}

@@ -87,9 +87,7 @@ const S12Final = () => {
                 setNowPayment(v.label);
                 setTotal({
                   ...total,
-                  S12Final: {
-                    nowPayment: v.label,
-                  },
+                  nowPaymentInfo: v.label,
                 });
               }}
             />

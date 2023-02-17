@@ -38,19 +38,19 @@ const S8Identification = () => {
 
   const checkIdentification = async () => {
     let inqDvCd = identificationType[0]?.checked ? 'REGID' : 'DRIVE';
-    if (total.S1UserType.value === '외국인') {
+    if (total.custommerType === '외국인') {
       inqDvCd = 'FORGN';
     }
     let persFrgnrPsnoEnprNo: string | undefined = '';
     let custNm: string | undefined = '';
-    if (total.S1UserType.value === '미성년자') {
+    if (total.custommerType === '미성년자') {
+      custNm = total.S5PersonalInfoParent.userNameParent;
       persFrgnrPsnoEnprNo =
         total.S5PersonalInfoParent.jumin3 + total.S5PersonalInfoParent.jumin4;
-      custNm = total.S5PersonalInfoParent.userNameParent;
     } else {
+      custNm = total.S5PersonalInfo.userName;
       persFrgnrPsnoEnprNo =
         total.S5PersonalInfo.jumin1 + total.S5PersonalInfo.jumin2;
-      custNm = total.S5PersonalInfo.userName;
     }
     const identiParts = {
       inqDvCd,
@@ -65,9 +65,7 @@ const S8Identification = () => {
   };
   useEffect(() => {
     const whoami =
-      total.S1UserType?.value === '미성년자'
-        ? '법정대리인'
-        : total.S5PersonalInfo?.userName;
+      total.custommerType === '미성년자' ? '법정대리인' : total.userName;
     setWho(whoami);
   }, []);
   return (
@@ -194,13 +192,13 @@ const S8Identification = () => {
               setIdentiWarning(false);
               setTotal({
                 ...total,
-                S8Identification: {
-                  identificationType,
-                  monthYear,
-                  driverNumber: driver1 + driver2 + driver3 + driver4,
-                },
+                identificationType: identificationType[0].checked
+                  ? '주민등록증'
+                  : '운전면허증',
+                monthYear,
+                driverNumber: driver1 + driver2 + driver3 + driver4,
               });
-              router.push('./S9SelfAuth');
+              await router.push('./S9SelfAuth');
             } else {
               setIdentiWarning(true);
             }

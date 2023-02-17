@@ -86,18 +86,16 @@ const S5PersonalInfo = () => {
             const isOk = juminRule.test(`${jumin1}-${jumin2}`);
             setVerifyCHeckJumin(isOk);
             const goal =
-              total.S1UserType.value === '미성년자'
+              total.custommerType === '미성년자'
                 ? './S5PersonalInfoParent'
                 : './S6Address';
             if (isOk) {
               setTotal({
                 ...total,
-                S5PersonalInfo: {
-                  userName,
-                  jumin12: jumin1 + jumin2,
-                  jumin1,
-                  jumin2,
-                },
+                userName,
+                jumin12: jumin1 + jumin2,
+                jumin1,
+                jumin2,
               });
               router.push(goal);
             }

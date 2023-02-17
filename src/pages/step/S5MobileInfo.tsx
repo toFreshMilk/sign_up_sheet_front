@@ -15,7 +15,7 @@ const telecomList = [
   { telecomName: 'KT 알뜰폰', selected: false, isAlddle: true },
   { telecomName: 'LGU+ 알뜰폰', selected: false, isAlddle: true },
 ];
-const S5PhoneNumber = () => {
+const S5MobileInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [selectedTelecom, setSelectedTelecom] = useState({
@@ -131,11 +131,9 @@ const S5PhoneNumber = () => {
           onClick={() => {
             setTotal({
               ...total,
-              S5PhoneNumber: {
-                ...selectedTelecom,
-                alddleTelecom,
-                phoneNumber,
-              },
+              selectedTelecom: selectedTelecom.telecomName,
+              alddleTelecom,
+              phoneNumber,
             });
             router.push('./S5PersonalInfo');
           }}
@@ -148,4 +146,4 @@ const S5PhoneNumber = () => {
   );
 };
 
-export default S5PhoneNumber;
+export default S5MobileInfo;

@@ -35,10 +35,11 @@ const S11PaymentInfo = () => {
   const [showSelect2, setShowSelect2] = useState(false);
   const [showSelect3, setShowSelect3] = useState(false);
   const [isNotMyThing, setIsNotMyThing] = useState(false);
-  const [whatsRelation, setWhatsRelation] = useState('');
-  const [ownerName, setOwnerName] = useState('');
-  const [birthMonthDay, setBirthMonthDay] = useState('');
-  const [contactableMobile, setContactableMobile] = useState('010-');
+  const [whatsRelationForNMT, setWhatsRelationForNMT] = useState('');
+  const [ownerNameForNMT, setOwnerNameForNMT] = useState('');
+  const [birthMonthDayForNMT, setBirthMonthDayForNMT] = useState('');
+  const [contactableMobileForNMT, setContactableMobileForNMT] =
+    useState('010-');
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [selectedBank, setSelectedBank] = useState({
     name: '',
@@ -293,7 +294,7 @@ const S11PaymentInfo = () => {
                 isSearchable={false}
                 name={'dd'}
                 onChange={(v: any) => {
-                  setWhatsRelation(v.label);
+                  setWhatsRelationForNMT(v.label);
                 }}
               />
             ) : null}
@@ -303,20 +304,20 @@ const S11PaymentInfo = () => {
             <input
               className={`${styles.inputBox} w-full`}
               placeholder="이름을 입력해주세요"
-              value={ownerName}
+              value={ownerNameForNMT}
               type="text"
               onChange={(e) => {
-                setOwnerName(e.target.value);
+                setOwnerNameForNMT(e.target.value);
               }}
             />
             <div className={`${styles.usimSubTitle} mt-10`}>생년월일</div>
             <input
               className={`${styles.inputBox} w-full`}
               placeholder="예) 901231"
-              value={birthMonthDay}
+              value={birthMonthDayForNMT}
               type="text"
               onChange={(e) => {
-                setBirthMonthDay(e.target.value);
+                setBirthMonthDayForNMT(e.target.value);
               }}
             />
             <div className={`${styles.usimSubTitle} mt-10`}>
@@ -324,13 +325,13 @@ const S11PaymentInfo = () => {
             </div>
             <input
               className={`${styles.inputBox} w-full`}
-              value={contactableMobile}
+              value={contactableMobileForNMT}
               type="text"
               onChange={(e) => {
                 const inputed = e.target.value
                   .replace(/[^0-9]/g, '')
                   .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
-                setContactableMobile(inputed);
+                setContactableMobileForNMT(inputed);
               }}
             />
             <div className="mt-[24px]">
@@ -344,24 +345,22 @@ const S11PaymentInfo = () => {
         ) : null}
         <button
           disabled={false}
-          onClick={async () => {
+          onClick={() => {
             setTotal({
               ...total,
-              S11PaymentInfo: {
-                card1,
-                card2,
-                card3,
-                card4,
-                month,
-                year,
-                isNotMyThing,
-                whatsRelation,
-                ownerName,
-                birthMonthDay,
-                contactableMobile,
-                selectedBank,
-                accountNumber,
-              },
+              card1,
+              card2,
+              card3,
+              card4,
+              selectedBank,
+              accountNumber,
+              month,
+              year,
+              isNotMyThing,
+              whatsRelationForNMT,
+              ownerNameForNMT,
+              birthMonthDayForNMT,
+              contactableMobileForNMT,
             });
             router.push('./S12Final');
           }}

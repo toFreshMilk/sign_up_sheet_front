@@ -6,7 +6,7 @@ import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 import { Check } from '@/utils/Svgs';
 
-const S4UsimType = () => {
+const S4DeliveryUsimType = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [usimTypes] = useState([
@@ -33,7 +33,7 @@ const S4UsimType = () => {
                 key={item.title}
                 onClick={() => {
                   setTotal({ ...total, S4UsimType: item.title });
-                  router.push('./S5PhoneNumber');
+                  router.push('./S5MobileInfo');
                 }}
                 className={`${styles.joinTypeBtn}`}
               >
@@ -57,4 +57,4 @@ const S4UsimType = () => {
   );
 };
 
-export default S4UsimType;
+export default S4DeliveryUsimType;

@@ -30,7 +30,7 @@ const S7Email = () => {
         <button
           disabled={!regex.test(email)}
           onClick={() => {
-            setTotal({ ...total, S7Email: email });
+            setTotal({ ...total, email });
             router.push('./S8Identification');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}

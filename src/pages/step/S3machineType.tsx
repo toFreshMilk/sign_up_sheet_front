@@ -48,7 +48,7 @@ const S3machineType = () => {
         </div>
         <button
           onClick={() => {
-            setTotal({ ...total, S3machineType: modelName });
+            setTotal({ ...total, modelName });
             router.push('./S4HowToGetUsim');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}

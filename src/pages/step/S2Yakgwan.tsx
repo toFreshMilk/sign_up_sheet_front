@@ -193,13 +193,11 @@ const S2Yakgwan = () => {
             );
             if (isRequiredCheckd.length === 0) {
               // 옵션 저장하고 진행
-
-              const [optionalChecked] = optionalYakgwans.filter(
-                (item: IfYakgwan) => item.checked
-              );
-              // console.log(optionalChecked?.name);
-              const result = { marketing: optionalChecked?.name || '{}' };
-              setTotal({ ...total, S2Yakgwan: result });
+              setTotal({
+                ...total,
+                marketing1: optionalYakgwans[0]?.checked,
+                marketing2: optionalYakgwans[1]?.checked,
+              });
               router.push('./S3JoinType');
             } else {
               alert('필수 항목에 동의해주세요.');
