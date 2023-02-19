@@ -44,13 +44,11 @@ const S8Identification = () => {
     let persFrgnrPsnoEnprNo: string | undefined = '';
     let custNm: string | undefined = '';
     if (total.custommerType === '미성년자') {
-      custNm = total.S5PersonalInfoParent.userNameParent;
-      persFrgnrPsnoEnprNo =
-        total.S5PersonalInfoParent.jumin3 + total.S5PersonalInfoParent.jumin4;
+      custNm = total.userNameParent;
+      persFrgnrPsnoEnprNo = total.jumin34;
     } else {
-      custNm = total.S5PersonalInfo.userName;
-      persFrgnrPsnoEnprNo =
-        total.S5PersonalInfo.jumin1 + total.S5PersonalInfo.jumin2;
+      custNm = total.userName;
+      persFrgnrPsnoEnprNo = total.jumin12;
     }
     const identiParts = {
       inqDvCd,

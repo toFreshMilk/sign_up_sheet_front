@@ -20,8 +20,8 @@ const InicisAuth = () => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
     const data2 = {
       mTxId,
-      userName: total.S5PersonalInfo.userName,
-      jumin1: total.S5PersonalInfo.jumin1,
+      userName: total.userName,
+      jumin1: total.jumin1,
       type: '전자서명인증',
     };
     axios.post(url, data2);
@@ -99,7 +99,11 @@ const InicisAuth = () => {
     });
     createInicisForm();
   }, []);
-  return <iframe name={'sa_popup'} className={'h-[700px] w-full'} />;
+  return (
+    <div className={'flex justify-center'}>
+      <iframe name={'sa_popup'} className={'h-[700px] w-full max-w-[500px]'} />
+    </div>
+  );
 };
 
 export default InicisAuth;

@@ -82,8 +82,8 @@ const FtpImgModal = (_props: any) => {
             k.setUploadImg(files[0]);
           }}
         />
-        <div className="flex space-x-1 mt-3">
-          <button onClick={k.closeModalForFtp} className="p-3 border">
+        <div className="mt-3 flex space-x-1">
+          <button onClick={k.closeModalForFtp} className="border p-3">
             취소
           </button>
           <button
@@ -91,7 +91,7 @@ const FtpImgModal = (_props: any) => {
             onClick={() => {
               saveImage(k.uploadImg, k.urlKey);
             }}
-            className="p-3 border"
+            className="border p-3"
           >
             저장
           </button>

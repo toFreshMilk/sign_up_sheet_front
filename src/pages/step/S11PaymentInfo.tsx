@@ -350,9 +350,7 @@ const S11PaymentInfo = () => {
             const ownerResidentNumber = isNotMyThing
               ? birthMonthDayForNMT
               : total.jumin12;
-            const ownerRelation = isNotMyThing
-              ? whatsRelationForNMT
-              : '본인';
+            const ownerRelation = isNotMyThing ? whatsRelationForNMT : '본인';
             setTotal({
               ...total,
               card1234: card1 + card2 + card3 + card4,

@@ -28,7 +28,6 @@ const S9SelfAuthResult = () => {
     }
   };
   useEffect(() => {
-    console.log(total);
     checkAuth();
   }, []);
   return <></>;

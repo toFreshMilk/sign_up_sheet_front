@@ -10,7 +10,7 @@ const Main = (props: IMainProps) => {
     <div className="w-full text-gray-700">
       {props.meta}
       <div className="mx-auto max-w-screen-md">
-        <div className="content text-xl px-[24px] pt-[48px] pb-[32px] max-w-[480px] m-auto">
+        <div className="content m-auto max-w-[480px] px-[24px] pt-[48px] pb-[32px] text-xl">
           {props.children}
         </div>
       </div>

@@ -69,7 +69,11 @@ const KcbAuth = () => {
     });
     getKcbMDLToken(mTxId);
   }, []);
-  return <iframe name={'sa_popup2'} className={'h-[700px] w-full'} />;
+  return (
+    <div className={'flex justify-center'}>
+      <iframe name={'sa_popup2'} className={'h-[700px] w-full max-w-[500px]'} />
+    </div>
+  );
 };
 
 export default KcbAuth;
