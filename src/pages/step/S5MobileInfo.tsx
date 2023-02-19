@@ -93,20 +93,52 @@ const S5MobileInfo = () => {
         {selectedTelecom?.isAlddle ? (
           <div className={'mt-6'}>
             <div className={`${styles.usimSubTitle}`}>알뜰폰 통신사</div>
-            <select
-              name="selectedTelecom"
-              value={alddleTelecom}
-              onChange={(e) => {
-                setAlddleTelecom(e.target.value);
-              }}
+            <input
+              readOnly={true}
               className={`${styles.inputBox} w-full`}
+              placeholder="알뜰폰 통신사 선택"
+              value={alddleTelecom}
+              onChange={() => {}}
+              type="text"
+              onClick={() => {
+                setBottomSheetOpen(!bottomSheetOpen);
+              }}
+            />
+            <BottomSheet
+              snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight]}
+              open={bottomSheetOpen}
+              onDismiss={() => {
+                setBottomSheetOpen(false);
+              }}
+              skipInitialTransition={false}
+              blocking={true}
             >
-              {alttleTelecomList.map((item) => (
-                <option key={item.title} value={item.title}>
-                  {item.title}
-                </option>
-              ))}
-            </select>
+              <div className={`${styles.bottomSheetStyle}`}>
+                <h3 className={`text-[24px] font-bold text-[#2a3037]`}>
+                  알뜰폰 통신사 선택
+                </h3>
+                <div className={'grid grid-cols-3 gap-4 py-[8px]'}>
+                  {alttleTelecomList.map((item) => (
+                    <div
+                      key={item.title}
+                      className={`${styles.bottomSheetList2}`}
+                      onClick={() => {
+                        setBottomSheetOpen(false);
+                        setAlddleTelecom(item.title);
+                      }}
+                    >
+                      <p
+                        className={
+                          'mt-2 text-center text-[14px] text-[#495057]'
+                        }
+                      >
+                        {item.title}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </BottomSheet>
           </div>
         ) : null}
 

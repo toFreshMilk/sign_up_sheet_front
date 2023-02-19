@@ -229,6 +229,7 @@
   align-items: center;
   padding: 10px;
   border-radius: 8px;
+  overflow-wrap: anywhere;
 }
 .hipen {
   display: flex;
