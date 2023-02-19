@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react';
 import { Context } from '@/utils/Context';
 
 const KcbAuth = () => {
-  const { total } = useContext(Context) as any;
+  const { total, setTotal } = useContext(Context) as any;
 
   const beforeIdentification = (_mTxId: string) => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
@@ -62,8 +62,11 @@ const KcbAuth = () => {
     }
   };
   useEffect(() => {
-    console.log(total);
     const mTxId = `smar${moment().format('YYMMDDHHmmssms')}`;
+    setTotal({
+      ...total,
+      mTxId,
+    });
     getKcbMDLToken(mTxId);
   }, []);
   return <iframe name={'sa_popup2'} className={'h-[700px] w-full'} />;

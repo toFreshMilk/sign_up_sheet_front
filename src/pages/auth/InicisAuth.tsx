@@ -14,7 +14,7 @@ const InicisAuth = () => {
     .createHash('sha256')
     .update(mid + mTxId + apiKey)
     .digest('hex');
-  const { total } = useContext(Context) as any;
+  const { total, setTotal } = useContext(Context) as any;
 
   const beforeIdentification = () => {
     const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
@@ -93,7 +93,10 @@ const InicisAuth = () => {
     }, 1000);
   };
   useEffect(() => {
-    console.log(total);
+    setTotal({
+      ...total,
+      mTxId,
+    });
     createInicisForm();
   }, []);
   return <iframe name={'sa_popup'} className={'h-[700px] w-full'} />;

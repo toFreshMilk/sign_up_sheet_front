@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
@@ -13,6 +13,9 @@ const S10BillStyle = () => {
     { title: '문자로 받을게요' },
     { title: '이메일로 받을게요' },
   ]);
+  useEffect(() => {
+    console.log(total);
+  }, []);
   return (
     <Main>
       <div className="overflow-hidden">

@@ -428,6 +428,8 @@ const initialState = {
   birthMonthDayForNMT: '',
   contactableMobileForNMT: '',
   nowPaymentInfo: '',
+  mTxId: '',
+  selfAuthType: '',
 };
 export {
   alttleTelecomList,
