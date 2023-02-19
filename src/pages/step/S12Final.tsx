@@ -1,6 +1,7 @@
 import 'react-tooltip/dist/react-tooltip.css';
 
 import axios from 'axios';
+import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
 import Select from 'react-select';
 
@@ -26,39 +27,53 @@ const nowPaymentList = [
   },
 ];
 const S12Final = () => {
+  const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [nowPayment, setNowPayment] = useState('');
   const [showSelect1, setShowSelect1] = useState(false);
-  const [payFeeObj] = useState({
-    RATECD: '요금제 정보 없음',
-    RATENM: '요금제 정보 없음',
-    RATEAMT: '-',
-  });
-  const [ftpImgUrls] = useState<string[]>([]);
   const finalRow = async () => {
     // 여기서 finalRow
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/insertFinalRow`;
     const resultObj = await axios.post(tokenUrl, {
       ...total,
-      payFeeObj,
-      ftpImgUrls,
     });
-    // console.log('resultObj');
-    // console.log(resultObj);
     if (resultObj.data.rowsAffected > 0) {
       // eslint-disable-next-line no-alert
       alert('접수가 완료되었습니다.');
+      router.push('/');
     } else {
       // eslint-disable-next-line no-alert
       alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
     }
   };
+  const getFeeInfo = async (_feeId: string) => {
+    const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getPayFeeInfo`;
+    const resultObj = await axios.post(tokenUrl, {
+      id: _feeId,
+    });
+    const result = resultObj.data[0];
+    if (result) {
+      setTotal({
+        ...total,
+        rateName: result.RATENM,
+        rateAmt: result.RATEAMT,
+      });
+    } else {
+      setTotal({
+        ...total,
+        rateName: '요금제 정보 없음',
+        rateAmt: '0',
+      });
+    }
+  };
   useEffect(() => {
+    console.log(total);
+    getFeeInfo(total.feeId);
     setShowSelect1(true);
   }, []);
   return (
     <Main>
-      <div className={``}>
+      <div>
         <h2 className={`${styles.stepTitle}`}>
           현재 요금 납부 방법을 <br /> 선택해 주세요
         </h2>

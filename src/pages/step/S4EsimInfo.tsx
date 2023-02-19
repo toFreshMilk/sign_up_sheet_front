@@ -9,12 +9,12 @@ import { ArrowSvg, SettingSvg } from '@/utils/Svgs';
 const S4EsimInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
-  const [modelName, setModelName] = useState('');
+  const [machineModelName, setMmchineModelName] = useState('');
   const [capacity, setCapacity] = useState('');
   const [serial, setSerial] = useState('');
   const [radio, setRadio] = useState(true);
   useEffect(() => {
-    setModelName(total.modelName);
+    setMmchineModelName(total.machineModelName);
   }, []);
   return (
     <Main>
@@ -26,7 +26,7 @@ const S4EsimInfo = () => {
         <div className={`${styles.usimSubTitle} mt-6`}>모델명</div>
         <input
           className={`${styles.inputBox} w-full`}
-          value={modelName}
+          value={machineModelName}
           onChange={() => {}}
           type="text"
         />
@@ -118,7 +118,7 @@ const S4EsimInfo = () => {
           onClick={() => {
             setTotal({
               ...total,
-              modelName,
+              machineModelName,
               capacity,
               serial,
               factory: radio ? '아이폰' : '삼성',

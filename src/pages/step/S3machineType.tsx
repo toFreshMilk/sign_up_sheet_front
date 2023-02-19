@@ -11,7 +11,7 @@ const S3machineType = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [showSelect, setShowSelect] = useState(false);
-  const [modelName, setModelName] = useState('');
+  const [machineModelName, setMachineModelName] = useState('');
   useEffect(() => {
     setShowSelect(true);
   }, []);
@@ -41,14 +41,14 @@ const S3machineType = () => {
               isSearchable={false}
               name={'dd'}
               onChange={(v: any) => {
-                setModelName(v.label);
+                setMachineModelName(v.label);
               }}
             />
           ) : null}
         </div>
         <button
           onClick={() => {
-            setTotal({ ...total, modelName });
+            setTotal({ ...total, machineModelName });
             router.push('./S4HowToGetUsim');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}

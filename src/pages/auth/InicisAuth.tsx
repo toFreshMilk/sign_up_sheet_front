@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import crypto from 'crypto';
 import moment from 'moment/moment';
 import { useContext, useEffect } from 'react';
@@ -16,17 +16,18 @@ const InicisAuth = () => {
     .digest('hex');
   const { total } = useContext(Context) as any;
 
-  // const beforeIdentification = () => {
-  //   const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
-  //   const data2 = {
-  //     mTxId,
-  //     userName: total.S5PersonalInfo.userName,
-  //     jumin1: total.S5PersonalInfo.jumin1,
-  //     type: '전자서명인증',
-  //   };
-  //   axios.post(url, data2);
-  // };
+  const beforeIdentification = () => {
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/beforeIdentification`;
+    const data2 = {
+      mTxId,
+      userName: total.S5PersonalInfo.userName,
+      jumin1: total.S5PersonalInfo.jumin1,
+      type: '전자서명인증',
+    };
+    axios.post(url, data2);
+  };
   const createInicisForm = () => {
+    beforeIdentification();
     const wdwDct = document as any;
     const form1 = wdwDct.createElement('form');
     form1.setAttribute('id', 'saForm1');
@@ -46,7 +47,7 @@ const InicisAuth = () => {
     hiddenField = wdwDct.createElement('input');
     hiddenField.setAttribute('type', 'hidden');
     hiddenField.setAttribute('name', 'identifier');
-    hiddenField.setAttribute('value', total.S5PersonalInfo.userName);
+    hiddenField.setAttribute('value', total.userName);
     form1.append(hiddenField);
     hiddenField = wdwDct.createElement('input');
     hiddenField.setAttribute('type', 'hidden');

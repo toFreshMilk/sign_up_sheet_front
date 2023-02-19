@@ -346,6 +346,13 @@ const S11PaymentInfo = () => {
         <button
           disabled={false}
           onClick={() => {
+            const ownerName = isNotMyThing ? ownerNameForNMT : total.userName;
+            const ownerResidentNumber = isNotMyThing
+              ? birthMonthDayForNMT
+              : total.jumin12;
+            const ownerRelation = isNotMyThing
+              ? whatsRelationForNMT
+              : '본인';
             setTotal({
               ...total,
               card1234: card1 + card2 + card3 + card4,
@@ -353,6 +360,9 @@ const S11PaymentInfo = () => {
               accountNumber,
               month,
               year,
+              ownerResidentNumber,
+              ownerName,
+              ownerRelation,
               isNotMyThing,
               whatsRelationForNMT,
               ownerNameForNMT,
