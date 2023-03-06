@@ -43,7 +43,7 @@ const S6Address = () => {
       )}
       <div className={``}>
         <h2 className={`${styles.stepTitle}`}>
-          유심 배송을 받을 <br /> 주소를 입력해 주세요
+          유심 배송 받을 <br /> 주소를 입력해 주세요
         </h2>
         <br className={'mt-[32px]'} />
         <div className={`${styles.usimSubTitle}`}>주소</div>
