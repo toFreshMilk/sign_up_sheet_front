@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
@@ -16,13 +16,18 @@ const S4HowToGetUsim = () => {
   const [howToGetUsimBtn1, setHowToGetUsimBtn1] = useState({
     title: 'QR 코드로 다운',
     subTitle: '빠른 개통',
-    checked: true,
+    checked: false,
   });
   const [howToGetUsimBtn2, setHowToGetUsimBtn2] = useState({
     title: '배송 받기',
     subTitle: '1~3일 정도 더 걸려요',
-    checked: false,
+    checked: true,
   });
+  const [isETC, setIsETC] = useState(false);
+  useEffect(() => {
+    const ETC = total.machineModelName === '그 외';
+    setIsETC(ETC);
+  }, []);
   return (
     <Main>
       <div className="">
@@ -31,31 +36,33 @@ const S4HowToGetUsim = () => {
           유심 종류에 따라 유심비가 부과될 수 있어요
         </h3>
         <div className={'mt-[40px] flex justify-center space-x-[8px]'}>
-          <button
-            className={`${styles.howToGetUsimBtn} ${
-              howToGetUsimBtn1.checked ? styles.howToGetUsimBtnActive : ''
-            }`}
-            onClick={() => {
-              setHowToGetUsimBtn1({ ...howToGetUsimBtn1, checked: true });
-              setHowToGetUsimBtn2({ ...howToGetUsimBtn2, checked: false });
-            }}
-          >
-            <div
-              className={`${styles.grayBtn} ${styles.howToGetUsimBtnInDiv} ${
-                howToGetUsimBtn1.checked
-                  ? `${styles.clickBtn} ${styles.howToGetUsimBtnActive2}`
-                  : ''
+          {isETC ? null : (
+            <button
+              className={`${styles.howToGetUsimBtn} ${
+                howToGetUsimBtn1.checked ? styles.howToGetUsimBtnActive : ''
               }`}
+              onClick={() => {
+                setHowToGetUsimBtn1({ ...howToGetUsimBtn1, checked: true });
+                setHowToGetUsimBtn2({ ...howToGetUsimBtn2, checked: false });
+              }}
             >
-              <HowToGetUsimSvg1 />
-            </div>
-            <div className={`${styles.howToGetUsimBtnContentBox} mt-[16px]`}>
-              <div className={`${styles.howToGetUsimBtnContent1}`}>
-                QR 코드로 다운
+              <div
+                className={`${styles.grayBtn} ${styles.howToGetUsimBtnInDiv} ${
+                  howToGetUsimBtn1.checked
+                    ? `${styles.clickBtn} ${styles.howToGetUsimBtnActive2}`
+                    : ''
+                }`}
+              >
+                <HowToGetUsimSvg1 />
               </div>
-              <HowToGetUsimSvg3 />
-            </div>
-          </button>
+              <div className={`${styles.howToGetUsimBtnContentBox} mt-[16px]`}>
+                <div className={`${styles.howToGetUsimBtnContent1}`}>
+                  QR 코드로 다운
+                </div>
+                <HowToGetUsimSvg3 />
+              </div>
+            </button>
+          )}
           <button
             className={`${styles.howToGetUsimBtn} ${
               howToGetUsimBtn2.checked ? styles.howToGetUsimBtnActive : ''
