@@ -5,9 +5,30 @@ import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 
+const custommerTypesObj = [
+  {
+    name: '일반 (만 19세 이상)',
+    checked: false,
+    value: '개인',
+    inqDvcd: 'REGID',
+  },
+  {
+    name: '미성년자 (만 19세 미만)',
+    checked: false,
+    value: '미성년자',
+    inqDvcd: 'REGID',
+  },
+  {
+    name: '외국인',
+    checked: false,
+    value: '외국인',
+    inqDvcd: 'FORGN',
+  },
+];
 const S5PersonalInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
+  const [custommerTypes, setCustommerTypes] = useState(custommerTypesObj);
   const [userName, setUserName] = useState('');
   const [jumin1, setJumin1] = useState('');
   const [jumin2, setJumin2] = useState('');
@@ -22,6 +43,32 @@ const S5PersonalInfo = () => {
         <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           안전하게 보관하고 개통시에만 사용해요
         </h3>
+        <br className={'mt-[32px]'} />
+        <div className="w-full space-x-1">
+          {custommerTypes.map((item, i) => (
+            <button
+              key={item.name}
+              onClick={() => {
+                setTotal({
+                  ...total,
+                  custommerType: item.value,
+                  custommerTypeTitle: item.name,
+                });
+                custommerTypes.map((v, i2) => {
+                  const temp = v;
+                  temp.checked = i === i2;
+                  return temp;
+                });
+                setCustommerTypes(custommerTypes);
+              }}
+              className={`${styles.customerTypeBtn} ${
+                item.checked ? styles.customerTypeBtnOn : ''
+              }`}
+            >
+              <div>{item.value}</div>
+            </button>
+          ))}
+        </div>
         <br className={'mt-[32px]'} />
         <input
           className={`${styles.inputBox} w-full`}
@@ -70,7 +117,7 @@ const S5PersonalInfo = () => {
                   fillRule="evenodd"
                   d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-9 3.75a1 1 0 112 0 1 1 0 01-2 0zm1-2.5a1 1 0 001-1v-4a1 1 0 10-2 0v4a1 1 0 001 1z"
                   clipRule="evenodd"
-                ></path>
+                />
               </svg>
               주민등록번호를 다시 확인해 주세요
             </div>
