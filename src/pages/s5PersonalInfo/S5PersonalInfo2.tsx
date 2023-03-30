@@ -5,24 +5,26 @@ import { juminRuleTest } from '@/utils/Commons';
 import { Context } from '@/utils/Context';
 import { Warning } from '@/utils/Svgs';
 
-export const S5PersonalInfo1 = forwardRef((props, ref) => {
+export const S5PersonalInfo2 = forwardRef((props, ref) => {
   const { total, setTotal } = useContext(Context) as any;
-  const [userName, setUserName] = useState('');
-  const [jumin1, setJumin1] = useState('');
-  const [jumin2, setJumin2] = useState('');
+  const [userNameParent, setUserNameParent] = useState('');
+  const [jumin3, setJumin3] = useState('');
+  const [jumin4, setJumin4] = useState('');
   const [verifyCHeckJumin, setVerifyCHeckJumin] = useState(true);
   useImperativeHandle(ref, () => ({
     childFunction1() {
-      console.log('child function 1 called');
       console.log(props);
-      const isOk = juminRuleTest(`${jumin1}-${jumin2}`);
+      const isOk = juminRuleTest(`${jumin3}-${jumin4}`);
+      console.log('child function 22222222 called');
+      console.log(isOk);
+
       setVerifyCHeckJumin(isOk);
       if (isOk) {
         setTotal({
           ...total,
-          userName,
-          jumin12: jumin1 + jumin2,
-          jumin1,
+          userNameParent,
+          jumin34: jumin3 + jumin4,
+          jumin3,
         });
       }
       return isOk;
@@ -30,12 +32,17 @@ export const S5PersonalInfo1 = forwardRef((props, ref) => {
   }));
   return (
     <>
+      <br className={'mt-[32px]'} />
+      <h3 className="mt-[8px] text-[16px] text-[#868e96]">
+        법정대리인의 <br /> 정보를 입력해주세요
+      </h3>
+      <br className={'mt-[32px]'} />
       <input
         className={`${styles.inputBox} w-full`}
         placeholder="이름을 입력해 주세요"
-        value={userName}
+        value={userNameParent}
         onChange={(e) => {
-          setUserName(e.target.value);
+          setUserNameParent(e.target.value);
         }}
         type="text"
       />
@@ -44,11 +51,11 @@ export const S5PersonalInfo1 = forwardRef((props, ref) => {
           className={`${styles.inputBox} w-full`}
           placeholder="앞자리"
           maxLength={6}
-          value={jumin1}
+          value={jumin3}
           type="text"
           onChange={(e) => {
             const regex = /[^0-9]/g;
-            setJumin1(e.target.value.replace(regex, ''));
+            setJumin3(e.target.value.replace(regex, ''));
           }}
         />
         <div className={`${styles.hipen}`}>-</div>
@@ -56,11 +63,11 @@ export const S5PersonalInfo1 = forwardRef((props, ref) => {
           className={`${styles.inputBox} w-full`}
           placeholder="뒷자리"
           maxLength={7}
-          value={jumin2}
+          value={jumin4}
           type="password"
           onChange={(e) => {
             const regex = /[^0-9]/g;
-            setJumin2(e.target.value.replace(regex, ''));
+            setJumin4(e.target.value.replace(regex, ''));
           }}
         />
       </div>
@@ -69,11 +76,12 @@ export const S5PersonalInfo1 = forwardRef((props, ref) => {
           <div className={`${styles.juminWaring}`}>
             <Warning />
             주민등록번호를 다시 확인해 주세요
+            주민등록번호를 다시 확인해 주세요
           </div>
         </div>
       )}
     </>
   );
 });
-S5PersonalInfo1.displayName = 'S5PersonalInfo1';
-export default S5PersonalInfo1;
+S5PersonalInfo2.displayName = 'S5PersonalInfo2';
+export default S5PersonalInfo2;

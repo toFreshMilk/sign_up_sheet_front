@@ -5,7 +5,7 @@ import { juminRuleTest } from '@/utils/Commons';
 import { Context } from '@/utils/Context';
 import { Warning } from '@/utils/Svgs';
 
-export const S5PersonalInfo1 = forwardRef((props, ref) => {
+export const S5PersonalInfo3 = forwardRef((_props, ref) => {
   const { total, setTotal } = useContext(Context) as any;
   const [userName, setUserName] = useState('');
   const [jumin1, setJumin1] = useState('');
@@ -13,8 +13,7 @@ export const S5PersonalInfo1 = forwardRef((props, ref) => {
   const [verifyCHeckJumin, setVerifyCHeckJumin] = useState(true);
   useImperativeHandle(ref, () => ({
     childFunction1() {
-      console.log('child function 1 called');
-      console.log(props);
+      console.log('child function 33333333333 called');
       const isOk = juminRuleTest(`${jumin1}-${jumin2}`);
       setVerifyCHeckJumin(isOk);
       if (isOk) {
@@ -68,12 +67,12 @@ export const S5PersonalInfo1 = forwardRef((props, ref) => {
         <div className="mt-[24px]">
           <div className={`${styles.juminWaring}`}>
             <Warning />
-            주민등록번호를 다시 확인해 주세요
+            외국인번호를 다시 확인해 주세요
           </div>
         </div>
       )}
     </>
   );
 });
-S5PersonalInfo1.displayName = 'S5PersonalInfo1';
-export default S5PersonalInfo1;
+S5PersonalInfo3.displayName = 'S5PersonalInfo3';
+export default S5PersonalInfo3;

@@ -134,13 +134,18 @@ const setLocalStorage = (key: string, value: any) => {
     // https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API/Using_the_Web_Storage_API
   }
 };
-
+const juminRuleTest = (key: string) => {
+  const juminRule =
+    /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$/;
+  return juminRule.test(key);
+};
 export {
   CheckIcon,
   encrypt,
   FtpImgModal,
   getLocalStorage,
   identificationCheckLG,
+  juminRuleTest,
   saveImage,
   setLocalStorage,
 };
