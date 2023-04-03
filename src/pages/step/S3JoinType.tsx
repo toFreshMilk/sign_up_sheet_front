@@ -33,7 +33,7 @@ const S3JoinType = () => {
                 onClick={() => {
                   setTotal({ ...total, joinType: item.title });
                   if (item.title === '번호이동') {
-                    router.push('./S3OldPaymentInfo');
+                    router.push('./S5MobileInfo');
                   } else {
                     router.push('./S3HopeNumber');
                   }

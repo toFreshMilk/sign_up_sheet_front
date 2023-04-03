@@ -386,7 +386,7 @@ const S3OldPaymentInfo = () => {
               birthMonthDayForNMT,
               contactableMobileForNMT,
             });
-            router.push('./S4HowToGetUsim');
+            router.push('./S5PersonalInfo');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

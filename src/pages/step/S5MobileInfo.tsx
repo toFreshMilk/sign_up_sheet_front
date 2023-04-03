@@ -167,7 +167,7 @@ const S5MobileInfo = () => {
               alddleTelecom,
               phoneNumber,
             });
-            router.push('./S5PersonalInfo');
+            router.push('./S3OldPaymentInfo');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
