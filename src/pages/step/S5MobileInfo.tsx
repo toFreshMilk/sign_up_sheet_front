@@ -34,7 +34,7 @@ const S5MobileInfo = () => {
     <Main>
       <div className={``}>
         <h2 className={`${styles.stepTitle}`}>
-          연락 가능한 <br /> 휴대폰 번호를 알려주세요
+          스마텔 알뜰폰으로 <br /> 이용하고자 하는 휴대폰 번호를 알려주세요
         </h2>
         <br className={'mt-[32px]'} />
         <div className={`${styles.usimSubTitle}`}>통신사</div>

@@ -32,7 +32,7 @@ const S3JoinType = () => {
                 key={item.title}
                 onClick={() => {
                   setTotal({ ...total, joinType: item.title });
-                  router.push('./S3machineType');
+                  router.push('./S4HowToGetUsim');
                 }}
                 className={`${styles.joinTypeBtn}`}
               >
