@@ -436,6 +436,8 @@ const initialState = {
   selfAuthType: '',
   hopeNum1st: '',
   hopeNum2st: '',
+  usedCard4: '',
+  usedBank4: '',
 };
 export {
   alttleTelecomList,
