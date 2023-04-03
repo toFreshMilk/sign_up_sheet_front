@@ -1,7 +1,7 @@
 import { forwardRef, useContext, useImperativeHandle, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
-import { juminRuleTest } from '@/utils/Commons';
+import { FtpImgModal, juminRuleTest } from '@/utils/Commons';
 import { Context } from '@/utils/Context';
 import { Warning } from '@/utils/Svgs';
 
@@ -11,6 +11,16 @@ export const S5PersonalInfo2 = forwardRef((props, ref) => {
   const [jumin3, setJumin3] = useState('');
   const [jumin4, setJumin4] = useState('');
   const [verifyCHeckJumin, setVerifyCHeckJumin] = useState(true);
+  const [picAttOpenFtp1, setPicAttOpenFtp1] = useState(false);
+  const [uploadImg1, setUploadImg1] = useState<File>();
+  const closeModalForFtp1 = () => {
+    setPicAttOpenFtp1(false);
+  };
+  const [picAttOpenFtp2, setPicAttOpenFtp2] = useState(false);
+  const [uploadImg2, setUploadImg2] = useState<File>();
+  const closeModalForFtp2 = () => {
+    setPicAttOpenFtp2(false);
+  };
   useImperativeHandle(ref, () => ({
     childFunction1() {
       console.log(props);
@@ -76,10 +86,59 @@ export const S5PersonalInfo2 = forwardRef((props, ref) => {
           <div className={`${styles.juminWaring}`}>
             <Warning />
             주민등록번호를 다시 확인해 주세요
-            주민등록번호를 다시 확인해 주세요
           </div>
         </div>
       )}
+      <br className={'mt-[32px]'} />
+      <h3 className="mt-[8px] text-[16px] text-[#868e96]">
+        사진 파일 첨부(법정대리인)
+      </h3>
+      <br className={'mt-[32px]'} />
+      <div className="col-span-6 sm:col-span-4">
+        <div className="mb-5 flex">
+          <button
+            onClick={() => {
+              setPicAttOpenFtp1(true);
+            }}
+            className="text-[16px] w-full border border-gray-300 p-1"
+          >
+            신분증 사진 첨부
+          </button>
+          <FtpImgModal
+            k={{
+              picAttOpenFtp: picAttOpenFtp1,
+              setPicAttOpenFtp: setPicAttOpenFtp1,
+              uploadImg: uploadImg1,
+              setUploadImg: setUploadImg1,
+              closeModalForFtp: closeModalForFtp1,
+              urlKey: 'ftpImgUrl2',
+              total,
+              setTotal,
+            }}
+          />
+          <span className="p-3" />
+          <button
+            onClick={() => {
+              setPicAttOpenFtp2(true);
+            }}
+            className="text-[16px] w-full border border-gray-300 p-1"
+          >
+            가족관계증명서 사진 첨부
+          </button>
+          <FtpImgModal
+            k={{
+              picAttOpenFtp: picAttOpenFtp2,
+              setPicAttOpenFtp: setPicAttOpenFtp2,
+              uploadImg: uploadImg2,
+              setUploadImg: setUploadImg2,
+              closeModalForFtp: closeModalForFtp2,
+              urlKey: 'ftpImgUrl3',
+              total,
+              setTotal,
+            }}
+          />
+        </div>
+      </div>
     </>
   );
 });

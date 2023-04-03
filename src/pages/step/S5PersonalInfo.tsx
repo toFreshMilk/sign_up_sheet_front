@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 
 import { S5PersonalInfo1 } from '@/pages/s5PersonalInfo/S5PersonalInfo1';
 import { S5PersonalInfo2 } from '@/pages/s5PersonalInfo/S5PersonalInfo2';
@@ -62,6 +62,9 @@ const S5PersonalInfo = () => {
         console.log('ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ');
     }
   };
+  useEffect(() => {
+    console.log(total);
+  }, []);
 
   return (
     <Main>

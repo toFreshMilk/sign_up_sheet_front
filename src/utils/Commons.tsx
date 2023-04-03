@@ -26,7 +26,12 @@ const encrypt = (val: any) => {
   const result = encrypted.toString();
   return encodeURIComponent(result);
 };
-const saveImage = (_uploadImg: any, _title: string) => {
+const saveImage = (
+  _uploadImg: any,
+  _title: string,
+  total: any,
+  setTotal: any
+) => {
   const formData = new FormData();
   formData.append('file', _uploadImg);
   // console.log(_uploadImg);
@@ -42,6 +47,10 @@ const saveImage = (_uploadImg: any, _title: string) => {
     .then((res) => {
       if (res.data.code === 226) {
         const u1 = res.data.ftpUploadUrl;
+        total.ftpImgUrls.push(u1);
+        setTotal({
+          ...total,
+        });
         sessionStorage.setItem(
           _title,
           JSON.stringify({
@@ -89,7 +98,7 @@ const FtpImgModal = (_props: any) => {
           <button
             type="submit"
             onClick={() => {
-              saveImage(k.uploadImg, k.urlKey);
+              saveImage(k.uploadImg, k.urlKey, k.total, k.setTotal);
             }}
             className="border p-3"
           >
