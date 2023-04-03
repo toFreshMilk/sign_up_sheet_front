@@ -43,23 +43,23 @@ const S5PersonalInfo = () => {
       case '개인':
         if (ok1) {
           console.log('개인');
-          router.push('./S6Address');
+          router.push('./S8Identification');
         }
         break;
       case '미성년자':
         if (ok1 && ok2) {
           console.log('미성년자');
-          router.push('./S6Address');
+          router.push('./S8Identification');
         }
         break;
       case '외국인':
         if (ok3) {
           console.log('외국인');
-          router.push('./S6Address');
+          router.push('./S8Identification');
         }
         break;
       default:
-        console.log('ㅌㅌㅌㅌㅌㅌㅌㅌㅌㅌ');
+        console.log('not ok');
     }
   };
   useEffect(() => {

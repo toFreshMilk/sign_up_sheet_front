@@ -434,6 +434,8 @@ const initialState = {
   nowPaymentInfo: '',
   mTxId: '',
   selfAuthType: '',
+  hopeNum1st: '',
+  hopeNum2st: '',
 };
 export {
   alttleTelecomList,

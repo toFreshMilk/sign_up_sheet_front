@@ -32,7 +32,11 @@ const S3JoinType = () => {
                 key={item.title}
                 onClick={() => {
                   setTotal({ ...total, joinType: item.title });
-                  router.push('./S4HowToGetUsim');
+                  if (item.title === '번호이동') {
+                    router.push('./S11PaymentInfo');
+                  } else {
+                    router.push('./S3HopeNumber');
+                  }
                 }}
                 className={`${styles.joinTypeBtn}`}
               >

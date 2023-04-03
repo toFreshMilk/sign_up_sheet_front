@@ -31,7 +31,7 @@ const S7Email = () => {
           disabled={!regex.test(email)}
           onClick={() => {
             setTotal({ ...total, email });
-            router.push('./S8Identification');
+            router.push('./S12Final');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

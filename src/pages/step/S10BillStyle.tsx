@@ -32,7 +32,7 @@ const S10BillStyle = () => {
                 key={item.title}
                 onClick={() => {
                   setTotal({ ...total, billType: item.title });
-                  router.push('./S11PaymentInfo');
+                  router.push('./S6Address');
                 }}
                 className={`${styles.joinTypeBtn}`}
               >
