@@ -38,6 +38,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
     getLocalStorage('total', initialState)
   ) as any;
   useEffect(() => {
+    console.log(total);
     setLocalStorage('total', total);
   }, [total]);
   return (

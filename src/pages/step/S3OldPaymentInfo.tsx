@@ -11,7 +11,7 @@ import { Context } from '@/utils/Context';
 import { bankList, family, monthList, yearList } from '@/utils/PublicData';
 import { InformBlue } from '@/utils/Svgs';
 
-const S11PaymentInfo = () => {
+const S3OldPaymentInfo = () => {
   const router = useRouter();
   const { total, setTotal } = useContext(Context) as any;
   const [who, setWho] = useState('');
@@ -386,7 +386,7 @@ const S11PaymentInfo = () => {
               birthMonthDayForNMT,
               contactableMobileForNMT,
             });
-            router.push('./S7Email');
+            router.push('./S4HowToGetUsim');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
@@ -397,4 +397,4 @@ const S11PaymentInfo = () => {
   );
 };
 
-export default S11PaymentInfo;
+export default S3OldPaymentInfo;

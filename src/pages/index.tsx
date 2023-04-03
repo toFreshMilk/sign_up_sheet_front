@@ -14,7 +14,7 @@ const Index = () => {
     const feeId = asPath.split('=')[1] || 'LPZ0015470';
     // console.log(feeId);
     setTotal({ ...initialState, feeId });
-    router.push('/step/S1UserType');
+    router.push('/step/S2Yakgwan');
   }, []);
 
   return (

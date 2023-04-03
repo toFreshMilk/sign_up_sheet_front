@@ -70,7 +70,7 @@ const S8Identification = () => {
     <Main>
       <div className={``}>
         <h2 className={`${styles.stepTitle}`}>
-          {who}님의 신분증 <br /> 정보를 입력해주세요
+          {who}의 신분증 진위확인
         </h2>
         <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           부정가입방지를 위한 과정이에요
@@ -109,7 +109,7 @@ const S8Identification = () => {
                 onChange={(e) => {
                   setDriver1(e.target.value);
                 }}
-                className={`${styles.inputBox} w-1/6`}
+                className={`${styles.inputBox} w-1/6 text-[11px] ${styles.fce11px}`}
               >
                 {driverLicenceRegion.map((item) => (
                   <option key={item.name} value={item.value}>

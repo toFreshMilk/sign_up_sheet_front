@@ -221,6 +221,9 @@
 .inputBox:focus {
   outline: none;
 }
+.fce11px {
+  font-size: 11px !important;
+}
 .bottomSheetStyle {
   padding: 26px 24px 16px 24px;
 }

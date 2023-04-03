@@ -67,7 +67,6 @@ const S12Final = () => {
     }
   };
   useEffect(() => {
-    console.log(total);
     getFeeInfo(total.feeId);
     setShowSelect1(true);
   }, []);
