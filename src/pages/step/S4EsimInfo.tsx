@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import Select from 'react-select';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
-import { ArrowSvg, SettingSvg } from '@/utils/Svgs';
+import { machineCapaList, machineModelList } from '@/utils/PublicData';
 
 const S4EsimInfo = () => {
   const router = useRouter();
@@ -12,8 +14,15 @@ const S4EsimInfo = () => {
   const [machineModelName, setMmchineModelName] = useState('');
   const [capacity, setCapacity] = useState('');
   const [serial, setSerial] = useState('');
-  const [radio, setRadio] = useState(true);
+  const [showHowToSeeUsim, setShowHowToSeeUsim] = useState(false);
+  const [showSelect, setShowSelect] = useState(false);
+  const [showSelect2, setShowSelect2] = useState(false);
+  const [eid, setEid] = useState('');
+  const [imei, setImei] = useState('');
+  const [imei2, setImei2] = useState('');
   useEffect(() => {
+    setShowSelect(true);
+    setShowSelect2(true);
     setMmchineModelName(total.machineModelName);
   }, []);
   return (
@@ -23,24 +32,83 @@ const S4EsimInfo = () => {
           eSim 개통을 위해 <br /> 휴대폰 정보를 입력해주세요
         </h2>
         <br className={'mt-[32px]'} />
-        <div className={`${styles.usimSubTitle} mt-6`}>모델명</div>
-        <input
-          className={`${styles.inputBox} w-full`}
-          value={machineModelName}
-          onChange={() => {}}
-          type="text"
-        />
-        <div className={`${styles.usimSubTitle} mt-6`}>용량</div>
-        <select
-          value={capacity}
-          onChange={(e) => {
-            setCapacity(e.target.value);
+        <button
+          onClick={() => {
+            setShowHowToSeeUsim(true);
           }}
-          className={`${styles.inputBox} w-full`}
+          className={`${styles.customerTypeBtn} ${styles.customerTypeBtnOn}`}
         >
-          <option value={'256G'}>256G</option>
-          <option value={'512G'}>512G</option>
-        </select>
+          <div>단말정보 보는법</div>
+        </button>
+        <Modal
+          isOpen={showHowToSeeUsim}
+          ariaHideApp={false}
+          style={{
+            content: {
+              top: '50%',
+              left: '50%',
+              right: 'auto',
+              bottom: 'auto',
+              marginRight: '-50%',
+              transform: 'translate(-50%, -50%)',
+            },
+          }}
+        >
+          <img
+            src={`${router.basePath}/assets/images/seeMachineInfo.png`}
+            alt={'이미지'}
+            onClick={() => {
+              setShowHowToSeeUsim(false);
+            }}
+          />
+        </Modal>
+        <br className={'mt-[32px]'} />
+        <div className={`${styles.usimSubTitle} mt-6`}>모델명</div>
+        <div className={'relative'}>
+          {showSelect ? (
+            <Select
+              options={machineModelList}
+              defaultValue={{
+                value: '선택',
+                label: '선택',
+                rating: 'safe',
+              }}
+              classNamePrefix={'selectPrefix'}
+              isDisabled={false}
+              isLoading={false}
+              isClearable={false}
+              isRtl={false}
+              isSearchable={false}
+              name={'dd'}
+              onChange={(v: any) => {
+                setMmchineModelName(v.label);
+              }}
+            />
+          ) : null}
+        </div>
+        <div className={`${styles.usimSubTitle} mt-6`}>용량</div>
+        <div className={'relative'}>
+          {showSelect2 ? (
+            <Select
+              options={machineCapaList}
+              defaultValue={{
+                value: '선택',
+                label: '선택',
+                rating: 'safe',
+              }}
+              classNamePrefix={'selectPrefix'}
+              isDisabled={false}
+              isLoading={false}
+              isClearable={false}
+              isRtl={false}
+              isSearchable={false}
+              name={'dd'}
+              onChange={(v: any) => {
+                setCapacity(v.label);
+              }}
+            />
+          ) : null}
+        </div>
         <div className={`${styles.usimSubTitle} mt-10`}>일련번호</div>
         <input
           className={`${styles.inputBox} w-full`}
@@ -52,78 +120,54 @@ const S4EsimInfo = () => {
           }}
         />
         <br className={'mt-[32px]'} />
-        <div className={`${styles.s4EsimRadioWrapper}`}>
-          <div
-            className={`${styles.s4EsimRadioWrapperInDiv} ${
-              radio ? styles.s4EsimRadioOn : styles.s4EsimRadioOff
-            }`}
-          ></div>
-          <div className={`${styles.s4EsimRadio}`}>
-            <button
-              onClick={() => {
-                setRadio(true);
-              }}
-            >
-              아이폰
-            </button>
-            <button
-              onClick={() => {
-                setRadio(false);
-              }}
-            >
-              삼성
-            </button>
-          </div>
-        </div>
-        <div className={'mt-[24px]'}>
-          <div className={`${styles.howToCheck}`}>확인방법</div>
-          <div className={`${styles.howToCheckSub} mb-[24px]`}>
-            <span className={'mr-[6px]'}>
-              <SettingSvg />
-            </span>
-            <span className={'mr-[6px]'}>설정</span>
-            <span className={'mr-[6px]'}>
-              <ArrowSvg />
-            </span>
-            <span className={'mr-[6px]'}>
-              {radio ? '일반' : '휴대전화 정보'}
-            </span>
-            <span className={'mr-[6px]'}>
-              <ArrowSvg />
-            </span>
-            <span className={'mr-[6px]'}>
-              {radio ? (
-                <>
-                  정보에서 <b>3가지 정보</b> 모두 확인할 수 있어요
-                </>
-              ) : (
-                '규제 정보에서 확인할 수 있어요'
-              )}
-            </span>
-          </div>
-          <div className={'flex justify-center'}>
-            <img
-              src={`${router.basePath}/assets/images/${
-                radio
-                  ? 'esim_ios_phone_guide.webp'
-                  : 'esim_samsung_phone_guide.webp'
-              }`}
-              alt={'img'}
-              className={'w-[270px]'}
-            />
-          </div>
-        </div>
-
+        <div className={`${styles.usimSubTitle} mt-6`}>EID</div>
+        <input
+          className={`${styles.inputBox} w-full`}
+          maxLength={32}
+          placeholder={'EID'}
+          value={eid}
+          onChange={(e) => {
+            setEid(e.target.value);
+          }}
+          type="text"
+        />
+        <div className={`${styles.usimSubTitle} mt-6`}>IMEI</div>
+        <input
+          className={`${styles.inputBox} w-full`}
+          maxLength={15}
+          placeholder={'IMEI'}
+          value={imei}
+          onChange={(e) => {
+            setImei(e.target.value);
+          }}
+          type="text"
+        />
+        <div className={`${styles.usimSubTitle} mt-6`}>IMEI2</div>
+        <input
+          className={`${styles.inputBox} w-full`}
+          maxLength={15}
+          placeholder={'IMEI2'}
+          value={imei2}
+          onChange={(e) => {
+            setImei2(e.target.value);
+          }}
+          type="text"
+        />
         <button
+          disabled={
+            eid.length !== 32 || imei.length !== 15 || imei2.length !== 15
+          }
           onClick={() => {
             setTotal({
               ...total,
               machineModelName,
               capacity,
               serial,
-              factory: radio ? '아이폰' : '삼성',
+              eid,
+              imei,
+              imei2,
             });
-            router.push('./S4EsimUniqNumber');
+            router.push('./S5MobileInfo');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

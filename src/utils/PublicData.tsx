@@ -175,6 +175,10 @@ const machineModelList = [
   { label: 'iPhone XS', value: 'iPhone XS', rating: 'safe' },
   { label: '그 외', value: '그 외', rating: 'safe' },
 ];
+const machineCapaList = [
+  { label: '256', value: '256', rating: 'safe' },
+  { label: '512', value: '512', rating: 'safe' },
+];
 const difficultNaverList = [
   {
     title: '아이콘을 눌러도 반응이 없어요',
@@ -441,6 +445,7 @@ export {
   driverLicenceRegion,
   family,
   initialState,
+  machineCapaList,
   machineModelList,
   monthList,
   yearList,
