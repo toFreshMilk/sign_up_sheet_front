@@ -1,5 +1,6 @@
 import 'react-tooltip/dist/react-tooltip.css';
 
+import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
 import DaumPostcode from 'react-daum-postcode';
@@ -11,7 +12,6 @@ import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 import { bankList, family, monthList, yearList } from '@/utils/PublicData';
 import { Close, InformBlue } from '@/utils/Svgs';
-import axios from 'axios';
 
 const S11PaymentInfo = () => {
   const router = useRouter();
