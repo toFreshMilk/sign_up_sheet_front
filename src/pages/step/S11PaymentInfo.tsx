@@ -2,6 +2,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 import { useRouter } from 'next/router';
 import { useContext, useEffect, useRef, useState } from 'react';
+import DaumPostcode from 'react-daum-postcode';
 import Select from 'react-select';
 import { BottomSheet } from 'react-spring-bottom-sheet';
 
@@ -9,7 +10,7 @@ import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 import { bankList, family, monthList, yearList } from '@/utils/PublicData';
-import { InformBlue } from '@/utils/Svgs';
+import { Close, InformBlue } from '@/utils/Svgs';
 
 const S11PaymentInfo = () => {
   const router = useRouter();
@@ -50,6 +51,13 @@ const S11PaymentInfo = () => {
   const ref2 = useRef(null) as any;
   const ref3 = useRef(null) as any;
   const ref4 = useRef(null) as any;
+  const [phoneNumberPayFor, setPhoneNumberPayFor] = useState('');
+  const [bunji, setBunji] = useState('');
+  const [openPostcode, setOpenPostcode] = useState(false);
+  const [address1, setAddress1] = useState('');
+  const [address2, setAddress2] = useState('');
+  const [email, setEmail] = useState('');
+  // const regex = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/; 이메일
   useEffect(() => {
     setWho(total.S5PersonalInfo?.userName);
     setShowSelect1(true);
@@ -59,11 +67,98 @@ const S11PaymentInfo = () => {
   return (
     <Main>
       <div className={``}>
-        <h2 className={`${styles.stepTitle}`}>요금 납부 방법을 선택해주세요</h2>
-        <h3 className="mt-[8px] text-[16px] text-[#868e96]">
-          {who}님 명의의 정보를 알려주세요 <br /> 이후 고객센터를 통해 변경할 수
-          있어요
-        </h3>
+        <h2 className={`${styles.stepTitle}`}>요금 납부 정보</h2>
+        <br className={'mt-[32px]'} />
+        <div className={`${styles.usimSubTitle} mt-6`}>휴대폰 번호</div>
+        <input
+          className={`${styles.inputBox} w-full`}
+          placeholder="휴대폰 번호"
+          maxLength={13}
+          value={phoneNumberPayFor}
+          type="text"
+          onChange={(e) => {
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setPhoneNumberPayFor(inputed);
+          }}
+        />
+        <br className={'mt-[32px]'} />
+        {openPostcode && (
+          <div className={`${styles.positionFixed}`}>
+            <div className="flex items-center justify-between border-b border-gray-300 p-[20px]">
+              <div className="text-[20px] font-bold text-gray-700">
+                주소 찾기
+              </div>
+              <div
+                className="cursor-pointer text-gray-500 hover:text-gray-600"
+                onClick={() => {
+                  setOpenPostcode(false);
+                }}
+              >
+                <Close />
+              </div>
+            </div>
+            <DaumPostcode
+              onComplete={(data) => {
+                setBunji(data.zonecode);
+                setAddress1(data.roadAddress);
+                setOpenPostcode(false);
+              }}
+              autoClose={false}
+              defaultQuery=""
+            />
+          </div>
+        )}
+        <div className={``}>
+          <div className={`${styles.usimSubTitle}`}>주소</div>
+          <div className={'flex'}>
+            <input
+              className={`${styles.inputBox} w-full`}
+              placeholder="주소를 입력해 주세요"
+              value={bunji}
+              onChange={() => {}}
+              type="text"
+            />
+            <button
+              className={`${styles.addressSearch} ml-[20px]`}
+              onClick={() => {
+                setOpenPostcode(true);
+              }}
+            >
+              주소 검색
+            </button>
+          </div>
+          <input
+            className={`${styles.inputBox} w-full`}
+            placeholder=""
+            value={address1}
+            onChange={() => {}}
+            type="text"
+          />
+          <input
+            className={`${styles.inputBox} w-full`}
+            placeholder=""
+            value={address2}
+            onChange={(e) => {
+              setAddress2(e.target.value);
+            }}
+            type="text"
+          />
+        </div>
+        <br className={'mt-[32px]'} />
+        <div className={``}>
+          <div className={`${styles.usimSubTitle}`}>이메일</div>
+          <input
+            className={`${styles.inputBox} w-full`}
+            placeholder="smartel@smartel.co.kr"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            type="text"
+          />
+        </div>
         <br className={'mt-[32px]'} />
         <div className={'flex justify-center space-x-[8px]'}>
           {paymentType.map((item: any, index: number) => (
@@ -372,6 +467,11 @@ const S11PaymentInfo = () => {
             const ownerRelation = isNotMyThing ? whatsRelationForNMT : '본인';
             setTotal({
               ...total,
+              phoneNumberPayFor,
+              bunji,
+              address1,
+              address2,
+              email,
               card1234: card1 + card2 + card3 + card4,
               selectedBank: selectedBank.name,
               accountNumber,

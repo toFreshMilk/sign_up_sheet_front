@@ -438,6 +438,7 @@ const initialState = {
   hopeNum2st: '',
   usedCard4: '',
   usedBank4: '',
+  phoneNumberPayFor: '',
 };
 export {
   alttleTelecomList,
