@@ -69,9 +69,7 @@ const S8Identification = () => {
   return (
     <Main>
       <div className={``}>
-        <h2 className={`${styles.stepTitle}`}>
-          {who}의 신분증 진위확인
-        </h2>
+        <h2 className={`${styles.stepTitle}`}>{who}의 신분증 진위확인</h2>
         <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           부정가입방지를 위한 과정이에요
         </h3>
