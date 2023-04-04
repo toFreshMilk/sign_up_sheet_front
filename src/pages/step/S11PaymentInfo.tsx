@@ -11,6 +11,7 @@ import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
 import { bankList, family, monthList, yearList } from '@/utils/PublicData';
 import { Close, InformBlue } from '@/utils/Svgs';
+import axios from 'axios';
 
 const S11PaymentInfo = () => {
   const router = useRouter();
@@ -58,6 +59,20 @@ const S11PaymentInfo = () => {
   const [address2, setAddress2] = useState('');
   const [email, setEmail] = useState('');
   // const regex = /[a-z0-9]+@[a-z]+.[a-z]{2,3}/; 이메일
+  const checkAccountInfoFunc = async () => {
+    const checkUrl = `${process.env.NEXT_PUBLIC_API_URL}/checkAccountInfoFunc`;
+    const result = await axios.post(checkUrl, {
+      accountName: isNotMyThing ? ownerNameForNMT : total.userName,
+      accountJumin1: isNotMyThing ? birthMonthDayForNMT : total.jumin1,
+      bankCd: selectedBank.value,
+      accountNumber,
+      acctGb: '1',
+    });
+    console.log(result);
+    console.log(result.data.dataHeader.GW_RSLT_CD);
+
+    return result.data.dataHeader.GW_RSLT_CD === '1200';
+  };
   useEffect(() => {
     setWho(total.S5PersonalInfo?.userName);
     setShowSelect1(true);
@@ -459,34 +474,41 @@ const S11PaymentInfo = () => {
         ) : null}
         <button
           disabled={false}
-          onClick={() => {
+          onClick={async () => {
             const ownerName = isNotMyThing ? ownerNameForNMT : total.userName;
             const ownerResidentNumber = isNotMyThing
               ? birthMonthDayForNMT
               : total.jumin12;
             const ownerRelation = isNotMyThing ? whatsRelationForNMT : '본인';
-            setTotal({
-              ...total,
-              phoneNumberPayFor,
-              bunji,
-              address1,
-              address2,
-              email,
-              card1234: card1 + card2 + card3 + card4,
-              selectedBank: selectedBank.name,
-              accountNumber,
-              month,
-              year,
-              ownerResidentNumber,
-              ownerName,
-              ownerRelation,
-              isNotMyThing,
-              whatsRelationForNMT,
-              ownerNameForNMT,
-              birthMonthDayForNMT,
-              contactableMobileForNMT,
-            });
-            router.push('./S12Final');
+            const isPassedAccount = await checkAccountInfoFunc();
+            if (isPassedAccount) {
+              setTotal({
+                ...total,
+                phoneNumberPayFor,
+                bunji,
+                address1,
+                address2,
+                email,
+                card1234: card1 + card2 + card3 + card4,
+                selectedBank: selectedBank.name,
+                bankCd: selectedBank.value,
+                accountNumber,
+                month,
+                year,
+                ownerResidentNumber,
+                ownerName,
+                ownerRelation,
+                isNotMyThing,
+                whatsRelationForNMT,
+                ownerNameForNMT,
+                birthMonthDayForNMT,
+                contactableMobileForNMT,
+              });
+              router.push('./S12Final');
+            } else {
+              // eslint-disable-next-line no-alert
+              alert('계좌 확인이 되지 않았습니다.');
+            }
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >

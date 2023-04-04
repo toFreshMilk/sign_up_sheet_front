@@ -420,6 +420,7 @@ const initialState = {
   billType: '',
   card1234: '0',
   selectedBank: '',
+  bankCd: '',
   accountNumber: '0',
   month: '',
   year: '',
