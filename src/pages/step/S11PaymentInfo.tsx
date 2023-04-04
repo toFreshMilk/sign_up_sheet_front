@@ -386,7 +386,7 @@ const S11PaymentInfo = () => {
               birthMonthDayForNMT,
               contactableMobileForNMT,
             });
-            router.push('./S7Email');
+            router.push('./S12Final');
           }}
           className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
         >
