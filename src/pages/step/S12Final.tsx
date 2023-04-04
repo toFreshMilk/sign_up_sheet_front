@@ -46,6 +46,10 @@ const S12Final = () => {
       alert('접수가 되지 않았습니다. 나중에 다시 시도해주세요.');
     }
   };
+  const [usedMobileNumber, setUsedMobileNumber] = useState('');
+  const [usedMobileCompony, setUsedMobileCompony] = useState('');
+  const [usedCard4, setUsedCard4] = useState('');
+  const [usedBank4, setUsedBank4] = useState('');
   const getFeeInfo = async (_feeId: string) => {
     const tokenUrl = `${process.env.NEXT_PUBLIC_API_URL}/getPayFeeInfo`;
     const resultObj = await axios.post(tokenUrl, {
@@ -66,56 +70,95 @@ const S12Final = () => {
       });
     }
   };
+  const [isBuni, setIsBuni] = useState(false);
+
   useEffect(() => {
     getFeeInfo(total.feeId);
     setShowSelect1(true);
+    setUsedMobileNumber(total.phoneNumber);
+    setUsedMobileCompony(total.alddleTelecom);
+    setIsBuni(total.joinType === '번호이동');
   }, []);
   return (
     <Main>
-      <div>
-        <h2 className={`${styles.stepTitle}`}>
-          현재 요금 납부 방법을 <br /> 선택해 주세요
-        </h2>
-        <h3 className="mt-[8px] text-[16px] text-[#868e96]">
-          현재 번호를 그대로 쓰기 위한 추가 인증 정보에요
-        </h3>
-        <br className={'mt-[32px]'} />
-        <div className={'relative mr-[20px] w-full'}>
-          {showSelect1 ? (
-            <Select
-              options={nowPaymentList}
-              defaultValue={{
-                value: '현재 납부 방법을 선택해 주세요',
-                label: '현재 납부 방법을 선택해 주세요',
-                rating: 'safe',
+      {isBuni ? (
+        <div>
+          <h2 className={`${styles.stepTitle}`}>
+            현재 사용하시는 {usedMobileNumber} 번호를 {usedMobileCompony}{' '}
+            통신사에서 요금 납부하시고 있는 방법을 선택해주세요
+          </h2>
+          <h3 className="mt-[8px] text-[16px] text-[#868e96]">
+            현재 번호를 그대로 쓰기위한 추가 인증 정보에요
+          </h3>
+          <br className={'mt-[32px]'} />
+          <div className={'relative mr-[20px] w-full'}>
+            {showSelect1 ? (
+              <Select
+                options={nowPaymentList}
+                defaultValue={{
+                  value: '현재 납부 방법을 선택해 주세요',
+                  label: '현재 납부 방법을 선택해 주세요',
+                  rating: 'safe',
+                }}
+                classNamePrefix={'selectPrefix'}
+                isDisabled={false}
+                isLoading={false}
+                isClearable={false}
+                isRtl={false}
+                isSearchable={false}
+                name={'dd'}
+                onChange={(v: any) => {
+                  setNowPayment(v.label);
+                  setTotal({
+                    ...total,
+                    nowPaymentInfo: v.label,
+                  });
+                }}
+              />
+            ) : null}
+          </div>
+          {nowPayment === '계좌 자동이체' ? (
+            <input
+              className={`${styles.inputBox} w-full`}
+              maxLength={4}
+              placeholder="카드번호 뒤 4자리"
+              value={usedCard4}
+              type="text"
+              onChange={(e) => {
+                const inputed = e.target.value.replace(/[^0-9]/g, '');
+                setUsedCard4(inputed);
               }}
-              classNamePrefix={'selectPrefix'}
-              isDisabled={false}
-              isLoading={false}
-              isClearable={false}
-              isRtl={false}
-              isSearchable={false}
-              name={'dd'}
-              onChange={(v: any) => {
-                setNowPayment(v.label);
-                setTotal({
-                  ...total,
-                  nowPaymentInfo: v.label,
-                });
+            />
+          ) : null}
+          {nowPayment === '카드' ? (
+            <input
+              className={`${styles.inputBox} w-full`}
+              maxLength={4}
+              placeholder="계좌번호 뒤 4자리"
+              value={usedBank4}
+              type="text"
+              onChange={(e) => {
+                const inputed = e.target.value.replace(/[^0-9]/g, '');
+                setUsedBank4(inputed);
               }}
             />
           ) : null}
         </div>
-        <button
-          disabled={nowPayment === ''}
-          onClick={async () => {
-            await finalRow();
-          }}
-          className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
-        >
-          신청완료
-        </button>
-      </div>
+      ) : (
+        <div>
+          <h2 className={`${styles.stepTitle}`}>
+            신청완료 버튼을 누르면 신규가입이 진행됩니다.
+          </h2>
+        </div>
+      )}
+      <button
+        onClick={async () => {
+          await finalRow();
+        }}
+        className={`${styles.nextBtn} mt-[40px] flex w-full justify-center`}
+      >
+        신청완료
+      </button>
     </Main>
   );
 };
