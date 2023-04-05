@@ -4,7 +4,6 @@ import { useContext, useState } from 'react';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
-import { HowToGetUsimSvg3 } from '@/utils/Svgs';
 
 const S4HowToGetUsim = () => {
   const router = useRouter();
@@ -59,7 +58,9 @@ const S4HowToGetUsim = () => {
               <div className={`${styles.howToGetUsimBtnContent1}`}>
                 eSim 개통하기
               </div>
-              <HowToGetUsimSvg3 />
+              <div className={`${styles.howToGetUsimBtnContent3}`}>
+                빠르게 개통이 가능합니다.
+              </div>
             </div>
           </button>
           <button

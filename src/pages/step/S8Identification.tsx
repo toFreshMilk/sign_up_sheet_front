@@ -122,7 +122,7 @@ const S8Identification = () => {
                 onChange={(e) => {
                   setDriver2(e.target.value);
                 }}
-                type="text"
+                type="number"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -131,7 +131,7 @@ const S8Identification = () => {
                 onChange={(e) => {
                   setDriver3(e.target.value);
                 }}
-                type="text"
+                type="number"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -140,7 +140,7 @@ const S8Identification = () => {
                 onChange={(e) => {
                   setDriver4(e.target.value);
                 }}
-                type="text"
+                type="number"
               />
             </div>
           </>
@@ -162,7 +162,7 @@ const S8Identification = () => {
           onChange={(e) => {
             setMonthYear(e.target.value);
           }}
-          type="text"
+          type="number"
         />
         {identiWarning ? (
           <div className="mt-[24px]">
