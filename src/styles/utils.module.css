@@ -226,6 +226,8 @@
 }
 .bottomSheetStyle {
   padding: 26px 24px 16px 24px;
+  max-height: 500px;
+  overflow-y: scroll;
 }
 .bottomSheetList {
   padding: 12px 0;

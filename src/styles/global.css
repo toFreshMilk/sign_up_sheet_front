@@ -42,13 +42,12 @@ input::-webkit-inner-spin-button {
   background: #ffffff;
   flex-direction: column;
   height: auto;
-  max-height: 750px;
+  max-height: 500px;
   transform: translate3d(0, 10px, 0);
   will-change: height;
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
-  overflow: scroll;
 }
 [data-rsbs-overlay]:focus {
   outline: none;
