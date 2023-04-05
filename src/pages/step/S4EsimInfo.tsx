@@ -123,33 +123,42 @@ const S4EsimInfo = () => {
         <div className={`${styles.usimSubTitle} mt-6`}>EID</div>
         <input
           className={`${styles.inputBox} w-full`}
-          maxLength={32}
           placeholder={'EID'}
+          maxLength={32}
           value={eid}
           onChange={(e) => {
-            setEid(e.target.value);
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setEid(inputed);
           }}
           type="text"
         />
         <div className={`${styles.usimSubTitle} mt-6`}>IMEI</div>
         <input
           className={`${styles.inputBox} w-full`}
-          maxLength={15}
           placeholder={'IMEI'}
           value={imei}
+          maxLength={15}
           onChange={(e) => {
-            setImei(e.target.value);
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setImei(inputed);
           }}
           type="text"
         />
         <div className={`${styles.usimSubTitle} mt-6`}>IMEI2</div>
         <input
           className={`${styles.inputBox} w-full`}
-          maxLength={15}
           placeholder={'IMEI2'}
+          maxLength={15}
           value={imei2}
           onChange={(e) => {
-            setImei2(e.target.value);
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setImei2(inputed);
           }}
           type="text"
         />

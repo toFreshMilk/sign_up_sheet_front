@@ -107,7 +107,7 @@ const S8Identification = () => {
                 onChange={(e) => {
                   setDriver1(e.target.value);
                 }}
-                className={`${styles.inputBox} w-1/6 text-[11px] ${styles.fce11px}`}
+                className={`${styles.inputBox} w-1/6 ${styles.fce11px}`}
               >
                 {driverLicenceRegion.map((item) => (
                   <option key={item.name} value={item.value}>
@@ -117,30 +117,42 @@ const S8Identification = () => {
               </select>
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-1/6`}
+                className={`${styles.inputBox} w-1/6 ${styles.fce11px}`}
                 value={driver2}
+                maxLength={4}
                 onChange={(e) => {
-                  setDriver2(e.target.value);
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setDriver2(inputed);
                 }}
-                type="number"
+                type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-2/6`}
+                className={`${styles.inputBox} w-2/6 ${styles.fce11px}`}
                 value={driver3}
+                maxLength={6}
                 onChange={(e) => {
-                  setDriver3(e.target.value);
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setDriver3(inputed);
                 }}
-                type="number"
+                type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-1/6`}
+                className={`${styles.inputBox} w-1/6 ${styles.fce11px}`}
                 value={driver4}
+                maxLength={4}
                 onChange={(e) => {
-                  setDriver4(e.target.value);
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setDriver4(inputed);
                 }}
-                type="number"
+                type="text"
               />
             </div>
           </>
@@ -158,11 +170,15 @@ const S8Identification = () => {
         <input
           className={`${styles.inputBox} w-full`}
           placeholder="20201010"
+          maxLength={8}
           value={monthYear}
           onChange={(e) => {
-            setMonthYear(e.target.value);
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setMonthYear(inputed);
           }}
-          type="number"
+          type="text"
         />
         {identiWarning ? (
           <div className="mt-[24px]">

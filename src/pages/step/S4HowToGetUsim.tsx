@@ -93,7 +93,7 @@ const S4HowToGetUsim = () => {
         </div>
         <br className={'mt-[32px]'} />
         <div>
-          {howToGetUsimBtn2.checked ? (
+          {howToGetUsimBtn1.checked ? (
             <ol className={`${styles.listStyle2}`}>
               <li>유심 없이 개통이 가능합니다.</li>
               <li>eSIM 발급 비용 2,750원이 첫 달만 청구됩니다.</li>
@@ -115,7 +115,7 @@ const S4HowToGetUsim = () => {
       ) : null}
       {howToGetUsimBtn2.checked ? (
         <>
-          <div className="mt-4 space-y-4">
+          <div className="space-y-4">
             {usimTypes.map((item) => (
               <button
                 key={item.title}

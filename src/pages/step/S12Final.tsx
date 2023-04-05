@@ -75,8 +75,8 @@ const S12Final = () => {
   useEffect(() => {
     getFeeInfo(total.feeId);
     setShowSelect1(true);
-    setUsedMobileNumber(total.phoneNumber);
-    setUsedMobileCompony(total.alddleTelecom);
+    setUsedMobileNumber(total.phoneNumberr);
+    setUsedMobileCompony(total.alddleTelecomm);
     setIsBuni(total.joinType === '번호이동');
   }, []);
   return (

@@ -147,14 +147,13 @@ const S11PaymentInfo = () => {
           </div>
           <input
             className={`${styles.inputBox} w-full`}
-            placeholder="상세주소"
             value={address1}
             onChange={() => {}}
             type="text"
           />
           <input
             className={`${styles.inputBox} w-full`}
-            placeholder=""
+            placeholder="상세주소"
             value={address2}
             onChange={(e) => {
               setAddress2(e.target.value);
@@ -208,12 +207,12 @@ const S11PaymentInfo = () => {
                 value={card1}
                 maxLength={4}
                 onChange={(e) => {
-                  setCard1(e.target.value);
-                  if (e.target.value.length === 4) {
-                    ref2?.current?.focus();
-                  }
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setCard1(inputed);
                 }}
-                type="number"
+                type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -222,12 +221,12 @@ const S11PaymentInfo = () => {
                 value={card2}
                 maxLength={4}
                 onChange={(e) => {
-                  setCard2(e.target.value);
-                  if (e.target.value.length === 4) {
-                    ref3?.current?.focus();
-                  }
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setCard2(inputed);
                 }}
-                type="number"
+                type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -236,22 +235,26 @@ const S11PaymentInfo = () => {
                 value={card3}
                 maxLength={4}
                 onChange={(e) => {
-                  setCard3(e.target.value);
-                  if (e.target.value.length === 4) {
-                    ref4?.current?.focus();
-                  }
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setCard3(inputed);
                 }}
-                type="number"
+                type="text"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
                 ref={ref4}
                 className={`${styles.inputBox} w-full`}
                 value={card4}
+                maxLength={4}
                 onChange={(e) => {
-                  setCard4(e.target.value);
+                  const inputed = e.target.value
+                    .replace(/[^0-9]/g, '')
+                    .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+                  setCard4(inputed);
                 }}
-                type="number"
+                type="text"
               />
             </div>
             <br className={'mt-[32px]'} />

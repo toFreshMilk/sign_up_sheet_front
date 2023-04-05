@@ -36,6 +36,9 @@ const S5MobileInfo = () => {
 
   useEffect(() => {
     setBottomSheetOpen(true);
+    if (total.joinType === '신규가입') {
+      router.push('./S5PersonalInfo');
+    }
   }, []);
   return (
     <Main>
@@ -160,8 +163,8 @@ const S5MobileInfo = () => {
         <input
           className={`${styles.inputBox} w-full`}
           placeholder="휴대폰 번호"
-          maxLength={13}
           value={phoneNumber}
+          maxLength={13}
           type="text"
           onChange={(e) => {
             const inputed = e.target.value
@@ -178,8 +181,8 @@ const S5MobileInfo = () => {
             setTotal({
               ...total,
               selectedTelecom: selectedTelecom.telecomName,
-              alddleTelecom,
-              phoneNumber,
+              alddleTelecomm: alddleTelecom,
+              phoneNumberr: phoneNumber,
             });
             router.push('./S5PersonalInfo');
           }}

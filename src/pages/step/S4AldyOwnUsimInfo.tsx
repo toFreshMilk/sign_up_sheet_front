@@ -37,9 +37,12 @@ const S4AldyOwnUsimInfo = () => {
           placeholder="마지막 숫자 8자리를 적어주세요"
           maxLength={8}
           value={aldyOwnUsimNumber}
-          type="number"
+          type="text"
           onChange={(e) => {
-            setAldyOwnUsimNumber(e.target.value);
+            const inputed = e.target.value
+              .replace(/[^0-9]/g, '')
+              .replace(/^(\d{2,3})(\d{3,4})(\d{4})$/, `$1-$2-$3`);
+            setAldyOwnUsimNumber(inputed);
           }}
         />
         <button
