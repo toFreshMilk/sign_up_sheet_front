@@ -121,12 +121,12 @@ const S12Final = () => {
             <input
               className={`${styles.inputBox} w-full`}
               maxLength={4}
-              placeholder="카드번호 뒤 4자리"
-              value={usedCard4}
+              placeholder="계좌번호 뒤 4자리"
+              value={usedBank4}
               type="text"
               onChange={(e) => {
                 const inputed = e.target.value.replace(/[^0-9]/g, '');
-                setUsedCard4(inputed);
+                setUsedBank4(inputed);
               }}
             />
           ) : null}
@@ -134,12 +134,12 @@ const S12Final = () => {
             <input
               className={`${styles.inputBox} w-full`}
               maxLength={4}
-              placeholder="계좌번호 뒤 4자리"
-              value={usedBank4}
+              placeholder="카드번호 뒤 4자리"
+              value={usedCard4}
               type="text"
               onChange={(e) => {
                 const inputed = e.target.value.replace(/[^0-9]/g, '');
-                setUsedBank4(inputed);
+                setUsedCard4(inputed);
               }}
             />
           ) : null}

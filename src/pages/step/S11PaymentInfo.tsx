@@ -88,6 +88,7 @@ const S11PaymentInfo = () => {
         <input
           className={`${styles.inputBox} w-full`}
           placeholder="휴대폰 번호"
+          autoFocus={true}
           maxLength={13}
           value={phoneNumberPayFor}
           type="text"
@@ -146,7 +147,7 @@ const S11PaymentInfo = () => {
           </div>
           <input
             className={`${styles.inputBox} w-full`}
-            placeholder=""
+            placeholder="상세주소"
             value={address1}
             onChange={() => {}}
             type="text"
@@ -204,7 +205,6 @@ const S11PaymentInfo = () => {
             <div className={'flex justify-items-center'}>
               <input
                 className={`${styles.inputBox} w-full`}
-                autoFocus={true}
                 value={card1}
                 maxLength={4}
                 onChange={(e) => {

@@ -277,14 +277,14 @@
   position: fixed;
   left: 0;
   right: 0;
+  top: 0;
   background: #ffff;
   z-index: 10;
   width: 100%;
   height: 100vh;
 }
 .howToGetUsimBtn {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
+  width: 50%;
   box-sizing: border-box;
   border: 1px solid rgb(241, 243, 245);
   padding: 16px;
@@ -293,6 +293,7 @@
   transition: border 0.3s ease 0s;
   -webkit-appearance: button;
   text-transform: none;
+  flex-flow: column;
 }
 .howToGetUsimBtnActive {
   border: 1px solid rgb(86, 111, 238);
@@ -300,15 +301,9 @@
 .howToGetUsimBtnActive2 {
   background: rgb(243, 246, 255) !important;
 }
-.howToGetUsimBtnInDiv {
-  -webkit-box-flex: 1;
-  flex-grow: 1;
+.howToGetUsimBtnInImg {
+  width: 100%;
   height: 100px;
-  display: flex;
-  -webkit-box-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  justify-content: center;
   background: rgb(248, 249, 250);
   transition: background 0.3s ease 0s;
 }

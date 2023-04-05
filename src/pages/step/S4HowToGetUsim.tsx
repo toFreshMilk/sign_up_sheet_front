@@ -4,11 +4,7 @@ import { useContext, useState } from 'react';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
-import {
-  HowToGetUsimSvg1,
-  HowToGetUsimSvg2,
-  HowToGetUsimSvg3,
-} from '@/utils/Svgs';
+import { HowToGetUsimSvg3 } from '@/utils/Svgs';
 
 const S4HowToGetUsim = () => {
   const router = useRouter();
@@ -40,7 +36,7 @@ const S4HowToGetUsim = () => {
         <h3 className="mt-[8px] text-[16px] text-[#868e96]">
           유심 종류에 따라 유심비가 부과될 수 있어요
         </h3>
-        <div className={'mt-[40px] flex justify-center space-x-[8px]'}>
+        <div className={'mt-[40px] flex space-x-[8px]'}>
           <button
             className={`${styles.howToGetUsimBtn} ${
               howToGetUsimBtn1.checked ? styles.howToGetUsimBtnActive : ''
@@ -50,15 +46,15 @@ const S4HowToGetUsim = () => {
               setHowToGetUsimBtn2({ ...howToGetUsimBtn2, checked: false });
             }}
           >
-            <div
-              className={`${styles.grayBtn} ${styles.howToGetUsimBtnInDiv} ${
+            <img
+              alt="esim"
+              src={`${router.basePath}/assets/images/esimImg.png`}
+              className={`${styles.grayBtn} ${styles.howToGetUsimBtnInImg} ${
                 howToGetUsimBtn1.checked
                   ? `${styles.clickBtn} ${styles.howToGetUsimBtnActive2}`
                   : ''
               }`}
-            >
-              <HowToGetUsimSvg1 />
-            </div>
+            />
             <div className={`${styles.howToGetUsimBtnContentBox} mt-[16px]`}>
               <div className={`${styles.howToGetUsimBtnContent1}`}>
                 eSim 개통하기
@@ -75,15 +71,15 @@ const S4HowToGetUsim = () => {
               setHowToGetUsimBtn2({ ...howToGetUsimBtn2, checked: true });
             }}
           >
-            <div
-              className={`${styles.grayBtn} ${styles.howToGetUsimBtnInDiv} ${
+            <img
+              alt="usim"
+              src={`${router.basePath}/assets/images/usimImg.png`}
+              className={`${styles.grayBtn} ${styles.howToGetUsimBtnInImg} ${
                 howToGetUsimBtn2.checked
                   ? `${styles.clickBtn} ${styles.howToGetUsimBtnActive2}`
                   : ''
               }`}
-            >
-              <HowToGetUsimSvg2 />
-            </div>
+            />
             <div className={`${styles.howToGetUsimBtnContentBox} mt-[16px]`}>
               <div className={`${styles.howToGetUsimBtnContent1}`}>
                 USIM 개통하기
