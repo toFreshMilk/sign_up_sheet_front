@@ -102,7 +102,7 @@ export const S5PersonalInfo2 = forwardRef((props, ref) => {
             }}
             className="text-[16px] w-full border border-gray-300 p-1"
           >
-            신분증 사진 첨부
+            법정대리인 신분증 사진 첨부
           </button>
           <FtpImgModal
             k={{

@@ -1,7 +1,7 @@
 import { forwardRef, useContext, useImperativeHandle, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
-import { juminRuleTest } from '@/utils/Commons';
+import { FtpImgModal, juminRuleTest } from '@/utils/Commons';
 import { Context } from '@/utils/Context';
 import { Warning } from '@/utils/Svgs';
 
@@ -27,6 +27,16 @@ export const S5PersonalInfo3 = forwardRef((_props, ref) => {
       return isOk;
     },
   }));
+  const [picAttOpenFtp3, setPicAttOpenFtp3] = useState(false);
+  const [uploadImg3, setUploadImg3] = useState<File>();
+  const closeModalForFtp3 = () => {
+    setPicAttOpenFtp3(false);
+  };
+  const [picAttOpenFtp4, setPicAttOpenFtp4] = useState(false);
+  const [uploadImg4, setUploadImg4] = useState<File>();
+  const closeModalForFtp4 = () => {
+    setPicAttOpenFtp4(false);
+  };
   return (
     <>
       <input
@@ -71,6 +81,46 @@ export const S5PersonalInfo3 = forwardRef((_props, ref) => {
           </div>
         </div>
       )}
+      <br className={'mt-[32px]'} />
+      <div className="mb-5 flex">
+        <button
+          onClick={() => {
+            setPicAttOpenFtp3(true);
+          }}
+          className="text-[16px] w-full border border-gray-300 p-1"
+        >
+          외국인 신분증 앞면 첨부
+        </button>
+        <FtpImgModal
+          k={{
+            picAttOpenFtp: picAttOpenFtp3,
+            setPicAttOpenFtp: setPicAttOpenFtp3,
+            uploadImg: uploadImg3,
+            setUploadImg: setUploadImg3,
+            closeModalForFtp: closeModalForFtp3,
+            urlKey: 'ftpImgUrl4',
+          }}
+        />
+        <span className="p-3" />
+        <button
+          onClick={() => {
+            setPicAttOpenFtp4(true);
+          }}
+          className="text-[16px] w-full border border-gray-300 p-1"
+        >
+          외국인 신분증 뒷면 첨부
+        </button>
+        <FtpImgModal
+          k={{
+            picAttOpenFtp: picAttOpenFtp4,
+            setPicAttOpenFtp: setPicAttOpenFtp4,
+            uploadImg: uploadImg4,
+            setUploadImg: setUploadImg4,
+            closeModalForFtp: closeModalForFtp4,
+            urlKey: 'ftpImgUrl5',
+          }}
+        />
+      </div>
     </>
   );
 });
