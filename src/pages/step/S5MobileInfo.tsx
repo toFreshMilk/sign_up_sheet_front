@@ -29,6 +29,7 @@ const S5MobileInfo = () => {
   });
   const [phoneNumber, setPhoneNumber] = useState('');
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [bottomSheetOpen2, setBottomSheetOpen2] = useState(false);
   const [alddleTelecom, setAlddleTelecom] = useState('');
   const [selectedAlttleMang, aetSelectedAlttleMang] =
     useState(alttleTelecomList1);
@@ -114,14 +115,14 @@ const S5MobileInfo = () => {
               onChange={() => {}}
               type="text"
               onClick={() => {
-                setBottomSheetOpen(!bottomSheetOpen);
+                setBottomSheetOpen2(!bottomSheetOpen2);
               }}
             />
             <BottomSheet
               snapPoints={({ minHeight, maxHeight }) => [minHeight, maxHeight]}
-              open={bottomSheetOpen}
+              open={bottomSheetOpen2}
               onDismiss={() => {
-                setBottomSheetOpen(false);
+                setBottomSheetOpen2(false);
               }}
               skipInitialTransition={false}
               blocking={true}
@@ -136,7 +137,7 @@ const S5MobileInfo = () => {
                       key={item.title}
                       className={`${styles.bottomSheetList2}`}
                       onClick={() => {
-                        setBottomSheetOpen(false);
+                        setBottomSheetOpen2(false);
                         setAlddleTelecom(item.title);
                       }}
                     >
