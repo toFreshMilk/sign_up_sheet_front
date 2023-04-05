@@ -36,7 +36,7 @@ const S4EsimInfo = () => {
           onClick={() => {
             setShowHowToSeeUsim(true);
           }}
-          className={`${styles.customerTypeBtn} ${styles.customerTypeBtnOn}`}
+          className={`${styles.customerTypeBtn} ${styles.customerTypeBtn2} ${styles.customerTypeBtnOn}`}
         >
           <div>단말정보 보는법</div>
         </button>

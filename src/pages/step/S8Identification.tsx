@@ -107,7 +107,7 @@ const S8Identification = () => {
                 onChange={(e) => {
                   setDriver1(e.target.value);
                 }}
-                className={`${styles.inputBox} w-1/6 ${styles.fce11px}`}
+                className={`${styles.inputBox} w-4/12 ${styles.fce13px}`}
               >
                 {driverLicenceRegion.map((item) => (
                   <option key={item.name} value={item.value}>
@@ -117,7 +117,7 @@ const S8Identification = () => {
               </select>
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-1/6 ${styles.fce11px}`}
+                className={`${styles.inputBox} w-2/12 ${styles.fce13px}`}
                 value={driver2}
                 maxLength={4}
                 onChange={(e) => {
@@ -130,7 +130,7 @@ const S8Identification = () => {
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-2/6 ${styles.fce11px}`}
+                className={`${styles.inputBox} w-4/12 ${styles.fce13px}`}
                 value={driver3}
                 maxLength={6}
                 onChange={(e) => {
@@ -143,7 +143,7 @@ const S8Identification = () => {
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
-                className={`${styles.inputBox} w-1/6 ${styles.fce11px}`}
+                className={`${styles.inputBox} w-2/12 ${styles.fce13px}`}
                 value={driver4}
                 maxLength={4}
                 onChange={(e) => {
@@ -189,14 +189,7 @@ const S8Identification = () => {
           </div>
         ) : null}
         <button
-          disabled={
-            identificationType[0].checked
-              ? monthYear.length !== 8
-              : monthYear.length !== 8 ||
-                driver2.length !== 2 ||
-                driver3.length !== 6 ||
-                driver4.length !== 2
-          }
+          disabled={monthYear.length !== 8}
           onClick={async () => {
             const lgResult = await checkIdentification();
             // console.log(lgResult);

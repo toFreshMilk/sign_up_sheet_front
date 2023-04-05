@@ -282,7 +282,7 @@ const S11PaymentInfo = () => {
                   />
                 ) : null}
               </div>
-              <div className={'relative w-1/4'}>
+              <div className={'relative w-2/5'}>
                 {showSelect2 ? (
                   <Select
                     options={yearList}
