@@ -5,7 +5,11 @@ import { BottomSheet } from 'react-spring-bottom-sheet';
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
-import { alttleTelecomList } from '@/utils/PublicData';
+import {
+  alttleTelecomList1,
+  alttleTelecomList2,
+  alttleTelecomList3,
+} from '@/utils/PublicData';
 
 const telecomList = [
   { telecomName: 'SKT', selected: false, isAlddle: false },
@@ -26,6 +30,8 @@ const S5MobileInfo = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [alddleTelecom, setAlddleTelecom] = useState('');
+  const [selectedAlttleMang, aetSelectedAlttleMang] =
+    useState(alttleTelecomList1);
 
   useEffect(() => {
     setBottomSheetOpen(true);
@@ -75,6 +81,13 @@ const S5MobileInfo = () => {
                     });
                     setBottomSheetOpen(false);
                     setSelectedTelecom(item);
+                    if (item.telecomName === 'SKT 알뜰폰') {
+                      aetSelectedAlttleMang(alttleTelecomList1);
+                    } else if (item.telecomName === 'KT 알뜰폰') {
+                      aetSelectedAlttleMang(alttleTelecomList2);
+                    } else if (item.telecomName === 'LGU+ 알뜰폰') {
+                      aetSelectedAlttleMang(alttleTelecomList3);
+                    }
                   }}
                 >
                   <p>{item.telecomName}</p>
@@ -118,7 +131,7 @@ const S5MobileInfo = () => {
                   알뜰폰 통신사 선택
                 </h3>
                 <div className={'grid grid-cols-3 gap-4 py-[8px]'}>
-                  {alttleTelecomList.map((item) => (
+                  {selectedAlttleMang.map((item) => (
                     <div
                       key={item.title}
                       className={`${styles.bottomSheetList2}`}

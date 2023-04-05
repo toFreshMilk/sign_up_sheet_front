@@ -61,7 +61,7 @@ const cardList = [
   { title: '기타카드', disabled: true },
   { title: '우리카드', disabled: true },
 ];
-const alttleTelecomList = [
+const alttleTelecomList1 = [
   { title: '[SK망]SK 7모바일(SK텔링크)', disabled: false },
   { title: '[SK망]LG헬로모바일', disabled: true },
   { title: '[SK망]스마텔', disabled: true },
@@ -74,6 +74,9 @@ const alttleTelecomList = [
   { title: '[SK망]마이월드(SKT망)', disabled: true },
   { title: '[SK망]이마트(SKT망)', disabled: true },
   { title: '[SK망]조이텔(SKT망)', disabled: true },
+  { title: '기타 통신사', disabled: true },
+];
+const alttleTelecomList2 = [
   { title: '[KT망]KT M모바일', disabled: true },
   { title: '[KT망]에넥스텔레콤', disabled: true },
   { title: '[KT망]LG헬로모바일', disabled: true },
@@ -109,6 +112,9 @@ const alttleTelecomList = [
   { title: '[KT망]케이티스카이라이프(KT망)', disabled: true },
   { title: '[KT망]에이프러스', disabled: true },
   { title: '[KT망]케이티엠모바일', disabled: true },
+  { title: '기타 통신사', disabled: true },
+];
+const alttleTelecomList3 = [
   { title: '[U+망]유플러스 알뜰 모바일', disabled: true },
   { title: '[U+망]스마텔', disabled: true },
   { title: '[U+망]이야기알뜰폰', disabled: true },
@@ -147,8 +153,6 @@ const alttleTelecomList = [
   { title: '[U+망]KPMOLG', disabled: true },
   { title: '[U+망]엔티온텔레콤(U+망)', disabled: true },
   { title: '[U+망]인스코리아(U+망)', disabled: true },
-  { title: '한국케이블텔레콤', disabled: true },
-  { title: '온세텔레콤', disabled: true },
   { title: '기타 통신사', disabled: true },
 ];
 const machineModelList = [
@@ -442,7 +446,9 @@ const initialState = {
   phoneNumberPayFor: '',
 };
 export {
-  alttleTelecomList,
+  alttleTelecomList1,
+  alttleTelecomList2,
+  alttleTelecomList3,
   bankList,
   cardList,
   difficultCardList,
