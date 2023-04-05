@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { Main } from '@/templates/Main';
-import { alttleTelecomList } from '@/utils/PublicData';
+import { alttleTelecomList1 } from '@/utils/PublicData';
 
 const telecomList = [
   { title: 'SKT', checked: true },
@@ -74,7 +74,7 @@ const S6UbuniInfo = () => {
               }}
               className="block w-full rounded-md border border-gray-300 bg-white p-3 shadow-sm focus:outline-none sm:text-sm"
             >
-              {alttleTelecomList.map((item) => (
+              {alttleTelecomList1.map((item) => (
                 <option key={item.title} value={item.title}>
                   {item.title}
                 </option>
