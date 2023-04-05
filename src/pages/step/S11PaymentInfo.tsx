@@ -213,7 +213,7 @@ const S11PaymentInfo = () => {
                     ref2?.current?.focus();
                   }
                 }}
-                type="text"
+                type="number"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -227,7 +227,7 @@ const S11PaymentInfo = () => {
                     ref3?.current?.focus();
                   }
                 }}
-                type="text"
+                type="number"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -241,7 +241,7 @@ const S11PaymentInfo = () => {
                     ref4?.current?.focus();
                   }
                 }}
-                type="text"
+                type="number"
               />
               <div className={`${styles.hipen}`}>-</div>
               <input
@@ -251,7 +251,7 @@ const S11PaymentInfo = () => {
                 onChange={(e) => {
                   setCard4(e.target.value);
                 }}
-                type="text"
+                type="number"
               />
             </div>
             <br className={'mt-[32px]'} />

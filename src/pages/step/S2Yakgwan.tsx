@@ -1,10 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import styles from '@/styles/utils.module.css';
 import { Main } from '@/templates/Main';
 import { Context } from '@/utils/Context';
+import { initialState } from '@/utils/PublicData';
 
 interface IfYakgwan {
   name: string;
@@ -54,6 +55,10 @@ const S2Yakgwan = () => {
     },
     { name: '정보광고 전송 동의(선택)', checked: false, value: 'Yakgwan8' },
   ]);
+  useEffect(() => {
+    const feeId = total.feeId || '';
+    setTotal({ ...initialState, feeId });
+  }, []);
   return (
     <Main>
       <h1 className="mb-[32px] flex items-start text-[24px] font-bold">

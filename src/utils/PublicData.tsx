@@ -366,6 +366,9 @@ const monthList = [
   { label: '12', value: '12', rating: 'safe' },
 ];
 const yearList = [
+  { label: '2019', value: '2019', rating: 'safe' },
+  { label: '2020', value: '2020', rating: 'safe' },
+  { label: '2021', value: '2021', rating: 'safe' },
   { label: '2022', value: '2022', rating: 'safe' },
   { label: '2023', value: '2023', rating: 'safe' },
   { label: '2024', value: '2024', rating: 'safe' },
